@@ -13,5 +13,7 @@ public class DataGenerators {
     public static void gatherData(GatherDataEvent event){
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper fileHelper = event.getExistingFileHelper();
+        generator.addProvider(new ItemModelSupplier(generator,fileHelper));
+        generator.addProvider(new BlockStateSupplier(generator,fileHelper));
     }
 }
