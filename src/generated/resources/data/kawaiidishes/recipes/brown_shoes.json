@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "s s"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:leather"
+    },
+    "s": {
+      "item": "minecraft:gray_wool"
+    }
+  },
+  "result": {
+    "item": "kawaiidishes:brown_shoes"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:orange_maid_dress"
+    },
+    {
+      "item": "kawaiidishes:caramel_cat_tail"
+    }
+  ],
+  "result": {
+    "item": "kawaiidishes:orange_maid_dress_cat_tail_caramel"
+  }
+}

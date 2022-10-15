@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:blue_maid_dress_cat_tail_caramel"
+    ]
+  },
+  "criteria": {
+    "has_blue_maid_dress": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:blue_maid_dress"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:blue_maid_dress_cat_tail_caramel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_blue_maid_dress",
+      "has_the_recipe"
+    ]
+  ]
+}

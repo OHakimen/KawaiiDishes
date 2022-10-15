@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:dried_coffee_beans_from_smelting"
+    ]
+  },
+  "criteria": {
+    "has_coffee_fruit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:coffee_fruit"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:dried_coffee_beans_from_smelting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_coffee_fruit",
+      "has_the_recipe"
+    ]
+  ]
+}

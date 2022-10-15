@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "s#s",
+    "@@@"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:brown_wool"
+    },
+    "@": {
+      "item": "minecraft:white_wool"
+    },
+    "s": {
+      "tag": "forge:string"
+    }
+  },
+  "result": {
+    "item": "kawaiidishes:brown_maid_dress"
+  }
+}

@@ -13,5 +13,6 @@ public class BlockStateSupplier extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+
     }
 }

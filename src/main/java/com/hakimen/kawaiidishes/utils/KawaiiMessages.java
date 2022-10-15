@@ -19,16 +19,22 @@ public class KawaiiMessages {
 
     static {
         defaultMessages.add("You look so kawaii !!");
+        defaultMessages.add("OuO");
         defaultMessages.add("Cute <3 ");
         defaultMessages.add("You look nice today");
         defaultMessages.add("Hi Cutie !");
+        defaultMessages.add("Look here little one, pose for me! *chik*");
+        defaultMessages.add("Hey sweetie, pleaaase notice me senpai!");
 
+        catEarsMessages.add("It's so cute neko-chan, Nyant - ta!");
+        catEarsMessages.add("Plweaaaaaaase! Take a picture with me!");
+        catEarsMessages.add("They seem like so... UwU!!!");
         catEarsMessages.add("OMG, CAT EARS");
         catEarsMessages.add("Wait... they are wearing cat ears !");
-        catEarsMessages.add("Come back neko-chan");
+        catEarsMessages.add("Come back, %user%-chan :3");
+        catEarsMessages.add("OwO");
 
-        maidCostumeMessages.add("No way, a cute maid is here");
-
+        maidCostumeMessages.add("No way, a cute maid is here >w<");
 
         catEarsMaidCostumeMessages.add("Omg a maid, if only they where with cat ea..., NO WAY THEY HAVE CAT EARS");
     }
@@ -39,27 +45,34 @@ public class KawaiiMessages {
         Random r = target.getRandom();
         hasCatEars = target.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).getItem() instanceof CatEars;
 
-        var msg = new TextComponent("<").append(entity.getDisplayName()).append(">");
+        var msg = new TextComponent("<").append(entity.getDisplayName()).append("> ");
         int size;
-
+        var value = "";
         if(hasCatEars && hasMaidDress){
             size = catEarsMaidCostumeMessages.size();
             int option = r.nextInt(0,size);
-            msg.append(catEarsMaidCostumeMessages.get(option));
+            value = catEarsMaidCostumeMessages.get(option);
         }else if(hasMaidDress){
             size = maidCostumeMessages.size();
             int option = r.nextInt(0,size);
-            msg.append(maidCostumeMessages.get(option));
+            value = maidCostumeMessages.get(option);
         }else if(hasCatEars){
             size = catEarsMessages.size();
             int option = r.nextInt(0,size);
-            msg.append(catEarsMessages.get(option));
+            value = catEarsMessages.get(option);
         }else{
             size = defaultMessages.size();
             int option = r.nextInt(0,size);
-            msg.append(defaultMessages.get(option));
+            value = defaultMessages.get(option);
         }
 
+        if(value != ""){
+            if(value.contains("%user%")){
+                value = value.replace("%user%",target.getDisplayName().getString());
+            }
+        }
+        msg.append(value);
         target.sendMessage(msg,entity.getUUID());
     }
+
 }

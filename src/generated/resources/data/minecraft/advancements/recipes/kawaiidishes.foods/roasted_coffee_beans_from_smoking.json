@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:roasted_coffee_beans_from_smoking"
+    ]
+  },
+  "criteria": {
+    "has_dried_coffee_beans": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:dried_coffee_beans"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:roasted_coffee_beans_from_smoking"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dried_coffee_beans",
+      "has_the_recipe"
+    ]
+  ]
+}

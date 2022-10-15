@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:magenta_maid_dress"
+    ]
+  },
+  "criteria": {
+    "has_magenta_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:magenta_wool"
+            ]
+          }
+        ]
+      }
+    },
+    "has_white_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:white_wool"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:magenta_maid_dress"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_magenta_wool",
+      "has_white_wool",
+      "has_the_recipe"
+    ]
+  ]
+}

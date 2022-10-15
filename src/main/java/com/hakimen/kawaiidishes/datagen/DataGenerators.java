@@ -15,5 +15,8 @@ public class DataGenerators {
         ExistingFileHelper fileHelper = event.getExistingFileHelper();
         generator.addProvider(new ItemModelSupplier(generator,fileHelper));
         generator.addProvider(new BlockStateSupplier(generator,fileHelper));
+        generator.addProvider(new LangSupplier(generator,"en_us"));
+        generator.addProvider(new CraftingRecipeSupplier(generator));
+        generator.addProvider(new LootTableSupplier(generator));
     }
 }

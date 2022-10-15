@@ -1,5 +1,6 @@
 package com.hakimen.kawaiidishes.blocks;
 
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -11,6 +12,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.crafting.conditions.FalseCondition;
 
 public class MugBlock extends Block  {
 
@@ -19,7 +21,9 @@ public class MugBlock extends Block  {
     }
 
     public MugBlock(){
-        super(BlockBehaviour.Properties.of(Material.STONE).strength(1,1).dynamicShape());
+        super(BlockBehaviour.Properties.of(Material.STONE)
+                .strength(1,1)
+                .dynamicShape().isSuffocating((p_61036_, p_61037_, p_61038_) -> false));
     }
 
 
