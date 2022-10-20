@@ -1,0 +1,26 @@
+{
+  "type": "kawaiidishes:coffee_machining",
+  "milk": true,
+  "water": false,
+  "ticks": 100,
+  "itemOnOutput": {
+    "item": "kawaiidishes:mug"
+  },
+  "ingredients": [
+    [
+      {
+        "item": "kawaiidishes:coffee_powder"
+      },
+      {
+        "item": "kawaiidishes:coffee_powder"
+      },
+      {
+        "item": "minecraft:sugar"
+      }
+    ]
+  ],
+  "output": {
+    "item": "kawaiidishes:latte_coffee",
+    "nbt": "{}"
+  }
+}

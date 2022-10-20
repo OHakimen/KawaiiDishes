@@ -15,6 +15,7 @@ import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -27,7 +28,9 @@ public class Drink extends BlockItem {
 
     public Drink(MugBlock pBlock,int nutrition,float saturation) {
         super(pBlock, new Properties().food(new FoodProperties.Builder().nutrition(nutrition).saturationMod(saturation).fast().build())
-                .tab(ItemRegister.foods).stacksTo(16));
+                .tab(ItemRegister.foods).stacksTo(16).craftRemainder(
+                        ItemRegister.mug.get()
+                ));
     }
 
 
@@ -37,14 +40,20 @@ public class Drink extends BlockItem {
     }
 
 
-
     @Override
     public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
-        pLevel.addFreshEntity(new ItemEntity(pLevel,
-                pLivingEntity.getX(),
-                pLivingEntity.getY(),
-                pLivingEntity.getZ(),
-                ItemRegister.mug.get().getDefaultInstance()));
+
+        if(pLivingEntity instanceof Player p){
+            p.addItem(ItemRegister.mug.get().getDefaultInstance());
+        }
+        CompoundTag mainEffect = pStack.getOrCreateTag().getCompound("mainEffect");
+        CompoundTag secondaryEffect = pStack.getOrCreateTag().getCompound("secondaryEffect");
+        if(!mainEffect.equals(new CompoundTag())){
+            pLivingEntity.addEffect(MobEffectInstance.load(mainEffect));
+        }
+        if(!secondaryEffect.equals(new CompoundTag())){
+            pLivingEntity.addEffect(MobEffectInstance.load(secondaryEffect));
+        }
         return super.finishUsingItem(pStack, pLevel, pLivingEntity);
     }
 

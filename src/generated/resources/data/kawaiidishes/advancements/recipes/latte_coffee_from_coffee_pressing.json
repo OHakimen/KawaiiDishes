@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:latte_coffee"
+    ]
+  },
+  "criteria": {
+    "has_expresso_coffee": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:expresso_coffee"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:latte_coffee"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_expresso_coffee",
+      "has_the_recipe"
+    ]
+  ]
+}

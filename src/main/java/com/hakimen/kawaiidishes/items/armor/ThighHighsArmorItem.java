@@ -2,7 +2,9 @@ package com.hakimen.kawaiidishes.items.armor;
 
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -19,6 +21,12 @@ public class ThighHighsArmorItem extends GeoArmorItem implements IAnimatable {
     public ThighHighsArmorItem(String textureName,EquipmentSlot slot) {
         super(ArmorMaterials.maidDress, slot, new Properties().tab(ItemRegister.cosmetics));
         textureLocation = textureName;
+    }
+
+    @Override
+    public void onArmorTick(ItemStack stack, Level level, Player player) {
+
+        super.onArmorTick(stack, level, player);
     }
 
     @Override

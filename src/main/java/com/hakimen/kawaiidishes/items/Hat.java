@@ -1,11 +1,14 @@
 package com.hakimen.kawaiidishes.items;
 
+import com.hakimen.kawaiidishes.items.armor.CatMaidArmorItem;
+import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
@@ -26,6 +29,8 @@ public class Hat extends Item {
     public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
         return armorType.equals(EquipmentSlot.HEAD);
     }
+
+
 
     @Nullable
     @Override

@@ -1,0 +1,17 @@
+{
+  "type": "kawaiidishes:coffee_pressing",
+  "ingredients": [
+    [
+      {
+        "item": "kawaiidishes:coffee_powder"
+      },
+      {
+        "item": "kawaiidishes:expresso_coffee"
+      }
+    ]
+  ],
+  "output": {
+    "item": "kawaiidishes:doppio_coffee",
+    "nbt": "{mainEffect:{Ambient:0b,Amplifier:0b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:300,Id:0b,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"kawaiidishes:kawaii\"},secondaryEffect:{Ambient:0b,Amplifier:1b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:300,Id:3b,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"minecraft:haste\"}}"
+  }
+}

@@ -1,9 +1,13 @@
 package com.hakimen.kawaiidishes.items.armor;
 
+import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -24,6 +28,14 @@ public class MaidDressArmorItem extends GeoArmorItem implements IAnimatable {
     @Override
     public boolean isFoil(ItemStack pStack) {
         return false;
+    }
+
+    @Override
+    public void onArmorTick(ItemStack stack, Level level, Player player) {
+        if(player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() instanceof MaidDressArmorItem){
+            player.forceAddEffect(new MobEffectInstance(EffectRegister.kawaiiEffect.get(),14*20),player);
+        }
+        super.onArmorTick(stack, level, player);
     }
 
     @Override

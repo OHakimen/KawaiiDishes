@@ -1,6 +1,7 @@
 package com.hakimen.kawaiidishes.datagen;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
+import com.hakimen.kawaiidishes.registry.BlockRegister;
 import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.data.DataGenerator;
@@ -35,28 +36,39 @@ public class LangSupplier extends LanguageProvider {
                 dressNames.put("purple_maid_dress","Purple Maid Dress");
                 
         for (var items:ItemRegister.ITEMS.getEntries().stream().toList()) {
+            String itemPath = items.get().getRegistryName().getPath();
             for (int i = 0; i < dressNames.keySet().size(); i++) {
-                if(items.get().getRegistryName().getPath().equals(dressNames.keySet().stream().toArray()[i].toString()+"_cat_tail_black")){
-                    add(items.get(),dressNames.get(items.get().getRegistryName().getPath().replace("_cat_tail_black",""))+" Black Tailed");
+                if(itemPath.equals(dressNames.keySet().stream().toArray()[i].toString()+"_cat_tail_black")){
+                    add(items.get(),dressNames.get(itemPath.replace("_cat_tail_black",""))+" Black Cat Tail");
                 }
-                if(items.get().getRegistryName().getPath().equals(dressNames.keySet().stream().toArray()[i].toString()+"_cat_tail_caramel")){
-                    add(items.get(),dressNames.get(items.get().getRegistryName().getPath().replace("_cat_tail_caramel",""))+" Caramel Tailed");
+                if(itemPath.equals(dressNames.keySet().stream().toArray()[i].toString()+"_cat_tail_caramel")){
+                    add(items.get(),dressNames.get(itemPath.replace("_cat_tail_caramel",""))+" Caramel Cat Tail");
                 }
-                if(items.get().getRegistryName().getPath().equals(dressNames.keySet().stream().toArray()[i].toString()+"_cat_tail_white")){
-                    add(items.get(),dressNames.get(items.get().getRegistryName().getPath().replace("_cat_tail_white",""))+" White Tailed");
+                if(itemPath.equals(dressNames.keySet().stream().toArray()[i].toString()+"_cat_tail_white")){
+                    add(items.get(),dressNames.get(itemPath.replace("_cat_tail_white",""))+" White Cat Tail");
                 }
-                if(items.get().getRegistryName().getPath().equals(dressNames.keySet().stream().toArray()[i].toString())){
-                    add(items.get(),dressNames.get(items.get().getRegistryName().getPath()));
+                if(itemPath.equals(dressNames.keySet().stream().toArray()[i].toString()+"_fox_tail_black")){
+                    add(items.get(),dressNames.get(itemPath.replace("_fox_tail_black",""))+" Black Fox Tailed");
+                }
+                if(itemPath.equals(dressNames.keySet().stream().toArray()[i].toString()+"_fox_tail_red")){
+                    add(items.get(),dressNames.get(itemPath.replace("_fox_tail_red",""))+" Red Fox Tailed");
+                }
+                if(itemPath.equals(dressNames.keySet().stream().toArray()[i].toString()+"_fox_tail_white")){
+                    add(items.get(),dressNames.get(itemPath.replace("_fox_tail_white",""))+" White Fox Tailed");
+                }
+                if(itemPath.equals(dressNames.keySet().stream().toArray()[i].toString())){
+                    add(items.get(),dressNames.get(itemPath));
                 }
             }
-            if(items.get().getRegistryName().getPath().endsWith("_coffee")){
-                add(items.get(),setFirstLetterUpperCase(items.get().getRegistryName().getPath().replace("_coffee",""))+ " Coffee");
+            if(itemPath.endsWith("_coffee")){
+                add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
             }
         }
 
         add(ItemRegister.coffeeFruit.get(),"Coffee Fruit");
         add(ItemRegister.roastedCoffeeBeans.get(),"Roasted Coffee Beans");
         add(ItemRegister.driedCoffeeBeans.get(),"Dried Coffee Beans");
+        add(ItemRegister.coffeePowder.get(),"Coffee Powder");
 
         add(ItemRegister.mug.get(),"Mug");
 
@@ -74,18 +86,24 @@ public class LangSupplier extends LanguageProvider {
         add(ItemRegister.blackThighHighsShoes.get(),"Dark Brown Shoes");
         add(ItemRegister.whiteThighHighsShoes.get(),"Brown Shoes");
 
+        add(BlockRegister.coffeeMachine.get(),"Coffee Machine");
+        add(BlockRegister.coffeePress.get(),"Coffee Press");
+
         add("itemGroup.kawaiidishes.foods", "Kawaii's Foods");
         add("itemGroup.kawaiidishes.blocks", "Kawaii's Blocks");
         add("itemGroup.kawaiidishes.cosmetics", "Kawaii's Cosmetics");
 
-        add(EffectRegister.kawaiiEffect.get(),"Kawaii OuO");
+        add("gui.kawaiidishes.coffee_machine", "Coffee Machine");
+
+        add(EffectRegister.kawaiiEffect.get(),"Kawaii");
+        add(EffectRegister.nekoEffect.get(),"Neko-chan");
     }
 
     public String setFirstLetterUpperCase(String string){
         var builtString = "";
         for (String word:string.split(" ")) {
-            builtString = word.substring(0,1).toUpperCase() + word.substring(1);
+            builtString += word.substring(0,1).toUpperCase() + word.substring(1)+ " ";
         }
-        return builtString;
+        return builtString.substring(0,builtString.length()-1);
     }
 }

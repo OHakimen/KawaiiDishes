@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,pressed=false": {
+      "model": "kawaiidishes:block/coffee_press",
+      "y": 90
+    },
+    "facing=east,pressed=true": {
+      "model": "kawaiidishes:block/coffee_press_down",
+      "y": 90
+    },
+    "facing=north,pressed=false": {
+      "model": "kawaiidishes:block/coffee_press"
+    },
+    "facing=north,pressed=true": {
+      "model": "kawaiidishes:block/coffee_press_down"
+    },
+    "facing=south,pressed=false": {
+      "model": "kawaiidishes:block/coffee_press",
+      "y": 180
+    },
+    "facing=south,pressed=true": {
+      "model": "kawaiidishes:block/coffee_press_down",
+      "y": 180
+    },
+    "facing=west,pressed=false": {
+      "model": "kawaiidishes:block/coffee_press",
+      "y": 270
+    },
+    "facing=west,pressed=true": {
+      "model": "kawaiidishes:block/coffee_press_down",
+      "y": 270
+    }
+  }
+}

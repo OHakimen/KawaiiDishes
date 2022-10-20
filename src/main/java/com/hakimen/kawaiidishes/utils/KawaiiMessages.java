@@ -1,6 +1,8 @@
 package com.hakimen.kawaiidishes.utils;
 
 import com.hakimen.kawaiidishes.items.CatEars;
+import com.hakimen.kawaiidishes.items.armor.CatMaidArmorItem;
+import com.hakimen.kawaiidishes.items.armor.MaidDressArmorItem;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -41,14 +43,15 @@ public class KawaiiMessages {
 
     public static void sendMessage(LivingEntity entity, Player target){
 
-        boolean hasCatEars,hasMaidDress = false;
+        boolean hasCatEars,hasMaidDress,hasCatMaidDress;
         Random r = target.getRandom();
         hasCatEars = target.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).getItem() instanceof CatEars;
-
+        hasMaidDress = target.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() instanceof MaidDressArmorItem;
+        hasCatMaidDress = target.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() instanceof CatMaidArmorItem;
         var msg = new TextComponent("<").append(entity.getDisplayName()).append("> ");
         int size;
         var value = "";
-        if(hasCatEars && hasMaidDress){
+        if(hasCatMaidDress || hasCatEars){
             size = catEarsMaidCostumeMessages.size();
             int option = r.nextInt(0,size);
             value = catEarsMaidCostumeMessages.get(option);

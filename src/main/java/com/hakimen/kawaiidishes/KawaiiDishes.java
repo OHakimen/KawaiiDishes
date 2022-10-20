@@ -1,8 +1,11 @@
 package com.hakimen.kawaiidishes;
 
+import com.hakimen.kawaiidishes.client.screens.CoffeeMachineScreen;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
+import com.hakimen.kawaiidishes.registry.ContainerRegister;
 import com.hakimen.kawaiidishes.registry.Registration;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -21,7 +24,7 @@ import org.slf4j.Logger;
 public class KawaiiDishes {
 
     // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
     public static final String modId = "kawaiidishes";
 
     public KawaiiDishes() {
@@ -46,6 +49,12 @@ public class KawaiiDishes {
     }
 
     private void clientStartup(final FMLClientSetupEvent event){
+        event.enqueueWork(() -> {
+            MenuScreens.register(ContainerRegister.coffeeMachine.get(), CoffeeMachineScreen::new);
+
+        });
         ItemBlockRenderTypes.setRenderLayer(BlockRegister.coffeePlant.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(BlockRegister.coffeePress.get(), RenderType.cutout());
+
     }
 }

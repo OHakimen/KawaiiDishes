@@ -1,12 +1,21 @@
 package com.hakimen.kawaiidishes.datagen;
 
+import com.hakimen.kawaiidishes.datagen.recipebuilder.CoffeeMachineRecipeBuilder;
+import com.hakimen.kawaiidishes.datagen.recipebuilder.CoffeePressRecipeBuilder;
+import com.hakimen.kawaiidishes.recipes.CoffeeMachineRecipe;
+import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.CriterionProgress;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
@@ -24,6 +33,17 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
 
     @Override
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+
+        roasting(pFinishedRecipeConsumer,ItemRegister.coffeeFruit.get(),ItemRegister.driedCoffeeBeans.get(),ItemRegister.roastedCoffeeBeans.get());
+
+
+        cosmetics(pFinishedRecipeConsumer);
+        coffees(pFinishedRecipeConsumer);
+
+    }
+
+
+    public void cosmetics(Consumer<FinishedRecipe> pFinishedRecipeConsumer){
         maidOutfit(pFinishedRecipeConsumer,ItemRegister.blackMaidDress.get(), Items.BLACK_WOOL,Items.WHITE_WOOL);
         maidOutfit(pFinishedRecipeConsumer,ItemRegister.whiteMaidDress.get(), Items.WHITE_WOOL,Items.BLACK_WOOL);
 
@@ -86,9 +106,142 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
         catTails(pFinishedRecipeConsumer,ItemRegister.blackCatTail.get(),Items.BLACK_WOOL);
         catTails(pFinishedRecipeConsumer,ItemRegister.whiteCatTail.get(),Items.WHITE_WOOL);
         catTails(pFinishedRecipeConsumer,ItemRegister.caramelCatTail.get(),Items.YELLOW_WOOL);
-
-        roasting(pFinishedRecipeConsumer,ItemRegister.coffeeFruit.get(),ItemRegister.driedCoffeeBeans.get(),ItemRegister.roastedCoffeeBeans.get());
     }
+
+    public void coffees(Consumer<FinishedRecipe> pFinishedRecipeConsumer){
+
+        machineRecipe(pFinishedRecipeConsumer,
+                ItemRegister.coffeePowder.get(),
+                ItemRegister.coffeePowder.get(),
+                Items.SUGAR,
+                ItemRegister.latteCoffee.get().getDefaultInstance(),
+                100,
+                false,
+                true,
+                ItemRegister.mug.get().getDefaultInstance(),
+                null,null);
+
+
+
+
+        pressRecipe(pFinishedRecipeConsumer,
+                ItemRegister.coffeePowder.get(),
+                Items.WATER_BUCKET,
+                ItemRegister.americanCoffee.get().getDefaultInstance(),
+                new MobEffectInstance(EffectRegister.kawaiiEffect.get(),15*20),
+                null
+        );
+        pressRecipe(pFinishedRecipeConsumer,
+                ItemRegister.coffeePowder.get(),
+                ItemRegister.americanCoffee.get(),
+                ItemRegister.expressoCoffee.get().getDefaultInstance(),
+                new MobEffectInstance(EffectRegister.kawaiiEffect.get(),15*20),
+                new MobEffectInstance(MobEffects.DIG_SPEED,15*20)
+        );
+
+        pressRecipe(pFinishedRecipeConsumer,
+                ItemRegister.coffeePowder.get(),
+                ItemRegister.expressoCoffee.get(),
+                ItemRegister.doppioCoffee.get().getDefaultInstance(),
+                new MobEffectInstance(EffectRegister.kawaiiEffect.get(),15*20),
+                new MobEffectInstance(MobEffects.DIG_SPEED,15*20,1)
+        );
+        pressRecipe(pFinishedRecipeConsumer,
+                ItemRegister.expressoCoffee.get(),
+                Items.MILK_BUCKET,
+                Items.SUGAR,
+                ItemRegister.latteCoffee.get().getDefaultInstance(),
+                new MobEffectInstance(EffectRegister.kawaiiEffect.get(),15*20),
+                new MobEffectInstance(MobEffects.MOVEMENT_SPEED,15*20)
+        );
+    }
+
+    public void machineRecipe(Consumer<FinishedRecipe>consumer,Item item,Item item1,Item item2,ItemStack result,int ticks, boolean needWater, boolean needMilk,ItemStack onOutput, MobEffectInstance mainEffect,MobEffectInstance secondaryEffect){
+        CoffeeMachineRecipeBuilder builder = new CoffeeMachineRecipeBuilder(
+                item,
+                item1,
+                item2,
+                result,
+                ticks,
+                needWater,
+                needMilk,
+                onOutput,
+                mainEffect,
+                secondaryEffect
+        );
+        builder.unlockedBy(getHasName(item), has(item));
+        builder.save(consumer);
+    }
+    public void machineRecipe(Consumer<FinishedRecipe>consumer,Item item,Item item1,ItemStack result,int ticks, boolean needWater, boolean needMilk,ItemStack onOutput, MobEffectInstance mainEffect,MobEffectInstance secondaryEffect){
+        CoffeeMachineRecipeBuilder builder = new CoffeeMachineRecipeBuilder(
+                item,
+                item1,
+                result,
+                ticks,
+                needWater,
+                needMilk,
+                onOutput,
+                mainEffect,
+                secondaryEffect
+        );
+        builder.unlockedBy(getHasName(item), has(item));
+        builder.save(consumer);
+    }
+    public void machineRecipe(Consumer<FinishedRecipe>consumer,Item item,ItemStack result,int ticks, boolean needWater, boolean needMilk,ItemStack onOutput, MobEffectInstance mainEffect,MobEffectInstance secondaryEffect){
+        CoffeeMachineRecipeBuilder builder = new CoffeeMachineRecipeBuilder(
+                item,
+                result,
+                ticks,
+                needWater,
+                needMilk,
+                onOutput,
+                mainEffect,
+                secondaryEffect
+        );
+        builder.unlockedBy(getHasName(item), has(item));
+
+        builder.save(consumer);
+    }
+
+
+
+
+    public void pressRecipe(Consumer<FinishedRecipe>consumer,Item item,Item item1,Item item2,ItemStack result, MobEffectInstance mainEffect,MobEffectInstance secondaryEffect){
+        CoffeePressRecipeBuilder builder = new CoffeePressRecipeBuilder(
+                item,
+                item1,
+                item2,
+                result,
+                mainEffect,
+                secondaryEffect
+        );
+        builder.unlockedBy(getHasName(item), has(item));
+        builder.save(consumer);
+    }
+    public void pressRecipe(Consumer<FinishedRecipe>consumer,Item item,Item item1,ItemStack result, MobEffectInstance mainEffect,MobEffectInstance secondaryEffect){
+        CoffeePressRecipeBuilder builder = new CoffeePressRecipeBuilder(
+                item,
+                item1,
+                result,
+                mainEffect,
+                secondaryEffect
+        );
+        builder.unlockedBy(getHasName(item), has(item));
+        builder.save(consumer);
+    }
+    public void pressRecipe(Consumer<FinishedRecipe>consumer,Item item,ItemStack result, MobEffectInstance mainEffect,MobEffectInstance secondaryEffect){
+        CoffeePressRecipeBuilder builder = new CoffeePressRecipeBuilder(
+                item,
+                result,
+                mainEffect,
+                secondaryEffect
+        );
+        builder.unlockedBy(getHasName(item), has(item));
+
+        builder.save(consumer);
+    }
+
+
 
     public void roasting(Consumer<FinishedRecipe> consumer,Item stage1,Item stage2,Item stage3){
         simpleCookingRecipe(consumer,"smelting", SimpleCookingSerializer.SMELTING_RECIPE,200,stage1,stage2,0.12f);

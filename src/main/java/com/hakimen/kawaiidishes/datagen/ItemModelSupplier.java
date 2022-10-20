@@ -23,10 +23,18 @@ public class ItemModelSupplier extends ItemModelProvider {
         block(BlockRegister.americanMug.get());
         block(BlockRegister.latteMug.get());
         block(BlockRegister.mochaMug.get());
+        block(BlockRegister.cappuccinoMug.get());
+        block(BlockRegister.doppioMug.get());
+        block(BlockRegister.cafeAuLaitMug.get());
+        block(BlockRegister.macchiatoMug.get());
+
+        block(BlockRegister.coffeePress.get());
+        block(BlockRegister.coffeeMachine.get());
 
         simpleItem(ItemRegister.coffeeFruit.get());
         simpleItem(ItemRegister.driedCoffeeBeans.get());
         simpleItem(ItemRegister.roastedCoffeeBeans.get());
+        simpleItem(ItemRegister.coffeePowder.get());
 
         simpleItem(ItemRegister.blackMaidDress.get());
         simpleItem(ItemRegister.blackMaidDressCatTailBlack.get());
@@ -117,6 +125,76 @@ public class ItemModelSupplier extends ItemModelProvider {
         simpleItem(ItemRegister.whiteThighHighs.get());
         simpleItem(ItemRegister.blackThighHighsShoes.get());
         simpleItem(ItemRegister.whiteThighHighsShoes.get());
+
+
+
+        simpleItem(ItemRegister.blackMaidDressFoxTailBlack.get());
+        simpleItem(ItemRegister.blackMaidDressFoxTailRed.get());
+        simpleItem(ItemRegister.blackMaidDressFoxTailWhite.get());
+
+        simpleItem(ItemRegister.whiteMaidDressFoxTailBlack.get());
+        simpleItem(ItemRegister.whiteMaidDressFoxTailRed.get());
+        simpleItem(ItemRegister.whiteMaidDressFoxTailWhite.get());
+
+        simpleItem(ItemRegister.grayMaidDressFoxTailBlack.get());
+        simpleItem(ItemRegister.grayMaidDressFoxTailRed.get());
+        simpleItem(ItemRegister.grayMaidDressFoxTailWhite.get());
+
+        simpleItem(ItemRegister.light_grayMaidDressFoxTailBlack.get());
+        simpleItem(ItemRegister.light_grayMaidDressFoxTailRed.get());
+        simpleItem(ItemRegister.light_grayMaidDressFoxTailWhite.get());
+
+        simpleItem(ItemRegister.light_blueMaidDressFoxTailBlack.get());
+        simpleItem(ItemRegister.light_blueMaidDressFoxTailRed.get());
+        simpleItem(ItemRegister.light_blueMaidDressFoxTailWhite.get());
+
+        simpleItem(ItemRegister.blueMaidDressFoxTailBlack.get());
+        simpleItem(ItemRegister.blueMaidDressFoxTailRed.get());
+        simpleItem(ItemRegister.blueMaidDressFoxTailWhite.get());
+
+        simpleItem(ItemRegister.limeMaidDressFoxTailBlack.get());
+        simpleItem(ItemRegister.limeMaidDressFoxTailRed.get());
+        simpleItem(ItemRegister.limeMaidDressFoxTailWhite.get());
+
+        simpleItem(ItemRegister.greenMaidDressFoxTailBlack.get());
+        simpleItem(ItemRegister.greenMaidDressFoxTailRed.get());
+        simpleItem(ItemRegister.greenMaidDressFoxTailWhite.get());
+
+        simpleItem(ItemRegister.orangeMaidDressFoxTailBlack.get());
+        simpleItem(ItemRegister.orangeMaidDressFoxTailRed.get());
+        simpleItem(ItemRegister.orangeMaidDressFoxTailWhite.get());
+
+        simpleItem(ItemRegister.redMaidDressFoxTailBlack.get());
+        simpleItem(ItemRegister.redMaidDressFoxTailRed.get());
+        simpleItem(ItemRegister.redMaidDressFoxTailWhite.get());
+
+        simpleItem(ItemRegister.pinkMaidDressFoxTailBlack.get());
+        simpleItem(ItemRegister.pinkMaidDressFoxTailRed.get());
+        simpleItem(ItemRegister.pinkMaidDressFoxTailWhite.get());
+
+        simpleItem(ItemRegister.magentaMaidDressFoxTailBlack.get());
+        simpleItem(ItemRegister.magentaMaidDressFoxTailRed.get());
+        simpleItem(ItemRegister.magentaMaidDressFoxTailWhite.get());
+
+        simpleItem(ItemRegister.magentaMaidDressFoxTailBlack.get());
+        simpleItem(ItemRegister.magentaMaidDressFoxTailRed.get());
+        simpleItem(ItemRegister.magentaMaidDressFoxTailWhite.get());
+
+        simpleItem(ItemRegister.purpleMaidDressFoxTailBlack.get());
+        simpleItem(ItemRegister.purpleMaidDressFoxTailRed.get());
+        simpleItem(ItemRegister.purpleMaidDressFoxTailWhite.get());
+
+        simpleItem(ItemRegister.brownMaidDressFoxTailBlack.get());
+        simpleItem(ItemRegister.brownMaidDressFoxTailRed.get());
+        simpleItem(ItemRegister.brownMaidDressFoxTailWhite.get());
+
+        simpleItem(ItemRegister.yellowMaidDressFoxTailBlack.get());
+        simpleItem(ItemRegister.yellowMaidDressFoxTailRed.get());
+        simpleItem(ItemRegister.yellowMaidDressFoxTailWhite.get());
+
+        simpleItem(ItemRegister.cyanMaidDressFoxTailBlack.get());
+        simpleItem(ItemRegister.cyanMaidDressFoxTailRed.get());
+        simpleItem(ItemRegister.cyanMaidDressFoxTailWhite.get());
 
 
     }
