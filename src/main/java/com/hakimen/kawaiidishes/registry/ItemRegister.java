@@ -1,5 +1,6 @@
 package com.hakimen.kawaiidishes.registry;
 
+import com.hakimen.kawaiidishes.blocks.StoolBlock;
 import com.hakimen.kawaiidishes.items.CatEars;
 import com.hakimen.kawaiidishes.items.Drink;
 import com.hakimen.kawaiidishes.items.armor.*;
@@ -33,6 +34,12 @@ public class ItemRegister {
             return blackCatEars.get().getDefaultInstance();
         }
     };
+    public static CreativeModeTab decoration = new CreativeModeTab("kawaiidishes.decoration") {
+        @Override
+        public ItemStack makeIcon() {
+            return whiteStool.get().getDefaultInstance();
+        }
+    };
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,modId);
 
@@ -47,12 +54,20 @@ public class ItemRegister {
     public static final RegistryObject<CatEars> caramelCatEars = ITEMS.register("caramel_cat_ears", CatEars::new);
     public static final RegistryObject<CatEars> whiteCatEars = ITEMS.register("white_cat_ears", CatEars::new);
 
+
     public static final RegistryObject<Item> blackCatTail = ITEMS.register("black_cat_tail",
             () -> new CatTailArmorItem("black_cat_tail.png"));
     public static final RegistryObject<Item> caramelCatTail = ITEMS.register("caramel_cat_tail",
             () -> new CatTailArmorItem("caramel_cat_tail.png"));
     public static final RegistryObject<Item> whiteCatTail = ITEMS.register("white_cat_tail",
             () -> new CatTailArmorItem("white_cat_tail.png"));
+
+    public static final RegistryObject<Item> blackFoxTail = ITEMS.register("black_fox_tail",
+            () -> new FoxTailArmorItem("black_fox_tail.png"));
+    public static final RegistryObject<Item> redFoxTail = ITEMS.register("red_fox_tail",
+            () -> new FoxTailArmorItem("red_fox_tail.png"));
+    public static final RegistryObject<Item> whiteFoxTail = ITEMS.register("white_fox_tail",
+            () -> new FoxTailArmorItem("white_fox_tail.png"));
 
     public static final RegistryObject<Item> blackMaidDress = ITEMS.register("black_maid_dress",
             () -> new MaidDressArmorItem("black_maid_dress_cat_tail_black.png"));
@@ -363,6 +378,23 @@ public class ItemRegister {
     public static final RegistryObject<Drink> doppioCoffee = ITEMS.register("doppio_coffee",() -> new Drink(BlockRegister.doppioMug.get(),5,3));
     public static final RegistryObject<Drink> cappuccinoCoffee = ITEMS.register("cappuccino_coffee", () -> new Drink(BlockRegister.cappuccinoMug.get(),6,4));
 
+
+    public static final RegistryObject<Item> blackStool = ITEMS.register("black_stool",() -> new BlockItem(BlockRegister.blackStool.get(), new Item.Properties().tab(decoration)));
+    public static final RegistryObject<Item> blueStool = ITEMS.register("blue_stool",() -> new BlockItem(BlockRegister.blueStool.get(), new Item.Properties().tab(decoration)));
+    public static final RegistryObject<Item> brownStool = ITEMS.register("brown_stool",() -> new BlockItem(BlockRegister.brownStool.get(), new Item.Properties().tab(decoration)));
+    public static final RegistryObject<Item> cyanStool = ITEMS.register("cyan_stool",() -> new BlockItem(BlockRegister.cyanStool.get(), new Item.Properties().tab(decoration)));
+    public static final RegistryObject<Item> grayStool = ITEMS.register("gray_stool",() -> new BlockItem(BlockRegister.grayStool.get(), new Item.Properties().tab(decoration)));
+    public static final RegistryObject<Item> greenStool = ITEMS.register("green_stool",() -> new BlockItem(BlockRegister.greenStool.get(), new Item.Properties().tab(decoration)));
+    public static final RegistryObject<Item> lightBlueStool = ITEMS.register("light_blue_stool",() -> new BlockItem(BlockRegister.lightBlueStool.get(), new Item.Properties().tab(decoration)));
+    public static final RegistryObject<Item> lightGrayStool = ITEMS.register("light_gray_stool",() -> new BlockItem(BlockRegister.lightGrayStool.get(), new Item.Properties().tab(decoration)));
+    public static final RegistryObject<Item> limeStool = ITEMS.register("lime_stool",() -> new BlockItem(BlockRegister.limeStool.get(), new Item.Properties().tab(decoration)));
+    public static final RegistryObject<Item> magentaStool = ITEMS.register("magenta_stool",() -> new BlockItem(BlockRegister.magentaStool.get(), new Item.Properties().tab(decoration)));
+    public static final RegistryObject<Item> orangeStool = ITEMS.register("orange_stool",() -> new BlockItem(BlockRegister.orangeStool.get(), new Item.Properties().tab(decoration)));
+    public static final RegistryObject<Item> pinkStool = ITEMS.register("pink_stool",() -> new BlockItem(BlockRegister.pinkStool.get(), new Item.Properties().tab(decoration)));
+    public static final RegistryObject<Item> purpleStool = ITEMS.register("purple_stool",() -> new BlockItem(BlockRegister.purpleStool.get(), new Item.Properties().tab(decoration)));
+    public static final RegistryObject<Item> redStool = ITEMS.register("red_stool",() -> new BlockItem(BlockRegister.redStool.get(), new Item.Properties().tab(decoration)));
+    public static final RegistryObject<Item> whiteStool = ITEMS.register("white_stool",() -> new BlockItem(BlockRegister.whiteStool.get(), new Item.Properties().tab(decoration)));
+    public static final RegistryObject<Item> yellowStool = ITEMS.register("yellow_stool",() -> new BlockItem(BlockRegister.yellowStool.get(), new Item.Properties().tab(decoration)));
 
 
     public static void register(IEventBus bus){

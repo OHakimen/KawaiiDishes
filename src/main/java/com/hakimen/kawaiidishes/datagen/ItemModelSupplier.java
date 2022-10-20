@@ -18,18 +18,12 @@ public class ItemModelSupplier extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        block(BlockRegister.mug.get());
-        block(BlockRegister.expressoMug.get());
-        block(BlockRegister.americanMug.get());
-        block(BlockRegister.latteMug.get());
-        block(BlockRegister.mochaMug.get());
-        block(BlockRegister.cappuccinoMug.get());
-        block(BlockRegister.doppioMug.get());
-        block(BlockRegister.cafeAuLaitMug.get());
-        block(BlockRegister.macchiatoMug.get());
-
-        block(BlockRegister.coffeePress.get());
-        block(BlockRegister.coffeeMachine.get());
+        for (var block:BlockRegister.BLOCKS.getEntries().stream().toList()) {
+            if(block.get().getRegistryName().toString().contains("_stool")){
+                stool(block.get());
+            }else if(!block.get().getRegistryName().toString().contains("coffee_bush"))
+                block(block.get());
+        }
 
         simpleItem(ItemRegister.coffeeFruit.get());
         simpleItem(ItemRegister.driedCoffeeBeans.get());
@@ -207,5 +201,8 @@ public class ItemModelSupplier extends ItemModelProvider {
 
     private ItemModelBuilder block(Block block){
         return withExistingParent(block.getRegistryName().getPath(),new ResourceLocation(KawaiiDishes.modId,"block/"+block.getRegistryName().getPath()));
+    }
+    private ItemModelBuilder stool(Block block){
+        return withExistingParent(block.getRegistryName().getPath(),new ResourceLocation(KawaiiDishes.modId,"block/stools/"+block.getRegistryName().getPath()));
     }
 }

@@ -3,6 +3,7 @@ package com.hakimen.kawaiidishes.registry;
 import com.hakimen.kawaiidishes.blocks.MugBlock;
 import com.hakimen.kawaiidishes.blocks.block_entities.CoffeeMachineBlockEntity;
 import com.hakimen.kawaiidishes.blocks.block_entities.CoffeePressBlockEntity;
+import com.hakimen.kawaiidishes.blocks.block_entities.StoolBlockEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -20,6 +21,26 @@ public class BlockEntityRegister {
             ()->BlockEntityType.Builder.of(CoffeePressBlockEntity::new,BlockRegister.coffeePress.get()).build(null));
     public static final RegistryObject<BlockEntityType<CoffeeMachineBlockEntity>> coffeeMachine = BLOCK_ENTITIES.register("coffee_machine_entity",
             ()->BlockEntityType.Builder.of(CoffeeMachineBlockEntity::new,BlockRegister.coffeeMachine.get()).build(null));
+
+
+    public static final RegistryObject<BlockEntityType<StoolBlockEntity>> stool = BLOCK_ENTITIES.register("stool_entity",
+            ()->BlockEntityType.Builder.of(StoolBlockEntity::new,
+                    BlockRegister.blackStool.get(),
+                    BlockRegister.blueStool.get(),
+                    BlockRegister.brownStool.get(),
+                    BlockRegister.cyanStool.get(),
+                    BlockRegister.grayStool.get(),
+                    BlockRegister.greenStool.get(),
+                    BlockRegister.lightBlueStool.get(),
+                    BlockRegister.lightGrayStool.get(),
+                    BlockRegister.limeStool.get(),
+                    BlockRegister.magentaStool.get(),
+                    BlockRegister.orangeStool.get(),
+                    BlockRegister.pinkStool.get(),
+                    BlockRegister.purpleStool.get(),
+                    BlockRegister.redStool.get(),
+                    BlockRegister.whiteStool.get(),
+                    BlockRegister.yellowStool.get()).build(null));
 
 
 

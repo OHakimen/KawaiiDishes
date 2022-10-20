@@ -14,5 +14,6 @@ public class Registration {
         ContainerRegister.register(bus);
         RecipeRegister.register(bus);
         EffectRegister.register(bus);
+        EntityRegister.register(bus);
     }
 }

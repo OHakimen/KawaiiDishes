@@ -76,6 +76,10 @@ public class LangSupplier extends LanguageProvider {
         add(ItemRegister.whiteCatTail.get(),"White Cat Tail");
         add(ItemRegister.blackCatTail.get(),"Black Cat Tail");
 
+        add(ItemRegister.redFoxTail.get(),"Red Fox Tail");
+        add(ItemRegister.whiteFoxTail.get(),"White Fox Tail");
+        add(ItemRegister.blackFoxTail.get(),"Black Fox Tail");
+
         add(ItemRegister.caramelCatEars.get(),"Caramel Cat Ears");
         add(ItemRegister.blackCatEars.get(),"Black Cat Ears");
         add(ItemRegister.whiteCatEars.get(),"White Cat Ears");
@@ -92,6 +96,7 @@ public class LangSupplier extends LanguageProvider {
         add("itemGroup.kawaiidishes.foods", "Kawaii's Foods");
         add("itemGroup.kawaiidishes.blocks", "Kawaii's Blocks");
         add("itemGroup.kawaiidishes.cosmetics", "Kawaii's Cosmetics");
+        add("itemGroup.kawaiidishes.decoration", "Kawaii's Decorations");
 
         add("gui.kawaiidishes.coffee_machine", "Coffee Machine");
 

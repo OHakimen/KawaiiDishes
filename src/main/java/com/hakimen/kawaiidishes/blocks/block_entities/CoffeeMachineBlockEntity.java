@@ -11,6 +11,7 @@ import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -120,6 +121,8 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements MenuProvide
 
     @Override
     public void tick(Level pLevel, BlockPos pPos, BlockState pState, CoffeeMachineBlockEntity pBlockEntity) {
+
+
         if(hasRecipe(pBlockEntity)){
             Level level = pBlockEntity.level;
             SimpleContainer inventory = new SimpleContainer(pBlockEntity.inventory.getSlots());
@@ -135,6 +138,7 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements MenuProvide
                     recipeTicks = recipe.getTicks();
                     setChanged();
                 }else {
+
                     this.progress++;
                     setChanged();
                     if(progress >= recipeTicks) {

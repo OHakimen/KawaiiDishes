@@ -23,6 +23,23 @@ public class BlockRegister {
     public static final RegistryObject<MugWithCoffee> doppioMug = BLOCKS.register("doppio_coffee",MugWithCoffee::new);
     public static final RegistryObject<MugWithCoffee> macchiatoMug = BLOCKS.register("macchiato_coffee",MugWithCoffee::new);
 
+    public static final RegistryObject<StoolBlock> blackStool = BLOCKS.register("black_stool",StoolBlock::new);
+    public static final RegistryObject<StoolBlock> blueStool = BLOCKS.register("blue_stool",StoolBlock::new);
+    public static final RegistryObject<StoolBlock> brownStool = BLOCKS.register("brown_stool",StoolBlock::new);
+    public static final RegistryObject<StoolBlock> cyanStool = BLOCKS.register("cyan_stool",StoolBlock::new);
+    public static final RegistryObject<StoolBlock> grayStool = BLOCKS.register("gray_stool",StoolBlock::new);
+    public static final RegistryObject<StoolBlock> greenStool = BLOCKS.register("green_stool",StoolBlock::new);
+    public static final RegistryObject<StoolBlock> lightBlueStool = BLOCKS.register("light_blue_stool",StoolBlock::new);
+    public static final RegistryObject<StoolBlock> lightGrayStool = BLOCKS.register("light_gray_stool",StoolBlock::new);
+    public static final RegistryObject<StoolBlock> limeStool = BLOCKS.register("lime_stool",StoolBlock::new);
+    public static final RegistryObject<StoolBlock> magentaStool = BLOCKS.register("magenta_stool",StoolBlock::new);
+    public static final RegistryObject<StoolBlock> orangeStool = BLOCKS.register("orange_stool",StoolBlock::new);
+    public static final RegistryObject<StoolBlock> pinkStool = BLOCKS.register("pink_stool",StoolBlock::new);
+    public static final RegistryObject<StoolBlock> purpleStool = BLOCKS.register("purple_stool",StoolBlock::new);
+    public static final RegistryObject<StoolBlock> redStool = BLOCKS.register("red_stool",StoolBlock::new);
+    public static final RegistryObject<StoolBlock> whiteStool = BLOCKS.register("white_stool",StoolBlock::new);
+    public static final RegistryObject<StoolBlock> yellowStool = BLOCKS.register("yellow_stool",StoolBlock::new);
+
     public static final RegistryObject<CoffeePress> coffeePress = BLOCKS.register("coffee_press",CoffeePress::new);
 
     public static final RegistryObject<CoffeeMachine> coffeeMachine = BLOCKS.register("coffee_machine",CoffeeMachine::new);

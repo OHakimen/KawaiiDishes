@@ -51,8 +51,13 @@ public class KawaiiDishes {
     private void clientStartup(final FMLClientSetupEvent event){
         event.enqueueWork(() -> {
             MenuScreens.register(ContainerRegister.coffeeMachine.get(), CoffeeMachineScreen::new);
-
         });
+
+        for(var block: BlockRegister.BLOCKS.getEntries().stream().toList()){
+            if(block.get().getRegistryName().getPath().contains("_stool")){
+                ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.cutout());
+            }
+        }
         ItemBlockRenderTypes.setRenderLayer(BlockRegister.coffeePlant.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(BlockRegister.coffeePress.get(), RenderType.cutout());
 

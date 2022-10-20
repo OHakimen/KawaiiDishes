@@ -15,6 +15,7 @@
   "gui.kawaiidishes.coffee_machine": "Coffee Machine",
   "item.kawaiidishes.black_cat_ears": "Black Cat Ears",
   "item.kawaiidishes.black_cat_tail": "Black Cat Tail",
+  "item.kawaiidishes.black_fox_tail": "Black Fox Tail",
   "item.kawaiidishes.black_maid_dress": "Black Maid Dress",
   "item.kawaiidishes.black_maid_dress_cat_tail_black": "Black Maid Dress Black Cat Tail",
   "item.kawaiidishes.black_maid_dress_cat_tail_caramel": "Black Maid Dress Caramel Cat Tail",
@@ -113,6 +114,7 @@
   "item.kawaiidishes.purple_maid_dress_fox_tail_black": "Purple Maid Dress Black Fox Tailed",
   "item.kawaiidishes.purple_maid_dress_fox_tail_red": "Purple Maid Dress Red Fox Tailed",
   "item.kawaiidishes.purple_maid_dress_fox_tail_white": "Purple Maid Dress White Fox Tailed",
+  "item.kawaiidishes.red_fox_tail": "Red Fox Tail",
   "item.kawaiidishes.red_maid_dress": "Red Maid Dress",
   "item.kawaiidishes.red_maid_dress_cat_tail_black": "Red Maid Dress Black Cat Tail",
   "item.kawaiidishes.red_maid_dress_cat_tail_caramel": "Red Maid Dress Caramel Cat Tail",
@@ -123,6 +125,7 @@
   "item.kawaiidishes.roasted_coffee_beans": "Roasted Coffee Beans",
   "item.kawaiidishes.white_cat_ears": "White Cat Ears",
   "item.kawaiidishes.white_cat_tail": "White Cat Tail",
+  "item.kawaiidishes.white_fox_tail": "White Fox Tail",
   "item.kawaiidishes.white_maid_dress": "White Maid Dress",
   "item.kawaiidishes.white_maid_dress_cat_tail_black": "White Maid Dress Black Cat Tail",
   "item.kawaiidishes.white_maid_dress_cat_tail_caramel": "White Maid Dress Caramel Cat Tail",
@@ -140,5 +143,6 @@
   "item.kawaiidishes.yellow_maid_dress_fox_tail_white": "Yellow Maid Dress White Fox Tailed",
   "itemGroup.kawaiidishes.blocks": "Kawaii's Blocks",
   "itemGroup.kawaiidishes.cosmetics": "Kawaii's Cosmetics",
+  "itemGroup.kawaiidishes.decoration": "Kawaii's Decorations",
   "itemGroup.kawaiidishes.foods": "Kawaii's Foods"
 }
