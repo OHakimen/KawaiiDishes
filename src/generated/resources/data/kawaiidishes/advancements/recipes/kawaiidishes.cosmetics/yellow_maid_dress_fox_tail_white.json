@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:yellow_maid_dress_fox_tail_white"
+    ]
+  },
+  "criteria": {
+    "has_yellow_maid_dress": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:yellow_maid_dress"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:yellow_maid_dress_fox_tail_white"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_yellow_maid_dress",
+      "has_the_recipe"
+    ]
+  ]
+}

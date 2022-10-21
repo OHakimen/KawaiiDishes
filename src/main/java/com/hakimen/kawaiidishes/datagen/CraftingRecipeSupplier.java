@@ -10,6 +10,8 @@ import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.CriterionProgress;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Mob;
@@ -19,6 +21,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.loot.entries.TagEntry;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.registries.RegistryObject;
@@ -35,13 +39,33 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
         roasting(pFinishedRecipeConsumer,ItemRegister.coffeeFruit.get(),ItemRegister.driedCoffeeBeans.get(),ItemRegister.roastedCoffeeBeans.get());
+        roasting(pFinishedRecipeConsumer,Items.COCOA_BEANS,ItemRegister.driedCocoaBeans.get(),ItemRegister.roastedCocoaBeans.get());
 
 
         cosmetics(pFinishedRecipeConsumer);
+        decor(pFinishedRecipeConsumer);
         coffees(pFinishedRecipeConsumer);
 
     }
 
+    public void decor(Consumer<FinishedRecipe> pFinishedRecipeConsumer){
+        stool(pFinishedRecipeConsumer,ItemRegister.blackStool.get(),Items.BLACK_WOOL);
+        stool(pFinishedRecipeConsumer,ItemRegister.blueStool.get(),Items.BLUE_WOOL);
+        stool(pFinishedRecipeConsumer,ItemRegister.brownStool.get(),Items.BROWN_WOOL);
+        stool(pFinishedRecipeConsumer,ItemRegister.cyanStool.get(),Items.CYAN_WOOL);
+        stool(pFinishedRecipeConsumer,ItemRegister.grayStool.get(),Items.GRAY_WOOL);
+        stool(pFinishedRecipeConsumer,ItemRegister.greenStool.get(),Items.GREEN_WOOL);
+        stool(pFinishedRecipeConsumer,ItemRegister.lightBlueStool.get(),Items.LIGHT_BLUE_WOOL);
+        stool(pFinishedRecipeConsumer,ItemRegister.lightGrayStool.get(),Items.LIGHT_GRAY_WOOL);
+        stool(pFinishedRecipeConsumer,ItemRegister.limeStool.get(),Items.LIME_WOOL);
+        stool(pFinishedRecipeConsumer,ItemRegister.magentaStool.get(),Items.MAGENTA_WOOL);
+        stool(pFinishedRecipeConsumer,ItemRegister.orangeStool.get(),Items.ORANGE_WOOL);
+        stool(pFinishedRecipeConsumer,ItemRegister.pinkStool.get(),Items.PINK_WOOL);
+        stool(pFinishedRecipeConsumer,ItemRegister.purpleStool.get(),Items.PURPLE_WOOL);
+        stool(pFinishedRecipeConsumer,ItemRegister.redStool.get(),Items.RED_WOOL);
+        stool(pFinishedRecipeConsumer,ItemRegister.whiteStool.get(),Items.WHITE_WOOL);
+        stool(pFinishedRecipeConsumer,ItemRegister.yellowStool.get(),Items.YELLOW_WOOL);
+    }
 
     public void cosmetics(Consumer<FinishedRecipe> pFinishedRecipeConsumer){
         maidOutfit(pFinishedRecipeConsumer,ItemRegister.blackMaidDress.get(), Items.BLACK_WOOL,Items.WHITE_WOOL);
@@ -106,6 +130,11 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
         catTails(pFinishedRecipeConsumer,ItemRegister.blackCatTail.get(),Items.BLACK_WOOL);
         catTails(pFinishedRecipeConsumer,ItemRegister.whiteCatTail.get(),Items.WHITE_WOOL);
         catTails(pFinishedRecipeConsumer,ItemRegister.caramelCatTail.get(),Items.YELLOW_WOOL);
+
+        foxTails(pFinishedRecipeConsumer,ItemRegister.blackFoxTail.get(),Items.BLACK_WOOL,Items.WHITE_WOOL);
+        foxTails(pFinishedRecipeConsumer,ItemRegister.redFoxTail.get(),Items.ORANGE_WOOL,Items.WHITE_WOOL);
+        foxTails(pFinishedRecipeConsumer,ItemRegister.whiteFoxTail.get(),Items.WHITE_WOOL,Items.WHITE_WOOL);
+
     }
 
     public void coffees(Consumer<FinishedRecipe> pFinishedRecipeConsumer){
@@ -262,6 +291,18 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
                 .save(consumer);
     }
 
+    public void foxTails(Consumer<FinishedRecipe> consumer,Item result,Item item,Item item2){
+        ShapedRecipeBuilder.shaped(result)
+                .pattern(" #x")
+                .pattern("s##")
+                .pattern("ss ")
+                .define('#',Ingredient.of(item.getDefaultInstance()))
+                .define('x',Ingredient.of(item2.getDefaultInstance()))
+                .define('s',Ingredient.of(Tags.Items.STRING))
+                .unlockedBy(getHasName(item), has(item))
+                .save(consumer);
+    }
+
     public void thighHighs(Consumer<FinishedRecipe> consumer,Item result,Item item){
         ShapedRecipeBuilder.shaped(result)
                 .pattern("# #")
@@ -309,28 +350,60 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
 
     public void maidOutfitVariations(Consumer<FinishedRecipe> consumer,Item result){
         for (var i:ItemRegister.ITEMS.getEntries().stream().toList()) {
-            if(i.get().getRegistryName().getPath().equals(result.getRegistryName().getPath()+"_cat_tail_black")){
+            var path = i.get().getRegistryName().getPath();
+            if(path.equals(result.getRegistryName().getPath()+"_cat_tail_black")){
                 ShapelessRecipeBuilder.shapeless(i.get())
                         .requires(Ingredient.of(result.getDefaultInstance()))
                         .requires(Ingredient.of(ItemRegister.blackCatTail.get().getDefaultInstance()))
                         .unlockedBy(getHasName(result), has(result))
                         .save(consumer);
             }
-            if(i.get().getRegistryName().getPath().equals(result.getRegistryName().getPath()+"_cat_tail_white")){
+            if(path.equals(result.getRegistryName().getPath()+"_cat_tail_white")){
                 ShapelessRecipeBuilder.shapeless(i.get())
                         .requires(Ingredient.of(result.getDefaultInstance()))
                         .requires(Ingredient.of(ItemRegister.whiteCatTail.get().getDefaultInstance()))
                         .unlockedBy(getHasName(result), has(result))
                         .save(consumer);
             }
-            if(i.get().getRegistryName().getPath().equals(result.getRegistryName().getPath()+"_cat_tail_caramel")){
+            if(path.equals(result.getRegistryName().getPath()+"_cat_tail_caramel")){
                 ShapelessRecipeBuilder.shapeless(i.get())
                         .requires(Ingredient.of(result.getDefaultInstance()))
                         .requires(Ingredient.of(ItemRegister.caramelCatTail.get().getDefaultInstance()))
                         .unlockedBy(getHasName(result), has(result))
                         .save(consumer);
             }
+            if(path.equals(result.getRegistryName().getPath()+"_fox_tail_black")){
+                ShapelessRecipeBuilder.shapeless(i.get())
+                        .requires(Ingredient.of(result.getDefaultInstance()))
+                        .requires(Ingredient.of(ItemRegister.blackFoxTail.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(result), has(result))
+                        .save(consumer);
+            }
+            if(path.equals(result.getRegistryName().getPath()+"_fox_tail_red")){
+                ShapelessRecipeBuilder.shapeless(i.get())
+                        .requires(Ingredient.of(result.getDefaultInstance()))
+                        .requires(Ingredient.of(ItemRegister.redFoxTail.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(result), has(result))
+                        .save(consumer);
+            }
+            if(path.equals(result.getRegistryName().getPath()+"_fox_tail_white")){
+                ShapelessRecipeBuilder.shapeless(i.get())
+                        .requires(Ingredient.of(result.getDefaultInstance()))
+                        .requires(Ingredient.of(ItemRegister.whiteFoxTail.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(result), has(result))
+                        .save(consumer);
+            }
         }
+    }
 
+    public void stool(Consumer<FinishedRecipe> consumer,Item result,Item mainColor){
+        ShapedRecipeBuilder.shaped(result)
+                .pattern("#s#")
+                .pattern("| |")
+                .define('s',Ingredient.of(mainColor.getDefaultInstance()))
+                .define('#',Ingredient.of(Items.STRIPPED_OAK_LOG,Items.STRIPPED_ACACIA_LOG,Items.STRIPPED_BIRCH_LOG,Items.STRIPPED_SPRUCE_LOG,Items.STRIPPED_SPRUCE_LOG,Items.STRIPPED_DARK_OAK_LOG))
+                .define('|',Ingredient.of(Items.STICK))
+                .unlockedBy(getHasName(mainColor), has(mainColor))
+                .save(consumer);
     }
 }

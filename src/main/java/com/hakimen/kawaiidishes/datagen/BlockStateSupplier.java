@@ -22,26 +22,6 @@ public class BlockStateSupplier extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        for(RegistryObject<Block> blocks: BlockRegister.BLOCKS.getEntries().stream().toList()){
-            if(blocks.get().getRegistryName().getPath().contains("_stool")){
-                genState(blocks.get());
-            }
-        }
     }
 
-    public void genState(Block block){
-        try {
-            FileWriter fileWriter = new FileWriter("D:\\Coding\\Java\\KawaiiDishes\\src\\generated\\resources\\assets\\kawaiidishes\\blockstates\\"+block.getRegistryName().getPath()+".json");
-            fileWriter.write(String.format("{\n" +
-                    "  \"variants\": {\n" +
-                    "    \"\": {\n" +
-                    "      \"model\": \"%s\"\n" +
-                    "    }\n" +
-                    "  }\n" +
-                    "}",block.getRegistryName().toString().replace("kawaiidishes:","kawaiidishes:block/stools/")));
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kawaiidishes:item/dark_chocolate_bar"
+  }
+}

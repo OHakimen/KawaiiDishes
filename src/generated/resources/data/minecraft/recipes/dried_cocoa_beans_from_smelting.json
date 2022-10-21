@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "minecraft:cocoa_beans"
+  },
+  "result": "kawaiidishes:dried_cocoa_beans",
+  "experience": 0.12,
+  "cookingtime": 200
+}

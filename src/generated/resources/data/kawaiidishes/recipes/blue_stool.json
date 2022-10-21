@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#s#",
+    "| |"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:blue_wool"
+    },
+    "#": [
+      {
+        "item": "minecraft:stripped_oak_log"
+      },
+      {
+        "item": "minecraft:stripped_acacia_log"
+      },
+      {
+        "item": "minecraft:stripped_birch_log"
+      },
+      {
+        "item": "minecraft:stripped_spruce_log"
+      },
+      {
+        "item": "minecraft:stripped_spruce_log"
+      },
+      {
+        "item": "minecraft:stripped_dark_oak_log"
+      }
+    ],
+    "|": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "kawaiidishes:blue_stool"
+  }
+}

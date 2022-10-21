@@ -25,6 +25,15 @@ public class ItemModelSupplier extends ItemModelProvider {
                 block(block.get());
         }
 
+
+        simpleItem(ItemRegister.whiteChocolateBar.get());
+        simpleItem(ItemRegister.darkChocolateBar.get());
+        simpleItem(ItemRegister.milkChocolateBar.get());
+
+        simpleItem(ItemRegister.driedCocoaBeans.get());
+        simpleItem(ItemRegister.roastedCocoaBeans.get());
+        simpleItem(ItemRegister.cocoaPowder.get());
+
         simpleItem(ItemRegister.coffeeFruit.get());
         simpleItem(ItemRegister.driedCoffeeBeans.get());
         simpleItem(ItemRegister.roastedCoffeeBeans.get());

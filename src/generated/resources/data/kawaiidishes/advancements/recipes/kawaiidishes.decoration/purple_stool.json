@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:purple_stool"
+    ]
+  },
+  "criteria": {
+    "has_purple_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:purple_wool"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:purple_stool"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_purple_wool",
+      "has_the_recipe"
+    ]
+  ]
+}

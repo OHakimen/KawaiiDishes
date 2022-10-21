@@ -368,6 +368,15 @@ public class ItemRegister {
     public static final RegistryObject<Item> roastedCoffeeBeans = ITEMS.register("roasted_coffee_beans",() ->  new Item(new Item.Properties().tab(foods)));
     public static final RegistryObject<Item> coffeePowder = ITEMS.register("coffee_powder",() ->  new Item(new Item.Properties().tab(foods)));
 
+    public static final RegistryObject<Item> driedCocoaBeans = ITEMS.register("dried_cocoa_beans", () ->  new Item(new Item.Properties().tab(foods)));
+    public static final RegistryObject<Item> roastedCocoaBeans = ITEMS.register("roasted_cocoa_beans",() ->  new Item(new Item.Properties().tab(foods)));
+    public static final RegistryObject<Item> cocoaPowder = ITEMS.register("cocoa_powder",() ->  new Item(new Item.Properties().tab(foods)));
+
+    public static final RegistryObject<Item> whiteChocolateBar = ITEMS.register("white_chocolate_bar", () ->  new Item(new Item.Properties().tab(foods).food(new FoodProperties.Builder().nutrition(3).saturationMod(8f).build())));
+    public static final RegistryObject<Item> darkChocolateBar = ITEMS.register("dark_chocolate_bar",() ->  new Item(new Item.Properties().tab(foods).food(new FoodProperties.Builder().nutrition(3).saturationMod(8f).build())));
+    public static final RegistryObject<Item> milkChocolateBar = ITEMS.register("milk_chocolate_bar",() ->  new Item(new Item.Properties().tab(foods).food(new FoodProperties.Builder().nutrition(3).saturationMod(8f).build())));
+
+
 
     public static final RegistryObject<Drink> expressoCoffee = ITEMS.register("expresso_coffee", () -> new Drink(BlockRegister.expressoMug.get(),3,1));
     public static final RegistryObject<Drink> americanCoffee = ITEMS.register("american_coffee", () -> new Drink(BlockRegister.americanMug.get(),4,2));
