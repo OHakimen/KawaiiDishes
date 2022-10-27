@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "g g",
+    "xxx"
+  ],
+  "key": {
+    "g": {
+      "tag": "forge:glass_panes"
+    },
+    "x": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "kawaiidishes:coffee_press"
+  }
+}

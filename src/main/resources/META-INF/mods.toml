@@ -31,10 +31,10 @@ displayName="Kawaii Dishes" #mandatory
 # A text field displayed in the mod UI
 #credits="Thanks for this example mod goes to Java" #optional
 # A text field displayed in the mod UI
-authors="Hakimen, DanielNCG" #optional
+authors="Hakimen" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-A mod, about maids, food, and other stuff
+A mod about maids, food, and other stuff
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.kawaiidishes]] #optional

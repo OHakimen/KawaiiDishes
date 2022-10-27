@@ -1,6 +1,8 @@
 package com.hakimen.kawaiidishes.items;
 
 import com.hakimen.kawaiidishes.blocks.MugBlock;
+import com.hakimen.kawaiidishes.blocks.block_entities.CoffeeMugBlockEntity;
+import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
 import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import com.mojang.authlib.GameProfile;
@@ -9,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
@@ -19,7 +22,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BannerBlock;
 
 import java.util.UUID;
 
@@ -39,6 +44,8 @@ public class Drink extends BlockItem {
         super.onUsingTick(stack, player, count);
     }
 
+    CompoundTag mainEffect;
+    CompoundTag secondaryEffect;
 
     @Override
     public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
@@ -46,8 +53,8 @@ public class Drink extends BlockItem {
         if(pLivingEntity instanceof Player p){
             p.addItem(ItemRegister.mug.get().getDefaultInstance());
         }
-        CompoundTag mainEffect = pStack.getOrCreateTag().getCompound("mainEffect");
-        CompoundTag secondaryEffect = pStack.getOrCreateTag().getCompound("secondaryEffect");
+        loadItemData(pStack);
+
         if(!mainEffect.equals(new CompoundTag())){
             pLivingEntity.addEffect(MobEffectInstance.load(mainEffect));
         }
@@ -56,6 +63,23 @@ public class Drink extends BlockItem {
         }
         return super.finishUsingItem(pStack, pLevel, pLivingEntity);
     }
+
+    public void loadItemData(ItemStack pStack){
+        mainEffect = pStack.getOrCreateTag().getCompound("mainEffect");
+        secondaryEffect = pStack.getOrCreateTag().getCompound("secondaryEffect");
+
+    }
+
+    @Override
+    public void onDestroyed(ItemEntity pItemEntity) {
+        CompoundTag tag = new CompoundTag();
+        tag.put("mainEffect",mainEffect);
+        tag.put("secondaryEffect",secondaryEffect);
+        setBlockEntityData(pItemEntity.getItem(), BlockEntityRegister.coffeeMug.get(),tag);
+        super.onDestroyed(pItemEntity);
+
+    }
+
 
     @Override
     public SoundEvent getEatingSound() {

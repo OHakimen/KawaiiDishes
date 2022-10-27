@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:cocoa_powder"
+    },
+    {
+      "item": "kawaiidishes:cocoa_powder"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "kawaiidishes:cocoa_powder"
+    }
+  ],
+  "result": {
+    "item": "kawaiidishes:dark_chocolate_bar"
+  }
+}

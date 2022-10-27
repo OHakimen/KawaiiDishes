@@ -14,14 +14,14 @@ public class BlockRegister {
 
     public static final RegistryObject<MugBlock> mug = BLOCKS.register("mug",MugBlock::new);
 
-    public static final RegistryObject<MugWithCoffee> expressoMug = BLOCKS.register("expresso_coffee",MugWithCoffee::new);
-    public static final RegistryObject<MugWithCoffee> americanMug = BLOCKS.register("american_coffee",MugWithCoffee::new);
-    public static final RegistryObject<MugWithCoffee> latteMug = BLOCKS.register("latte_coffee",MugWithCoffee::new);
-    public static final RegistryObject<MugWithCoffee> mochaMug = BLOCKS.register("mocha_coffee",MugWithCoffee::new);
-    public static final RegistryObject<MugWithCoffee> cafeAuLaitMug = BLOCKS.register("cafe_au_lait_coffee",MugWithCoffee::new);
-    public static final RegistryObject<MugWithCoffee> cappuccinoMug = BLOCKS.register("cappuccino_coffee",MugWithCoffee::new);
-    public static final RegistryObject<MugWithCoffee> doppioMug = BLOCKS.register("doppio_coffee",MugWithCoffee::new);
-    public static final RegistryObject<MugWithCoffee> macchiatoMug = BLOCKS.register("macchiato_coffee",MugWithCoffee::new);
+    public static final RegistryObject<MugWithCoffeeBlock> expressoMug = BLOCKS.register("expresso_coffee", MugWithCoffeeBlock::new);
+    public static final RegistryObject<MugWithCoffeeBlock> americanMug = BLOCKS.register("american_coffee", MugWithCoffeeBlock::new);
+    public static final RegistryObject<MugWithCoffeeBlock> latteMug = BLOCKS.register("latte_coffee", MugWithCoffeeBlock::new);
+    public static final RegistryObject<MugWithCoffeeBlock> mochaMug = BLOCKS.register("mocha_coffee", MugWithCoffeeBlock::new);
+    public static final RegistryObject<MugWithCoffeeBlock> cafeAuLaitMug = BLOCKS.register("cafe_au_lait_coffee", MugWithCoffeeBlock::new);
+    public static final RegistryObject<MugWithCoffeeBlock> cappuccinoMug = BLOCKS.register("cappuccino_coffee", MugWithCoffeeBlock::new);
+    public static final RegistryObject<MugWithCoffeeBlock> doppioMug = BLOCKS.register("doppio_coffee", MugWithCoffeeBlock::new);
+    public static final RegistryObject<MugWithCoffeeBlock> macchiatoMug = BLOCKS.register("macchiato_coffee", MugWithCoffeeBlock::new);
 
     public static final RegistryObject<StoolBlock> blackStool = BLOCKS.register("black_stool",StoolBlock::new);
     public static final RegistryObject<StoolBlock> blueStool = BLOCKS.register("blue_stool",StoolBlock::new);
@@ -40,12 +40,13 @@ public class BlockRegister {
     public static final RegistryObject<StoolBlock> whiteStool = BLOCKS.register("white_stool",StoolBlock::new);
     public static final RegistryObject<StoolBlock> yellowStool = BLOCKS.register("yellow_stool",StoolBlock::new);
 
-    public static final RegistryObject<CoffeePress> coffeePress = BLOCKS.register("coffee_press",CoffeePress::new);
+    public static final RegistryObject<CoffeePressBlock> coffeePress = BLOCKS.register("coffee_press", CoffeePressBlock::new);
 
-    public static final RegistryObject<CoffeeMachine> coffeeMachine = BLOCKS.register("coffee_machine",CoffeeMachine::new);
+    public static final RegistryObject<CoffeeMachineBlock> coffeeMachine = BLOCKS.register("coffee_machine", CoffeeMachineBlock::new);
 
+    public static final RegistryObject<MortarAndPestleBlock> mortarAndPestle = BLOCKS.register("mortar_and_pestle",MortarAndPestleBlock::new);
 
-    public static final RegistryObject<CoffeePlant> coffeePlant = BLOCKS.register("coffee_bush",CoffeePlant::new);
+    public static final RegistryObject<CoffeePlantBlock> coffeePlant = BLOCKS.register("coffee_bush", CoffeePlantBlock::new);
 
     public static void register(IEventBus bus){
         BLOCKS.register(bus);

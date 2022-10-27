@@ -1,0 +1,15 @@
+{
+  "type": "kawaiidishes:mortar_grinding",
+  "ticks": 100,
+
+  "ingredients": [
+    [
+      {
+        "item": "kawaiidishes:roasted_coffee_beans"
+      }
+    ]
+  ],
+  "output": {
+    "item": "kawaiidishes:coffee_powder"
+  }
+}

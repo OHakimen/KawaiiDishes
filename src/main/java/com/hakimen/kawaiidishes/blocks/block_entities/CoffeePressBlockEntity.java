@@ -1,6 +1,6 @@
 package com.hakimen.kawaiidishes.blocks.block_entities;
 
-import com.hakimen.kawaiidishes.blocks.CoffeePress;
+import com.hakimen.kawaiidishes.blocks.CoffeePressBlock;
 import com.hakimen.kawaiidishes.recipes.CoffeePressRecipe;
 import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
 import net.minecraft.core.BlockPos;
@@ -20,7 +20,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
-import java.util.Random;
 
 public class CoffeePressBlockEntity extends BlockEntity {
 
@@ -97,7 +96,7 @@ public class CoffeePressBlockEntity extends BlockEntity {
             entity.coffeeMade = match.get().getResultItem();
             entity.coffeeGotMade = true;
             level.setBlockAndUpdate(entity.getBlockPos(),entity.getBlockState().setValue(
-                    CoffeePress.PRESSED,true
+                    CoffeePressBlock.PRESSED,true
             ));
         }
     }

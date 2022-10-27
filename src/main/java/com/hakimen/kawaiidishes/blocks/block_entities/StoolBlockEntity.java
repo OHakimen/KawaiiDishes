@@ -18,7 +18,7 @@ public class StoolBlockEntity extends BlockEntity {
     public SittableEntity getOrCreateSeat() {
         if (this.seat == null) {
             final var seat = new SittableEntity(this.level);
-            seat.absMoveTo(this.worldPosition.getX() + 0.5D, this.worldPosition.getY()+0.25f,
+            seat.absMoveTo(this.worldPosition.getX() + 0.5D, this.worldPosition.getY()+0.125f,
                     this.worldPosition.getZ() + 0.5D);
             this.level.addFreshEntity(seat);
             this.seat = seat;

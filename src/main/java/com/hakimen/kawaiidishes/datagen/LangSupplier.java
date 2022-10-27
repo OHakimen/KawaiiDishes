@@ -63,12 +63,25 @@ public class LangSupplier extends LanguageProvider {
             if(itemPath.endsWith("_coffee")){
                 add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
             }
+            if(itemPath.endsWith("_stool")){
+                add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
+            }
         }
 
         add(ItemRegister.coffeeFruit.get(),"Coffee Fruit");
         add(ItemRegister.roastedCoffeeBeans.get(),"Roasted Coffee Beans");
         add(ItemRegister.driedCoffeeBeans.get(),"Dried Coffee Beans");
         add(ItemRegister.coffeePowder.get(),"Coffee Powder");
+
+        add(ItemRegister.roastedCocoaBeans.get(),"Roasted Cocoa Beans");
+        add(ItemRegister.driedCocoaBeans.get(),"Dried Cocoa Beans");
+        add(ItemRegister.cocoaPowder.get(),"Cocoa Powder");
+
+        add(ItemRegister.whiteChocolateBar.get(),"White Chocolate Bar");
+        add(ItemRegister.darkChocolateBar.get(),"Dark Chocolate Bar");
+        add(ItemRegister.milkChocolateBar.get(),"Milk Chocolate Bar");
+
+        add(ItemRegister.mortarAndPestle.get(),"Mortar And Pestle");
 
         add(ItemRegister.mug.get(),"Mug");
 

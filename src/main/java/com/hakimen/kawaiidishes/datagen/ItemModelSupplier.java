@@ -21,7 +21,9 @@ public class ItemModelSupplier extends ItemModelProvider {
         for (var block:BlockRegister.BLOCKS.getEntries().stream().toList()) {
             if(block.get().getRegistryName().toString().contains("_stool")){
                 stool(block.get());
-            }else if(!block.get().getRegistryName().toString().contains("coffee_bush"))
+            }else if(block.get().getRegistryName().toString().contains("coffee_bush") || block.get().getRegistryName().toString().contains("mortar_and_pestle")){
+                continue;
+            }else
                 block(block.get());
         }
 

@@ -1,22 +1,12 @@
 package com.hakimen.kawaiidishes.blocks;
 
 import com.hakimen.kawaiidishes.blocks.block_entities.CoffeeMachineBlockEntity;
-import com.hakimen.kawaiidishes.blocks.block_entities.CoffeePressBlockEntity;
-import com.hakimen.kawaiidishes.containers.CoffeeMachineContainer;
-import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -27,9 +17,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.*;
@@ -37,11 +25,10 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import javax.swing.*;
 
-public class CoffeeMachine extends Block implements EntityBlock{
+public class CoffeeMachineBlock extends Block implements EntityBlock{
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public CoffeeMachine() {
+    public CoffeeMachineBlock() {
         super(Properties.of(Material.STONE).strength(2f,2f)
                 .sound(SoundType.METAL));
         registerDefaultState( getStateDefinition().any()
@@ -54,6 +41,7 @@ public class CoffeeMachine extends Block implements EntityBlock{
         return pLevel.isClientSide ? null
                 : (level, pos, state, blockEntity) -> ((CoffeeMachineBlockEntity) blockEntity).tick(level,pos,state,(CoffeeMachineBlockEntity)blockEntity);
     }
+
 
     @Override
     @Deprecated
@@ -94,8 +82,21 @@ public class CoffeeMachine extends Block implements EntityBlock{
 
 
     @Override
-    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
-        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (!pState.is(pNewState.getBlock())) {
+            BlockEntity blockentity = pLevel.getBlockEntity(pPos);
+            if (blockentity instanceof CoffeeMachineBlockEntity coffeeMachine) {
+                for (int i = 0; i < coffeeMachine.inventory.getSlots(); i++) {
+                    pLevel.addFreshEntity(new ItemEntity(
+                            pLevel,pPos.getX(),
+                            pPos.getY(),
+                            pPos.getZ(),
+                            coffeeMachine.inventory.getStackInSlot(i)
+                    ));
+                }
+            }
+            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+        }
     }
 
     @Override

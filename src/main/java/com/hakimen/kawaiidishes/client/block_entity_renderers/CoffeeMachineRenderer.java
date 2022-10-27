@@ -1,20 +1,21 @@
 package com.hakimen.kawaiidishes.client.block_entity_renderers;
 
-import com.hakimen.kawaiidishes.blocks.CoffeeMachine;
+import com.hakimen.kawaiidishes.blocks.CoffeeMachineBlock;
 import com.hakimen.kawaiidishes.blocks.block_entities.CoffeeMachineBlockEntity;
-import com.hakimen.kawaiidishes.blocks.block_entities.CoffeePressBlockEntity;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.DustParticle;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.core.particles.*;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Objects;
 
@@ -30,9 +31,10 @@ public class CoffeeMachineRenderer implements BlockEntityRenderer<CoffeeMachineB
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
         pPoseStack.pushPose();
         var itemStack = pBlockEntity.inventory.getStackInSlot(5);
+        var pos = pBlockEntity.getBlockPos();
         var state = Objects.requireNonNull(pBlockEntity.getLevel()).getBlockState(pBlockEntity.getBlockPos());
         if(state.getBlock() == BlockRegister.coffeeMachine.get()) {
-            var direction = state.getValue(CoffeeMachine.FACING);
+            var direction = state.getValue(CoffeeMachineBlock.FACING);
             if (direction == Direction.WEST) {
                 pPoseStack.translate(0.25, .25f, .25f);
                 pPoseStack.scale(0.65f, 0.65f, 0.65f);

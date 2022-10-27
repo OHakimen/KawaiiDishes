@@ -24,13 +24,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import static net.minecraftforge.common.ForgeHooks.*;
 import java.util.Random;
 
-public class CoffeePlant extends BushBlock implements BonemealableBlock {
+public class CoffeePlantBlock extends BushBlock implements BonemealableBlock {
 
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
     private static final VoxelShape SAPLING_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D);
     private static final VoxelShape MID_GROWTH_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
 
-    public CoffeePlant() {
+    public CoffeePlantBlock() {
         super(Properties.of(Material.PLANT)
                 .randomTicks()
                 .noCollission()

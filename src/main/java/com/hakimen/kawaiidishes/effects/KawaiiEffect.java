@@ -41,4 +41,6 @@ public class KawaiiEffect extends MobEffect {
     public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
         return true;
     }
+
+
 }

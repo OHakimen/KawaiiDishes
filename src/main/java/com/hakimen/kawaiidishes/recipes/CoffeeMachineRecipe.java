@@ -58,20 +58,25 @@ public class CoffeeMachineRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
-        var matches = new boolean[]{
-                true,true,true,true,true
-        };
+        boolean match = true;
 
-        if(requireWater){
-            matches[0] = pContainer.getItem(0).is(Items.WATER_BUCKET);
-        }
-        if(requireMilk){
-            matches[1] = pContainer.getItem(1).is(Items.MILK_BUCKET);
-        }
         for (int i = 0; i < recipeItems.get(0).getItems().length; i++) {
-            matches[i+2] = recipeItems.get(0).getItems()[i].getItem().equals(pContainer.getItem(i+2).getItem());
+
+            match &= recipeItems.get(0).getItems()[i].getItem().equals(pContainer.getItem(i+2).getItem());
         }
-        return (matches[0]&&matches[1]&&matches[2]&&matches[3]&&matches[4])&&pContainer.getItem(5).getItem().equals(itemOnOutput.getItem());
+        if(requireWater)
+            match &= pContainer.getItem(0).getItem().equals(Items.WATER_BUCKET);
+        else if(!requireWater && pContainer.getItem(0).getItem().equals(Items.WATER_BUCKET)){
+            return false;
+        }
+        if(requireMilk)
+            match &= pContainer.getItem(1).getItem().equals(Items.MILK_BUCKET);
+        else if(!requireMilk && pContainer.getItem(1).getItem().equals(Items.MILK_BUCKET)){
+            return false;
+        }
+        match &= pContainer.getItem(5).getItem().equals(itemOnOutput.getItem());
+
+        return match;
     }
 
     @Override
@@ -82,6 +87,11 @@ public class CoffeeMachineRecipe implements Recipe<SimpleContainer> {
     @Override
     public boolean canCraftInDimensions(int pWidth, int pHeight) {
         return true;
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return recipeItems;
     }
 
     @Override

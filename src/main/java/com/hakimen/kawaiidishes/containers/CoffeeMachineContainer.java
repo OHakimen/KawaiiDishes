@@ -1,10 +1,8 @@
 package com.hakimen.kawaiidishes.containers;
 
-import com.hakimen.kawaiidishes.blocks.CoffeeMachine;
 import com.hakimen.kawaiidishes.blocks.block_entities.CoffeeMachineBlockEntity;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
 import com.hakimen.kawaiidishes.registry.ContainerRegister;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

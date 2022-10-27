@@ -4,6 +4,7 @@ import com.hakimen.kawaiidishes.client.block_entity_renderers.CoffeeMachineRende
 import com.hakimen.kawaiidishes.client.block_entity_renderers.CoffeePressRenderer;
 import com.hakimen.kawaiidishes.client.entity.FoxTailArmorRenderer;
 import com.hakimen.kawaiidishes.client.entity.SeatRenderer;
+import com.hakimen.kawaiidishes.client.entity.blocks.MortarAndPestleRenderer;
 import com.hakimen.kawaiidishes.client.entity.maid_dresses.CatMaidDressArmorRenderer;
 import com.hakimen.kawaiidishes.client.entity.CatTailArmorRenderer;
 import com.hakimen.kawaiidishes.client.entity.maid_dresses.FoxMaidDressArmorRenderer;
@@ -12,6 +13,7 @@ import com.hakimen.kawaiidishes.client.entity.ThighHighsArmorRenderer;
 import com.hakimen.kawaiidishes.items.armor.*;
 import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
 import com.hakimen.kawaiidishes.registry.EntityRegister;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,6 +31,11 @@ public class KawaiiDishesClient {
         GeoArmorRenderer.registerArmorRenderer(FoxMaidArmorItem.class, new FoxMaidDressArmorRenderer());
         GeoArmorRenderer.registerArmorRenderer(FoxTailArmorItem.class, new FoxTailArmorRenderer());
 
+    }
+
+    @SubscribeEvent
+    public static void registerBlockRenderers(final EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(BlockEntityRegister.mortarAndPestle.get(), MortarAndPestleRenderer::new);
     }
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event){

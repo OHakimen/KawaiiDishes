@@ -27,7 +27,7 @@ public class StoolBlock extends Block  implements EntityBlock {
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        var finalShape = Block.box(0.0D, 10.0D, 0.0D, 16.0D, 12.0D, 16.0D);
+        var finalShape = Block.box(2.0D, 8.0D, 2.0D, 14.0D, 10.0D, 14.0D);
         finalShape = Shapes.join(finalShape,Block.box(7.0D, 0.0D, 2.0D, 9.0D, 2.0D, 8.0D), BooleanOp.OR);
         finalShape = Shapes.join(finalShape,Block.box(2.0D, 0.0D, 7.0D, 8.0D, 2.0D, 9.0D), BooleanOp.OR);
         finalShape = Shapes.join(finalShape,Block.box(7.0D, 0.0D, 8.0D, 9.0D, 2.0D, 14.0D), BooleanOp.OR);

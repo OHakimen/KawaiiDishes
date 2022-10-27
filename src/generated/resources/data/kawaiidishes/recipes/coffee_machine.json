@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    ".px",
+    "iri"
+  ],
+  "key": {
+    "x": {
+      "tag": "forge:stone"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "p": {
+      "item": "kawaiidishes:coffee_press"
+    },
+    ".": {
+      "item": "minecraft:iron_nugget"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "kawaiidishes:coffee_machine"
+  }
+}

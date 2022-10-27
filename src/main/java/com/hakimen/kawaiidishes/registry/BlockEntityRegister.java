@@ -1,9 +1,7 @@
 package com.hakimen.kawaiidishes.registry;
 
 import com.hakimen.kawaiidishes.blocks.MugBlock;
-import com.hakimen.kawaiidishes.blocks.block_entities.CoffeeMachineBlockEntity;
-import com.hakimen.kawaiidishes.blocks.block_entities.CoffeePressBlockEntity;
-import com.hakimen.kawaiidishes.blocks.block_entities.StoolBlockEntity;
+import com.hakimen.kawaiidishes.blocks.block_entities.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -21,6 +19,23 @@ public class BlockEntityRegister {
             ()->BlockEntityType.Builder.of(CoffeePressBlockEntity::new,BlockRegister.coffeePress.get()).build(null));
     public static final RegistryObject<BlockEntityType<CoffeeMachineBlockEntity>> coffeeMachine = BLOCK_ENTITIES.register("coffee_machine_entity",
             ()->BlockEntityType.Builder.of(CoffeeMachineBlockEntity::new,BlockRegister.coffeeMachine.get()).build(null));
+    public static final RegistryObject<BlockEntityType<MortarAndPestleBlockEntity>> mortarAndPestle = BLOCK_ENTITIES.register("mortar_and_pestle_entity",
+            ()->BlockEntityType.Builder.of(MortarAndPestleBlockEntity::new,BlockRegister.mortarAndPestle.get()).build(null));
+
+
+    public static final RegistryObject<BlockEntityType<CoffeeMugBlockEntity>> coffeeMug = BLOCK_ENTITIES.register("coffee_mug_entity",
+            ()->BlockEntityType.Builder.of(
+                    CoffeeMugBlockEntity::new,
+                    BlockRegister.mochaMug.get(),
+                    BlockRegister.cafeAuLaitMug.get(),
+                    BlockRegister.doppioMug.get(),
+                    BlockRegister.americanMug.get(),
+                    BlockRegister.cappuccinoMug.get(),
+                    BlockRegister.macchiatoMug.get(),
+                    BlockRegister.latteMug.get(),
+                    BlockRegister.expressoMug.get()
+
+            ).build(null));
 
 
     public static final RegistryObject<BlockEntityType<StoolBlockEntity>> stool = BLOCK_ENTITIES.register("stool_entity",

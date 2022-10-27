@@ -28,7 +28,7 @@ public class NekoEffect extends MobEffect {
         for (Entity entity:entities) {
             if(entity instanceof Creeper creeper){
                 creeper.knockback(
-                        (float)Math.sqrt((pLivingEntity.getX()-creeper.getX())*(pLivingEntity.getZ()-creeper.getZ())),
+                        0.25f,
                         (pLivingEntity.getX()-creeper.getX()),
                         (pLivingEntity.getZ()-creeper.getZ())
                 );

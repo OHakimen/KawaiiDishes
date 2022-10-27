@@ -55,6 +55,12 @@ public class CoffeePressRecipe implements Recipe<SimpleContainer> {
         return output.copy();
     }
 
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return recipeItems;
+    }
+
     @Override
     public ResourceLocation getId() {
         return id;

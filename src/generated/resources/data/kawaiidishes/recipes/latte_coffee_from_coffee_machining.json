@@ -21,6 +21,6 @@
   ],
   "output": {
     "item": "kawaiidishes:latte_coffee",
-    "nbt": "{}"
+    "nbt": "{mainEffect:{Ambient:0b,Amplifier:0b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:300,Id:0b,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"kawaiidishes:kawaii\"},secondaryEffect:{Ambient:0b,Amplifier:0b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:600,Id:3b,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"minecraft:haste\"}}"
   }
 }

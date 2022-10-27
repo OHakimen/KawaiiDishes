@@ -68,6 +68,10 @@ public class KawaiiMessages {
             int option = r.nextInt(0,size);
             value = defaultMessages.get(option);
         }
+        if(r.nextFloat(0,1) < 0.75){
+            int option = r.nextInt(0,defaultMessages.size());
+            value = defaultMessages.get(option);
+        }
 
         if(value != ""){
             if(value.contains("%user%")){

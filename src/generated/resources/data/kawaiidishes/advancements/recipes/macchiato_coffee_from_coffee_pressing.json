@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:macchiato_coffee"
+    ]
+  },
+  "criteria": {
+    "has_doppio_coffee": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:doppio_coffee"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:macchiato_coffee"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_doppio_coffee",
+      "has_the_recipe"
+    ]
+  ]
+}

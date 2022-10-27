@@ -2,14 +2,12 @@ package com.hakimen.kawaiidishes.blocks;
 
 import com.hakimen.kawaiidishes.blocks.block_entities.CoffeePressBlockEntity;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -30,10 +28,10 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
-public class CoffeePress extends Block implements EntityBlock {
+public class CoffeePressBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty PRESSED = BooleanProperty.create("pressed");
-    public CoffeePress() {
+    public CoffeePressBlock() {
         super(Properties.of(Material.STONE).strength(2f,2f)
                 .sound(SoundType.GLASS));
         registerDefaultState( getStateDefinition().any()
@@ -115,7 +113,7 @@ public class CoffeePress extends Block implements EntityBlock {
                 }else{
                     coffeePress.coffeeGotMade = false;
                     pLevel.setBlockAndUpdate(coffeePress.getBlockPos(),coffeePress.getBlockState().setValue(
-                            CoffeePress.PRESSED,coffeePress.coffeeGotMade
+                            CoffeePressBlock.PRESSED,coffeePress.coffeeGotMade
                     ));
 
                 }

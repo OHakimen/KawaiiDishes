@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "kawaiidishes:latte_coffee"
+          "name": "minecraft:air"
         }
       ],
       "conditions": [
