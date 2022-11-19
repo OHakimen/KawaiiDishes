@@ -1,14 +1,18 @@
 package com.hakimen.kawaiidishes.effects;
 
+import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.utils.EntityUtils;
 import com.hakimen.kawaiidishes.utils.KawaiiMessages;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.PowderSnowBlock;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+
 import java.util.Random;
 
 
@@ -26,13 +30,14 @@ public class KawaiiEffect extends MobEffect {
                         pLivingEntity.getY(),
                         pLivingEntity.getZ()
                 ),8*(1+pAmplifier),8*(1+pAmplifier),8*(1+pAmplifier)));
+        Random r = pLivingEntity.getRandom();
         for (Entity entity:entities) {
-            if(entity instanceof LivingEntity livingEntity && EntityUtils.isHumanoid(livingEntity) && pLivingEntity instanceof Player player){
-                Random r = player.getRandom();
-                if(r.nextInt(0,1000) < 1){
+            if((entity instanceof LivingEntity livingEntity && EntityUtils.isHumanoid(livingEntity)&& pLivingEntity instanceof Player player)){
+                if(r.nextInt(0,10000) < 1){
                     KawaiiMessages.sendMessage(livingEntity,player);
                 }
             }
+
         }
         super.applyEffectTick(pLivingEntity, pAmplifier);
     }
@@ -41,6 +46,8 @@ public class KawaiiEffect extends MobEffect {
     public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
         return true;
     }
+
+
 
 
 }

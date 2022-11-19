@@ -26,11 +26,41 @@ public class ItemModelSupplier extends ItemModelProvider {
             }else
                 block(block.get());
         }
+        for(var item : ItemRegister.ITEMS.getEntries().stream().toList()){
+            if(item.get().getRegistryName().toString().contains("_headband")){
+                if(item.get().getRegistryName().toString().endsWith("_cat_ears_black")){
+                    catBandItem(item.get(),"cat_ears_black");
+                }
+                else if(item.get().getRegistryName().toString().endsWith("_cat_ears_white")){
+                    catBandItem(item.get(),"cat_ears_white");
+                }
+                else if(item.get().getRegistryName().toString().endsWith("_cat_ears_caramel")) {
+                    catBandItem(item.get(),"cat_ears_caramel");
+                }
+                else if(item.get().getRegistryName().toString().endsWith("_fox_ears_black")){
+                    foxBandItem(item.get(),"cat_ears_black","fox_ears_black");
+                }
+                else if(item.get().getRegistryName().toString().endsWith("_fox_ears_white")){
+                    foxBandItem(item.get(),"cat_ears_white","fox_ears_white");
+                }
+                else if(item.get().getRegistryName().toString().endsWith("_fox_ears_red")) {
+                    foxBandItem(item.get(),"fox_ears_red","fox_ears_red");
+                }
+                else{
+                    headBandItem(item.get());
+                }
+            }else if(item.get().getRegistryName().toString().contains("_maid_dress")){
+                maidDressItem(item.get());
+            }
+        }
 
 
         simpleItem(ItemRegister.whiteChocolateBar.get());
         simpleItem(ItemRegister.darkChocolateBar.get());
         simpleItem(ItemRegister.milkChocolateBar.get());
+
+        simpleItem(ItemRegister.condensedMilk.get());
+        simpleItem(ItemRegister.brigadeiroMix.get());
 
         simpleItem(ItemRegister.driedCocoaBeans.get());
         simpleItem(ItemRegister.roastedCocoaBeans.get());
@@ -41,165 +71,10 @@ public class ItemModelSupplier extends ItemModelProvider {
         simpleItem(ItemRegister.roastedCoffeeBeans.get());
         simpleItem(ItemRegister.coffeePowder.get());
 
-        simpleItem(ItemRegister.blackMaidDress.get());
-        simpleItem(ItemRegister.blackMaidDressCatTailBlack.get());
-        simpleItem(ItemRegister.blackMaidDressCatTailCaramel.get());
-        simpleItem(ItemRegister.blackMaidDressCatTailWhite.get());
-
-        simpleItem(ItemRegister.whiteMaidDress.get());
-        simpleItem(ItemRegister.whiteMaidDressCatTailBlack.get());
-        simpleItem(ItemRegister.whiteMaidDressCatTailCaramel.get());
-        simpleItem(ItemRegister.whiteMaidDressCatTailWhite.get());
-
-        simpleItem(ItemRegister.grayMaidDress.get());
-        simpleItem(ItemRegister.grayMaidDressCatTailBlack.get());
-        simpleItem(ItemRegister.grayMaidDressCatTailCaramel.get());
-        simpleItem(ItemRegister.grayMaidDressCatTailWhite.get());
-
-        simpleItem(ItemRegister.light_grayMaidDress.get());
-        simpleItem(ItemRegister.light_grayMaidDressCatTailBlack.get());
-        simpleItem(ItemRegister.light_grayMaidDressCatTailCaramel.get());
-        simpleItem(ItemRegister.light_grayMaidDressCatTailWhite.get());
-
-        simpleItem(ItemRegister.light_blueMaidDress.get());
-        simpleItem(ItemRegister.light_blueMaidDressCatTailBlack.get());
-        simpleItem(ItemRegister.light_blueMaidDressCatTailCaramel.get());
-        simpleItem(ItemRegister.light_blueMaidDressCatTailWhite.get());
-
-        simpleItem(ItemRegister.blueMaidDress.get());
-        simpleItem(ItemRegister.blueMaidDressCatTailBlack.get());
-        simpleItem(ItemRegister.blueMaidDressCatTailCaramel.get());
-        simpleItem(ItemRegister.blueMaidDressCatTailWhite.get());
-
-        simpleItem(ItemRegister.limeMaidDress.get());
-        simpleItem(ItemRegister.limeMaidDressCatTailBlack.get());
-        simpleItem(ItemRegister.limeMaidDressCatTailCaramel.get());
-        simpleItem(ItemRegister.limeMaidDressCatTailWhite.get());
-
-        simpleItem(ItemRegister.greenMaidDress.get());
-        simpleItem(ItemRegister.greenMaidDressCatTailBlack.get());
-        simpleItem(ItemRegister.greenMaidDressCatTailCaramel.get());
-        simpleItem(ItemRegister.greenMaidDressCatTailWhite.get());
-
-        simpleItem(ItemRegister.orangeMaidDress.get());
-        simpleItem(ItemRegister.orangeMaidDressCatTailBlack.get());
-        simpleItem(ItemRegister.orangeMaidDressCatTailCaramel.get());
-        simpleItem(ItemRegister.orangeMaidDressCatTailWhite.get());
-
-        simpleItem(ItemRegister.redMaidDress.get());
-        simpleItem(ItemRegister.redMaidDressCatTailBlack.get());
-        simpleItem(ItemRegister.redMaidDressCatTailCaramel.get());
-        simpleItem(ItemRegister.redMaidDressCatTailWhite.get());
-
-        simpleItem(ItemRegister.pinkMaidDress.get());
-        simpleItem(ItemRegister.pinkMaidDressCatTailBlack.get());
-        simpleItem(ItemRegister.pinkMaidDressCatTailCaramel.get());
-        simpleItem(ItemRegister.pinkMaidDressCatTailWhite.get());
-
-        simpleItem(ItemRegister.magentaMaidDress.get());
-        simpleItem(ItemRegister.magentaMaidDressCatTailBlack.get());
-        simpleItem(ItemRegister.magentaMaidDressCatTailCaramel.get());
-        simpleItem(ItemRegister.magentaMaidDressCatTailWhite.get());
-
-        simpleItem(ItemRegister.magentaMaidDress.get());
-        simpleItem(ItemRegister.magentaMaidDressCatTailBlack.get());
-        simpleItem(ItemRegister.magentaMaidDressCatTailCaramel.get());
-        simpleItem(ItemRegister.magentaMaidDressCatTailWhite.get());
-
-        simpleItem(ItemRegister.purpleMaidDress.get());
-        simpleItem(ItemRegister.purpleMaidDressCatTailBlack.get());
-        simpleItem(ItemRegister.purpleMaidDressCatTailCaramel.get());
-        simpleItem(ItemRegister.purpleMaidDressCatTailWhite.get());
-
-        simpleItem(ItemRegister.brownMaidDress.get());
-        simpleItem(ItemRegister.brownMaidDressCatTailBlack.get());
-        simpleItem(ItemRegister.brownMaidDressCatTailCaramel.get());
-        simpleItem(ItemRegister.brownMaidDressCatTailWhite.get());
-
-        simpleItem(ItemRegister.yellowMaidDress.get());
-        simpleItem(ItemRegister.yellowMaidDressCatTailBlack.get());
-        simpleItem(ItemRegister.yellowMaidDressCatTailCaramel.get());
-        simpleItem(ItemRegister.yellowMaidDressCatTailWhite.get());
-
-        simpleItem(ItemRegister.cyanMaidDress.get());
-        simpleItem(ItemRegister.cyanMaidDressCatTailBlack.get());
-        simpleItem(ItemRegister.cyanMaidDressCatTailCaramel.get());
-        simpleItem(ItemRegister.cyanMaidDressCatTailWhite.get());
-
         simpleItem(ItemRegister.blackThighHighs.get());
         simpleItem(ItemRegister.whiteThighHighs.get());
         simpleItem(ItemRegister.blackThighHighsShoes.get());
         simpleItem(ItemRegister.whiteThighHighsShoes.get());
-
-
-
-        simpleItem(ItemRegister.blackMaidDressFoxTailBlack.get());
-        simpleItem(ItemRegister.blackMaidDressFoxTailRed.get());
-        simpleItem(ItemRegister.blackMaidDressFoxTailWhite.get());
-
-        simpleItem(ItemRegister.whiteMaidDressFoxTailBlack.get());
-        simpleItem(ItemRegister.whiteMaidDressFoxTailRed.get());
-        simpleItem(ItemRegister.whiteMaidDressFoxTailWhite.get());
-
-        simpleItem(ItemRegister.grayMaidDressFoxTailBlack.get());
-        simpleItem(ItemRegister.grayMaidDressFoxTailRed.get());
-        simpleItem(ItemRegister.grayMaidDressFoxTailWhite.get());
-
-        simpleItem(ItemRegister.light_grayMaidDressFoxTailBlack.get());
-        simpleItem(ItemRegister.light_grayMaidDressFoxTailRed.get());
-        simpleItem(ItemRegister.light_grayMaidDressFoxTailWhite.get());
-
-        simpleItem(ItemRegister.light_blueMaidDressFoxTailBlack.get());
-        simpleItem(ItemRegister.light_blueMaidDressFoxTailRed.get());
-        simpleItem(ItemRegister.light_blueMaidDressFoxTailWhite.get());
-
-        simpleItem(ItemRegister.blueMaidDressFoxTailBlack.get());
-        simpleItem(ItemRegister.blueMaidDressFoxTailRed.get());
-        simpleItem(ItemRegister.blueMaidDressFoxTailWhite.get());
-
-        simpleItem(ItemRegister.limeMaidDressFoxTailBlack.get());
-        simpleItem(ItemRegister.limeMaidDressFoxTailRed.get());
-        simpleItem(ItemRegister.limeMaidDressFoxTailWhite.get());
-
-        simpleItem(ItemRegister.greenMaidDressFoxTailBlack.get());
-        simpleItem(ItemRegister.greenMaidDressFoxTailRed.get());
-        simpleItem(ItemRegister.greenMaidDressFoxTailWhite.get());
-
-        simpleItem(ItemRegister.orangeMaidDressFoxTailBlack.get());
-        simpleItem(ItemRegister.orangeMaidDressFoxTailRed.get());
-        simpleItem(ItemRegister.orangeMaidDressFoxTailWhite.get());
-
-        simpleItem(ItemRegister.redMaidDressFoxTailBlack.get());
-        simpleItem(ItemRegister.redMaidDressFoxTailRed.get());
-        simpleItem(ItemRegister.redMaidDressFoxTailWhite.get());
-
-        simpleItem(ItemRegister.pinkMaidDressFoxTailBlack.get());
-        simpleItem(ItemRegister.pinkMaidDressFoxTailRed.get());
-        simpleItem(ItemRegister.pinkMaidDressFoxTailWhite.get());
-
-        simpleItem(ItemRegister.magentaMaidDressFoxTailBlack.get());
-        simpleItem(ItemRegister.magentaMaidDressFoxTailRed.get());
-        simpleItem(ItemRegister.magentaMaidDressFoxTailWhite.get());
-
-        simpleItem(ItemRegister.magentaMaidDressFoxTailBlack.get());
-        simpleItem(ItemRegister.magentaMaidDressFoxTailRed.get());
-        simpleItem(ItemRegister.magentaMaidDressFoxTailWhite.get());
-
-        simpleItem(ItemRegister.purpleMaidDressFoxTailBlack.get());
-        simpleItem(ItemRegister.purpleMaidDressFoxTailRed.get());
-        simpleItem(ItemRegister.purpleMaidDressFoxTailWhite.get());
-
-        simpleItem(ItemRegister.brownMaidDressFoxTailBlack.get());
-        simpleItem(ItemRegister.brownMaidDressFoxTailRed.get());
-        simpleItem(ItemRegister.brownMaidDressFoxTailWhite.get());
-
-        simpleItem(ItemRegister.yellowMaidDressFoxTailBlack.get());
-        simpleItem(ItemRegister.yellowMaidDressFoxTailRed.get());
-        simpleItem(ItemRegister.yellowMaidDressFoxTailWhite.get());
-
-        simpleItem(ItemRegister.cyanMaidDressFoxTailBlack.get());
-        simpleItem(ItemRegister.cyanMaidDressFoxTailRed.get());
-        simpleItem(ItemRegister.cyanMaidDressFoxTailWhite.get());
 
 
     }
@@ -209,7 +84,34 @@ public class ItemModelSupplier extends ItemModelProvider {
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(KawaiiDishes.modId,"item/" + item.getRegistryName().getPath()));
     }
+    private ItemModelBuilder maidDressItem(Item item) {
+        return withExistingParent(item.getRegistryName().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(KawaiiDishes.modId,"item/maid_dresses/" + item.getRegistryName().getPath()));
+    }
+    private ItemModelBuilder catBandItem(Item item,String type) {
+        return withExistingParent(
+                item.getRegistryName().getPath(),
+                new ResourceLocation(KawaiiDishes.modId,"item/cat_headband"))
+                .texture("0", new ResourceLocation(KawaiiDishes.modId,"item/" + type))
+                .texture("1", new ResourceLocation(KawaiiDishes.modId,"item/headbands/" + item.getRegistryName().getPath().replaceAll("_"+type,"")));
 
+    }
+    private ItemModelBuilder foxBandItem(Item item,String type,String name) {
+        return withExistingParent(
+                item.getRegistryName().getPath(),
+                new ResourceLocation(KawaiiDishes.modId,"item/fox_headband"))
+                .texture("0", new ResourceLocation(KawaiiDishes.modId,"item/" + type))
+                .texture("1", new ResourceLocation(KawaiiDishes.modId,"item/headbands/" + item.getRegistryName().getPath().replaceAll("_"+name,"")));
+
+    }
+    private ItemModelBuilder headBandItem(Item item) {
+        return withExistingParent(
+                item.getRegistryName().getPath(),
+                new ResourceLocation(KawaiiDishes.modId,"item/headband"))
+                .texture("0", new ResourceLocation(KawaiiDishes.modId,"item/headbands/" + item.getRegistryName().getPath()));
+
+    }
     private ItemModelBuilder block(Block block){
         return withExistingParent(block.getRegistryName().getPath(),new ResourceLocation(KawaiiDishes.modId,"block/"+block.getRegistryName().getPath()));
     }

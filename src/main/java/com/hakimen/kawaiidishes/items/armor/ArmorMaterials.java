@@ -103,7 +103,7 @@ public class ArmorMaterials {
 
         @Override
         public int getDefenseForSlot(EquipmentSlot pSlot) {
-            return 5;
+            return 6;
         }
 
         @Override

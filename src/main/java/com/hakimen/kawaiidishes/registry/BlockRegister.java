@@ -13,6 +13,8 @@ public class BlockRegister {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,modId);
 
     public static final RegistryObject<MugBlock> mug = BLOCKS.register("mug",MugBlock::new);
+    public static final RegistryObject<GlassCupBlock> glassCup = BLOCKS.register("glass_cup",GlassCupBlock::new);
+
 
     public static final RegistryObject<MugWithCoffeeBlock> expressoMug = BLOCKS.register("expresso_coffee", MugWithCoffeeBlock::new);
     public static final RegistryObject<MugWithCoffeeBlock> americanMug = BLOCKS.register("american_coffee", MugWithCoffeeBlock::new);
@@ -22,6 +24,18 @@ public class BlockRegister {
     public static final RegistryObject<MugWithCoffeeBlock> cappuccinoMug = BLOCKS.register("cappuccino_coffee", MugWithCoffeeBlock::new);
     public static final RegistryObject<MugWithCoffeeBlock> doppioMug = BLOCKS.register("doppio_coffee", MugWithCoffeeBlock::new);
     public static final RegistryObject<MugWithCoffeeBlock> macchiatoMug = BLOCKS.register("macchiato_coffee", MugWithCoffeeBlock::new);
+
+    public static final RegistryObject<IceCreamBlock> sweetBerryIceCream = BLOCKS.register("sweet_berry_ice_cream", IceCreamBlock::new);
+    public static final RegistryObject<IceCreamBlock> napolitanoIceCream = BLOCKS.register("napolitano_ice_cream", IceCreamBlock::new);
+    public static final RegistryObject<IceCreamBlock> creamIceCream = BLOCKS.register("cream_ice_cream", IceCreamBlock::new);
+    public static final RegistryObject<IceCreamBlock> chocolateIceCream = BLOCKS.register("chocolate_ice_cream", IceCreamBlock::new);
+    public static final RegistryObject<IceCreamBlock> coffeeIceCream = BLOCKS.register("coffee_ice_cream", IceCreamBlock::new);
+    public static final RegistryObject<IceCreamBlock> mochaIceCream = BLOCKS.register("mocha_ice_cream", IceCreamBlock::new);
+    public static final RegistryObject<IceCreamBlock> glowBerryIceCream = BLOCKS.register("glow_berry_ice_cream", IceCreamBlock::new);
+
+    public static final RegistryObject<SmallCandy> beijinho = BLOCKS.register("beijinho", SmallCandy::new);
+    public static final RegistryObject<SmallCandy> brigadeiro = BLOCKS.register("brigadeiro", SmallCandy::new);
+
 
     public static final RegistryObject<StoolBlock> blackStool = BLOCKS.register("black_stool",StoolBlock::new);
     public static final RegistryObject<StoolBlock> blueStool = BLOCKS.register("blue_stool",StoolBlock::new);
@@ -43,6 +57,9 @@ public class BlockRegister {
     public static final RegistryObject<CoffeePressBlock> coffeePress = BLOCKS.register("coffee_press", CoffeePressBlock::new);
 
     public static final RegistryObject<CoffeeMachineBlock> coffeeMachine = BLOCKS.register("coffee_machine", CoffeeMachineBlock::new);
+
+    public static final RegistryObject<IceCreamMachineBlock> iceCreamMachine = BLOCKS.register("ice_cream_machine", IceCreamMachineBlock::new);
+
 
     public static final RegistryObject<MortarAndPestleBlock> mortarAndPestle = BLOCKS.register("mortar_and_pestle",MortarAndPestleBlock::new);
 

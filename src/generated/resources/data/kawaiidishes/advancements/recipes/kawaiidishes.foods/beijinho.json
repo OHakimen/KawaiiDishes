@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:beijinho"
+    ]
+  },
+  "criteria": {
+    "has_condensed_milk": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:condensed_milk"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:beijinho"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_condensed_milk",
+      "has_the_recipe"
+    ]
+  ]
+}

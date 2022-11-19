@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -87,5 +88,16 @@ public class CoffeePlantBlock extends BushBlock implements BonemealableBlock {
         pLevel.setBlock(pPos, pState.setValue(AGE, Integer.valueOf(i)), 2);
     }
 
+    @Override
+    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
+        int i = state.getValue(AGE);
+        boolean flag = i == 3;
+        int j = 1 + level.random.nextInt(2);
+        if(i > 1){
+            popResource(level, pos, new ItemStack(ItemRegister.coffeeFruit.get(), j + (flag ? 1 : 0)));
+        }
+        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
+    }
 
+    
 }

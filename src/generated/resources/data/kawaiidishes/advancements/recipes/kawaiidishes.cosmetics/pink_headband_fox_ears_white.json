@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:pink_headband_fox_ears_white"
+    ]
+  },
+  "criteria": {
+    "has_pink_headband": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:pink_headband"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:pink_headband_fox_ears_white"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pink_headband",
+      "has_the_recipe"
+    ]
+  ]
+}

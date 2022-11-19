@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "kawaiidishes:item/brown_maid_dress_cat_tail_black"
+    "layer0": "kawaiidishes:item/maid_dresses/brown_maid_dress_cat_tail_black"
   }
 }

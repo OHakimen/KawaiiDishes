@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:condensed_milk"
+    },
+    {
+      "item": "kawaiidishes:cocoa_powder"
+    }
+  ],
+  "result": {
+    "item": "kawaiidishes:brigadeiro_mix"
+  }
+}

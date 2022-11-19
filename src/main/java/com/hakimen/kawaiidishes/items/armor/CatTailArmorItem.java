@@ -7,6 +7,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
@@ -41,13 +42,13 @@ public class CatTailArmorItem extends GeoArmorItem implements IAnimatable {
     @Override
     public void onArmorTick(ItemStack stack, Level level, Player player) {
         if(player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() instanceof CatTailArmorItem){
-            player.forceAddEffect(new MobEffectInstance(EffectRegister.nekoEffect.get(),14*20),player);
+            player.forceAddEffect(new MobEffectInstance(EffectRegister.nekoEffect.get(),14*20,0,false,false),player);
         }
         super.onArmorTick(stack, level, player);
     }
 
     private <P extends IAnimatable> PlayState predicate(AnimationEvent<P> event){
-        if(event.getExtraData().get(1) instanceof Player player && player.isCrouching()){
+        if((event.getExtraData().get(1) instanceof Player player && player.isCrouching())||(!(event.getExtraData().get(1) instanceof ArmorStand) && !(event.getExtraData().get(1) instanceof Player))){
             event.getController().setAnimation(new AnimationBuilder().addAnimation("move", true));
         }else{
             event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", true));

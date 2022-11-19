@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "kawaiidishes:item/yellow_maid_dress"
+    "layer0": "kawaiidishes:item/maid_dresses/yellow_maid_dress"
   }
 }

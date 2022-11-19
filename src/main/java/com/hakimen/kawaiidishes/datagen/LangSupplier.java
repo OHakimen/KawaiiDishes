@@ -63,8 +63,21 @@ public class LangSupplier extends LanguageProvider {
             if(itemPath.endsWith("_coffee")){
                 add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
             }
+            if(itemPath.endsWith("_ice_cream")){
+                add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
+            }
             if(itemPath.endsWith("_stool")){
                 add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
+            }
+            if(itemPath.contains("_headband")){
+                if(itemPath.contains("_cat_ears")) {
+                    add(items.get(), setFirstLetterUpperCase(itemPath.replace("_cat_ears", "_with_cat_ears").replaceAll("_", " ")));
+                }else if(itemPath.contains("_fox_ears")){
+                    add(items.get(),setFirstLetterUpperCase(itemPath.replace("_fox_ears","_with_fox_ears").replaceAll("_"," ")));
+                }else{
+                    add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
+
+                }
             }
         }
 
@@ -82,8 +95,12 @@ public class LangSupplier extends LanguageProvider {
         add(ItemRegister.milkChocolateBar.get(),"Milk Chocolate Bar");
 
         add(ItemRegister.mortarAndPestle.get(),"Mortar And Pestle");
+        add(ItemRegister.iceCreamMachine.get(),"Ice Cream Maker");
+        add(BlockRegister.coffeeMachine.get(),"Coffee Machine");
+        add(BlockRegister.coffeePress.get(),"Coffee Press");
 
         add(ItemRegister.mug.get(),"Mug");
+        add(ItemRegister.glassCup.get(),"Glass Cup");
 
         add(ItemRegister.caramelCatTail.get(),"Caramel Cat Tail");
         add(ItemRegister.whiteCatTail.get(),"White Cat Tail");
@@ -97,14 +114,16 @@ public class LangSupplier extends LanguageProvider {
         add(ItemRegister.blackCatEars.get(),"Black Cat Ears");
         add(ItemRegister.whiteCatEars.get(),"White Cat Ears");
 
+        add(ItemRegister.redFoxEars.get(),"Red Fox Ears");
+        add(ItemRegister.blackFoxEars.get(),"Black Fox Ears");
+        add(ItemRegister.whiteFoxEars.get(),"White Fox Ears");
+
         add(ItemRegister.blackThighHighs.get(),"Black Thigh Highs");
         add(ItemRegister.whiteThighHighs.get(),"White Thigh Highs");
 
         add(ItemRegister.blackThighHighsShoes.get(),"Dark Brown Shoes");
         add(ItemRegister.whiteThighHighsShoes.get(),"Brown Shoes");
 
-        add(BlockRegister.coffeeMachine.get(),"Coffee Machine");
-        add(BlockRegister.coffeePress.get(),"Coffee Press");
 
         add("itemGroup.kawaiidishes.foods", "Kawaii's Foods");
         add("itemGroup.kawaiidishes.blocks", "Kawaii's Blocks");
@@ -112,6 +131,7 @@ public class LangSupplier extends LanguageProvider {
         add("itemGroup.kawaiidishes.decoration", "Kawaii's Decorations");
 
         add("gui.kawaiidishes.coffee_machine", "Coffee Machine");
+        add("gui.kawaiidishes.ice_cream_machine", "Ice Cream Maker");
 
         add(EffectRegister.kawaiiEffect.get(),"Kawaii");
         add(EffectRegister.nekoEffect.get(),"Neko-chan");

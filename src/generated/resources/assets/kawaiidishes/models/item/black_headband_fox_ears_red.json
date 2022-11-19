@@ -1,0 +1,7 @@
+{
+  "parent": "kawaiidishes:item/fox_headband",
+  "textures": {
+    "0": "kawaiidishes:item/fox_ears_red",
+    "1": "kawaiidishes:item/headbands/black_headband"
+  }
+}

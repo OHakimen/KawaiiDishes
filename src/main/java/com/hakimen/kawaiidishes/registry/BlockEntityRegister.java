@@ -19,8 +19,12 @@ public class BlockEntityRegister {
             ()->BlockEntityType.Builder.of(CoffeePressBlockEntity::new,BlockRegister.coffeePress.get()).build(null));
     public static final RegistryObject<BlockEntityType<CoffeeMachineBlockEntity>> coffeeMachine = BLOCK_ENTITIES.register("coffee_machine_entity",
             ()->BlockEntityType.Builder.of(CoffeeMachineBlockEntity::new,BlockRegister.coffeeMachine.get()).build(null));
+
     public static final RegistryObject<BlockEntityType<MortarAndPestleBlockEntity>> mortarAndPestle = BLOCK_ENTITIES.register("mortar_and_pestle_entity",
             ()->BlockEntityType.Builder.of(MortarAndPestleBlockEntity::new,BlockRegister.mortarAndPestle.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<IceCreamMachineBlockEntity>> iceCreamMachine = BLOCK_ENTITIES.register("ice_cream_machine_entity",
+            ()->BlockEntityType.Builder.of(IceCreamMachineBlockEntity::new,BlockRegister.iceCreamMachine.get()).build(null));
 
 
     public static final RegistryObject<BlockEntityType<CoffeeMugBlockEntity>> coffeeMug = BLOCK_ENTITIES.register("coffee_mug_entity",
@@ -34,7 +38,18 @@ public class BlockEntityRegister {
                     BlockRegister.macchiatoMug.get(),
                     BlockRegister.latteMug.get(),
                     BlockRegister.expressoMug.get()
+            ).build(null));
 
+    public static final RegistryObject<BlockEntityType<IceCreamBlockEntity>> iceCream = BLOCK_ENTITIES.register("ice_cream_entity",
+            ()->BlockEntityType.Builder.of(
+                    IceCreamBlockEntity::new,
+                    BlockRegister.sweetBerryIceCream.get(),
+                    BlockRegister.napolitanoIceCream.get(),
+                    BlockRegister.creamIceCream.get(),
+                    BlockRegister.chocolateIceCream.get(),
+                    BlockRegister.mochaIceCream.get(),
+                    BlockRegister.coffeeIceCream.get(),
+                    BlockRegister.glowBerryIceCream.get()
             ).build(null));
 
 

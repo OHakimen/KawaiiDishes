@@ -4,6 +4,7 @@ import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -39,7 +40,7 @@ public class FoxTailArmorItem extends GeoArmorItem implements IAnimatable {
     }
 
     private <P extends IAnimatable> PlayState predicate(AnimationEvent<P> event){
-        if(event.getExtraData().get(1) instanceof Player player && player.isCrouching()){
+        if((event.getExtraData().get(1) instanceof Player player && player.isCrouching())||(!(event.getExtraData().get(1) instanceof ArmorStand) && !(event.getExtraData().get(1) instanceof Player))){
             event.getController().setAnimation(new AnimationBuilder().addAnimation("move", true));
         }else{
             event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", true));

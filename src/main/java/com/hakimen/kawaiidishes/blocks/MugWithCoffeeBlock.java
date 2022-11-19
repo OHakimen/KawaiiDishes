@@ -1,6 +1,7 @@
 package com.hakimen.kawaiidishes.blocks;
 
 import com.hakimen.kawaiidishes.blocks.block_entities.CoffeeMugBlockEntity;
+import com.hakimen.kawaiidishes.blocks.block_entities.IceCreamBlockEntity;
 import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -14,6 +15,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
@@ -25,21 +28,23 @@ import java.util.Random;
 
 public class MugWithCoffeeBlock extends MugBlock implements EntityBlock {
     public MugWithCoffeeBlock(){
-        super(BlockBehaviour.Properties.of(Material.STONE).strength(1,1).dynamicShape().randomTicks());
+        super(BlockBehaviour.Properties.of(Material.STONE).strength(1,1));
     }
-    public boolean isRandomlyTicking(BlockState pState) {
-        return true;
-    }
-    @Override
-    public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom) {
-        super.randomTick(pState, pLevel, pPos, pRandom);
-    }
+
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if(pPlayer.isCrouching()){
-            ItemStack stack = this.asItem().getDefaultInstance();
-            stack.getOrCreateTag().merge(pLevel.getBlockEntity(pPos).saveWithFullMetadata());
+            var stack = this.asItem().getDefaultInstance();
+            stack.getOrCreateTag();
+            if(pLevel.getBlockEntity(pPos) instanceof IceCreamBlockEntity entity){
+                if(!entity.mainEffect.equals(new CompoundTag())){
+                    stack.getOrCreateTag().put("mainEffect",entity.mainEffect);
+                }
+                if(!entity.secondaryEffect.equals(new CompoundTag())){
+                    stack.getOrCreateTag().put("secondaryEffect",entity.secondaryEffect);
+                }
+            }
             pLevel.removeBlock(pPos,false);
             pPlayer.addItem(stack);
             return InteractionResult.SUCCESS;
@@ -51,6 +56,14 @@ public class MugWithCoffeeBlock extends MugBlock implements EntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new CoffeeMugBlockEntity(pPos,pState);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+        return pLevel.isClientSide ? (pLevel1, pPos, pState1,pBlockEntity) -> {
+            ((CoffeeMugBlockEntity)pBlockEntity).tick(pLevel1,pPos,pState1,(CoffeeMugBlockEntity)pBlockEntity);
+        }: null;
     }
 
     @Override

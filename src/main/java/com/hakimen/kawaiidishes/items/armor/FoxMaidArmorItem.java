@@ -1,5 +1,8 @@
 package com.hakimen.kawaiidishes.items.armor;
 
+import com.hakimen.kawaiidishes.registry.ItemRegister;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -10,12 +13,15 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.item.GeoArmorItem;
 
-public class FoxMaidArmorItem extends MaidDressArmorItem {
+public class FoxMaidArmorItem extends GeoArmorItem implements IAnimatable {
     private AnimationFactory factory = new AnimationFactory(this);
+    public String textureLocation;
 
     public FoxMaidArmorItem(String textureName) {
-        super(textureName);
+        super(ArmorMaterials.catMaidDress, EquipmentSlot.CHEST, new Properties().tab(ItemRegister.cosmetics));
+        textureLocation = textureName;
     }
     @Override
     public boolean isFoil(ItemStack pStack) {
@@ -31,7 +37,7 @@ public class FoxMaidArmorItem extends MaidDressArmorItem {
     }
 
     private <P extends IAnimatable> PlayState predicate(AnimationEvent<P> event){
-        if(event.getExtraData().get(1) instanceof Player player && player.isCrouching()){
+        if((event.getExtraData().get(1) instanceof Player player && player.isCrouching())||(!(event.getExtraData().get(1) instanceof ArmorStand) && !(event.getExtraData().get(1) instanceof Player))){
             event.getController().setAnimation(new AnimationBuilder().addAnimation("move", true));
         }else{
             event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", true));

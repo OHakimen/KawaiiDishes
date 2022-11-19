@@ -8,26 +8,9 @@
     "s": {
       "item": "minecraft:magenta_wool"
     },
-    "#": [
-      {
-        "item": "minecraft:stripped_oak_log"
-      },
-      {
-        "item": "minecraft:stripped_acacia_log"
-      },
-      {
-        "item": "minecraft:stripped_birch_log"
-      },
-      {
-        "item": "minecraft:stripped_spruce_log"
-      },
-      {
-        "item": "minecraft:stripped_spruce_log"
-      },
-      {
-        "item": "minecraft:stripped_dark_oak_log"
-      }
-    ],
+    "#": {
+      "tag": "minecraft:logs"
+    },
     "|": {
       "item": "minecraft:stick"
     }

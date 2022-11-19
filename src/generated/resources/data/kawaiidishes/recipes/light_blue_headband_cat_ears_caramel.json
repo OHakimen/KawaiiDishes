@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:light_blue_headband"
+    },
+    {
+      "item": "kawaiidishes:caramel_cat_ears"
+    }
+  ],
+  "result": {
+    "item": "kawaiidishes:light_blue_headband_cat_ears_caramel"
+  }
+}

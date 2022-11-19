@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "kawaiidishes:item/black_fox_tail",
-		"particle": "kawaiidishes:item/black_fox_tail"
+		"0": "kawaiidishes:item/tails/black_fox_tail",
+		"particle": "kawaiidishes:item/tails/black_fox_tail"
 	},
 	"elements": [
 		{

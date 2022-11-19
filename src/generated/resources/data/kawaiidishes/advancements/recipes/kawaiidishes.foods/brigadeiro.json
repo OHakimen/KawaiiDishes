@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:brigadeiro"
+    ]
+  },
+  "criteria": {
+    "has_brigadeiro_mix": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:brigadeiro_mix"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:brigadeiro"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_brigadeiro_mix",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,10 +1,10 @@
 package com.hakimen.kawaiidishes.registry;
 
 import com.hakimen.kawaiidishes.blocks.StoolBlock;
-import com.hakimen.kawaiidishes.items.CatEars;
-import com.hakimen.kawaiidishes.items.Drink;
+import com.hakimen.kawaiidishes.items.*;
 import com.hakimen.kawaiidishes.items.armor.*;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -19,19 +19,19 @@ public class ItemRegister {
     public static CreativeModeTab blocks = new CreativeModeTab("kawaiidishes.blocks") {
         @Override
         public ItemStack makeIcon() {
-            return mug.get().getDefaultInstance();
+            return coffeeMachine.get().getDefaultInstance();
         }
     };
     public static CreativeModeTab foods = new CreativeModeTab("kawaiidishes.foods") {
         @Override
         public ItemStack makeIcon() {
-            return roastedCoffeeBeans.get().getDefaultInstance();
+            return cappuccinoCoffee.get().getDefaultInstance();
         }
     };
     public static CreativeModeTab cosmetics = new CreativeModeTab("kawaiidishes.cosmetics") {
         @Override
         public ItemStack makeIcon() {
-            return blackCatEars.get().getDefaultInstance();
+            return blackMaidDress.get().getDefaultInstance();
         }
     };
     public static CreativeModeTab decoration = new CreativeModeTab("kawaiidishes.decoration") {
@@ -44,15 +44,23 @@ public class ItemRegister {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,modId);
 
     public static final RegistryObject<Item> mug = ITEMS.register("mug", () -> new BlockItem(BlockRegister.mug.get(), new Item.Properties().tab(blocks)));
+    public static final RegistryObject<Item> glassCup = ITEMS.register("glass_cup", () -> new BlockItem(BlockRegister.glassCup.get(), new Item.Properties().tab(blocks)));
+
 
     public static final RegistryObject<Item> coffeePress = ITEMS.register("coffee_press", () -> new BlockItem(BlockRegister.coffeePress.get(), new Item.Properties().tab(blocks)));
     public static final RegistryObject<Item> coffeeMachine = ITEMS.register("coffee_machine", () -> new BlockItem(BlockRegister.coffeeMachine.get(), new Item.Properties().tab(blocks)));
     public static final RegistryObject<Item> mortarAndPestle = ITEMS.register("mortar_and_pestle", () -> new BlockItem(BlockRegister.mortarAndPestle.get(), new Item.Properties().tab(blocks)));
 
+    public static final RegistryObject<Item> iceCreamMachine = ITEMS.register("ice_cream_machine", () -> new BlockItem(BlockRegister.iceCreamMachine.get(), new Item.Properties().tab(blocks)));
 
     public static final RegistryObject<CatEars> blackCatEars = ITEMS.register("black_cat_ears", CatEars::new);
     public static final RegistryObject<CatEars> caramelCatEars = ITEMS.register("caramel_cat_ears", CatEars::new);
     public static final RegistryObject<CatEars> whiteCatEars = ITEMS.register("white_cat_ears", CatEars::new);
+
+    public static final RegistryObject<FoxEars> blackFoxEars = ITEMS.register("black_fox_ears", FoxEars::new);
+    public static final RegistryObject<FoxEars> redFoxEars = ITEMS.register("red_fox_ears", FoxEars::new);
+    public static final RegistryObject<FoxEars> whiteFoxEars = ITEMS.register("white_fox_ears", FoxEars::new);
+
 
 
     public static final RegistryObject<Item> blackCatTail = ITEMS.register("black_cat_tail",
@@ -253,8 +261,6 @@ public class ItemRegister {
     public static final RegistryObject<Item> orangeMaidDressFoxTailWhite = ITEMS.register("orange_maid_dress_fox_tail_white",
             () -> new FoxMaidArmorItem("orange_maid_dress_fox_tail_white.png"));
 
-
-
     public static final RegistryObject<Item> pinkMaidDress = ITEMS.register("pink_maid_dress",
             () -> new MaidDressArmorItem("pink_maid_dress_cat_tail_black.png"));
 
@@ -345,40 +351,141 @@ public class ItemRegister {
     public static final RegistryObject<Item> blackThighHighsShoes = ITEMS.register("dark_brown_shoes",
             () -> new ThighHighsArmorItem("black_thigh_highs.png",EquipmentSlot.FEET));
 
-    //Fox tails for now
+    public static final RegistryObject<Headband> blackHeadBand = ITEMS.register("black_headband", Headband::new);
+    public static final RegistryObject<CatHeadband> blackHeadBandCatEarsBlack = ITEMS.register("black_headband_cat_ears_black", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> blackHeadBandCatEarsWhite = ITEMS.register("black_headband_cat_ears_white", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> blackHeadBandCatEarsCaramel = ITEMS.register("black_headband_cat_ears_caramel", CatHeadband::new);
+    public static final RegistryObject<Headband> blackHeadBandFoxEarsBlack = ITEMS.register("black_headband_fox_ears_black", Headband::new);
+    public static final RegistryObject<Headband> blackHeadBandFoxEarsWhite = ITEMS.register("black_headband_fox_ears_white", Headband::new);
+    public static final RegistryObject<Headband> blackHeadBandFoxEarsRed = ITEMS.register("black_headband_fox_ears_red", Headband::new);
 
 
+    public static final RegistryObject<Headband> blueHeadBand = ITEMS.register("blue_headband", Headband::new);
+    public static final RegistryObject<CatHeadband> blueHeadBandCatEarsBlack = ITEMS.register("blue_headband_cat_ears_black", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> blueHeadBandCatEarsWhite = ITEMS.register("blue_headband_cat_ears_white", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> blueHeadBandCatEarsCaramel = ITEMS.register("blue_headband_cat_ears_caramel", CatHeadband::new);
+    public static final RegistryObject<Headband> blueHeadBandFoxEarsBlack = ITEMS.register("blue_headband_fox_ears_black", Headband::new);
+    public static final RegistryObject<Headband> blueHeadBandFoxEarsWhite = ITEMS.register("blue_headband_fox_ears_white", Headband::new);
+    public static final RegistryObject<Headband> blueHeadBandFoxEarsRed = ITEMS.register("blue_headband_fox_ears_red", Headband::new);
 
 
+    public static final RegistryObject<Headband> brownHeadBand = ITEMS.register("brown_headband", Headband::new);
+    public static final RegistryObject<CatHeadband> brownHeadBandCatEarsBlack = ITEMS.register("brown_headband_cat_ears_black", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> brownHeadBandCatEarsWhite = ITEMS.register("brown_headband_cat_ears_white", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> brownHeadBandCatEarsCaramel = ITEMS.register("brown_headband_cat_ears_caramel", CatHeadband::new);
+    public static final RegistryObject<Headband> brownHeadBandFoxEarsBlack = ITEMS.register("brown_headband_fox_ears_black", Headband::new);
+    public static final RegistryObject<Headband> brownHeadBandFoxEarsWhite = ITEMS.register("brown_headband_fox_ears_white", Headband::new);
+    public static final RegistryObject<Headband> brownHeadBandFoxEarsRed = ITEMS.register("brown_headband_fox_ears_red", Headband::new);
 
 
+    public static final RegistryObject<Headband> cyanHeadBand = ITEMS.register("cyan_headband", Headband::new);
+    public static final RegistryObject<CatHeadband> cyanHeadBandCatEarsBlack = ITEMS.register("cyan_headband_cat_ears_black", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> cyanHeadBandCatEarsWhite = ITEMS.register("cyan_headband_cat_ears_white", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> cyanHeadBandCatEarsCaramel = ITEMS.register("cyan_headband_cat_ears_caramel", CatHeadband::new);
+    public static final RegistryObject<Headband> cyanHeadBandFoxEarsBlack = ITEMS.register("cyan_headband_fox_ears_black", Headband::new);
+    public static final RegistryObject<Headband> cyanHeadBandFoxEarsWhite = ITEMS.register("cyan_headband_fox_ears_white", Headband::new);
+    public static final RegistryObject<Headband> cyanHeadBandFoxEarsRed = ITEMS.register("cyan_headband_fox_ears_red", Headband::new);
 
+    public static final RegistryObject<Headband> grayHeadBand = ITEMS.register("gray_headband", Headband::new);
+    public static final RegistryObject<CatHeadband> grayHeadBandCatEarsBlack = ITEMS.register("gray_headband_cat_ears_black", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> grayHeadBandCatEarsWhite = ITEMS.register("gray_headband_cat_ears_white", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> grayHeadBandCatEarsCaramel = ITEMS.register("gray_headband_cat_ears_caramel", CatHeadband::new);
+    public static final RegistryObject<Headband> grayHeadBandFoxEarsBlack = ITEMS.register("gray_headband_fox_ears_black", Headband::new);
+    public static final RegistryObject<Headband> grayHeadBandFoxEarsWhite = ITEMS.register("gray_headband_fox_ears_white", Headband::new);
+    public static final RegistryObject<Headband> grayHeadBandFoxEarsRed = ITEMS.register("gray_headband_fox_ears_red", Headband::new);
 
+    public static final RegistryObject<Headband> greenHeadBand = ITEMS.register("green_headband", Headband::new);
+    public static final RegistryObject<CatHeadband> greenHeadBandCatEarsBlack = ITEMS.register("green_headband_cat_ears_black", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> greenHeadBandCatEarsWhite = ITEMS.register("green_headband_cat_ears_white", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> greenHeadBandCatEarsCaramel = ITEMS.register("green_headband_cat_ears_caramel", CatHeadband::new);
+    public static final RegistryObject<Headband> greenHeadBandFoxEarsBlack = ITEMS.register("green_headband_fox_ears_black", Headband::new);
+    public static final RegistryObject<Headband> greenHeadBandFoxEarsWhite = ITEMS.register("green_headband_fox_ears_white", Headband::new);
+    public static final RegistryObject<Headband> greenHeadBandFoxEarsRed = ITEMS.register("green_headband_fox_ears_red", Headband::new);
 
+    public static final RegistryObject<Headband> lightBlueHeadBand = ITEMS.register("light_blue_headband", Headband::new);
+    public static final RegistryObject<CatHeadband> lightBlueHeadBandCatEarsBlack = ITEMS.register("light_blue_headband_cat_ears_black", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> lightBlueHeadBandCatEarsWhite = ITEMS.register("light_blue_headband_cat_ears_white", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> lightBlueHeadBandCatEarsCaramel = ITEMS.register("light_blue_headband_cat_ears_caramel", CatHeadband::new);
+    public static final RegistryObject<Headband> lightBlueHeadBandFoxEarsBlack = ITEMS.register("light_blue_headband_fox_ears_black", Headband::new);
+    public static final RegistryObject<Headband> lightBlueHeadBandFoxEarsWhite = ITEMS.register("light_blue_headband_fox_ears_white", Headband::new);
+    public static final RegistryObject<Headband> lightBlueHeadBandFoxEarsRed = ITEMS.register("light_blue_headband_fox_ears_red", Headband::new);
 
+    public static final RegistryObject<Headband> lightGrayHeadBand = ITEMS.register("light_gray_headband", Headband::new);
+    public static final RegistryObject<CatHeadband> lightGrayHeadBandCatEarsBlack = ITEMS.register("light_gray_headband_cat_ears_black", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> lightGrayHeadBandCatEarsWhite = ITEMS.register("light_gray_headband_cat_ears_white", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> lightGrayHeadBandCatEarsCaramel = ITEMS.register("light_gray_headband_cat_ears_caramel", CatHeadband::new);
+    public static final RegistryObject<Headband> lightGrayHeadBandFoxEarsBlack = ITEMS.register("light_gray_headband_fox_ears_black", Headband::new);
+    public static final RegistryObject<Headband> lightGrayHeadBandFoxEarsWhite = ITEMS.register("light_gray_headband_fox_ears_white", Headband::new);
+    public static final RegistryObject<Headband> lightGrayHeadBandFoxEarsRed = ITEMS.register("light_gray_headband_fox_ears_red", Headband::new);
 
+    public static final RegistryObject<Headband> limeHeadBand = ITEMS.register("lime_headband", Headband::new);
+    public static final RegistryObject<CatHeadband> limeHeadBandCatEarsBlack = ITEMS.register("lime_headband_cat_ears_black", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> limeHeadBandCatEarsWhite = ITEMS.register("lime_headband_cat_ears_white", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> limeHeadBandCatEarsCaramel = ITEMS.register("lime_headband_cat_ears_caramel", CatHeadband::new);
+    public static final RegistryObject<Headband> limeHeadBandFoxEarsBlack = ITEMS.register("lime_headband_fox_ears_black", Headband::new);
+    public static final RegistryObject<Headband> limeHeadBandFoxEarsWhite = ITEMS.register("lime_headband_fox_ears_white", Headband::new);
+    public static final RegistryObject<Headband> limeHeadBandFoxEarsRed = ITEMS.register("lime_headband_fox_ears_red", Headband::new);
 
+    public static final RegistryObject<Headband> magentaHeadBand = ITEMS.register("magenta_headband", Headband::new);
+    public static final RegistryObject<CatHeadband> magentaHeadBandCatEarsBlack = ITEMS.register("magenta_headband_cat_ears_black", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> magentaHeadBandCatEarsWhite = ITEMS.register("magenta_headband_cat_ears_white", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> magentaHeadBandCatEarsCaramel = ITEMS.register("magenta_headband_cat_ears_caramel", CatHeadband::new);
+    public static final RegistryObject<Headband> magentaHeadBandFoxEarsBlack = ITEMS.register("magenta_headband_fox_ears_black", Headband::new);
+    public static final RegistryObject<Headband> magentaHeadBandFoxEarsWhite = ITEMS.register("magenta_headband_fox_ears_white", Headband::new);
+    public static final RegistryObject<Headband> magentaHeadBandFoxEarsRed = ITEMS.register("magenta_headband_fox_ears_red", Headband::new);
 
+    public static final RegistryObject<Headband> orangeHeadBand = ITEMS.register("orange_headband", Headband::new);
+    public static final RegistryObject<CatHeadband> orangeHeadBandCatEarsBlack = ITEMS.register("orange_headband_cat_ears_black", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> orangeHeadBandCatEarsWhite = ITEMS.register("orange_headband_cat_ears_white", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> orangeHeadBandCatEarsCaramel = ITEMS.register("orange_headband_cat_ears_caramel", CatHeadband::new);
+    public static final RegistryObject<Headband> orangeHeadBandFoxEarsBlack = ITEMS.register("orange_headband_fox_ears_black", Headband::new);
+    public static final RegistryObject<Headband> orangeHeadBandFoxEarsWhite = ITEMS.register("orange_headband_fox_ears_white", Headband::new);
+    public static final RegistryObject<Headband> orangeHeadBandFoxEarsRed = ITEMS.register("orange_headband_fox_ears_red", Headband::new);
 
+    public static final RegistryObject<Headband> pinkHeadBand = ITEMS.register("pink_headband", Headband::new);
+    public static final RegistryObject<CatHeadband> pinkHeadBandCatEarsBlack = ITEMS.register("pink_headband_cat_ears_black", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> pinkHeadBandCatEarsWhite = ITEMS.register("pink_headband_cat_ears_white", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> pinkHeadBandCatEarsCaramel = ITEMS.register("pink_headband_cat_ears_caramel", CatHeadband::new);
+    public static final RegistryObject<Headband> pinkHeadBandFoxEarsBlack = ITEMS.register("pink_headband_fox_ears_black", Headband::new);
+    public static final RegistryObject<Headband> pinkHeadBandFoxEarsWhite = ITEMS.register("pink_headband_fox_ears_white", Headband::new);
+    public static final RegistryObject<Headband> pinkHeadBandFoxEarsRed = ITEMS.register("pink_headband_fox_ears_red", Headband::new);
 
+    public static final RegistryObject<Headband> purpleHeadBand = ITEMS.register("purple_headband", Headband::new);
+    public static final RegistryObject<CatHeadband> purpleHeadBandCatEarsBlack = ITEMS.register("purple_headband_cat_ears_black", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> purpleHeadBandCatEarsWhite = ITEMS.register("purple_headband_cat_ears_white", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> purpleHeadBandCatEarsCaramel = ITEMS.register("purple_headband_cat_ears_caramel", CatHeadband::new);
+    public static final RegistryObject<Headband> purpleHeadBandFoxEarsBlack = ITEMS.register("purple_headband_fox_ears_black", Headband::new);
+    public static final RegistryObject<Headband> purpleHeadBandFoxEarsWhite = ITEMS.register("purple_headband_fox_ears_white", Headband::new);
+    public static final RegistryObject<Headband> purpleHeadBandFoxEarsRed = ITEMS.register("purple_headband_fox_ears_red", Headband::new);
 
+    public static final RegistryObject<Headband> redHeadBand = ITEMS.register("red_headband", Headband::new);
+    public static final RegistryObject<CatHeadband> redHeadBandCatEarsBlack = ITEMS.register("red_headband_cat_ears_black", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> redHeadBandCatEarsWhite = ITEMS.register("red_headband_cat_ears_white", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> redHeadBandCatEarsCaramel = ITEMS.register("red_headband_cat_ears_caramel", CatHeadband::new);
+    public static final RegistryObject<Headband> redHeadBandFoxEarsBlack = ITEMS.register("red_headband_fox_ears_black", Headband::new);
+    public static final RegistryObject<Headband> redHeadBandFoxEarsWhite = ITEMS.register("red_headband_fox_ears_white", Headband::new);
+    public static final RegistryObject<Headband> redHeadBandFoxEarsRed = ITEMS.register("red_headband_fox_ears_red", Headband::new);
 
+    public static final RegistryObject<Headband> whiteHeadBand = ITEMS.register("white_headband", Headband::new);
+    public static final RegistryObject<CatHeadband> whiteHeadBandCatEarsBlack = ITEMS.register("white_headband_cat_ears_black", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> whiteHeadBandCatEarsWhite = ITEMS.register("white_headband_cat_ears_white", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> whiteHeadBandCatEarsCaramel = ITEMS.register("white_headband_cat_ears_caramel", CatHeadband::new);
+    public static final RegistryObject<Headband> whiteHeadBandFoxEarsBlack = ITEMS.register("white_headband_fox_ears_black", Headband::new);
+    public static final RegistryObject<Headband> whiteHeadBandFoxEarsWhite = ITEMS.register("white_headband_fox_ears_white", Headband::new);
+    public static final RegistryObject<Headband> whiteHeadBandFoxEarsRed = ITEMS.register("white_headband_fox_ears_red", Headband::new);
 
-
-
-
-
-
-
-
-
-
-
+    public static final RegistryObject<Headband> yellowHeadBand = ITEMS.register("yellow_headband", Headband::new);
+    public static final RegistryObject<CatHeadband> yellowHeadBandCatEarsBlack = ITEMS.register("yellow_headband_cat_ears_black", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> yellowHeadBandCatEarsWhite = ITEMS.register("yellow_headband_cat_ears_white", CatHeadband::new);
+    public static final RegistryObject<CatHeadband> yellowHeadBandCatEarsCaramel = ITEMS.register("yellow_headband_cat_ears_caramel", CatHeadband::new);
+    public static final RegistryObject<Headband> yellowHeadBandFoxEarsBlack = ITEMS.register("yellow_headband_fox_ears_black", Headband::new);
+    public static final RegistryObject<Headband> yellowHeadBandFoxEarsWhite = ITEMS.register("yellow_headband_fox_ears_white", Headband::new);
+    public static final RegistryObject<Headband> yellowHeadBandFoxEarsRed = ITEMS.register("yellow_headband_fox_ears_red", Headband::new);
 
 
 
     public static final RegistryObject<Item> coffeeFruit = ITEMS.register("coffee_fruit", () -> new BlockItem(
-            BlockRegister.coffeePlant.get(),new Item.Properties().tab(foods).food(new FoodProperties.Builder().fast().nutrition(2).saturationMod(2).build()
+            BlockRegister.coffeePlant.get(),new Item.Properties().tab(foods).food(new FoodProperties.Builder().fast().nutrition(2).saturationMod(1.125f).build()
     )));
     public static final RegistryObject<Item> driedCoffeeBeans = ITEMS.register("dried_coffee_beans", () ->  new Item(new Item.Properties().tab(foods)));
     public static final RegistryObject<Item> roastedCoffeeBeans = ITEMS.register("roasted_coffee_beans",() ->  new Item(new Item.Properties().tab(foods)));
@@ -388,21 +495,34 @@ public class ItemRegister {
     public static final RegistryObject<Item> roastedCocoaBeans = ITEMS.register("roasted_cocoa_beans",() ->  new Item(new Item.Properties().tab(foods)));
     public static final RegistryObject<Item> cocoaPowder = ITEMS.register("cocoa_powder",() ->  new Item(new Item.Properties().tab(foods)));
 
-    public static final RegistryObject<Item> whiteChocolateBar = ITEMS.register("white_chocolate_bar", () ->  new Item(new Item.Properties().tab(foods).food(new FoodProperties.Builder().nutrition(3).saturationMod(8f).build())));
-    public static final RegistryObject<Item> darkChocolateBar = ITEMS.register("dark_chocolate_bar",() ->  new Item(new Item.Properties().tab(foods).food(new FoodProperties.Builder().nutrition(3).saturationMod(8f).build())));
-    public static final RegistryObject<Item> milkChocolateBar = ITEMS.register("milk_chocolate_bar",() ->  new Item(new Item.Properties().tab(foods).food(new FoodProperties.Builder().nutrition(3).saturationMod(8f).build())));
+    public static final RegistryObject<Item> whiteChocolateBar = ITEMS.register("white_chocolate_bar", () ->  new Item(new Item.Properties().tab(foods).food(new FoodProperties.Builder().nutrition(3).saturationMod(1.5f).build())));
+    public static final RegistryObject<Item> darkChocolateBar = ITEMS.register("dark_chocolate_bar",() ->  new Item(new Item.Properties().tab(foods).food(new FoodProperties.Builder().nutrition(3).saturationMod(1.5f).build())));
+    public static final RegistryObject<Item> milkChocolateBar = ITEMS.register("milk_chocolate_bar",() ->  new Item(new Item.Properties().tab(foods).food(new FoodProperties.Builder().nutrition(3).saturationMod(1.5f).build())));
 
 
 
-    public static final RegistryObject<Drink> expressoCoffee = ITEMS.register("expresso_coffee", () -> new Drink(BlockRegister.expressoMug.get(),3,1));
-    public static final RegistryObject<Drink> americanCoffee = ITEMS.register("american_coffee", () -> new Drink(BlockRegister.americanMug.get(),4,2));
-    public static final RegistryObject<Drink> latteCoffee = ITEMS.register("latte_coffee",() -> new Drink(BlockRegister.latteMug.get(),5,3));
-    public static final RegistryObject<Drink> mochaCoffee = ITEMS.register("mocha_coffee", () -> new Drink(BlockRegister.mochaMug.get(),6,4));
+    public static final RegistryObject<Drink> expressoCoffee = ITEMS.register("expresso_coffee", () -> new Drink(BlockRegister.expressoMug.get(),3,1.2f));
+    public static final RegistryObject<Drink> americanCoffee = ITEMS.register("american_coffee", () -> new Drink(BlockRegister.americanMug.get(),4,1.2f));
+    public static final RegistryObject<Drink> latteCoffee = ITEMS.register("latte_coffee",() -> new Drink(BlockRegister.latteMug.get(),5,1.2f));
+    public static final RegistryObject<Drink> mochaCoffee = ITEMS.register("mocha_coffee", () -> new Drink(BlockRegister.mochaMug.get(),6,1.2f));
+    public static final RegistryObject<Drink> macchiatoCoffee = ITEMS.register("macchiato_coffee", () -> new Drink(BlockRegister.macchiatoMug.get(),3,1.2f));
+    public static final RegistryObject<Drink> doppioCoffee = ITEMS.register("doppio_coffee",() -> new Drink(BlockRegister.doppioMug.get(),5,1.2f));
+    public static final RegistryObject<Drink> cappuccinoCoffee = ITEMS.register("cappuccino_coffee", () -> new Drink(BlockRegister.cappuccinoMug.get(),6,1.2f));
 
-    public static final RegistryObject<Drink> macchiatoCoffee = ITEMS.register("macchiato_coffee", () -> new Drink(BlockRegister.macchiatoMug.get(),3,1));
-    public static final RegistryObject<Drink> doppioCoffee = ITEMS.register("doppio_coffee",() -> new Drink(BlockRegister.doppioMug.get(),5,3));
-    public static final RegistryObject<Drink> cappuccinoCoffee = ITEMS.register("cappuccino_coffee", () -> new Drink(BlockRegister.cappuccinoMug.get(),6,4));
+    public static final RegistryObject<IceCream> sweetBerryIceCream = ITEMS.register("sweet_berry_ice_cream", () -> new IceCream(BlockRegister.sweetBerryIceCream.get(),6,1.2f));
+    public static final RegistryObject<IceCream> napolitanoIceCream = ITEMS.register("napolitano_ice_cream", () -> new IceCream(BlockRegister.napolitanoIceCream.get(),6,1.2f));
+    public static final RegistryObject<IceCream> creamIceCream = ITEMS.register("cream_ice_cream", () -> new IceCream(BlockRegister.creamIceCream.get(),6,1.2f));
+    public static final RegistryObject<IceCream> chocolateIceCream = ITEMS.register("chocolate_ice_cream", () -> new IceCream(BlockRegister.chocolateIceCream.get(),6,1.2f));
+    public static final RegistryObject<IceCream> coffeeIceCream = ITEMS.register("coffee_ice_cream", () -> new IceCream(BlockRegister.coffeeIceCream.get(),6,1.2f));
+    public static final RegistryObject<IceCream> mochaIceCream = ITEMS.register("mocha_ice_cream", () -> new IceCream(BlockRegister.mochaIceCream.get(),6,1.2f));
+    public static final RegistryObject<IceCream> glowBerryIceCream = ITEMS.register("glow_berry_ice_cream", () -> new IceCream(BlockRegister.glowBerryIceCream.get(),6,1.2f));
 
+    public static final RegistryObject<Item> condensedMilk = ITEMS.register("condensed_milk", () -> new Item(new Item.Properties().tab(foods)));
+    public static final RegistryObject<Item> brigadeiroMix = ITEMS.register("brigadeiro_mix", () -> new Item(new Item.Properties().tab(foods)));
+
+
+    public static final RegistryObject<Candy> beijinho = ITEMS.register("beijinho", () -> new Candy(BlockRegister.beijinho.get(),3,1.2f));
+    public static final RegistryObject<Candy> brigadeiro = ITEMS.register("brigadeiro", () -> new Candy(BlockRegister.brigadeiro.get(),3,1.2f));
 
     public static final RegistryObject<Item> blackStool = ITEMS.register("black_stool",() -> new BlockItem(BlockRegister.blackStool.get(), new Item.Properties().tab(decoration)));
     public static final RegistryObject<Item> blueStool = ITEMS.register("blue_stool",() -> new BlockItem(BlockRegister.blueStool.get(), new Item.Properties().tab(decoration)));

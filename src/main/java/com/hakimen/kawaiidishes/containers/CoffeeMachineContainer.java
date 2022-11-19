@@ -88,7 +88,7 @@ public class CoffeeMachineContainer extends AbstractContainerMenu {
             if (index < 6 && !this.moveItemStackTo(stack1, 1, this.slots.size(), true)) {
                 return ItemStack.EMPTY;
             }
-            if (!this.moveItemStackTo(stack1, 0, 5, false)) {
+            if (!this.moveItemStackTo(stack1, 0, 6, false)) {
                 return ItemStack.EMPTY;
             }
             if (stack1.isEmpty()) {

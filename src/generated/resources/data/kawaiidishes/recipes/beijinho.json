@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:condensed_milk"
+    }
+  ],
+  "result": {
+    "item": "kawaiidishes:beijinho",
+    "count": 8
+  }
+}

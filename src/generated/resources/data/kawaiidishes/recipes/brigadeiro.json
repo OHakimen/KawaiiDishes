@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:brigadeiro_mix"
+    }
+  ],
+  "result": {
+    "item": "kawaiidishes:brigadeiro",
+    "count": 8
+  }
+}

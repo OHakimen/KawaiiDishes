@@ -1,0 +1,7 @@
+{
+  "parent": "kawaiidishes:item/cat_headband",
+  "textures": {
+    "0": "kawaiidishes:item/cat_ears_white",
+    "1": "kawaiidishes:item/headbands/white_headband"
+  }
+}

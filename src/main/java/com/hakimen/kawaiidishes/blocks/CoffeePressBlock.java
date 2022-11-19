@@ -108,8 +108,12 @@ public class CoffeePressBlock extends Block implements EntityBlock {
                     CoffeePressBlockEntity.craft(coffeePress);
                 }
             }else if(currentItemInHand.getItem().equals(ItemRegister.mug.get()) && coffeePress.coffeeGotMade){
-                if(coffeePress.coffeeMade.getCount() >0){
+                if(coffeePress.coffeeMade.getCount() > 0){
                     pPlayer.addItem(coffeePress.coffeeMade);
+                    coffeePress.coffeeGotMade = false;
+                    pLevel.setBlockAndUpdate(coffeePress.getBlockPos(),coffeePress.getBlockState().setValue(
+                            CoffeePressBlock.PRESSED,coffeePress.coffeeGotMade
+                    ));
                 }else{
                     coffeePress.coffeeGotMade = false;
                     pLevel.setBlockAndUpdate(coffeePress.getBlockPos(),coffeePress.getBlockState().setValue(

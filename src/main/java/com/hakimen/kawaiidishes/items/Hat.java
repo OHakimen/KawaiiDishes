@@ -1,5 +1,6 @@
 package com.hakimen.kawaiidishes.items;
 
+import com.google.common.collect.Multimap;
 import com.hakimen.kawaiidishes.items.armor.CatMaidArmorItem;
 import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
@@ -12,13 +13,20 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PlayerHeadItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.PlayerHeadBlock;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.HashMap;
+import java.util.UUID;
 
 public class Hat extends Item {
     public Hat() {
@@ -29,7 +37,6 @@ public class Hat extends Item {
     public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
         return armorType.equals(EquipmentSlot.HEAD);
     }
-
 
 
     @Nullable

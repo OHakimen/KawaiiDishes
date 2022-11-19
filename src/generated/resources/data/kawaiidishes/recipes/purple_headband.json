@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "@ @"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:purple_wool"
+    },
+    "@": {
+      "item": "minecraft:white_wool"
+    }
+  },
+  "result": {
+    "item": "kawaiidishes:purple_headband"
+  }
+}

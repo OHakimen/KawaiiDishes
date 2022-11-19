@@ -22,14 +22,15 @@ public class KawaiiMessages {
     static {
         defaultMessages.add("You look so kawaii !!");
         defaultMessages.add("OuO");
-        defaultMessages.add("Cute <3 ");
+        defaultMessages.add("Cute <3");
         defaultMessages.add("You look nice today");
         defaultMessages.add("Hi Cutie !");
         defaultMessages.add("Look here little one, pose for me! *chik*");
-        defaultMessages.add("Hey sweetie, pleaaase notice me senpai!");
+        defaultMessages.add("Hey sweetie!");
+        defaultMessages.add("Hewwo, %user% :3");
 
         catEarsMessages.add("It's so cute neko-chan, Nyant - ta!");
-        catEarsMessages.add("Plweaaaaaaase! Take a picture with me!");
+        catEarsMessages.add("Plweaaaase! Take a picture with me!");
         catEarsMessages.add("They seem like so... UwU!!!");
         catEarsMessages.add("OMG, CAT EARS");
         catEarsMessages.add("Wait... they are wearing cat ears !");

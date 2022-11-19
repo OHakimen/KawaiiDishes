@@ -165,10 +165,10 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements MenuProvide
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY){
-            return invHandler.cast();
-        }else{
-            return super.getCapability(cap);
+        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            return (LazyOptional<T>) invHandler;
+        } else {
+            return super.getCapability(cap,side);
         }
     }
 
@@ -200,7 +200,7 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements MenuProvide
 
             @Override
             public int getSlotLimit(int slot) {
-                return 1;
+                return slot == 5 ? 1 : 64;
             }
 
             @Nonnull

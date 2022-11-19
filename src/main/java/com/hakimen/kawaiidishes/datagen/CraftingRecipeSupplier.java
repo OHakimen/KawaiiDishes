@@ -2,14 +2,18 @@ package com.hakimen.kawaiidishes.datagen;
 
 import com.hakimen.kawaiidishes.datagen.recipebuilder.CoffeeMachineRecipeBuilder;
 import com.hakimen.kawaiidishes.datagen.recipebuilder.CoffeePressRecipeBuilder;
+import com.hakimen.kawaiidishes.datagen.recipebuilder.IceCreamMachineRecipeBuilder;
 import com.hakimen.kawaiidishes.recipes.CoffeeMachineRecipe;
 import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.CriterionProgress;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -48,17 +52,36 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
                 .unlockedBy(getHasName(Items.BRICK), has(Items.BRICK))
                 .save(pFinishedRecipeConsumer);
 
+        ShapedRecipeBuilder.shaped(ItemRegister.glassCup.get())
+                .pattern("x x")
+                .pattern("xxx")
+                .define('x', Tags.Items.GLASS_PANES)
+                .unlockedBy(getHasName(Items.GLASS_PANE), has(Items.GLASS_PANE))
+                .save(pFinishedRecipeConsumer);
+
         ShapedRecipeBuilder.shaped(ItemRegister.coffeeMachine.get())
                 .pattern("xxx")
-                .pattern(".px")
+                .pattern(".pi")
                 .pattern("iri")
-                .define('x', Tags.Items.STONE)
+                .define('x', Items.STONE_SLAB)
                 .define('r', Items.REDSTONE)
+                .define('.', Items.IRON_NUGGET)
+                .define('i', Items.IRON_INGOT)
                 .define('p', ItemRegister.coffeePress.get())
+                .unlockedBy(getHasName(Items.REDSTONE), has(Items.REDSTONE))
+                .unlockedBy(getHasName(Items.IRON_NUGGET), has(Items.IRON_NUGGET))
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ItemRegister.iceCreamMachine.get())
+                .pattern("xxx")
+                .pattern("i.i")
+                .pattern("iri")
+                .define('x', Tags.Items.GLASS)
+                .define('r', Items.REDSTONE)
                 .define('.', Items.IRON_NUGGET)
                 .define('i', Items.IRON_INGOT)
                 .unlockedBy(getHasName(Items.REDSTONE), has(Items.REDSTONE))
-                .unlockedBy(getHasName(ItemRegister.coffeePress.get()), has(ItemRegister.coffeePress.get()))
                 .unlockedBy(getHasName(Items.IRON_NUGGET), has(Items.IRON_NUGGET))
                 .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
                 .save(pFinishedRecipeConsumer);
@@ -87,6 +110,33 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
                 .unlockedBy(getHasName(ItemRegister.cocoaPowder.get()), has(ItemRegister.cocoaPowder.get()))
                 .save(pFinishedRecipeConsumer);
 
+
+        ShapelessRecipeBuilder.shapeless(ItemRegister.condensedMilk.get())
+                .requires(Items.MILK_BUCKET)
+                .requires(Items.SUGAR)
+                .unlockedBy(getHasName(Items.MILK_BUCKET), has(Items.MILK_BUCKET))
+                .unlockedBy(getHasName(Items.SUGAR), has(Items.SUGAR))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(ItemRegister.beijinho.get(),8)
+                .requires(ItemRegister.condensedMilk.get())
+                .unlockedBy(getHasName(ItemRegister.condensedMilk.get()), has(ItemRegister.condensedMilk.get()))
+                .save(pFinishedRecipeConsumer);
+
+
+        ShapelessRecipeBuilder.shapeless(ItemRegister.brigadeiro.get(),8)
+                .requires(ItemRegister.brigadeiroMix.get())
+                .unlockedBy(getHasName(ItemRegister.brigadeiroMix.get()), has(ItemRegister.brigadeiroMix.get()))
+                .save(pFinishedRecipeConsumer);
+
+
+        ShapelessRecipeBuilder.shapeless(ItemRegister.brigadeiroMix.get())
+                .requires(ItemRegister.condensedMilk.get())
+                .requires(ItemRegister.cocoaPowder.get())
+                .unlockedBy(getHasName(ItemRegister.condensedMilk.get()), has(ItemRegister.condensedMilk.get()))
+                .unlockedBy(getHasName(ItemRegister.cocoaPowder.get()), has(ItemRegister.cocoaPowder.get()))
+                .save(pFinishedRecipeConsumer);
+
         ShapelessRecipeBuilder.shapeless(ItemRegister.milkChocolateBar.get())
                 .requires(ItemRegister.cocoaPowder.get())
                 .requires(ItemRegister.cocoaPowder.get())
@@ -103,11 +153,123 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
                 .unlockedBy(getHasName(ItemRegister.cocoaPowder.get()), has(ItemRegister.cocoaPowder.get()))
                 .save(pFinishedRecipeConsumer);
 
+
+
         cosmetics(pFinishedRecipeConsumer);
         decor(pFinishedRecipeConsumer);
         coffees(pFinishedRecipeConsumer);
+        iceCreams(pFinishedRecipeConsumer);
+
+    }
+
+    public void iceCreams(Consumer<FinishedRecipe> consumer){
+        iceCream(consumer,
+                Items.SWEET_BERRIES,
+                ItemRegister.sweetBerryIceCream.get().getDefaultInstance(),
+                100,
+                ItemRegister.glassCup.get().getDefaultInstance(),
+                new MobEffectInstance(MobEffects.FIRE_RESISTANCE,15*20)
+                ,null);
+
+        iceCream(consumer,
+                Items.GLOW_BERRIES,
+                ItemRegister.glowBerryIceCream.get().getDefaultInstance(),
+                100,
+                ItemRegister.glassCup.get().getDefaultInstance(),
+                new MobEffectInstance(MobEffects.FIRE_RESISTANCE,15*20),
+                new MobEffectInstance(MobEffects.NIGHT_VISION,30*20));
+
+        iceCream(consumer,
+                Items.SWEET_BERRIES,
+                Items.MILK_BUCKET,
+                ItemRegister.cocoaPowder.get(),
+                ItemRegister.napolitanoIceCream.get().getDefaultInstance(),
+                100,
+                ItemRegister.glassCup.get().getDefaultInstance(),
+                new MobEffectInstance(MobEffects.FIRE_RESISTANCE,15*20)
+                ,null);
+
+        iceCream(consumer,
+                ItemRegister.cocoaPowder.get(),
+                ItemRegister.chocolateIceCream.get().getDefaultInstance(),
+                100,
+                ItemRegister.glassCup.get().getDefaultInstance(),
+                new MobEffectInstance(MobEffects.FIRE_RESISTANCE,15*20)
+                ,null);
+
+        iceCream(consumer,
+                ItemRegister.coffeePowder.get(),
+                ItemRegister.coffeeIceCream.get().getDefaultInstance(),
+                100,
+                ItemRegister.glassCup.get().getDefaultInstance(),
+                new MobEffectInstance(MobEffects.FIRE_RESISTANCE,15*20)
+                ,null);
+
+        iceCream(consumer,
+                Items.MILK_BUCKET,
+                Items.SUGAR,
+                ItemRegister.creamIceCream.get().getDefaultInstance(),
+                100,
+                ItemRegister.glassCup.get().getDefaultInstance(),
+                new MobEffectInstance(MobEffects.FIRE_RESISTANCE,15*20)
+                ,null);
+
+        iceCream(consumer,
+                ItemRegister.coffeePowder.get(),
+                ItemRegister.cocoaPowder.get(),
+                Items.MILK_BUCKET,
+                ItemRegister.mochaIceCream.get().getDefaultInstance(),
+                100,
+                ItemRegister.glassCup.get().getDefaultInstance(),
+                new MobEffectInstance(MobEffects.FIRE_RESISTANCE,15*20)
+                ,null);
+
+    }
 
 
+    public void iceCream(Consumer<FinishedRecipe> consumer, Item item, Item item1, Item item2, ItemStack result, int ticks, ItemStack onOutput, MobEffectInstance mainEffect, MobEffectInstance secondaryEffect){
+        IceCreamMachineRecipeBuilder builder = new IceCreamMachineRecipeBuilder(
+                Items.SNOWBALL,
+                item,
+                item1,
+                item2,
+                result,
+                ticks,
+                onOutput,
+                mainEffect,
+                secondaryEffect
+        );
+        builder.unlockedBy(getHasName(item), has(item));
+        builder.save(consumer);
+    }
+
+    public void iceCream(Consumer<FinishedRecipe> consumer, Item item, Item item1, ItemStack result, int ticks, ItemStack onOutput, MobEffectInstance mainEffect, MobEffectInstance secondaryEffect){
+        IceCreamMachineRecipeBuilder builder = new IceCreamMachineRecipeBuilder(
+                Items.SNOWBALL,
+                item,
+                item1,
+                result,
+                ticks,
+                onOutput,
+                mainEffect,
+                secondaryEffect
+        );
+        builder.unlockedBy(getHasName(item), has(item));
+        builder.save(consumer);
+    }
+
+    public void iceCream(Consumer<FinishedRecipe> consumer, Item item, ItemStack result, int ticks, ItemStack onOutput, MobEffectInstance mainEffect, MobEffectInstance secondaryEffect){
+        IceCreamMachineRecipeBuilder builder = new IceCreamMachineRecipeBuilder(
+                Items.SNOWBALL,
+                item,
+                result,
+                ticks,
+                onOutput,
+                mainEffect,
+                secondaryEffect
+        );
+        builder.unlockedBy(getHasName(item), has(item));
+        builder.save(consumer);
     }
 
     public void decor(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
@@ -189,6 +351,11 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
         catEars(pFinishedRecipeConsumer, ItemRegister.whiteCatEars.get(), Items.WHITE_WOOL);
         catEars(pFinishedRecipeConsumer, ItemRegister.caramelCatEars.get(), Items.YELLOW_WOOL);
 
+        foxEars(pFinishedRecipeConsumer, ItemRegister.blackFoxEars.get(), Items.BLACK_WOOL);
+        foxEars(pFinishedRecipeConsumer, ItemRegister.whiteFoxEars.get(), Items.WHITE_WOOL);
+        foxEars(pFinishedRecipeConsumer, ItemRegister.redFoxEars.get(), Items.ORANGE_WOOL);
+
+
         catTails(pFinishedRecipeConsumer, ItemRegister.blackCatTail.get(), Items.BLACK_WOOL);
         catTails(pFinishedRecipeConsumer, ItemRegister.whiteCatTail.get(), Items.WHITE_WOOL);
         catTails(pFinishedRecipeConsumer, ItemRegister.caramelCatTail.get(), Items.YELLOW_WOOL);
@@ -197,6 +364,22 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
         foxTails(pFinishedRecipeConsumer, ItemRegister.redFoxTail.get(), Items.ORANGE_WOOL, Items.WHITE_WOOL);
         foxTails(pFinishedRecipeConsumer, ItemRegister.whiteFoxTail.get(), Items.WHITE_WOOL, Items.WHITE_WOOL);
 
+        headBands(pFinishedRecipeConsumer, ItemRegister.blackHeadBand.get(), Items.BLACK_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.whiteHeadBand.get(), Items.WHITE_WOOL, Items.BLACK_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.grayHeadBand.get(), Items.GRAY_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.lightGrayHeadBand.get(), Items.LIGHT_GRAY_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.lightBlueHeadBand.get(), Items.LIGHT_BLUE_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.redHeadBand.get(), Items.RED_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.pinkHeadBand.get(), Items.PINK_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.magentaHeadBand.get(), Items.MAGENTA_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.purpleHeadBand.get(), Items.PURPLE_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.greenHeadBand.get(), Items.GREEN_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.limeHeadBand.get(), Items.LIME_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.blueHeadBand.get(), Items.BLUE_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.cyanHeadBand.get(), Items.CYAN_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.yellowHeadBand.get(), Items.YELLOW_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.orangeHeadBand.get(), Items.ORANGE_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.brownHeadBand.get(), Items.BROWN_WOOL, Items.WHITE_WOOL);
 
     }
 
@@ -496,6 +679,16 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
                 .unlockedBy(getHasName(item), has(item))
                 .save(consumer);
     }
+    public void foxEars(Consumer<FinishedRecipe> consumer, Item result, Item item) {
+        ShapedRecipeBuilder.shaped(result)
+                .pattern("# #")
+                .pattern("#s#")
+                .pattern("s s")
+                .define('#', Ingredient.of(item.getDefaultInstance()))
+                .define('s', Ingredient.of(Tags.Items.STRING))
+                .unlockedBy(getHasName(item), has(item))
+                .save(consumer);
+    }
 
     public void maidOutfit(Consumer<FinishedRecipe> consumer, Item result, Item mainColor, Item secondaryColor) {
         ShapedRecipeBuilder.shaped(result)
@@ -508,6 +701,62 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
                 .unlockedBy(getHasName(mainColor), has(mainColor))
                 .unlockedBy(getHasName(secondaryColor), has(secondaryColor))
                 .save(consumer);
+    }
+
+    public void headBands(Consumer<FinishedRecipe> consumer, Item result, Item mainColor, Item secondaryColor) {
+        ShapedRecipeBuilder.shaped(result)
+                .pattern("###")
+                .pattern("@ @")
+                .define('#', Ingredient.of(mainColor.getDefaultInstance()))
+                .define('@', Ingredient.of(secondaryColor.getDefaultInstance()))
+                .unlockedBy(getHasName(mainColor), has(mainColor))
+                .unlockedBy(getHasName(secondaryColor), has(secondaryColor))
+                .save(consumer);
+        for (var i : ItemRegister.ITEMS.getEntries().stream().toList()) {
+            var path = i.get().getRegistryName().getPath();
+            if (path.equals(result.getRegistryName().getPath() + "_cat_ears_black")) {
+                ShapelessRecipeBuilder.shapeless(i.get())
+                        .requires(Ingredient.of(result.getDefaultInstance()))
+                        .requires(Ingredient.of(ItemRegister.blackCatEars.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(result), has(result))
+                        .save(consumer);
+            }
+            if (path.equals(result.getRegistryName().getPath() + "_cat_ears_white")) {
+                ShapelessRecipeBuilder.shapeless(i.get())
+                        .requires(Ingredient.of(result.getDefaultInstance()))
+                        .requires(Ingredient.of(ItemRegister.whiteCatEars.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(result), has(result))
+                        .save(consumer);
+            }
+            if (path.equals(result.getRegistryName().getPath() + "_cat_ears_caramel")) {
+                ShapelessRecipeBuilder.shapeless(i.get())
+                        .requires(Ingredient.of(result.getDefaultInstance()))
+                        .requires(Ingredient.of(ItemRegister.caramelCatEars.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(result), has(result))
+                        .save(consumer);
+            }
+            if (path.equals(result.getRegistryName().getPath() + "_fox_ears_black")) {
+                ShapelessRecipeBuilder.shapeless(i.get())
+                        .requires(Ingredient.of(result.getDefaultInstance()))
+                        .requires(Ingredient.of(ItemRegister.blackFoxEars.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(result), has(result))
+                        .save(consumer);
+            }
+            if (path.equals(result.getRegistryName().getPath() + "_fox_ears_red")) {
+                ShapelessRecipeBuilder.shapeless(i.get())
+                        .requires(Ingredient.of(result.getDefaultInstance()))
+                        .requires(Ingredient.of(ItemRegister.redFoxEars.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(result), has(result))
+                        .save(consumer);
+            }
+            if (path.equals(result.getRegistryName().getPath() + "_fox_ears_white")) {
+                ShapelessRecipeBuilder.shapeless(i.get())
+                        .requires(Ingredient.of(result.getDefaultInstance()))
+                        .requires(Ingredient.of(ItemRegister.whiteFoxEars.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(result), has(result))
+                        .save(consumer);
+            }
+        }
     }
 
     public void maidOutfitVariations(Consumer<FinishedRecipe> consumer, Item result) {
@@ -563,9 +812,11 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
                 .pattern("#s#")
                 .pattern("| |")
                 .define('s', Ingredient.of(mainColor.getDefaultInstance()))
-                .define('#', Ingredient.of(Items.STRIPPED_OAK_LOG, Items.STRIPPED_ACACIA_LOG, Items.STRIPPED_BIRCH_LOG, Items.STRIPPED_SPRUCE_LOG, Items.STRIPPED_SPRUCE_LOG, Items.STRIPPED_DARK_OAK_LOG))
+                .define('#', Ingredient.of(ItemTags.LOGS))
                 .define('|', Ingredient.of(Items.STICK))
                 .unlockedBy(getHasName(mainColor), has(mainColor))
                 .save(consumer);
+
+
     }
 }
