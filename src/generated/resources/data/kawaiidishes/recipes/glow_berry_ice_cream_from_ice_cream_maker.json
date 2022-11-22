@@ -1,0 +1,21 @@
+{
+  "type": "kawaiidishes:ice_cream_making",
+  "ticks": 100,
+  "itemOnOutput": {
+    "item": "kawaiidishes:glass_cup"
+  },
+  "ingredients": [
+    [
+      {
+        "item": "minecraft:snowball"
+      },
+      {
+        "item": "minecraft:glow_berries"
+      }
+    ]
+  ],
+  "output": {
+    "item": "kawaiidishes:glow_berry_ice_cream",
+    "nbt": "{mainEffect:{Ambient:0b,Amplifier:0b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:300,Id:12b,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"minecraft:fire_resistance\"},secondaryEffect:{Ambient:0b,Amplifier:0b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:600,Id:16b,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"minecraft:night_vision\"}}"
+  }
+}

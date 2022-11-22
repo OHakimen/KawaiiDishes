@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:orange_headband_fox_ears_blackuncraft"
+    ]
+  },
+  "criteria": {
+    "has_orange_headband_fox_ears_black": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:orange_headband_fox_ears_black"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:orange_headband_fox_ears_blackuncraft"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_orange_headband_fox_ears_black",
+      "has_the_recipe"
+    ]
+  ]
+}

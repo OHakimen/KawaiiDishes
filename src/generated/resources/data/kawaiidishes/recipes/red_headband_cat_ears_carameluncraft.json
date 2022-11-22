@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:red_headband_cat_ears_caramel"
+    }
+  ],
+  "result": {
+    "item": "kawaiidishes:caramel_cat_ears"
+  }
+}

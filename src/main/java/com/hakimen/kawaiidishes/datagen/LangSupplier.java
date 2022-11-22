@@ -60,13 +60,7 @@ public class LangSupplier extends LanguageProvider {
                     add(items.get(),dressNames.get(itemPath));
                 }
             }
-            if(itemPath.endsWith("_coffee")){
-                add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
-            }
-            if(itemPath.endsWith("_ice_cream")){
-                add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
-            }
-            if(itemPath.endsWith("_stool")){
+            if(itemPath.endsWith("_ice_cream") || itemPath.endsWith("_coffee") || itemPath.endsWith("_stool")){
                 add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
             }
             if(itemPath.contains("_headband")){
@@ -80,6 +74,14 @@ public class LangSupplier extends LanguageProvider {
                 }
             }
         }
+
+
+        add(ItemRegister.beijinho.get(),"Beijinho");
+        add(ItemRegister.condensedMilk.get(),"Condensed Milk");
+        add(ItemRegister.brigadeiroMix.get(),"Brigadeiro Mix");
+        add(ItemRegister.brigadeiro.get(),"Brigadeiro");
+
+        add(ItemRegister.blender.get(),"Blender");
 
         add(ItemRegister.coffeeFruit.get(),"Coffee Fruit");
         add(ItemRegister.roastedCoffeeBeans.get(),"Roasted Coffee Beans");
@@ -132,6 +134,7 @@ public class LangSupplier extends LanguageProvider {
 
         add("gui.kawaiidishes.coffee_machine", "Coffee Machine");
         add("gui.kawaiidishes.ice_cream_machine", "Ice Cream Maker");
+        add("gui.kawaiidishes.blender", "Blender");
 
         add(EffectRegister.kawaiiEffect.get(),"Kawaii");
         add(EffectRegister.nekoEffect.get(),"Neko-chan");

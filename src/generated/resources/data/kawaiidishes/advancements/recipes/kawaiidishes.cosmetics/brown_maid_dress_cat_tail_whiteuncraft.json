@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:brown_maid_dress_cat_tail_whiteuncraft"
+    ]
+  },
+  "criteria": {
+    "has_brown_maid_dress_cat_tail_white": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:brown_maid_dress_cat_tail_white"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:brown_maid_dress_cat_tail_whiteuncraft"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_brown_maid_dress_cat_tail_white",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -60,6 +60,8 @@ public class BlockRegister {
 
     public static final RegistryObject<IceCreamMachineBlock> iceCreamMachine = BLOCKS.register("ice_cream_machine", IceCreamMachineBlock::new);
 
+    public static final RegistryObject<BlenderBlock> blender = BLOCKS.register("blender", BlenderBlock::new);
+
 
     public static final RegistryObject<MortarAndPestleBlock> mortarAndPestle = BLOCKS.register("mortar_and_pestle",MortarAndPestleBlock::new);
 

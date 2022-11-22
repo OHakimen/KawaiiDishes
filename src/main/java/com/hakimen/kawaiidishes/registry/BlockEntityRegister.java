@@ -26,6 +26,9 @@ public class BlockEntityRegister {
     public static final RegistryObject<BlockEntityType<IceCreamMachineBlockEntity>> iceCreamMachine = BLOCK_ENTITIES.register("ice_cream_machine_entity",
             ()->BlockEntityType.Builder.of(IceCreamMachineBlockEntity::new,BlockRegister.iceCreamMachine.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<BlenderBlockEntity>> blender = BLOCK_ENTITIES.register("blender_entity",
+            ()->BlockEntityType.Builder.of(BlenderBlockEntity::new,BlockRegister.blender.get()).build(null));
+
 
     public static final RegistryObject<BlockEntityType<CoffeeMugBlockEntity>> coffeeMug = BLOCK_ENTITIES.register("coffee_mug_entity",
             ()->BlockEntityType.Builder.of(

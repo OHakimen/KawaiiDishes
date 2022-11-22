@@ -1,0 +1,27 @@
+{
+  "type": "kawaiidishes:ice_cream_making",
+  "ticks": 100,
+  "itemOnOutput": {
+    "item": "kawaiidishes:glass_cup"
+  },
+  "ingredients": [
+    [
+      {
+        "item": "minecraft:snowball"
+      },
+      {
+        "item": "minecraft:sweet_berries"
+      },
+      {
+        "item": "minecraft:milk_bucket"
+      },
+      {
+        "item": "kawaiidishes:cocoa_powder"
+      }
+    ]
+  ],
+  "output": {
+    "item": "kawaiidishes:napolitano_ice_cream",
+    "nbt": "{mainEffect:{Ambient:0b,Amplifier:0b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:300,Id:12b,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"minecraft:fire_resistance\"}}"
+  }
+}

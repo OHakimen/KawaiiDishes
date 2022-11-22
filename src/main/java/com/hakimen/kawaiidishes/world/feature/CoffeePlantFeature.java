@@ -14,26 +14,17 @@ import java.util.List;
 import java.util.Set;
 
 public class CoffeePlantFeature {
-    public static void generateCoffeeOnForest(final BiomeLoadingEvent event) {
-        ResourceKey<Biome> key = ResourceKey.create(Registry.BIOME_REGISTRY, event.getName());
-        Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
-        if(types.contains(BiomeDictionary.Type.FOREST)) {
-            List<Holder<PlacedFeature>> base =
-                    event.getGeneration().getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION);
 
+    public static void generateCoffee(final BiomeLoadingEvent event) {
+        List<Holder<PlacedFeature>> base =
+                event.getGeneration().getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION);
+
+        if(event.getCategory() != Biome.BiomeCategory.DESERT
+                || event.getCategory() != Biome.BiomeCategory.BEACH
+                || event.getCategory() != Biome.BiomeCategory.MESA
+                || event.getCategory() != Biome.BiomeCategory.OCEAN
+                || event.getCategory() != Biome.BiomeCategory.MUSHROOM){
             base.add(PlacedFeaturesRegistry.COFFEE_PLANT_PLACED);
         }
-
-    }
-    public static void generateCoffeeOnPlains(final BiomeLoadingEvent event) {
-        ResourceKey<Biome> key = ResourceKey.create(Registry.BIOME_REGISTRY, event.getName());
-        Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
-        if(types.contains(BiomeDictionary.Type.PLAINS)) {
-            List<Holder<PlacedFeature>> base =
-                    event.getGeneration().getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION);
-
-            base.add(PlacedFeaturesRegistry.COFFEE_PLANT_PLACED);
-        }
-
     }
 }

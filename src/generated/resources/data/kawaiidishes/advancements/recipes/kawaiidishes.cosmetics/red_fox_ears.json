@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:red_fox_ears"
+    ]
+  },
+  "criteria": {
+    "has_orange_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:orange_wool"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:red_fox_ears"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_orange_wool",
+      "has_the_recipe"
+    ]
+  ]
+}

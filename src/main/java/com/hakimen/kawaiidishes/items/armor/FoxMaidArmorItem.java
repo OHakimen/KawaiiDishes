@@ -1,9 +1,12 @@
 package com.hakimen.kawaiidishes.items.armor;
 
+import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -19,8 +22,9 @@ public class FoxMaidArmorItem extends GeoArmorItem implements IAnimatable {
     private AnimationFactory factory = new AnimationFactory(this);
     public String textureLocation;
 
-    public FoxMaidArmorItem(String textureName) {
-        super(ArmorMaterials.catMaidDress, EquipmentSlot.CHEST, new Properties().tab(ItemRegister.cosmetics));
+    public FoxMaidArmorItem(String textureName, Item dress) {
+        super(ArmorMaterials.catMaidDress, EquipmentSlot.CHEST, new Properties().tab(ItemRegister.cosmetics)
+                .craftRemainder(dress));
         textureLocation = textureName;
     }
     @Override
@@ -33,6 +37,9 @@ public class FoxMaidArmorItem extends GeoArmorItem implements IAnimatable {
     }
     @Override
     public void onArmorTick(ItemStack stack, Level level, Player player) {
+        if(player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() instanceof MaidDressArmorItem){
+            player.forceAddEffect(new MobEffectInstance(EffectRegister.kawaiiEffect.get(),14*20,0,false,false),player);
+        }
         super.onArmorTick(stack, level, player);
     }
 

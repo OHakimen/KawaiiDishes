@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:magenta_maid_dress_fox_tail_blackuncraft"
+    ]
+  },
+  "criteria": {
+    "has_magenta_maid_dress_fox_tail_black": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:magenta_maid_dress_fox_tail_black"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:magenta_maid_dress_fox_tail_blackuncraft"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_magenta_maid_dress_fox_tail_black",
+      "has_the_recipe"
+    ]
+  ]
+}

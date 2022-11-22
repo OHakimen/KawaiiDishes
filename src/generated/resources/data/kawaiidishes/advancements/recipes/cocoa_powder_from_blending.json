@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:cocoa_powder"
+    ]
+  },
+  "criteria": {
+    "has_roasted_cocoa_beans": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:roasted_cocoa_beans"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:cocoa_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_roasted_cocoa_beans",
+      "has_the_recipe"
+    ]
+  ]
+}

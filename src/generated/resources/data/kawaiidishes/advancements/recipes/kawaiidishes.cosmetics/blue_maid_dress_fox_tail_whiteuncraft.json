@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:blue_maid_dress_fox_tail_whiteuncraft"
+    ]
+  },
+  "criteria": {
+    "has_blue_maid_dress_fox_tail_white": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:blue_maid_dress_fox_tail_white"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:blue_maid_dress_fox_tail_whiteuncraft"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_blue_maid_dress_fox_tail_white",
+      "has_the_recipe"
+    ]
+  ]
+}

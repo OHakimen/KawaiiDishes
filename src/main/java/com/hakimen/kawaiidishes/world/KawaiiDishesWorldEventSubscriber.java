@@ -10,7 +10,6 @@ import net.minecraftforge.fml.common.Mod;
 public class KawaiiDishesWorldEventSubscriber {
     @SubscribeEvent
     public static void biomeLoadingEvent(final BiomeLoadingEvent event) {
-        CoffeePlantFeature.generateCoffeeOnForest(event);
-        CoffeePlantFeature.generateCoffeeOnPlains(event);
+        CoffeePlantFeature.generateCoffee(event);
     }
 }

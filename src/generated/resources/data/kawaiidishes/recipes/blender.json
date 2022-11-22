@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "g g",
+    "xrx"
+  ],
+  "key": {
+    "g": {
+      "tag": "forge:glass_panes"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "x": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "kawaiidishes:blender"
+  }
+}

@@ -1,17 +1,15 @@
 package com.hakimen.kawaiidishes;
 
+import com.hakimen.kawaiidishes.client.screens.BlenderScreen;
 import com.hakimen.kawaiidishes.client.screens.CoffeeMachineScreen;
 import com.hakimen.kawaiidishes.client.screens.IceCreamScreen;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
 import com.hakimen.kawaiidishes.registry.ContainerRegister;
 import com.hakimen.kawaiidishes.registry.Registration;
-import com.hakimen.kawaiidishes.utils.MaidMobEventHandler;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.monster.Monster;
@@ -45,12 +43,13 @@ public class KawaiiDishes {
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
         forgeBus.addListener(this::onLivingSpecialSpawn);
+        bus.addListener(this::enqueueIMC);
         bus.addListener(this::clientStartup);
     }
 
     public void onLivingSpecialSpawn(LivingSpawnEvent.SpecialSpawn event) {
         Entity entity = event.getEntity();
-        if (entity instanceof Monster monster && !monster.serializeNBT().getBoolean("isBaby") && event.getWorld().getRandom().nextFloat(0,1) < 0.075f) {
+        if (entity instanceof Monster monster && !entity.serializeNBT().getBoolean("isBaby") && event.getWorld().getRandom().nextFloat(0,1) < 0.075f) {
             ItemStack[] stacks = armorBuild(event.getWorld().getRandom());
 
             monster.setItemSlot(EquipmentSlot.HEAD, stacks[0]);
@@ -67,6 +66,7 @@ public class KawaiiDishes {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
+
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
@@ -81,9 +81,12 @@ public class KawaiiDishes {
     }
 
     private void clientStartup(final FMLClientSetupEvent event){
+
         event.enqueueWork(() -> {
             MenuScreens.register(ContainerRegister.coffeeMachine.get(), CoffeeMachineScreen::new);
             MenuScreens.register(ContainerRegister.iceCreamMachine.get(), IceCreamScreen::new);
+            MenuScreens.register(ContainerRegister.blenderContainer.get(), BlenderScreen::new);
+
         });
 
         for(var block: BlockRegister.BLOCKS.getEntries().stream().toList()){
@@ -100,6 +103,7 @@ public class KawaiiDishes {
         ItemBlockRenderTypes.setRenderLayer(BlockRegister.glassCup.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(BlockRegister.coffeePlant.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(BlockRegister.coffeePress.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(BlockRegister.blender.get(), RenderType.translucent());
 
     }
 }

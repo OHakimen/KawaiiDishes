@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:cyan_headband_cat_ears_whiteuncraft"
+    ]
+  },
+  "criteria": {
+    "has_cyan_headband_cat_ears_white": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:cyan_headband_cat_ears_white"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:cyan_headband_cat_ears_whiteuncraft"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cyan_headband_cat_ears_white",
+      "has_the_recipe"
+    ]
+  ]
+}

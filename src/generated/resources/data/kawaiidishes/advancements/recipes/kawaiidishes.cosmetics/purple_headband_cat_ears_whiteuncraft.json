@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:purple_headband_cat_ears_whiteuncraft"
+    ]
+  },
+  "criteria": {
+    "has_purple_headband_cat_ears_white": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:purple_headband_cat_ears_white"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:purple_headband_cat_ears_whiteuncraft"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_purple_headband_cat_ears_white",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:light_gray_headband_fox_ears_reduncraft"
+    ]
+  },
+  "criteria": {
+    "has_light_gray_headband_fox_ears_red": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:light_gray_headband_fox_ears_red"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:light_gray_headband_fox_ears_reduncraft"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_light_gray_headband_fox_ears_red",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,9 +1,13 @@
 package com.hakimen.kawaiidishes.items;
 
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.hakimen.kawaiidishes.items.armor.CatMaidArmorItem;
 import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
@@ -12,6 +16,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -23,6 +28,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PlayerHeadItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.PlayerHeadBlock;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -33,11 +42,27 @@ public class Hat extends Item {
         super(new Properties().stacksTo(1).tab(ItemRegister.cosmetics));
     }
 
+    public Hat(Item item) {
+        super(new Properties().stacksTo(1).tab(ItemRegister.cosmetics).craftRemainder(item));
+    }
+
     @Override
     public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
         return armorType.equals(EquipmentSlot.HEAD);
     }
 
+
+    @Override
+    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
+        if(slot == EquipmentSlot.HEAD){
+            ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+            UUID uuid = UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B");
+            builder.put(Attributes.ARMOR, new AttributeModifier(uuid, "Armor modifier", (double)2, AttributeModifier.Operation.ADDITION));
+
+            return builder.build();
+        }else
+            return super.getAttributeModifiers(slot,stack);
+    }
 
     @Nullable
     @Override
