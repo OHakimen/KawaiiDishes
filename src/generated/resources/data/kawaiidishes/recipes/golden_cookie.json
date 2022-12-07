@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#x#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:gold_nugget"
+    },
+    "x": {
+      "tag": "kawaiidishes:cookies"
+    }
+  },
+  "result": {
+    "item": "kawaiidishes:golden_cookie"
+  }
+}
