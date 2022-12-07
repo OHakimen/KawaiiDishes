@@ -2,6 +2,8 @@ package com.hakimen.kawaiidishes.registry;
 
 import com.hakimen.kawaiidishes.items.*;
 import com.hakimen.kawaiidishes.items.armor.*;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
@@ -43,6 +45,7 @@ public class ItemRegister {
 
     public static final RegistryObject<Item> mug = ITEMS.register("mug", () -> new BlockItem(BlockRegister.mug.get(), new Item.Properties().tab(blocks)));
     public static final RegistryObject<Item> glassCup = ITEMS.register("glass_cup", () -> new BlockItem(BlockRegister.glassCup.get(), new Item.Properties().tab(blocks)));
+    public static final RegistryObject<Item> milkshakeCup = ITEMS.register("milkshake_cup", () -> new BlockItem(BlockRegister.milkshakeCup.get(), new Item.Properties().tab(blocks)));
 
 
     public static final RegistryObject<Item> coffeePress = ITEMS.register("coffee_press", () -> new BlockItem(BlockRegister.coffeePress.get(), new Item.Properties().tab(blocks)));
@@ -496,28 +499,43 @@ public class ItemRegister {
     public static final RegistryObject<Item> milkChocolateBar = ITEMS.register("milk_chocolate_bar", () -> new Item(new Item.Properties().tab(foods).food(new FoodProperties.Builder().nutrition(3).saturationMod(1.5f).build())));
 
 
-    public static final RegistryObject<Drink> expressoCoffee = ITEMS.register("expresso_coffee", () -> new Drink(BlockRegister.expressoMug.get(), 3, 1.2f));
-    public static final RegistryObject<Drink> americanCoffee = ITEMS.register("american_coffee", () -> new Drink(BlockRegister.americanMug.get(), 4, 1.2f));
-    public static final RegistryObject<Drink> latteCoffee = ITEMS.register("latte_coffee", () -> new Drink(BlockRegister.latteMug.get(), 5, 1.2f));
-    public static final RegistryObject<Drink> mochaCoffee = ITEMS.register("mocha_coffee", () -> new Drink(BlockRegister.mochaMug.get(), 6, 1.2f));
-    public static final RegistryObject<Drink> macchiatoCoffee = ITEMS.register("macchiato_coffee", () -> new Drink(BlockRegister.macchiatoMug.get(), 3, 1.2f));
-    public static final RegistryObject<Drink> doppioCoffee = ITEMS.register("doppio_coffee", () -> new Drink(BlockRegister.doppioMug.get(), 5, 1.2f));
-    public static final RegistryObject<Drink> cappuccinoCoffee = ITEMS.register("cappuccino_coffee", () -> new Drink(BlockRegister.cappuccinoMug.get(), 6, 1.2f));
+    public static final RegistryObject<PlaceableFoodItem> expressoCoffee = ITEMS.register("expresso_coffee", () -> new PlaceableFoodItem(BlockRegister.expressoMug.get(), 3, 1.2f, ItemRegister.mug.get()));
+    public static final RegistryObject<PlaceableFoodItem> americanCoffee = ITEMS.register("american_coffee", () -> new PlaceableFoodItem(BlockRegister.americanMug.get(), 4, 1.2f, ItemRegister.mug.get()));
+    public static final RegistryObject<PlaceableFoodItem> latteCoffee = ITEMS.register("latte_coffee", () -> new PlaceableFoodItem(BlockRegister.latteMug.get(), 5, 1.2f, ItemRegister.mug.get()));
+    public static final RegistryObject<PlaceableFoodItem> mochaCoffee = ITEMS.register("mocha_coffee", () -> new PlaceableFoodItem(BlockRegister.mochaMug.get(), 6, 1.2f, ItemRegister.mug.get()));
+    public static final RegistryObject<PlaceableFoodItem> macchiatoCoffee = ITEMS.register("macchiato_coffee", () -> new PlaceableFoodItem(BlockRegister.macchiatoMug.get(), 3, 1.2f, ItemRegister.mug.get()));
+    public static final RegistryObject<PlaceableFoodItem> doppioCoffee = ITEMS.register("doppio_coffee", () -> new PlaceableFoodItem(BlockRegister.doppioMug.get(), 5, 1.2f, ItemRegister.mug.get()));
+    public static final RegistryObject<PlaceableFoodItem> cappuccinoCoffee = ITEMS.register("cappuccino_coffee", () -> new PlaceableFoodItem(BlockRegister.cappuccinoMug.get(), 6, 1.2f, ItemRegister.mug.get()));
 
-    public static final RegistryObject<IceCream> sweetBerryIceCream = ITEMS.register("sweet_berry_ice_cream", () -> new IceCream(BlockRegister.sweetBerryIceCream.get(), 6, 1.2f));
-    public static final RegistryObject<IceCream> napolitanoIceCream = ITEMS.register("napolitano_ice_cream", () -> new IceCream(BlockRegister.napolitanoIceCream.get(), 6, 1.2f));
-    public static final RegistryObject<IceCream> creamIceCream = ITEMS.register("cream_ice_cream", () -> new IceCream(BlockRegister.creamIceCream.get(), 6, 1.2f));
-    public static final RegistryObject<IceCream> chocolateIceCream = ITEMS.register("chocolate_ice_cream", () -> new IceCream(BlockRegister.chocolateIceCream.get(), 6, 1.2f));
-    public static final RegistryObject<IceCream> coffeeIceCream = ITEMS.register("coffee_ice_cream", () -> new IceCream(BlockRegister.coffeeIceCream.get(), 6, 1.2f));
-    public static final RegistryObject<IceCream> mochaIceCream = ITEMS.register("mocha_ice_cream", () -> new IceCream(BlockRegister.mochaIceCream.get(), 6, 1.2f));
-    public static final RegistryObject<IceCream> glowBerryIceCream = ITEMS.register("glow_berry_ice_cream", () -> new IceCream(BlockRegister.glowBerryIceCream.get(), 6, 1.2f));
+    public static final RegistryObject<PlaceableFoodItem> sweetBerryIceCream = ITEMS.register("sweet_berry_ice_cream", () -> new PlaceableFoodItem(BlockRegister.sweetBerryIceCream.get(), 6, 1.2f, ItemRegister.glassCup.get()));
+    public static final RegistryObject<PlaceableFoodItem> napolitanoIceCream = ITEMS.register("napolitano_ice_cream", () -> new PlaceableFoodItem(BlockRegister.napolitanoIceCream.get(), 6, 1.2f, ItemRegister.glassCup.get()));
+    public static final RegistryObject<PlaceableFoodItem> creamIceCream = ITEMS.register("cream_ice_cream", () -> new PlaceableFoodItem(BlockRegister.creamIceCream.get(), 6, 1.2f, ItemRegister.glassCup.get()));
+    public static final RegistryObject<PlaceableFoodItem> chocolateIceCream = ITEMS.register("chocolate_ice_cream", () -> new PlaceableFoodItem(BlockRegister.chocolateIceCream.get(), 6, 1.2f, ItemRegister.glassCup.get()));
+    public static final RegistryObject<PlaceableFoodItem> coffeeIceCream = ITEMS.register("coffee_ice_cream", () -> new PlaceableFoodItem(BlockRegister.coffeeIceCream.get(), 6, 1.2f, ItemRegister.glassCup.get()));
+    public static final RegistryObject<PlaceableFoodItem> mochaIceCream = ITEMS.register("mocha_ice_cream", () -> new PlaceableFoodItem(BlockRegister.mochaIceCream.get(), 6, 1.2f, ItemRegister.glassCup.get()));
+    public static final RegistryObject<PlaceableFoodItem> glowBerryIceCream = ITEMS.register("glow_berry_ice_cream", () -> new PlaceableFoodItem(BlockRegister.glowBerryIceCream.get(), 6, 1.2f, ItemRegister.glassCup.get()));
+
+    public static final RegistryObject<PlaceableFoodItem> sweetBerryMilkshake = ITEMS.register("sweet_berry_milkshake",() -> new PlaceableFoodItem(BlockRegister.sweetBerryMilkshake.get(), 6, 1.2f, ItemRegister.milkshakeCup.get()));
+    public static final RegistryObject<PlaceableFoodItem> chocolateMilkshake = ITEMS.register("chocolate_milkshake",() -> new PlaceableFoodItem(BlockRegister.chocolateMilkshake.get(), 6, 1.2f, ItemRegister.milkshakeCup.get()));
+    public static final RegistryObject<PlaceableFoodItem> creamMilkshake = ITEMS.register("cream_milkshake",() -> new PlaceableFoodItem(BlockRegister.creamMilkshake.get(), 6, 1.2f, ItemRegister.milkshakeCup.get()));
+    public static final RegistryObject<PlaceableFoodItem> napolitanoMilkshake = ITEMS.register("napolitano_milkshake",() -> new PlaceableFoodItem(BlockRegister.napolitanoMilkshake.get(), 6, 1.2f, ItemRegister.milkshakeCup.get()));
+    public static final RegistryObject<PlaceableFoodItem> coffeeMilkshake = ITEMS.register("coffee_milkshake",() -> new PlaceableFoodItem(BlockRegister.coffeeMilkshake.get(), 6, 1.2f, ItemRegister.milkshakeCup.get()));
+    public static final RegistryObject<PlaceableFoodItem> mochaMilkshake = ITEMS.register("mocha_milkshake",() -> new PlaceableFoodItem(BlockRegister.mochaMilkshake.get(), 6, 1.2f, ItemRegister.milkshakeCup.get()));
+    public static final RegistryObject<PlaceableFoodItem> glowBerryMilkshake = ITEMS.register("glow_berry_milkshake",() -> new PlaceableFoodItem(BlockRegister.glowBerryMilkshake.get(), 6, 1.2f, ItemRegister.milkshakeCup.get()));
 
     public static final RegistryObject<Item> condensedMilk = ITEMS.register("condensed_milk", () -> new Item(new Item.Properties().tab(foods)));
     public static final RegistryObject<Item> brigadeiroMix = ITEMS.register("brigadeiro_mix", () -> new Item(new Item.Properties().tab(foods)));
 
-
     public static final RegistryObject<Candy> beijinho = ITEMS.register("beijinho", () -> new Candy(BlockRegister.beijinho.get(), 3, 1.2f));
     public static final RegistryObject<Candy> brigadeiro = ITEMS.register("brigadeiro", () -> new Candy(BlockRegister.brigadeiro.get(), 3, 1.2f));
+
+    public static final RegistryObject<Item> sweetBerryCookie = ITEMS.register("sweet_berry_cookie", () -> new Item(new Item.Properties().tab(foods).food(new FoodProperties.Builder().saturationMod(1).nutrition(3).build())));
+    public static final RegistryObject<Item> honeyCookie = ITEMS.register("honey_cookie", () -> new Item(new Item.Properties().tab(foods).food(new FoodProperties.Builder().saturationMod(1).nutrition(3).build())));
+    public static final RegistryObject<Item> chocolateCookie = ITEMS.register("chocolate_cookie", () -> new Item(new Item.Properties().tab(foods).food(new FoodProperties.Builder().saturationMod(1).nutrition(3).build())));
+    public static final RegistryObject<Item> goldenCookie = ITEMS.register("golden_cookie", () -> new Item(new Item.Properties().tab(foods).food(new FoodProperties.Builder().saturationMod(1).nutrition(6).alwaysEat()
+            .effect(() -> new MobEffectInstance(MobEffects.ABSORPTION,20*60,1),1f)
+            .effect(() -> new MobEffectInstance(MobEffects.REGENERATION,20*20,1),1f).build())));
+    public static final RegistryObject<Item> unbindingCookie = ITEMS.register("cookie_of_unbinding", () -> new UnbindingCookie(new Item.Properties().tab(foods).food(new FoodProperties.Builder().saturationMod(1).nutrition(3).alwaysEat().build())));
 
     public static final RegistryObject<Item> blackStool = ITEMS.register("black_stool", () -> new BlockItem(BlockRegister.blackStool.get(), new Item.Properties().tab(decoration)));
     public static final RegistryObject<Item> blueStool = ITEMS.register("blue_stool", () -> new BlockItem(BlockRegister.blueStool.get(), new Item.Properties().tab(decoration)));

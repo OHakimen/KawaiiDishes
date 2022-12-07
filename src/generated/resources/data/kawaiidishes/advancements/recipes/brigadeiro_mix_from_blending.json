@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:brigadeiro_mix"
+    ]
+  },
+  "criteria": {
+    "has_cocoa_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:cocoa_powder"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:brigadeiro_mix"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cocoa_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

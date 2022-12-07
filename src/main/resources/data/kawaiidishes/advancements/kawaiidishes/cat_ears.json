@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "kawaiidishes:white_cat_ears"
+    },
+    "title": "Cat Ears !",
+    "description": "Why wouldn't you use these !"
+  },
+  "parent": "kawaiidishes:kawaiidishes/root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "equipment": {
+                "head": {
+                  "tag": "kawaiidishes:cat_ears"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

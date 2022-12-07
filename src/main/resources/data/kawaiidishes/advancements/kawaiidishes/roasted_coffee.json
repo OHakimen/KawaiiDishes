@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "kawaiidishes:roasted_coffee_beans"
+    },
+    "title": "Coffee Processing",
+    "description": "Process the coffee fruit into roasted coffee beans",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "kawaiidishes:kawaiidishes/coffee_fruit_got",
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:roasted_coffee_beans"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -63,7 +63,7 @@ public class BlendingRecipeCategory implements IRecipeCategory<BlenderRecipe> {
             builder.addSlot(RecipeIngredientRole.INPUT,45,27+(i*18)).addItemStack(recipe.getIngredients().get(0).getItems()[i]);
 
         }
-
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 122, 36).addItemStack(recipe.getResultItem());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 122, 36).addItemStack(recipe.getOnOutput());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 122, 61).addItemStack(recipe.getResultItem());
     }
 }

@@ -1,12 +1,8 @@
 package com.hakimen.kawaiidishes.blocks.block_entities;
 
 import com.hakimen.kawaiidishes.containers.BlenderContainer;
-import com.hakimen.kawaiidishes.containers.CoffeeMachineContainer;
-import com.hakimen.kawaiidishes.items.Drink;
 import com.hakimen.kawaiidishes.recipes.BlenderRecipe;
-import com.hakimen.kawaiidishes.recipes.CoffeeMachineRecipe;
 import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
-import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -22,7 +18,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -148,7 +143,11 @@ public class BlenderBlockEntity extends BlockEntity implements MenuProvider,Bloc
                                 pBlockEntity.inventory.setStackInSlot(i, stack.getDefaultInstance());
                             }
                         }
-                        pBlockEntity.inventory.insertItem(2,recipe.getResultItem(),false);
+                        if(recipe.getOnOutput().equals(ItemStack.EMPTY)){
+                            pBlockEntity.inventory.insertItem(2,recipe.getResultItem(),false);
+                        }else{
+                            pBlockEntity.inventory.setStackInSlot(2,recipe.getResultItem());
+                        }
                         setChanged();
                     }
                 }
@@ -188,7 +187,8 @@ public class BlenderBlockEntity extends BlockEntity implements MenuProvider,Bloc
 
             @Override
             public int getSlotLimit(int slot) {
-                return 64;
+
+                return slot == 2 ? 64 : 1;
             }
 
             @Nonnull

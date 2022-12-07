@@ -5,8 +5,11 @@ import com.hakimen.kawaiidishes.client.screens.CoffeeMachineScreen;
 import com.hakimen.kawaiidishes.client.screens.IceCreamScreen;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
 import com.hakimen.kawaiidishes.registry.ContainerRegister;
+import com.hakimen.kawaiidishes.registry.ItemRegister;
 import com.hakimen.kawaiidishes.registry.Registration;
+import com.mojang.authlib.GameProfile;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -86,14 +89,16 @@ public class KawaiiDishes {
             MenuScreens.register(ContainerRegister.coffeeMachine.get(), CoffeeMachineScreen::new);
             MenuScreens.register(ContainerRegister.iceCreamMachine.get(), IceCreamScreen::new);
             MenuScreens.register(ContainerRegister.blenderContainer.get(), BlenderScreen::new);
-
         });
+
 
         for(var block: BlockRegister.BLOCKS.getEntries().stream().toList()){
             if(block.get().getRegistryName().getPath().contains("_stool")){
                 ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.cutout());
             }else if(block.get().getRegistryName().getPath().contains("_ice_cream")){
                 ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.cutout());
+            }else if(block.get().getRegistryName().getPath().contains("_milkshake")){
+                ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.translucent());
             }
         }
 
@@ -104,6 +109,7 @@ public class KawaiiDishes {
         ItemBlockRenderTypes.setRenderLayer(BlockRegister.coffeePlant.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(BlockRegister.coffeePress.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(BlockRegister.blender.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(BlockRegister.milkshakeCup.get(), RenderType.translucent());
 
     }
 }

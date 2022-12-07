@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "kawaiidishes:coffee_press"
+    },
+    "title": "Ye Olden Ways",
+    "description": "Get a coffee press",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "kawaiidishes:kawaiidishes/root",
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:coffee_press"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

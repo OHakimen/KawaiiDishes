@@ -1,40 +1,29 @@
 package com.hakimen.kawaiidishes.datagen;
 
-import com.hakimen.kawaiidishes.containers.BlenderContainer;
+import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.datagen.recipebuilder.BlenderRecipeBuilder;
 import com.hakimen.kawaiidishes.datagen.recipebuilder.CoffeeMachineRecipeBuilder;
 import com.hakimen.kawaiidishes.datagen.recipebuilder.CoffeePressRecipeBuilder;
 import com.hakimen.kawaiidishes.datagen.recipebuilder.IceCreamMachineRecipeBuilder;
-import com.hakimen.kawaiidishes.recipes.CoffeeMachineRecipe;
 import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
-import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.CriterionProgress;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.storage.loot.entries.TagEntry;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
-import net.minecraftforge.registries.RegistryObject;
-
 import java.util.function.Consumer;
-import java.util.stream.Stream;
 
 public class CraftingRecipeSupplier extends RecipeProvider implements IConditionBuilder {
     public CraftingRecipeSupplier(DataGenerator pGenerator) {
@@ -167,6 +156,11 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
                 .save(pFinishedRecipeConsumer);
 
 
+        cookie(pFinishedRecipeConsumer,ItemRegister.honeyCookie.get(),8,Items.HONEY_BOTTLE);
+        cookie(pFinishedRecipeConsumer,ItemRegister.sweetBerryCookie.get(),8,Items.SWEET_BERRIES);
+        cookie(pFinishedRecipeConsumer,ItemRegister.chocolateCookie.get(),8,ItemRegister.cocoaPowder.get());
+        cookieGolden(pFinishedRecipeConsumer,ItemRegister.goldenCookie.get(),1, new TagKey<Item>(Registry.ITEM_REGISTRY,new ResourceLocation(KawaiiDishes.modId,"cookies")));
+        cookieOfUnbinding(pFinishedRecipeConsumer);
 
         cosmetics(pFinishedRecipeConsumer);
         decor(pFinishedRecipeConsumer);
@@ -175,20 +169,140 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
         blendings(pFinishedRecipeConsumer);
     }
 
+    public void cookie(Consumer<FinishedRecipe> pFinishedRecipeConsumer,Item output, int count,Item middle){
+        ShapedRecipeBuilder.shaped(output,count)
+                .pattern("#x#")
+                .define('#',Items.WHEAT)
+                .define('x',middle)
+                .unlockedBy(getHasName(middle), has(middle))
+                .save(pFinishedRecipeConsumer);
+    }
+    public void cookieGolden(Consumer<FinishedRecipe> pFinishedRecipeConsumer,Item output, int count,TagKey<Item> middle){
+        ShapedRecipeBuilder.shaped(output,count)
+                .pattern(" # ")
+                .pattern("#x#")
+                .pattern(" # ")
+                .define('#',Items.GOLD_NUGGET)
+                .define('x',Ingredient.of(middle))
+                .unlockedBy(getHasName(Items.GOLD_NUGGET), has(Items.GOLD_NUGGET))
+                .save(pFinishedRecipeConsumer);
+    }
+    public void cookieOfUnbinding(Consumer<FinishedRecipe> pFinishedRecipeConsumer){
+        ShapedRecipeBuilder.shaped(ItemRegister.unbindingCookie.get())
+                .pattern(" a ")
+                .pattern("bxc")
+                .pattern(" d ")
+                .define('a',Items.GHAST_TEAR)
+                .define('b',Items.WITHER_SKELETON_SKULL)
+                .define('c',Items.FERMENTED_SPIDER_EYE)
+                .define('d',Items.EXPERIENCE_BOTTLE)
+                .define('x',Ingredient.of(new TagKey<Item>(Registry.ITEM_REGISTRY,new ResourceLocation(KawaiiDishes.modId,"cookies"))))
+                .unlockedBy(getHasName(Items.COOKIE), has(Items.COOKIE))
+                .save(pFinishedRecipeConsumer);
+    }
     public void blendings(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
         blending(pFinishedRecipeConsumer,
                 ItemRegister.roastedCoffeeBeans.get(),
                 ItemRegister.coffeePowder.get().getDefaultInstance(),
-                100);
+                100,1);
         blending(pFinishedRecipeConsumer,
                 ItemRegister.roastedCocoaBeans.get(),
                 ItemRegister.cocoaPowder.get().getDefaultInstance(),
-                100);
+                100,1);
+        blending(pFinishedRecipeConsumer,
+                ItemRegister.cocoaPowder.get(),
+                ItemRegister.condensedMilk.get(),
+                ItemRegister.brigadeiroMix.get().getDefaultInstance(),
+                100,4);
+        blending(pFinishedRecipeConsumer,
+                Items.MILK_BUCKET,
+                Items.SUGAR,
+                ItemRegister.condensedMilk.get().getDefaultInstance(),
+                100,4);
+
+        blending(pFinishedRecipeConsumer,
+                Items.MILK_BUCKET,
+                ItemRegister.sweetBerryIceCream.get(),
+                ItemRegister.sweetBerryMilkshake.get().getDefaultInstance(),
+                ItemRegister.milkshakeCup.get().getDefaultInstance(),
+                new MobEffectInstance(MobEffects.FIRE_RESISTANCE,30*20),
+                null,
+                100,
+                1);
+        blending(pFinishedRecipeConsumer,
+                Items.MILK_BUCKET,
+                ItemRegister.glowBerryIceCream.get(),
+                ItemRegister.glowBerryMilkshake.get().getDefaultInstance(),
+                ItemRegister.milkshakeCup.get().getDefaultInstance(),
+                new MobEffectInstance(MobEffects.FIRE_RESISTANCE,30*20),
+                new MobEffectInstance(MobEffects.NIGHT_VISION,60*20),
+                100,
+                1);
+        blending(pFinishedRecipeConsumer,
+                Items.MILK_BUCKET,
+                ItemRegister.napolitanoIceCream.get(),
+                ItemRegister.napolitanoMilkshake.get().getDefaultInstance(),
+                ItemRegister.milkshakeCup.get().getDefaultInstance(),
+                new MobEffectInstance(MobEffects.FIRE_RESISTANCE,30*20),
+                null,
+                100,
+                1);
+        blending(pFinishedRecipeConsumer,
+                Items.MILK_BUCKET,
+                ItemRegister.chocolateIceCream.get(),
+                ItemRegister.chocolateMilkshake.get().getDefaultInstance(),
+                ItemRegister.milkshakeCup.get().getDefaultInstance(),
+                new MobEffectInstance(MobEffects.FIRE_RESISTANCE,30*20),
+                null,
+                100,
+                1);
+        blending(pFinishedRecipeConsumer,
+                Items.MILK_BUCKET,
+                ItemRegister.coffeeIceCream.get(),
+                ItemRegister.coffeeMilkshake.get().getDefaultInstance(),
+                ItemRegister.milkshakeCup.get().getDefaultInstance(),
+                new MobEffectInstance(MobEffects.FIRE_RESISTANCE,30*20),
+                null,
+                100,
+                1);
+        blending(pFinishedRecipeConsumer,
+                Items.MILK_BUCKET,
+                ItemRegister.mochaIceCream.get(),
+                ItemRegister.mochaMilkshake.get().getDefaultInstance(),
+                ItemRegister.milkshakeCup.get().getDefaultInstance(),
+                new MobEffectInstance(MobEffects.FIRE_RESISTANCE,30*20),
+                null,
+                100,
+                1);
+        blending(pFinishedRecipeConsumer,
+                Items.MILK_BUCKET,
+                ItemRegister.creamIceCream.get(),
+                ItemRegister.creamMilkshake.get().getDefaultInstance(),
+                ItemRegister.milkshakeCup.get().getDefaultInstance(),
+                new MobEffectInstance(MobEffects.FIRE_RESISTANCE,30*20),
+                null,
+                100,
+                1);
     }
 
-    public void blending(Consumer<FinishedRecipe> consumer,Item ingredient, ItemStack result,int tick) {
+    public void blending(Consumer<FinishedRecipe> consumer,Item ingredient, ItemStack result,int tick,int count) {
         BlenderRecipeBuilder builder = new BlenderRecipeBuilder(
-            ingredient,result,tick
+            ingredient,result,ItemStack.EMPTY,tick,count
+        );
+        builder.unlockedBy(getHasName(ingredient), has(ingredient));
+        builder.save(consumer);
+    }
+    public void blending(Consumer<FinishedRecipe> consumer,Item ingredient,Item ingredient2, ItemStack result,int tick,int count) {
+        BlenderRecipeBuilder builder = new BlenderRecipeBuilder(
+                ingredient,ingredient2,result,ItemStack.EMPTY,tick,count
+        );
+        builder.unlockedBy(getHasName(ingredient), has(ingredient));
+        builder.save(consumer);
+    }
+    public void blending(Consumer<FinishedRecipe> consumer,Item ingredient,Item ingredient2,ItemStack result,ItemStack onOut,
+                         MobEffectInstance mainEffect,MobEffectInstance secondaryEffect,int tick,int count) {
+        BlenderRecipeBuilder builder = new BlenderRecipeBuilder(
+                ingredient,ingredient2,result,onOut,tick,mainEffect,secondaryEffect,count
         );
         builder.unlockedBy(getHasName(ingredient), has(ingredient));
         builder.save(consumer);

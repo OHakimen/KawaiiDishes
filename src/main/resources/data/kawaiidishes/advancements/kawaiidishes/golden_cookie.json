@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "kawaiidishes:golden_cookie"
+    },
+    "title": "Click the cookie!",
+    "description": "Get a golden cookie",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "kawaiidishes:kawaiidishes/root",
+  "criteria": {
+    "got_golden_cookie": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {}
+          }
+        ],
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:golden_cookie"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

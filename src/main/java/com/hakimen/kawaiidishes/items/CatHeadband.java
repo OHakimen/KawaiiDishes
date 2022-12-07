@@ -1,6 +1,6 @@
 package com.hakimen.kawaiidishes.items;
 
-import com.hakimen.kawaiidishes.items.armor.MaidDressArmorItem;
+
 import com.hakimen.kawaiidishes.registry.EffectRegister;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;

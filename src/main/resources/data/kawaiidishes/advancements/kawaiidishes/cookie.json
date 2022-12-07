@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:cookie"
+    },
+    "title": "Take a cookie",
+    "description": "Obtain a cookie",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "kawaiidishes:kawaiidishes/root",
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "kawaiidishes:cookies"
+          }
+        ]
+      }
+    }
+  }
+}

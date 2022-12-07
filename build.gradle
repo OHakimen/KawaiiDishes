@@ -70,7 +70,6 @@ minecraft {
 
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             property 'forge.enabledGameTestNamespaces', 'KawaiiDishes'
-
             mods {
                 kawaiidishes {
                     source sourceSets.main
@@ -86,8 +85,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             property 'forge.enabledGameTestNamespaces', 'KawaiiDishes'
-
-            mods {
+             mods {
                 kawaiidishes {
                     source sourceSets.main
                 }
@@ -166,9 +164,11 @@ repositories {
         url "https://cursemaven.com"
     }
 
+    //Curios
     maven {
         url = "https://maven.theillusivec4.top/"
     }
+
 }
 
 dependencies {
@@ -189,10 +189,11 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
+    //GeckoLib
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.18:3.0.41')
 
+    //Jei
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
-    // at runtime, use the full JEI jar
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'

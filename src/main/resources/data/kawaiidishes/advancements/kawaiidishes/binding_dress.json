@@ -1,0 +1,39 @@
+{
+  "display": {
+    "icon": {
+      "item": "kawaiidishes:black_maid_dress"
+    },
+    "title": "Maid'd",
+    "description": "Equip a maid dress with curse of binding",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "kawaiidishes:kawaiidishes/root",
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "equipment": {
+                "chest": {
+                  "tag": "kawaiidishes:maid_dresses",
+                  "enchantments": [
+                    {
+                      "enchantment": "minecraft:binding_curse"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

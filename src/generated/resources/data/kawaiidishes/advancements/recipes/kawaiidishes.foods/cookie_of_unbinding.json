@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:cookie_of_unbinding"
+    ]
+  },
+  "criteria": {
+    "has_cookie": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:cookie"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "kawaiidishes:cookie_of_unbinding"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cookie",
+      "has_the_recipe"
+    ]
+  ]
+}

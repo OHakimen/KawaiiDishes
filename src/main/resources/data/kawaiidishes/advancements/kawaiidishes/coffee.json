@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "kawaiidishes:cappuccino_coffee"
+    },
+    "title": "Nice and Warm",
+    "description": "Coffee !",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "kawaiidishes:kawaiidishes/roasted_coffee",
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "kawaiidishes:coffee"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "kawaiidishes:coffee_fruit"
+    },
+    "title": "Awesome fruits",
+    "description": "Adquire some coffee fruits"
+  },
+  "parent": "kawaiidishes:kawaiidishes/root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:coffee_fruit"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

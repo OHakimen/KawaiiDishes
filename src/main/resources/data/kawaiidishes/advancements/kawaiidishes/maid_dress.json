@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "kawaiidishes:black_maid_dress"
+    },
+    "title": "Cosplaying !",
+    "description": "Obtain a Maid Dress",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "kawaiidishes:kawaiidishes/root",
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "kawaiidishes:maid_dresses"
+          }
+        ]
+      }
+    }
+  }
+}

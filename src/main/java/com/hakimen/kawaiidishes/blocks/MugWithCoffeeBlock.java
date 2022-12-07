@@ -1,11 +1,9 @@
 package com.hakimen.kawaiidishes.blocks;
 
-import com.hakimen.kawaiidishes.blocks.block_entities.CoffeeMugBlockEntity;
-import com.hakimen.kawaiidishes.blocks.block_entities.IceCreamBlockEntity;
+import com.hakimen.kawaiidishes.blocks.block_entities.PlaceableFoodBlockEntity;
 import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,16 +13,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Random;
 
 public class MugWithCoffeeBlock extends MugBlock implements EntityBlock {
     public MugWithCoffeeBlock(){
@@ -37,7 +31,7 @@ public class MugWithCoffeeBlock extends MugBlock implements EntityBlock {
         if(pPlayer.isCrouching()){
             var stack = this.asItem().getDefaultInstance();
             stack.getOrCreateTag();
-            if(pLevel.getBlockEntity(pPos) instanceof IceCreamBlockEntity entity){
+            if(pLevel.getBlockEntity(pPos) instanceof PlaceableFoodBlockEntity entity){
                 if(!entity.mainEffect.equals(new CompoundTag())){
                     stack.getOrCreateTag().put("mainEffect",entity.mainEffect);
                 }
@@ -55,20 +49,13 @@ public class MugWithCoffeeBlock extends MugBlock implements EntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new CoffeeMugBlockEntity(pPos,pState);
+        return new PlaceableFoodBlockEntity(pPos,pState);
     }
 
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide ? (pLevel1, pPos, pState1,pBlockEntity) -> {
-            ((CoffeeMugBlockEntity)pBlockEntity).tick(pLevel1,pPos,pState1,(CoffeeMugBlockEntity)pBlockEntity);
-        }: null;
-    }
 
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
-        pLevel.getBlockEntity(pPos, BlockEntityRegister.coffeeMug.get()).ifPresent((a) -> {
+        pLevel.getBlockEntity(pPos, BlockEntityRegister.placeableFood.get()).ifPresent((a) -> {
             a.load(pStack.getOrCreateTag());
         });
         super.setPlacedBy(pLevel, pPos, pState, pPlacer, pStack);
@@ -78,7 +65,7 @@ public class MugWithCoffeeBlock extends MugBlock implements EntityBlock {
     public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
         var stack = this.asItem().getDefaultInstance();
         stack.getOrCreateTag();
-        if(level.getBlockEntity(pos) instanceof CoffeeMugBlockEntity entity){
+        if(level.getBlockEntity(pos) instanceof PlaceableFoodBlockEntity entity){
             if(!entity.mainEffect.equals(new CompoundTag())){
                 stack.getOrCreateTag().put("mainEffect",entity.mainEffect);
             }

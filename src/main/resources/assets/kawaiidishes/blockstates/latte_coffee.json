@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "kawaiidishes:block/latte_coffee"
+      "model": "kawaiidishes:block/coffees/latte_coffee"
     }
   }
 }

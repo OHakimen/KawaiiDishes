@@ -1,7 +1,6 @@
 package com.hakimen.kawaiidishes.blocks;
 
-import com.hakimen.kawaiidishes.blocks.block_entities.CoffeeMugBlockEntity;
-import com.hakimen.kawaiidishes.blocks.block_entities.IceCreamBlockEntity;
+import com.hakimen.kawaiidishes.blocks.block_entities.PlaceableFoodBlockEntity;
 import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -50,7 +49,7 @@ public class IceCreamBlock extends Block implements EntityBlock {
         if(pPlayer.isCrouching()){
             var stack = this.asItem().getDefaultInstance();
             stack.getOrCreateTag();
-            if(pLevel.getBlockEntity(pPos) instanceof IceCreamBlockEntity entity){
+            if(pLevel.getBlockEntity(pPos) instanceof PlaceableFoodBlockEntity entity){
                 if(!entity.mainEffect.equals(new CompoundTag())){
                     stack.getOrCreateTag().put("mainEffect",entity.mainEffect);
                 }
@@ -66,7 +65,7 @@ public class IceCreamBlock extends Block implements EntityBlock {
     }
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
-        pLevel.getBlockEntity(pPos, BlockEntityRegister.iceCream.get()).ifPresent((a) -> {
+        pLevel.getBlockEntity(pPos, BlockEntityRegister.placeableFood.get()).ifPresent((a) -> {
             a.load(pStack.getOrCreateTag());
         });
         super.setPlacedBy(pLevel, pPos, pState, pPlacer, pStack);
@@ -76,7 +75,7 @@ public class IceCreamBlock extends Block implements EntityBlock {
     public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
         var stack = this.asItem().getDefaultInstance();
         stack.getOrCreateTag();
-        if(level.getBlockEntity(pos) instanceof IceCreamBlockEntity entity){
+        if(level.getBlockEntity(pos) instanceof PlaceableFoodBlockEntity entity){
             if(!entity.mainEffect.equals(new CompoundTag())){
                 stack.getOrCreateTag().put("mainEffect",entity.mainEffect);
             }
@@ -91,6 +90,6 @@ public class IceCreamBlock extends Block implements EntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new IceCreamBlockEntity(pPos,pState);
+        return new PlaceableFoodBlockEntity(pPos,pState);
     }
 }

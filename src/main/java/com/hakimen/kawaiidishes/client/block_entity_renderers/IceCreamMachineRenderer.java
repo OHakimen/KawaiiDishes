@@ -1,11 +1,7 @@
 package com.hakimen.kawaiidishes.client.block_entity_renderers;
 
-import com.hakimen.kawaiidishes.blocks.CoffeeMachineBlock;
-import com.hakimen.kawaiidishes.blocks.IceCreamMachineBlock;
-import com.hakimen.kawaiidishes.blocks.block_entities.CoffeeMachineBlockEntity;
-import com.hakimen.kawaiidishes.blocks.block_entities.IceCreamBlockEntity;
+
 import com.hakimen.kawaiidishes.blocks.block_entities.IceCreamMachineBlockEntity;
-import com.hakimen.kawaiidishes.registry.BlockRegister;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Quaternion;
 import net.minecraft.client.Minecraft;
@@ -14,10 +10,6 @@ import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.core.Direction;
-import net.minecraft.world.item.ItemStack;
-
-import java.util.Objects;
 
 public class IceCreamMachineRenderer implements BlockEntityRenderer<IceCreamMachineBlockEntity> {
     BlockEntityRendererProvider.Context context;

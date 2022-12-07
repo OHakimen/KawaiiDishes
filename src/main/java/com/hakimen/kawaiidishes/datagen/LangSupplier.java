@@ -38,29 +38,30 @@ public class LangSupplier extends LanguageProvider {
         for (var items:ItemRegister.ITEMS.getEntries().stream().toList()) {
             String itemPath = items.get().getRegistryName().getPath();
             for (int i = 0; i < dressNames.keySet().size(); i++) {
-                if(itemPath.equals(dressNames.keySet().stream().toArray()[i].toString()+"_cat_tail_black")){
+                String name = dressNames.keySet().stream().toArray()[i].toString();
+                if(itemPath.equals(name +"_cat_tail_black")){
                     add(items.get(),dressNames.get(itemPath.replace("_cat_tail_black",""))+" Black Cat Tail");
                 }
-                if(itemPath.equals(dressNames.keySet().stream().toArray()[i].toString()+"_cat_tail_caramel")){
+                if(itemPath.equals(name +"_cat_tail_caramel")){
                     add(items.get(),dressNames.get(itemPath.replace("_cat_tail_caramel",""))+" Caramel Cat Tail");
                 }
-                if(itemPath.equals(dressNames.keySet().stream().toArray()[i].toString()+"_cat_tail_white")){
+                if(itemPath.equals(name +"_cat_tail_white")){
                     add(items.get(),dressNames.get(itemPath.replace("_cat_tail_white",""))+" White Cat Tail");
                 }
-                if(itemPath.equals(dressNames.keySet().stream().toArray()[i].toString()+"_fox_tail_black")){
+                if(itemPath.equals(name +"_fox_tail_black")){
                     add(items.get(),dressNames.get(itemPath.replace("_fox_tail_black",""))+" Black Fox Tailed");
                 }
-                if(itemPath.equals(dressNames.keySet().stream().toArray()[i].toString()+"_fox_tail_red")){
+                if(itemPath.equals(name +"_fox_tail_red")){
                     add(items.get(),dressNames.get(itemPath.replace("_fox_tail_red",""))+" Red Fox Tailed");
                 }
-                if(itemPath.equals(dressNames.keySet().stream().toArray()[i].toString()+"_fox_tail_white")){
+                if(itemPath.equals(name +"_fox_tail_white")){
                     add(items.get(),dressNames.get(itemPath.replace("_fox_tail_white",""))+" White Fox Tailed");
                 }
-                if(itemPath.equals(dressNames.keySet().stream().toArray()[i].toString())){
+                if(itemPath.equals(name)){
                     add(items.get(),dressNames.get(itemPath));
                 }
             }
-            if(itemPath.endsWith("_ice_cream") || itemPath.endsWith("_coffee") || itemPath.endsWith("_stool")){
+            if(itemPath.endsWith("_ice_cream") || itemPath.endsWith("_coffee") || itemPath.endsWith("_milkshake") || itemPath.endsWith("_stool")){
                 add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
             }
             if(itemPath.contains("_headband")){
@@ -80,6 +81,12 @@ public class LangSupplier extends LanguageProvider {
         add(ItemRegister.condensedMilk.get(),"Condensed Milk");
         add(ItemRegister.brigadeiroMix.get(),"Brigadeiro Mix");
         add(ItemRegister.brigadeiro.get(),"Brigadeiro");
+
+        add(ItemRegister.honeyCookie.get(),"Honey Cookie");
+        add(ItemRegister.chocolateCookie.get(),"Chocolate Cookie");
+        add(ItemRegister.goldenCookie.get(),"Golden Cookie");
+        add(ItemRegister.sweetBerryCookie.get(),"Sweet Berry Cookie");
+        add(ItemRegister.unbindingCookie.get(),"Cookie of Unbinding");
 
         add(ItemRegister.blender.get(),"Blender");
 

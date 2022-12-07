@@ -1,0 +1,19 @@
+{
+  "type": "kawaiidishes:blending",
+  "ticks": 100,
+  "ingredients": [
+    [
+      {
+        "item": "kawaiidishes:cocoa_powder"
+      },
+      {
+        "item": "kawaiidishes:condensed_milk"
+      }
+    ]
+  ],
+  "output": {
+    "item": "kawaiidishes:brigadeiro_mix",
+    "nbt": "{}",
+    "count": 4
+  }
+}

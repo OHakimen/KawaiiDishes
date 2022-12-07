@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#x#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:wheat"
+    },
+    "x": {
+      "item": "minecraft:honey_bottle"
+    }
+  },
+  "result": {
+    "item": "kawaiidishes:honey_cookie",
+    "count": 8
+  }
+}

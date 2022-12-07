@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "kawaiidishes:coffee_machine"
+    },
+    "title": "An expresso please !!",
+    "description": "Get a Coffee Machine",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "kawaiidishes:kawaiidishes/coffee_press",
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:coffee_machine"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

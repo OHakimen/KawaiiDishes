@@ -19,41 +19,55 @@ public class ItemModelSupplier extends ItemModelProvider {
     @Override
     protected void registerModels() {
         for (var block:BlockRegister.BLOCKS.getEntries().stream().toList()) {
-            if(block.get().getRegistryName().toString().contains("_stool")){
+            String path = block.get().getRegistryName().toString();
+            if(path.contains("_stool")){
                 stool(block.get());
-            }else if(block.get().getRegistryName().toString().contains("coffee_bush") || block.get().getRegistryName().toString().contains("mortar_and_pestle")){
+            }else if(path.endsWith("milkshake")){
+                milkshake(block.get());
+            }else if(path.endsWith("coffee")){
+                coffee(block.get());
+            }else if(path.endsWith("ice_cream")){
+                iceCream(block.get());
+            } else if(path.contains("coffee_bush") || path.contains("mortar_and_pestle")){
                 continue;
             }else
                 block(block.get());
         }
         for(var item : ItemRegister.ITEMS.getEntries().stream().toList()){
-            if(item.get().getRegistryName().toString().contains("_headband")){
-                if(item.get().getRegistryName().toString().endsWith("_cat_ears_black")){
+            String path = item.get().getRegistryName().toString();
+            if(path.contains("_headband")){
+                if(path.endsWith("_cat_ears_black")){
                     catBandItem(item.get(),"cat_ears_black");
                 }
-                else if(item.get().getRegistryName().toString().endsWith("_cat_ears_white")){
+                else if(path.endsWith("_cat_ears_white")){
                     catBandItem(item.get(),"cat_ears_white");
                 }
-                else if(item.get().getRegistryName().toString().endsWith("_cat_ears_caramel")) {
+                else if(path.endsWith("_cat_ears_caramel")) {
                     catBandItem(item.get(),"cat_ears_caramel");
                 }
-                else if(item.get().getRegistryName().toString().endsWith("_fox_ears_black")){
+                else if(path.endsWith("_fox_ears_black")){
                     foxBandItem(item.get(),"cat_ears_black","fox_ears_black");
                 }
-                else if(item.get().getRegistryName().toString().endsWith("_fox_ears_white")){
+                else if(path.endsWith("_fox_ears_white")){
                     foxBandItem(item.get(),"cat_ears_white","fox_ears_white");
                 }
-                else if(item.get().getRegistryName().toString().endsWith("_fox_ears_red")) {
+                else if(path.endsWith("_fox_ears_red")) {
                     foxBandItem(item.get(),"fox_ears_red","fox_ears_red");
                 }
                 else{
                     headBandItem(item.get());
                 }
-            }else if(item.get().getRegistryName().toString().contains("_maid_dress")){
+            }else if(path.contains("_maid_dress")){
                 maidDressItem(item.get());
             }
         }
 
+
+        cookieItem(ItemRegister.sweetBerryCookie.get());
+        cookieItem(ItemRegister.chocolateCookie.get());
+        cookieItem(ItemRegister.honeyCookie.get());
+        cookieItem(ItemRegister.goldenCookie.get());
+        cookieItem(ItemRegister.unbindingCookie.get());
 
         simpleItem(ItemRegister.whiteChocolateBar.get());
         simpleItem(ItemRegister.darkChocolateBar.get());
@@ -89,6 +103,12 @@ public class ItemModelSupplier extends ItemModelProvider {
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(KawaiiDishes.modId,"item/maid_dresses/" + item.getRegistryName().getPath()));
     }
+
+    private ItemModelBuilder cookieItem(Item item) {
+        return withExistingParent(item.getRegistryName().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(KawaiiDishes.modId,"item/cookie/" + item.getRegistryName().getPath()));
+    }
     private ItemModelBuilder catBandItem(Item item,String type) {
         return withExistingParent(
                 item.getRegistryName().getPath(),
@@ -115,6 +135,17 @@ public class ItemModelSupplier extends ItemModelProvider {
     private ItemModelBuilder block(Block block){
         return withExistingParent(block.getRegistryName().getPath(),new ResourceLocation(KawaiiDishes.modId,"block/"+block.getRegistryName().getPath()));
     }
+
+    private ItemModelBuilder milkshake(Block block){
+        return withExistingParent(block.getRegistryName().getPath(),new ResourceLocation(KawaiiDishes.modId,"block/milk_shakes/"+block.getRegistryName().getPath()));
+    }
+    private ItemModelBuilder coffee(Block block){
+        return withExistingParent(block.getRegistryName().getPath(),new ResourceLocation(KawaiiDishes.modId,"block/coffees/"+block.getRegistryName().getPath()));
+    }
+    private ItemModelBuilder iceCream(Block block){
+        return withExistingParent(block.getRegistryName().getPath(),new ResourceLocation(KawaiiDishes.modId,"block/ice_creams/"+block.getRegistryName().getPath()));
+    }
+
     private ItemModelBuilder stool(Block block){
         return withExistingParent(block.getRegistryName().getPath(),new ResourceLocation(KawaiiDishes.modId,"block/stools/"+block.getRegistryName().getPath()));
     }

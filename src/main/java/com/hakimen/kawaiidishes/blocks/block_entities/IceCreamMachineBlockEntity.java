@@ -1,17 +1,11 @@
 package com.hakimen.kawaiidishes.blocks.block_entities;
 
-import com.hakimen.kawaiidishes.containers.CoffeeMachineContainer;
 import com.hakimen.kawaiidishes.containers.IceCreamMachineContainer;
-import com.hakimen.kawaiidishes.items.Drink;
-import com.hakimen.kawaiidishes.recipes.CoffeeMachineRecipe;
-import com.hakimen.kawaiidishes.recipes.CoffeePressRecipe;
 import com.hakimen.kawaiidishes.recipes.IceCreamMachineRecipe;
 import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ItemParticleOption;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;

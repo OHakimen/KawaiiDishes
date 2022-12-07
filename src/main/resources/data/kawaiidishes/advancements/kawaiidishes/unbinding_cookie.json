@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "kawaiidishes:cookie_of_unbinding"
+    },
+    "title": "Free from the Curse",
+    "description": "Obtain an Unbinding Cookie",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "kawaiidishes:kawaiidishes/cookie",
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:cookie_of_unbinding"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

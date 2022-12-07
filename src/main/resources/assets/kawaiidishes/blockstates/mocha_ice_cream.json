@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "kawaiidishes:block/mocha_ice_cream"
+      "model": "kawaiidishes:block/ice_creams/mocha_ice_cream"
     }
   }
 }

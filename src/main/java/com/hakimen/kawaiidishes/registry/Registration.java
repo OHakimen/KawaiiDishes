@@ -1,6 +1,5 @@
 package com.hakimen.kawaiidishes.registry;
 
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 

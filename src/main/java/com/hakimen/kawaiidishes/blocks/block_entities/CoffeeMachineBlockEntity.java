@@ -1,7 +1,6 @@
 package com.hakimen.kawaiidishes.blocks.block_entities;
 
 import com.hakimen.kawaiidishes.containers.CoffeeMachineContainer;
-import com.hakimen.kawaiidishes.items.Drink;
 import com.hakimen.kawaiidishes.recipes.CoffeeMachineRecipe;
 import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
@@ -188,9 +187,6 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements MenuProvide
                     }
                     case 1 ->{
                         return stack.is(Items.MILK_BUCKET.asItem())||stack.is(Items.BUCKET.asItem());
-                    }
-                    case 5 ->{
-                        return stack.getItem() instanceof Drink || stack.is(ItemRegister.mug.get());
                     }
                 }
                 return true;

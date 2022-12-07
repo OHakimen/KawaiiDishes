@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " a ",
+    "bxc",
+    " d "
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:ghast_tear"
+    },
+    "b": {
+      "item": "minecraft:wither_skeleton_skull"
+    },
+    "c": {
+      "item": "minecraft:fermented_spider_eye"
+    },
+    "d": {
+      "item": "minecraft:experience_bottle"
+    },
+    "x": {
+      "tag": "kawaiidishes:cookies"
+    }
+  },
+  "result": {
+    "item": "kawaiidishes:cookie_of_unbinding"
+  }
+}

@@ -1,9 +1,6 @@
 package com.hakimen.kawaiidishes.registry;
 
-import com.hakimen.kawaiidishes.blocks.MugBlock;
 import com.hakimen.kawaiidishes.blocks.block_entities.*;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -30,9 +27,9 @@ public class BlockEntityRegister {
             ()->BlockEntityType.Builder.of(BlenderBlockEntity::new,BlockRegister.blender.get()).build(null));
 
 
-    public static final RegistryObject<BlockEntityType<CoffeeMugBlockEntity>> coffeeMug = BLOCK_ENTITIES.register("coffee_mug_entity",
+    public static final RegistryObject<BlockEntityType<PlaceableFoodBlockEntity>> placeableFood = BLOCK_ENTITIES.register("coffee_mug_entity",
             ()->BlockEntityType.Builder.of(
-                    CoffeeMugBlockEntity::new,
+                    PlaceableFoodBlockEntity::new,
                     BlockRegister.mochaMug.get(),
                     BlockRegister.cafeAuLaitMug.get(),
                     BlockRegister.doppioMug.get(),
@@ -40,20 +37,20 @@ public class BlockEntityRegister {
                     BlockRegister.cappuccinoMug.get(),
                     BlockRegister.macchiatoMug.get(),
                     BlockRegister.latteMug.get(),
-                    BlockRegister.expressoMug.get()
-            ).build(null));
+                    BlockRegister.expressoMug.get(),
 
-    public static final RegistryObject<BlockEntityType<IceCreamBlockEntity>> iceCream = BLOCK_ENTITIES.register("ice_cream_entity",
-            ()->BlockEntityType.Builder.of(
-                    IceCreamBlockEntity::new,
                     BlockRegister.sweetBerryIceCream.get(),
                     BlockRegister.napolitanoIceCream.get(),
                     BlockRegister.creamIceCream.get(),
                     BlockRegister.chocolateIceCream.get(),
                     BlockRegister.mochaIceCream.get(),
                     BlockRegister.coffeeIceCream.get(),
-                    BlockRegister.glowBerryIceCream.get()
+                    BlockRegister.glowBerryIceCream.get(),
+
+                    BlockRegister.sweetBerryMilkshake.get()
             ).build(null));
+
+
 
 
     public static final RegistryObject<BlockEntityType<StoolBlockEntity>> stool = BLOCK_ENTITIES.register("stool_entity",

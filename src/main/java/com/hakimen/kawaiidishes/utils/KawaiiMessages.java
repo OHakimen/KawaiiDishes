@@ -81,6 +81,7 @@ public class KawaiiMessages {
         }
         msg.append(value);
         target.sendMessage(msg,entity.getUUID());
+
     }
 
 }

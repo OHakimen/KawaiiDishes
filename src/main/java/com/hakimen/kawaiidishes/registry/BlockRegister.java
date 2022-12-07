@@ -14,6 +14,8 @@ public class BlockRegister {
 
     public static final RegistryObject<MugBlock> mug = BLOCKS.register("mug",MugBlock::new);
     public static final RegistryObject<GlassCupBlock> glassCup = BLOCKS.register("glass_cup",GlassCupBlock::new);
+    public static final RegistryObject<MilkshakeCupBlock> milkshakeCup = BLOCKS.register("milkshake_cup",MilkshakeCupBlock::new);
+
 
 
     public static final RegistryObject<MugWithCoffeeBlock> expressoMug = BLOCKS.register("expresso_coffee", MugWithCoffeeBlock::new);
@@ -32,6 +34,15 @@ public class BlockRegister {
     public static final RegistryObject<IceCreamBlock> coffeeIceCream = BLOCKS.register("coffee_ice_cream", IceCreamBlock::new);
     public static final RegistryObject<IceCreamBlock> mochaIceCream = BLOCKS.register("mocha_ice_cream", IceCreamBlock::new);
     public static final RegistryObject<IceCreamBlock> glowBerryIceCream = BLOCKS.register("glow_berry_ice_cream", IceCreamBlock::new);
+
+    public static final RegistryObject<MilkshakeBlock> sweetBerryMilkshake = BLOCKS.register("sweet_berry_milkshake", MilkshakeBlock::new);
+    public static final RegistryObject<MilkshakeBlock> chocolateMilkshake = BLOCKS.register("chocolate_milkshake", MilkshakeBlock::new);
+    public static final RegistryObject<MilkshakeBlock> creamMilkshake = BLOCKS.register("cream_milkshake", MilkshakeBlock::new);
+    public static final RegistryObject<MilkshakeBlock> napolitanoMilkshake = BLOCKS.register("napolitano_milkshake", MilkshakeBlock::new);
+    public static final RegistryObject<MilkshakeBlock> coffeeMilkshake = BLOCKS.register("coffee_milkshake", MilkshakeBlock::new);
+    public static final RegistryObject<MilkshakeBlock> mochaMilkshake = BLOCKS.register("mocha_milkshake", MilkshakeBlock::new);
+    public static final RegistryObject<MilkshakeBlock> glowBerryMilkshake = BLOCKS.register("glow_berry_milkshake", MilkshakeBlock::new);
+
 
     public static final RegistryObject<SmallCandy> beijinho = BLOCKS.register("beijinho", SmallCandy::new);
     public static final RegistryObject<SmallCandy> brigadeiro = BLOCKS.register("brigadeiro", SmallCandy::new);
