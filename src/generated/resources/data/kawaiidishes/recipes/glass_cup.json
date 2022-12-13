@@ -1,14 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "x x",
-    "xxx"
-  ],
   "key": {
     "x": {
       "tag": "forge:glass_panes"
     }
   },
+  "pattern": [
+    "x x",
+    "xxx"
+  ],
   "result": {
     "item": "kawaiidishes:glass_cup"
   }

@@ -17,7 +17,7 @@ import net.minecraftforge.registries.RegistryObject;
 import static com.hakimen.kawaiidishes.KawaiiDishes.modId;
 
 public class EntityRegister {
-    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES,modId);
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES,modId);
 
     public static final RegistryObject<EntityType<SittableEntity>> SEAT = ENTITIES.register("seat",
             () -> EntityType.Builder.<SittableEntity>of(SittableEntity::new, MobCategory.MISC).sized(1f, 1f)

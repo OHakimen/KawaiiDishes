@@ -10,10 +10,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 
@@ -35,7 +37,7 @@ public class BlenderContainer extends AbstractContainerMenu {
         this.playerInventory = new InvWrapper(inv.player.getInventory());
 
         if(blockEntity != null){
-            blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
+            blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(h -> {
                 addSlot(new SlotItemHandler(h,0,45,27));
                 addSlot(new SlotItemHandler(h,1,45,27+18));
                 addSlot(new SlotItemHandler(h,2,122,36));

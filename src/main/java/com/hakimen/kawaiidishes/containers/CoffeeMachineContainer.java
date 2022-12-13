@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
@@ -34,7 +34,7 @@ public class CoffeeMachineContainer extends AbstractContainerMenu {
         this.playerInventory = new InvWrapper(inv.player.getInventory());
 
         if(blockEntity != null){
-            blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
+            blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(h -> {
                 addSlot(new SlotItemHandler(h,0,26,18));
                 addSlot(new SlotItemHandler(h,1,26,54));
                 addSlot(new SlotItemHandler(h,2,62,18));

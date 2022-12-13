@@ -24,12 +24,12 @@ import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 public class KawaiiDishesClient {
     @SubscribeEvent
     public static void registerArmorRenderers(final EntityRenderersEvent.AddLayers event) {
-        GeoArmorRenderer.registerArmorRenderer(CatTailArmorItem.class, new CatTailArmorRenderer());
-        GeoArmorRenderer.registerArmorRenderer(MaidDressArmorItem.class, new MaidDressArmorRenderer());
-        GeoArmorRenderer.registerArmorRenderer(CatMaidArmorItem.class, new CatMaidDressArmorRenderer());
-        GeoArmorRenderer.registerArmorRenderer(ThighHighsArmorItem.class, new ThighHighsArmorRenderer());
-        GeoArmorRenderer.registerArmorRenderer(FoxMaidArmorItem.class, new FoxMaidDressArmorRenderer());
-        GeoArmorRenderer.registerArmorRenderer(FoxTailArmorItem.class, new FoxTailArmorRenderer());
+        GeoArmorRenderer.registerArmorRenderer(CatTailArmorItem.class, CatTailArmorRenderer::new);
+        GeoArmorRenderer.registerArmorRenderer(MaidDressArmorItem.class, MaidDressArmorRenderer::new);
+        GeoArmorRenderer.registerArmorRenderer(CatMaidArmorItem.class, CatMaidDressArmorRenderer::new);
+        GeoArmorRenderer.registerArmorRenderer(ThighHighsArmorItem.class, ThighHighsArmorRenderer::new);
+        GeoArmorRenderer.registerArmorRenderer(FoxMaidArmorItem.class, FoxMaidDressArmorRenderer::new);
+        GeoArmorRenderer.registerArmorRenderer(FoxTailArmorItem.class, FoxTailArmorRenderer::new);
 
     }
 

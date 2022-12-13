@@ -10,7 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 import static com.hakimen.kawaiidishes.KawaiiDishes.modId;
 
 public class BlockEntityRegister {
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES,modId);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES,modId);
 
     public static final RegistryObject<BlockEntityType<CoffeePressBlockEntity>> coffeePress = BLOCK_ENTITIES.register("coffee_press_entity",
             ()->BlockEntityType.Builder.of(CoffeePressBlockEntity::new,BlockRegister.coffeePress.get()).build(null));

@@ -104,7 +104,7 @@ public class CoffeeMachineBlock extends Block implements EntityBlock{
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if(entity instanceof CoffeeMachineBlockEntity) {
-                NetworkHooks.openGui(((ServerPlayer)pPlayer), (CoffeeMachineBlockEntity)entity, pPos);
+                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (CoffeeMachineBlockEntity)entity, pPos);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }

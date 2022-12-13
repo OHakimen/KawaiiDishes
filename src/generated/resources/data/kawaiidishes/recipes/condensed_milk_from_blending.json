@@ -1,6 +1,5 @@
 {
   "type": "kawaiidishes:blending",
-  "ticks": 100,
   "ingredients": [
     [
       {
@@ -12,8 +11,9 @@
     ]
   ],
   "output": {
+    "count": 4,
     "item": "kawaiidishes:condensed_milk",
-    "nbt": "{}",
-    "count": 4
-  }
+    "nbt": "{}"
+  },
+  "ticks": 100
 }

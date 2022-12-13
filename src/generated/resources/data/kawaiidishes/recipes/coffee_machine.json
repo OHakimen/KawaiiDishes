@@ -1,17 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "xxx",
-    ".pi",
-    "iri"
-  ],
   "key": {
-    "x": {
-      "item": "minecraft:stone_slab"
-    },
-    "r": {
-      "item": "minecraft:redstone"
-    },
     ".": {
       "item": "minecraft:iron_nugget"
     },
@@ -20,8 +9,19 @@
     },
     "p": {
       "item": "kawaiidishes:coffee_press"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "x": {
+      "item": "minecraft:stone_slab"
     }
   },
+  "pattern": [
+    "xxx",
+    ".pi",
+    "iri"
+  ],
   "result": {
     "item": "kawaiidishes:coffee_machine"
   }

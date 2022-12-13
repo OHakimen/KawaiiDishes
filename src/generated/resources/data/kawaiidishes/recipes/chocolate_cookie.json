@@ -1,8 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "#x#"
-  ],
   "key": {
     "#": {
       "item": "minecraft:wheat"
@@ -11,8 +8,11 @@
       "item": "kawaiidishes:cocoa_powder"
     }
   },
+  "pattern": [
+    "#x#"
+  ],
   "result": {
-    "item": "kawaiidishes:chocolate_cookie",
-    "count": 8
+    "count": 8,
+    "item": "kawaiidishes:chocolate_cookie"
   }
 }

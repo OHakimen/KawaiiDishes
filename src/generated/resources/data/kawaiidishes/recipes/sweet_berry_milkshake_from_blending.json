@@ -1,6 +1,5 @@
 {
   "type": "kawaiidishes:blending",
-  "ticks": 100,
   "ingredients": [
     [
       {
@@ -11,11 +10,12 @@
       }
     ]
   ],
-  "output": {
-    "item": "kawaiidishes:sweet_berry_milkshake",
-    "nbt": "{mainEffect:{Ambient:0b,Amplifier:0b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:600,Id:12b,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"minecraft:fire_resistance\"}}"
-  },
   "onOutput": {
     "item": "kawaiidishes:milkshake_cup"
-  }
+  },
+  "output": {
+    "item": "kawaiidishes:sweet_berry_milkshake",
+    "nbt": "{mainEffect:{Ambient:0b,Amplifier:0b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:600,Id:12,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"minecraft:fire_resistance\"}}"
+  },
+  "ticks": 100
 }

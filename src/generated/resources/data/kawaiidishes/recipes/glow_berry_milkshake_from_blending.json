@@ -1,6 +1,5 @@
 {
   "type": "kawaiidishes:blending",
-  "ticks": 100,
   "ingredients": [
     [
       {
@@ -11,11 +10,12 @@
       }
     ]
   ],
-  "output": {
-    "item": "kawaiidishes:glow_berry_milkshake",
-    "nbt": "{mainEffect:{Ambient:0b,Amplifier:0b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:600,Id:12b,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"minecraft:fire_resistance\"},secondaryEffect:{Ambient:0b,Amplifier:0b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:1200,Id:16b,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"minecraft:night_vision\"}}"
-  },
   "onOutput": {
     "item": "kawaiidishes:milkshake_cup"
-  }
+  },
+  "output": {
+    "item": "kawaiidishes:glow_berry_milkshake",
+    "nbt": "{mainEffect:{Ambient:0b,Amplifier:0b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:600,Id:12,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"minecraft:fire_resistance\"},secondaryEffect:{Ambient:0b,Amplifier:0b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:1200,Id:16,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"minecraft:night_vision\"}}"
+  },
+  "ticks": 100
 }

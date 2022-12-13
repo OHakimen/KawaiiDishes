@@ -1,6 +1,7 @@
 package com.hakimen.kawaiidishes.datagen;
 
 import com.hakimen.kawaiidishes.registry.BlockRegister;
+import net.minecraft.core.Registry;
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -12,7 +13,7 @@ public class BlockLootTableSupplier extends BlockLoot {
     protected void addTables() {
         for (var i: BlockRegister.BLOCKS.getEntries().stream().toList()) {
             if(!i.get().equals(BlockRegister.coffeePlant.get())
-            && !i.get().getRegistryName().getPath().contains("_coffee")){
+            && !Registry.BLOCK.getKey(i.get()).toString().contains("_coffee")){
                 this.dropSelf(i.get());
             }
         }

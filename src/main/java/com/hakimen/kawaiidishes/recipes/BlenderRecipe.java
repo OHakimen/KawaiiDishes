@@ -155,22 +155,6 @@ public class BlenderRecipe implements Recipe<SimpleContainer> {
             buf.writeItemStack(recipe.onOutput, false);
         }
 
-        @Override
-        public RecipeSerializer<?> setRegistryName(ResourceLocation name) {
-            return INSTANCE;
-        }
-
-        @Nullable
-        @Override
-        public ResourceLocation getRegistryName() {
-            return ID;
-        }
-
-        @Override
-        public Class<RecipeSerializer<?>> getRegistryType() {
-            return Serializer.castClass(RecipeSerializer.class);
-        }
-
         @SuppressWarnings("unchecked") // Need this wrapper, because generics
         private static <G> Class<G> castClass(Class<?> cls) {
             return (Class<G>)cls;

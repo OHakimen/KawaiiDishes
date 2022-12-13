@@ -1,18 +1,20 @@
 package com.hakimen.kawaiidishes.integration.jei.categories;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
+import com.hakimen.kawaiidishes.integration.jei.JEIIntegration;
 import com.hakimen.kawaiidishes.recipes.BlenderRecipe;
 import com.hakimen.kawaiidishes.recipes.CoffeeMachineRecipe;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
+import com.hakimen.kawaiidishes.registry.RecipeRegister;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
@@ -29,22 +31,17 @@ public class BlendingRecipeCategory implements IRecipeCategory<BlenderRecipe> {
 
     public BlendingRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(BlockRegister.blender.get()));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(BlockRegister.blender.get()));
     }
 
     @Override
-    public ResourceLocation getUid() {
-        return UID;
-    }
-
-    @Override
-    public Class<? extends BlenderRecipe> getRecipeClass() {
-        return BlenderRecipe.class;
+    public RecipeType<BlenderRecipe> getRecipeType() {
+        return JEIIntegration.blending;
     }
 
     @Override
     public Component getTitle() {
-        return new TextComponent("Blending");
+        return Component.literal("Blending");
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.hakimen.kawaiidishes.integration.jei.categories;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
+import com.hakimen.kawaiidishes.integration.jei.JEIIntegration;
 import com.hakimen.kawaiidishes.recipes.CoffeeMachineRecipe;
 import com.hakimen.kawaiidishes.recipes.IceCreamMachineRecipe;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
@@ -10,9 +11,9 @@ import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -30,22 +31,18 @@ public class IceCreamMachineRecipeCategory implements IRecipeCategory<IceCreamMa
 
     public IceCreamMachineRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(BlockRegister.iceCreamMachine.get()));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(BlockRegister.iceCreamMachine.get()));
     }
 
-    @Override
-    public ResourceLocation getUid() {
-        return UID;
-    }
 
     @Override
-    public Class<? extends IceCreamMachineRecipe> getRecipeClass() {
-        return IceCreamMachineRecipe.class;
+    public RecipeType<IceCreamMachineRecipe> getRecipeType() {
+        return JEIIntegration.iceCreamMaking;
     }
 
     @Override
     public Component getTitle() {
-        return new TextComponent("Ice Cream Making");
+        return Component.literal("Ice Cream Making");
     }
 
     @Override

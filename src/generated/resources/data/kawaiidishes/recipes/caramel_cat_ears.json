@@ -1,9 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "#s#",
-    "s s"
-  ],
   "key": {
     "#": {
       "item": "minecraft:yellow_wool"
@@ -12,6 +8,10 @@
       "tag": "forge:string"
     }
   },
+  "pattern": [
+    "#s#",
+    "s s"
+  ],
   "result": {
     "item": "kawaiidishes:caramel_cat_ears"
   }

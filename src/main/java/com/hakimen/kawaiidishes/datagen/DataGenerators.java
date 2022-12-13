@@ -6,9 +6,10 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeBlockTagsProvider;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
+
 
 @Mod.EventBusSubscriber(modid = KawaiiDishes.modId, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
@@ -16,10 +17,10 @@ public class DataGenerators {
     public static void gatherData(GatherDataEvent event){
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper fileHelper = event.getExistingFileHelper();
-        generator.addProvider(new ItemModelSupplier(generator,fileHelper));
-        generator.addProvider(new BlockStateSupplier(generator,fileHelper));
-        generator.addProvider(new LangSupplier(generator,"en_us"));
-        generator.addProvider(new CraftingRecipeSupplier(generator));
-        generator.addProvider(new LootTableSupplier(generator));
+        generator.addProvider(true,new ItemModelSupplier(generator,fileHelper));
+        generator.addProvider(true,new BlockStateSupplier(generator,fileHelper));
+        generator.addProvider(true,new LangSupplier(generator,"en_us"));
+        generator.addProvider(true,new CraftingRecipeSupplier(generator));
+        generator.addProvider(true,new LootTableSupplier(generator));
     }
 }

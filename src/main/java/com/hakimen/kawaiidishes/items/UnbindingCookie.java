@@ -2,8 +2,6 @@ package com.hakimen.kawaiidishes.items;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -27,14 +25,14 @@ public class UnbindingCookie extends Item {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         if(pStack.getOrCreateTag().getBoolean("activated")){
-            pTooltipComponents.add(new TextComponent("The Cookie is pulsing with curse removal powers..."));
+            pTooltipComponents.add(Component.literal("The Cookie is pulsing with curse removal powers..."));
 
         }else {
-            pTooltipComponents.add(new TextComponent("The Cookie isn't pulsing with curse removal powers..."));
-            pTooltipComponents.add(new TextComponent("Try crafting while wearing ").setStyle(
+            pTooltipComponents.add(Component.literal("The Cookie isn't pulsing with curse removal powers..."));
+            pTooltipComponents.add(Component.literal("Try crafting while wearing ").setStyle(
                     Style.EMPTY.withColor(0x888888)
             ))
-            ;pTooltipComponents.add(new TextComponent("a binded armor piece").setStyle(
+            ;pTooltipComponents.add(Component.literal("a binded armor piece").setStyle(
                     Style.EMPTY.withColor(0x888888)
             ));
         }

@@ -14,5 +14,6 @@ public class Registration {
         RecipeRegister.register(bus);
         EffectRegister.register(bus);
         EntityRegister.register(bus);
+        PlacedFeaturesRegistry.register(bus);
     }
 }

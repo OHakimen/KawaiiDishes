@@ -5,7 +5,7 @@ import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
@@ -79,8 +79,8 @@ public class PlaceableFoodItem extends BlockItem {
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
         if(!pStack.getOrCreateTag().getCompound("mainEffect").equals(new CompoundTag())){
             var instance = MobEffectInstance.load(pStack.getOrCreateTag().getCompound("mainEffect"));
-            var mainEffect = new TranslatableComponent(instance.getDescriptionId());
-            mainEffect.append(" ").append(new TranslatableComponent("enchantment.level." + (instance.getAmplifier() + 1)));
+            var mainEffect = Component.translatable(instance.getDescriptionId());
+            mainEffect.append(" ").append(Component.translatable("enchantment.level." + (instance.getAmplifier() + 1)));
             mainEffect.append(" ("+ MobEffectUtil.formatDuration(instance,1f)+")");
             if(!instance.getEffect().isBeneficial())
                 mainEffect.setStyle(Style.EMPTY.withColor(0xDD4444));
@@ -90,8 +90,8 @@ public class PlaceableFoodItem extends BlockItem {
         }
         if(!pStack.getOrCreateTag().getCompound("secondaryEffect").equals(new CompoundTag())){
             var instance = MobEffectInstance.load(pStack.getOrCreateTag().getCompound("secondaryEffect"));
-            var mainEffect = new TranslatableComponent(instance.getDescriptionId());
-            mainEffect.append(" ").append(new TranslatableComponent("enchantment.level." + (instance.getAmplifier() + 1)));
+            var mainEffect = Component.translatable(instance.getDescriptionId());
+            mainEffect.append(" ").append(Component.translatable("enchantment.level." + (instance.getAmplifier() + 1)));
             mainEffect.append(" ("+ MobEffectUtil.formatDuration(instance,1f)+")");
             if(!instance.getEffect().isBeneficial())
                 mainEffect.setStyle(Style.EMPTY.withColor(0xDD4444));

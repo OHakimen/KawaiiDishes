@@ -75,7 +75,7 @@ public class MaidMobEventHandler {
                 ItemStack.EMPTY
         };
         for (var item : ItemRegister.ITEMS.getEntries().stream().toList()) {
-            var stack = item.get().getRegistryName().toString();
+            var stack = item.get().getDescriptionId();
             if(!stacks[0].equals(ItemStack.EMPTY) && !stacks[1].equals(ItemStack.EMPTY)){
                 break;
             }

@@ -1,6 +1,7 @@
 package com.hakimen.kawaiidishes.integration.jei.categories;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
+import com.hakimen.kawaiidishes.integration.jei.JEIIntegration;
 import com.hakimen.kawaiidishes.recipes.CoffeeMachineRecipe;
 import com.hakimen.kawaiidishes.recipes.CoffeePressRecipe;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
@@ -11,9 +12,10 @@ import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -32,24 +34,19 @@ public class CoffeePressRecipeCategory implements IRecipeCategory<CoffeePressRec
     public CoffeePressRecipeCategory(IGuiHelper helper) {
 
         this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(BlockRegister.coffeePress.get()));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(BlockRegister.coffeePress.get()));
 
     }
 
 
     @Override
-    public ResourceLocation getUid() {
-        return UID;
-    }
-
-    @Override
-    public Class<? extends CoffeePressRecipe> getRecipeClass() {
-        return CoffeePressRecipe.class;
+    public RecipeType<CoffeePressRecipe> getRecipeType() {
+        return JEIIntegration.coffeePressing;
     }
 
     @Override
     public Component getTitle() {
-        return new TextComponent("Coffee Pressing");
+        return Component.literal("Coffee Pressing");
     }
 
     @Override

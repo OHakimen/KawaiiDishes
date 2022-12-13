@@ -1,24 +1,24 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "xxx",
-    "i.i",
-    "iri"
-  ],
   "key": {
-    "x": {
-      "tag": "forge:glass"
-    },
-    "r": {
-      "item": "minecraft:redstone"
-    },
     ".": {
       "item": "minecraft:iron_nugget"
     },
     "i": {
       "item": "minecraft:iron_ingot"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "x": {
+      "tag": "forge:glass"
     }
   },
+  "pattern": [
+    "xxx",
+    "i.i",
+    "iri"
+  ],
   "result": {
     "item": "kawaiidishes:ice_cream_machine"
   }

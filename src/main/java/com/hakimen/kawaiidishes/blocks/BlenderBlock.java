@@ -111,7 +111,7 @@ public class BlenderBlock extends Block implements EntityBlock{
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if(entity instanceof BlenderBlockEntity) {
-                NetworkHooks.openGui(((ServerPlayer)pPlayer), (BlenderBlockEntity)entity, pPos);
+                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (BlenderBlockEntity)entity, pPos);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }

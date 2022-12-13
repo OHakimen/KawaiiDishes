@@ -1,6 +1,5 @@
 {
   "type": "kawaiidishes:blending",
-  "ticks": 100,
   "ingredients": [
     {
       "item": "kawaiidishes:roasted_cocoa_beans"
@@ -9,5 +8,6 @@
   "output": {
     "item": "kawaiidishes:cocoa_powder",
     "nbt": "{}"
-  }
+  },
+  "ticks": 100
 }

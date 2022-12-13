@@ -1,25 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "kawaiidishes:brigadeiro_mix"
-    ]
-  },
   "criteria": {
-    "has_condensed_milk": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "kawaiidishes:condensed_milk"
-            ]
-          }
-        ]
-      }
-    },
     "has_cocoa_powder": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -28,13 +10,26 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_condensed_milk": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:condensed_milk"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "kawaiidishes:brigadeiro_mix"
-      }
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
@@ -43,5 +38,10 @@
       "has_cocoa_powder",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:brigadeiro_mix"
+    ]
+  }
 }

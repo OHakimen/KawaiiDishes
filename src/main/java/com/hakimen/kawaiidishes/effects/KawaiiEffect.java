@@ -1,5 +1,6 @@
 package com.hakimen.kawaiidishes.effects;
 
+import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.utils.EntityUtils;
 import com.hakimen.kawaiidishes.utils.KawaiiMessages;
@@ -30,7 +31,7 @@ public class KawaiiEffect extends MobEffect {
                         pLivingEntity.getY(),
                         pLivingEntity.getZ()
                 ),8*(1+pAmplifier),8*(1+pAmplifier),8*(1+pAmplifier)));
-        Random r = pLivingEntity.getRandom();
+        Random r = KawaiiDishes.RANDOM;
         for (Entity entity:entities) {
             if((entity instanceof LivingEntity livingEntity && EntityUtils.isHumanoid(livingEntity)&& pLivingEntity instanceof Player player)){
                 if(r.nextInt(0,10000) < 1){

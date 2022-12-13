@@ -1,9 +1,5 @@
 {
   "type": "kawaiidishes:ice_cream_making",
-  "ticks": 100,
-  "itemOnOutput": {
-    "item": "kawaiidishes:glass_cup"
-  },
   "ingredients": [
     [
       {
@@ -14,8 +10,12 @@
       }
     ]
   ],
+  "itemOnOutput": {
+    "item": "kawaiidishes:glass_cup"
+  },
   "output": {
     "item": "kawaiidishes:coffee_ice_cream",
-    "nbt": "{mainEffect:{Ambient:0b,Amplifier:0b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:300,Id:12b,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"minecraft:fire_resistance\"}}"
-  }
+    "nbt": "{mainEffect:{Ambient:0b,Amplifier:0b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:300,Id:12,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"minecraft:fire_resistance\"}}"
+  },
+  "ticks": 100
 }

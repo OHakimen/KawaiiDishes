@@ -20,11 +20,11 @@ import java.util.Objects;
 @JeiPlugin
 public class JEIIntegration implements IModPlugin {
 
-    RecipeType<CoffeeMachineRecipe> coffeeMachining = RecipeType.create(KawaiiDishes.modId,"coffee_machining",CoffeeMachineRecipe.class);
-    RecipeType<CoffeePressRecipe> coffeePressing = RecipeType.create(KawaiiDishes.modId,"coffee_pressing", CoffeePressRecipe.class);
-    RecipeType<MortarAndPestleRecipe> mortarGrinding = RecipeType.create(KawaiiDishes.modId,"mortar_grinding", MortarAndPestleRecipe.class);
-    RecipeType<IceCreamMachineRecipe> iceCreamMaking = RecipeType.create(KawaiiDishes.modId,"ice_cream_making", IceCreamMachineRecipe.class);
-    RecipeType<BlenderRecipe> blending = RecipeType.create(KawaiiDishes.modId,"blending", BlenderRecipe.class);
+    public static RecipeType<CoffeeMachineRecipe> coffeeMachining = RecipeType.create(KawaiiDishes.modId,"coffee_machining",CoffeeMachineRecipe.class);
+    public static RecipeType<CoffeePressRecipe> coffeePressing = RecipeType.create(KawaiiDishes.modId,"coffee_pressing", CoffeePressRecipe.class);
+    public static RecipeType<MortarAndPestleRecipe> mortarGrinding = RecipeType.create(KawaiiDishes.modId,"mortar_grinding", MortarAndPestleRecipe.class);
+    public static RecipeType<IceCreamMachineRecipe> iceCreamMaking = RecipeType.create(KawaiiDishes.modId,"ice_cream_making", IceCreamMachineRecipe.class);
+    public static RecipeType<BlenderRecipe> blending = RecipeType.create(KawaiiDishes.modId,"blending", BlenderRecipe.class);
 
     @Override
     public ResourceLocation getPluginUid() {

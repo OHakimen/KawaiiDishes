@@ -30,6 +30,8 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
+import java.util.Random;
+
 import static com.hakimen.kawaiidishes.utils.MaidMobEventHandler.armorBuild;
 
 
@@ -37,6 +39,7 @@ import static com.hakimen.kawaiidishes.utils.MaidMobEventHandler.armorBuild;
 public class KawaiiDishes {
 
     // Directly reference a slf4j logger
+    public static final Random RANDOM = new Random();
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String modId = "kawaiidishes";
 
@@ -52,8 +55,8 @@ public class KawaiiDishes {
 
     public void onLivingSpecialSpawn(LivingSpawnEvent.SpecialSpawn event) {
         Entity entity = event.getEntity();
-        if (entity instanceof Monster monster && !entity.serializeNBT().getBoolean("isBaby") && event.getWorld().getRandom().nextFloat(0,1) < 0.075f) {
-            ItemStack[] stacks = armorBuild(event.getWorld().getRandom());
+        if (entity instanceof Monster monster && !entity.serializeNBT().getBoolean("isBaby") && RANDOM.nextFloat(0,1) < 0.075f) {
+            ItemStack[] stacks = armorBuild(RANDOM);
 
             monster.setItemSlot(EquipmentSlot.HEAD, stacks[0]);
             monster.setItemSlot(EquipmentSlot.CHEST, stacks[1]);
@@ -93,11 +96,11 @@ public class KawaiiDishes {
 
 
         for(var block: BlockRegister.BLOCKS.getEntries().stream().toList()){
-            if(block.get().getRegistryName().getPath().contains("_stool")){
+            if(block.get().getDescriptionId().contains("_stool")){
                 ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.cutout());
-            }else if(block.get().getRegistryName().getPath().contains("_ice_cream")){
+            }else if(block.get().getDescriptionId().contains("_ice_cream")){
                 ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.cutout());
-            }else if(block.get().getRegistryName().getPath().contains("_milkshake")){
+            }else if(block.get().getDescriptionId().contains("_milkshake")){
                 ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.translucent());
             }
         }

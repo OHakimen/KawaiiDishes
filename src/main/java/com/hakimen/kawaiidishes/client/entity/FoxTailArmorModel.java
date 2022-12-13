@@ -7,17 +7,17 @@ import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class FoxTailArmorModel extends AnimatedGeoModel<FoxTailArmorItem> {
-    public ResourceLocation getModelLocation(FoxTailArmorItem object) {
+    public ResourceLocation getModelResource(FoxTailArmorItem object) {
         return new ResourceLocation(KawaiiDishes.modId, "geo/fox_tail.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureLocation(FoxTailArmorItem object) {
+    public ResourceLocation getTextureResource(FoxTailArmorItem object) {
         return new ResourceLocation(KawaiiDishes.modId, "textures/models/armor/"+object.textureLocation);
     }
 
     @Override
-    public ResourceLocation getAnimationFileLocation(FoxTailArmorItem animatable) {
+    public ResourceLocation getAnimationResource(FoxTailArmorItem animatable) {
         return new ResourceLocation(KawaiiDishes.modId, "animations/fox_tail_animations.json");
     }
 

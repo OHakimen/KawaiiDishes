@@ -1,11 +1,5 @@
 {
   "type": "kawaiidishes:coffee_machining",
-  "milk": false,
-  "water": true,
-  "ticks": 100,
-  "itemOnOutput": {
-    "item": "kawaiidishes:mug"
-  },
   "ingredients": [
     [
       {
@@ -16,8 +10,14 @@
       }
     ]
   ],
+  "itemOnOutput": {
+    "item": "kawaiidishes:mug"
+  },
+  "milk": false,
   "output": {
     "item": "kawaiidishes:doppio_coffee",
-    "nbt": "{mainEffect:{Ambient:0b,Amplifier:0b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:300,Id:0b,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"kawaiidishes:kawaii\"},secondaryEffect:{Ambient:0b,Amplifier:1b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:600,Id:1b,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"minecraft:speed\"}}"
-  }
+    "nbt": "{mainEffect:{Ambient:0b,Amplifier:0b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:300,Id:0,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"kawaiidishes:kawaii\"},secondaryEffect:{Ambient:0b,Amplifier:1b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:600,Id:1,ShowIcon:1b,ShowParticles:1b,\"forge:id\":\"minecraft:speed\"}}"
+  },
+  "ticks": 100,
+  "water": true
 }

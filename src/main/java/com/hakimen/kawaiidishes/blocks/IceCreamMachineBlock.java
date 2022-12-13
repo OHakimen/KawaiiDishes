@@ -107,7 +107,7 @@ public class IceCreamMachineBlock extends Block implements EntityBlock{
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if(entity instanceof IceCreamMachineBlockEntity) {
-                NetworkHooks.openGui(((ServerPlayer)pPlayer), (IceCreamMachineBlockEntity)entity, pPos);
+                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (IceCreamMachineBlockEntity)entity, pPos);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }

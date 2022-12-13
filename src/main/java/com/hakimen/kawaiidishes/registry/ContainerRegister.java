@@ -12,7 +12,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ContainerRegister {
-    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, KawaiiDishes.modId);
+    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, KawaiiDishes.modId);
 
     public static final RegistryObject<MenuType<CoffeeMachineContainer>> coffeeMachine = CONTAINERS.register("coffee_machine", ()-> IForgeMenuType.create(CoffeeMachineContainer::new));
     public static final RegistryObject<MenuType<IceCreamMachineContainer>> iceCreamMachine = CONTAINERS.register("ice_cream_machine", ()-> IForgeMenuType.create(IceCreamMachineContainer::new));

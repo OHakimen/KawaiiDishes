@@ -6,17 +6,17 @@ import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class MaidDressArmorModel extends AnimatedGeoModel<MaidDressArmorItem> {
-    public ResourceLocation getModelLocation(MaidDressArmorItem object) {
+    public ResourceLocation getModelResource(MaidDressArmorItem object) {
         return new ResourceLocation(KawaiiDishes.modId, "geo/maid_dress.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureLocation(MaidDressArmorItem object) {
+    public ResourceLocation getTextureResource(MaidDressArmorItem object) {
         return new ResourceLocation(KawaiiDishes.modId, "textures/models/armor/cat_tailed/"+object.textureLocation);
     }
 
     @Override
-    public ResourceLocation getAnimationFileLocation(MaidDressArmorItem animatable) {
+    public ResourceLocation getAnimationResource(MaidDressArmorItem animatable) {
         return new ResourceLocation(KawaiiDishes.modId, "animations/maid_dress_animation.json");
     }
 

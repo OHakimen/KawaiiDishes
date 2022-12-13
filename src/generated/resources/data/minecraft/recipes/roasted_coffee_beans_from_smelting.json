@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.12,
   "ingredient": {
     "item": "kawaiidishes:dried_coffee_beans"
   },
-  "result": "kawaiidishes:roasted_coffee_beans",
-  "experience": 0.12,
-  "cookingtime": 200
+  "result": "kawaiidishes:roasted_coffee_beans"
 }

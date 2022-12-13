@@ -1,9 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###",
-    "@ @"
-  ],
   "key": {
     "#": {
       "item": "minecraft:white_wool"
@@ -12,6 +8,10 @@
       "item": "minecraft:black_wool"
     }
   },
+  "pattern": [
+    "###",
+    "@ @"
+  ],
   "result": {
     "item": "kawaiidishes:white_headband"
   }

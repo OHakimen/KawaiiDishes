@@ -1,5 +1,6 @@
 package com.hakimen.kawaiidishes.blocks.block_entities;
 
+import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.recipes.MortarAndPestleRecipe;
 import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
 import net.minecraft.core.BlockPos;
@@ -18,25 +19,28 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib3.GeckoLib;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
 
 public class MortarAndPestleBlockEntity extends BlockEntity implements IAnimatable, BlockEntityTicker<MortarAndPestleBlockEntity> {
-    private AnimationFactory factory = new AnimationFactory(this);
+    private AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     public boolean isUsing = false;
     public int usingTime = 0;
@@ -85,9 +89,9 @@ public class MortarAndPestleBlockEntity extends BlockEntity implements IAnimatab
 
     private <P extends IAnimatable> PlayState predicate(AnimationEvent<P> event){
         if(usingTime > 0){
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("use", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("use", ILoopType.EDefaultLoopTypes.LOOP));
         }else{
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", ILoopType.EDefaultLoopTypes.LOOP));
         }
 
         return PlayState.CONTINUE;
@@ -120,7 +124,7 @@ public class MortarAndPestleBlockEntity extends BlockEntity implements IAnimatab
                             .getRecipeFor(MortarAndPestleRecipe.Type.INSTANCE, inventory, level);
                     if(isCrafting){
                         progress++;
-                        pLevel.addAlwaysVisibleParticle(new ItemParticleOption(ParticleTypes.ITEM,pBlockEntity.inventory.getStackInSlot(0)),pPos.getX()+0.5f,pPos.getY()+0.25f,pPos.getZ()+0.5f,this.level.random.nextFloat(-1,1)/10f,0.1f,this.level.random.nextFloat(-1,1)/10f);
+                        pLevel.addAlwaysVisibleParticle(new ItemParticleOption(ParticleTypes.ITEM,pBlockEntity.inventory.getStackInSlot(0)),pPos.getX()+0.5f,pPos.getY()+0.25f,pPos.getZ()+0.5f, KawaiiDishes.RANDOM.nextFloat(-1,1)/10f,0.1f,KawaiiDishes.RANDOM.nextFloat(-1,1)/10f);
                         if(progress >= recipeTime){
                             isCrafting = false;
                             progress = 0;
@@ -147,7 +151,7 @@ public class MortarAndPestleBlockEntity extends BlockEntity implements IAnimatab
         return match.isPresent();
     }
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY){
+        if(cap == ForgeCapabilities.ITEM_HANDLER){
             return invHandler.cast();
         }else{
             return super.getCapability(cap);

@@ -4,6 +4,7 @@ import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
 import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
+import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.LanguageProvider;
@@ -36,9 +37,9 @@ public class LangSupplier extends LanguageProvider {
                 dressNames.put("purple_maid_dress","Purple Maid Dress");
                 
         for (var items:ItemRegister.ITEMS.getEntries().stream().toList()) {
-            String itemPath = items.get().getRegistryName().getPath();
+            String itemPath = Registry.ITEM.getKey(items.get()).toString().replaceAll(KawaiiDishes.modId+":","");
             for (int i = 0; i < dressNames.keySet().size(); i++) {
-                String name = dressNames.keySet().stream().toArray()[i].toString();
+                String name = dressNames.keySet().stream().toArray()[i].toString().replaceAll(KawaiiDishes.modId+":","");
                 if(itemPath.equals(name +"_cat_tail_black")){
                     add(items.get(),dressNames.get(itemPath.replace("_cat_tail_black",""))+" Black Cat Tail");
                 }
@@ -61,7 +62,7 @@ public class LangSupplier extends LanguageProvider {
                     add(items.get(),dressNames.get(itemPath));
                 }
             }
-            if(itemPath.endsWith("_ice_cream") || itemPath.endsWith("_coffee") || itemPath.endsWith("_milkshake") || itemPath.endsWith("_stool")){
+            if(itemPath.endsWith("_ice_cream") || itemPath.endsWith("_coffee") || itemPath.contains("_milkshake") || itemPath.endsWith("_stool")){
                 add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
             }
             if(itemPath.contains("_headband")){

@@ -1,14 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "x x",
-    "xxx"
-  ],
   "key": {
     "x": {
       "item": "minecraft:brick"
     }
   },
+  "pattern": [
+    "x x",
+    "xxx"
+  ],
   "result": {
     "item": "kawaiidishes:mug"
   }

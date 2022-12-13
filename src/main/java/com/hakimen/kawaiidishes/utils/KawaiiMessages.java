@@ -3,7 +3,7 @@ package com.hakimen.kawaiidishes.utils;
 import com.hakimen.kawaiidishes.items.CatEars;
 import com.hakimen.kawaiidishes.items.armor.CatMaidArmorItem;
 import com.hakimen.kawaiidishes.items.armor.MaidDressArmorItem;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -45,11 +45,11 @@ public class KawaiiMessages {
     public static void sendMessage(LivingEntity entity, Player target){
 
         boolean hasCatEars,hasMaidDress,hasCatMaidDress;
-        Random r = target.getRandom();
+        Random r = (Random) target.getRandom();
         hasCatEars = target.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).getItem() instanceof CatEars;
         hasMaidDress = target.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() instanceof MaidDressArmorItem;
         hasCatMaidDress = target.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() instanceof CatMaidArmorItem;
-        var msg = new TextComponent("<").append(entity.getDisplayName()).append("> ");
+        var msg = Component.literal("<").append(entity.getDisplayName()).append("> ");
         int size;
         var value = "";
         if(hasCatMaidDress || hasCatEars){
@@ -80,7 +80,7 @@ public class KawaiiMessages {
             }
         }
         msg.append(value);
-        target.sendMessage(msg,entity.getUUID());
+        target.displayClientMessage(msg,false);
 
     }
 

@@ -1,20 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "#s#",
-    "| |"
-  ],
   "key": {
-    "s": {
-      "item": "minecraft:gray_wool"
-    },
     "#": {
       "tag": "minecraft:logs"
+    },
+    "s": {
+      "item": "minecraft:gray_wool"
     },
     "|": {
       "item": "minecraft:stick"
     }
   },
+  "pattern": [
+    "#s#",
+    "| |"
+  ],
   "result": {
     "item": "kawaiidishes:gray_stool"
   }

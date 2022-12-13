@@ -10,6 +10,7 @@ import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.nbt.CompoundTag;
@@ -173,7 +174,7 @@ public class IceCreamMachineRecipeBuilder implements RecipeBuilder {
 
 
             JsonObject onOutput = new JsonObject();
-            onOutput.addProperty("item", this.neededOnOutput.getItem().getRegistryName().toString());
+            onOutput.addProperty("item", Registry.ITEM.getKey(this.neededOnOutput.getItem()).toString());
 
             pJson.add("itemOnOutput",onOutput);
             JsonArray jsonarray = new JsonArray();
@@ -181,7 +182,7 @@ public class IceCreamMachineRecipeBuilder implements RecipeBuilder {
 
             pJson.add("ingredients", jsonarray);
             JsonObject jsonobject = new JsonObject();
-            jsonobject.addProperty("item", this.result.getItem().getRegistryName().toString());
+            jsonobject.addProperty("item", Registry.ITEM.getKey(this.result.getItem()).toString());
             jsonobject.addProperty("nbt", this.result.getOrCreateTag().toString());
             if (this.count > 1) {
                 jsonobject.addProperty("count", this.count);
@@ -194,7 +195,7 @@ public class IceCreamMachineRecipeBuilder implements RecipeBuilder {
         @Override
         public ResourceLocation getId() {
             return new ResourceLocation(KawaiiDishes.modId,
-                    this.result.getItem().getRegistryName().getPath()+"_from_ice_cream_maker");
+                    Registry.ITEM.getKey(this.result.getItem()).toString().replaceAll(KawaiiDishes.modId+":","")+"_from_ice_cream_maker");
         }
 
         @Override
