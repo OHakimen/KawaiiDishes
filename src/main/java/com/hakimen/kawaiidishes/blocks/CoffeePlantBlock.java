@@ -50,7 +50,9 @@ public class CoffeePlantBlock extends BushBlock implements BonemealableBlock {
         return pState.getValue(AGE) < 3;
     }
 
-    public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom) {
+
+    @Override
+    public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
         int i = pState.getValue(AGE);
         if (i < 3 && pLevel.getRawBrightness(pPos.above(), 0) >= 9 && onCropsGrowPre(pLevel, pPos, pState,pRandom.nextInt(5) == 0)) {
             pLevel.setBlock(pPos, pState.setValue(AGE, Integer.valueOf(i + 1)), 2);
@@ -72,6 +74,8 @@ public class CoffeePlantBlock extends BushBlock implements BonemealableBlock {
             return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
         }
     }
+
+
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(AGE);
     }

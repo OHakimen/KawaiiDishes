@@ -152,7 +152,7 @@ public class MortarAndPestleBlockEntity extends BlockEntity implements IAnimatab
     }
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if(cap == ForgeCapabilities.ITEM_HANDLER){
-            return invHandler.cast();
+            return (LazyOptional<T>) invHandler;
         }else{
             return super.getCapability(cap);
         }

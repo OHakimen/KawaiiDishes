@@ -40,7 +40,7 @@ public class FoxMaidArmorItem extends GeoArmorItem implements IAnimatable {
     }
     @Override
     public void onArmorTick(ItemStack stack, Level level, Player player) {
-        if(player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() instanceof MaidDressArmorItem){
+        if(player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() instanceof FoxMaidArmorItem){
             player.forceAddEffect(new MobEffectInstance(EffectRegister.kawaiiEffect.get(),14*20,0,false,false),player);
         }
         super.onArmorTick(stack, level, player);
