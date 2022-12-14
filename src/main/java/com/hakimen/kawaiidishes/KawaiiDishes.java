@@ -18,6 +18,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -59,7 +60,6 @@ public class KawaiiDishes {
             monster.setItemSlot(EquipmentSlot.CHEST, stacks[1]);
             monster.setItemSlot(EquipmentSlot.LEGS, stacks[2]);
             monster.setItemSlot(EquipmentSlot.FEET, stacks[3]);
-
             monster.setDropChance(EquipmentSlot.HEAD,0.25f);
             monster.setDropChance(EquipmentSlot.CHEST,0.25f);
             monster.setDropChance(EquipmentSlot.LEGS,0.25f);
