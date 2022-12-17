@@ -61,7 +61,7 @@ public class LangSupplier extends LanguageProvider {
                     add(items.get(),dressNames.get(itemPath));
                 }
             }
-            if(itemPath.endsWith("_ice_cream") || itemPath.endsWith("_coffee") || itemPath.contains("_milkshake") || itemPath.endsWith("_stool")){
+            if(itemPath.endsWith("_ice_cream") || itemPath.endsWith("_coffee") || itemPath.contains("milkshake") || itemPath.endsWith("_stool")){
                 add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
             }
             if(itemPath.contains("_headband")){
