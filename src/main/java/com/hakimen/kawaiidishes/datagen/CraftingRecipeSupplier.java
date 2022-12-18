@@ -20,6 +20,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
+import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import java.util.function.Consumer;
@@ -34,6 +35,7 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
 
         roasting(pFinishedRecipeConsumer, ItemRegister.coffeeFruit.get(), ItemRegister.driedCoffeeBeans.get(), ItemRegister.roastedCoffeeBeans.get());
         roasting(pFinishedRecipeConsumer, Items.COCOA_BEANS, ItemRegister.driedCocoaBeans.get(), ItemRegister.roastedCocoaBeans.get());
+
 
         ShapedRecipeBuilder.shaped(ItemRegister.mug.get())
                 .pattern("x x")

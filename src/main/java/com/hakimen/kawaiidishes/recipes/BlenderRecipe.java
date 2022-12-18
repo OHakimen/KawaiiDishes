@@ -52,7 +52,7 @@ public class BlenderRecipe implements Recipe<SimpleContainer> {
             match = false;
         }
         if(!pContainer.getItem(pContainer.getContainerSize()-1).getItem().equals(getResultItem().getItem())
-                && !pContainer.getItem(pContainer.getContainerSize()-1).equals(ItemStack.EMPTY)) {
+                && !pContainer.getItem(pContainer.getContainerSize()-1).is(ItemStack.EMPTY.getItem())) {
             match = false;
         }
         if(!onOutput.equals(ItemStack.EMPTY)) {

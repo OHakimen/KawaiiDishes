@@ -1,5 +1,6 @@
 package com.hakimen.kawaiidishes.blocks;
 
+import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -54,7 +55,7 @@ public class CoffeePlantBlock extends BushBlock implements BonemealableBlock {
     @Override
     public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
         int i = pState.getValue(AGE);
-        if (i < 3 && pLevel.getRawBrightness(pPos.above(), 0) >= 9 && onCropsGrowPre(pLevel, pPos, pState,pRandom.nextInt(5) == 0)) {
+        if (i < 3 && pLevel.getRawBrightness(pPos.above(), 0) >= 9 && onCropsGrowPre(pLevel, pPos, pState, KawaiiDishes.RANDOM.nextInt(5) == 0)) {
             pLevel.setBlock(pPos, pState.setValue(AGE, Integer.valueOf(i + 1)), 2);
             net.minecraftforge.common.ForgeHooks.onCropsGrowPost(pLevel, pPos, pState);
         }
