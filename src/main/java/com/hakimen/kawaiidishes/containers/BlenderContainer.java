@@ -86,13 +86,11 @@ public class BlenderContainer extends AbstractContainerMenu {
             if (index < 3 && !this.moveItemStackTo(stack1, 3, this.slots.size(), true)) {
                 return ItemStack.EMPTY;
             }
-            if (!this.moveItemStackTo(stack1, 0, 2, false)) {
+            if (!this.moveItemStackTo(stack1, 0,3, false)) {
                 return ItemStack.EMPTY;
             }
             if (stack1.isEmpty()) {
-                if(index != 2){
-                    slot.mayPlace(ItemStack.EMPTY);
-                }
+                slot.mayPlace(ItemStack.EMPTY);
             }
             if (stack1.getCount() == stack.getCount()) {
                 return ItemStack.EMPTY;

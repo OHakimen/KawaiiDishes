@@ -46,13 +46,14 @@ public class BlenderRecipe implements Recipe<SimpleContainer> {
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
         boolean match = true;
         for (int i = 0; i < recipeItems.get(0).getItems().length; i++) {
+
             match &= recipeItems.get(0).getItems()[i].getItem().equals(pContainer.getItem(i).getItem());
         }
         if(recipeItems.get(0).getItems().length == 1 && !pContainer.getItem(1).getItem().equals(Items.AIR)){
             match = false;
         }
         if(!pContainer.getItem(pContainer.getContainerSize()-1).getItem().equals(getResultItem().getItem())
-                && !pContainer.getItem(pContainer.getContainerSize()-1).equals(ItemStack.EMPTY)) {
+                && !pContainer.getItem(pContainer.getContainerSize()-1).is(ItemStack.EMPTY.getItem())) {
             match = false;
         }
         if(!onOutput.equals(ItemStack.EMPTY)) {
@@ -60,7 +61,6 @@ public class BlenderRecipe implements Recipe<SimpleContainer> {
                 match = true;
             }else
                 return false;
-
         }
         return match;
     }
