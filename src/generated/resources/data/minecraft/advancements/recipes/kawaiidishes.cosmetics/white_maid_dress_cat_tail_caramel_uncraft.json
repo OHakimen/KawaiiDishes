@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:white_maid_dress_cat_tail_caramel_uncraft"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_maid_dress_cat_tail_caramel": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:white_maid_dress_cat_tail_caramel"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_white_maid_dress_cat_tail_caramel",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:white_maid_dress_cat_tail_caramel_uncraft"
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pink_headband_cat_ears_caramel": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:pink_headband_cat_ears_caramel"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:pink_headband_cat_ears_caramel_uncraft"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_pink_headband_cat_ears_caramel",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:pink_headband_cat_ears_caramel_uncraft"
+    ]
+  }
+}

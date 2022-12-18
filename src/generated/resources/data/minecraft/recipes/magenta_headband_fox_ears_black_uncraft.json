@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:magenta_headband_fox_ears_black"
+    }
+  ],
+  "result": {
+    "item": "kawaiidishes:black_fox_ears"
+  }
+}

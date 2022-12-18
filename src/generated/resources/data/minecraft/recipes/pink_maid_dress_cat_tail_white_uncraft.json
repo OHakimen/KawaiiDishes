@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:pink_maid_dress_cat_tail_white"
+    }
+  ],
+  "result": {
+    "item": "kawaiidishes:white_cat_tail"
+  }
+}
