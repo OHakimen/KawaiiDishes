@@ -1,6 +1,7 @@
 package com.hakimen.kawaiidishes.registry;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
+import com.hakimen.kawaiidishes.config.KawaiiDishesCommonConfig;
 import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;

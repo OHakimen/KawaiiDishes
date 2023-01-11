@@ -22,7 +22,6 @@ public class JEIIntegration implements IModPlugin {
 
     public static RecipeType<CoffeeMachineRecipe> coffeeMachining = RecipeType.create(KawaiiDishes.modId,"coffee_machining",CoffeeMachineRecipe.class);
     public static RecipeType<CoffeePressRecipe> coffeePressing = RecipeType.create(KawaiiDishes.modId,"coffee_pressing", CoffeePressRecipe.class);
-    public static RecipeType<MortarAndPestleRecipe> mortarGrinding = RecipeType.create(KawaiiDishes.modId,"mortar_grinding", MortarAndPestleRecipe.class);
     public static RecipeType<IceCreamMachineRecipe> iceCreamMaking = RecipeType.create(KawaiiDishes.modId,"ice_cream_making", IceCreamMachineRecipe.class);
     public static RecipeType<BlenderRecipe> blending = RecipeType.create(KawaiiDishes.modId,"blending", BlenderRecipe.class);
 
@@ -38,8 +37,6 @@ public class JEIIntegration implements IModPlugin {
         registration.addRecipeCategories(new
                 CoffeePressRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new
-                MortarAndPestleRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(new
                 IceCreamMachineRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new
                 BlendingRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
@@ -49,8 +46,7 @@ public class JEIIntegration implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(ItemRegister.coffeePress.get().getDefaultInstance(),coffeePressing);
         registration.addRecipeCatalyst(ItemRegister.coffeeMachine.get().getDefaultInstance(),coffeeMachining);
-        registration.addRecipeCatalyst(ItemRegister.mortarAndPestle.get().getDefaultInstance(),mortarGrinding);
-        registration.addRecipeCatalyst(ItemRegister.iceCreamMachine.get().getDefaultInstance(),iceCreamMaking);
+         registration.addRecipeCatalyst(ItemRegister.iceCreamMachine.get().getDefaultInstance(),iceCreamMaking);
         registration.addRecipeCatalyst(ItemRegister.blender.get().getDefaultInstance(),blending);
 
     }
@@ -60,13 +56,11 @@ public class JEIIntegration implements IModPlugin {
         RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
         List<CoffeeMachineRecipe> coffeeMachineRecipes = rm.getAllRecipesFor(CoffeeMachineRecipe.Type.INSTANCE);
         List<CoffeePressRecipe> coffeePressRecipes = rm.getAllRecipesFor(CoffeePressRecipe.Type.INSTANCE);
-        List<MortarAndPestleRecipe> mortarRecipes = rm.getAllRecipesFor(MortarAndPestleRecipe.Type.INSTANCE);
         List<IceCreamMachineRecipe> iceCreamMachineRecipes = rm.getAllRecipesFor(IceCreamMachineRecipe.Type.INSTANCE);
         List<BlenderRecipe> blenderRecipes = rm.getAllRecipesFor(BlenderRecipe.Type.INSTANCE);
 
         registration.addRecipes(coffeeMachining, coffeeMachineRecipes);
         registration.addRecipes(coffeePressing, coffeePressRecipes);
-        registration.addRecipes(mortarGrinding, mortarRecipes);
         registration.addRecipes(iceCreamMaking, iceCreamMachineRecipes);
         registration.addRecipes(blending, blenderRecipes);
     }

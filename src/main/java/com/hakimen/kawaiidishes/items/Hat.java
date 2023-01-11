@@ -2,6 +2,7 @@ package com.hakimen.kawaiidishes.items;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.hakimen.kawaiidishes.config.KawaiiDishesCommonConfig;
 import com.hakimen.kawaiidishes.items.armor.CatMaidArmorItem;
 import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
@@ -49,7 +50,7 @@ public class Hat extends Item {
         if(slot == EquipmentSlot.HEAD){
             ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
             UUID uuid = UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B");
-            builder.put(Attributes.ARMOR, new AttributeModifier(uuid, "Armor modifier", (double)2, AttributeModifier.Operation.ADDITION));
+            builder.put(Attributes.ARMOR, new AttributeModifier(uuid, "Armor modifier",2, AttributeModifier.Operation.ADDITION));
 
             return builder.build();
         }else

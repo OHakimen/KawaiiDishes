@@ -106,12 +106,6 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
                 .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
                 .save(pFinishedRecipeConsumer);
 
-        ShapedRecipeBuilder.shaped(ItemRegister.mortarAndPestle.get())
-                .pattern("x x")
-                .pattern("xxx")
-                .define('x',Tags.Items.STONE)
-                .unlockedBy(getHasName(Items.STONE), has(Items.STONE))
-                .save(pFinishedRecipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(ItemRegister.darkChocolateBar.get())
                 .requires(ItemRegister.cocoaPowder.get())

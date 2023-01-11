@@ -7,7 +7,7 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
 
 public class ArmorMaterials {
-    public static ArmorMaterial catTail = new ArmorMaterial() {
+    public static ArmorMaterial tail = new ArmorMaterial() {
         @Override
         public int getDurabilityForSlot(EquipmentSlot pSlot) {
             return -1;
@@ -35,7 +35,7 @@ public class ArmorMaterials {
 
         @Override
         public String getName() {
-            return "cat_tail";
+            return "tail";
         }
 
         @Override
@@ -95,7 +95,7 @@ public class ArmorMaterials {
         public float getKnockbackResistance() {
             return 0;
         }};
-    public static ArmorMaterial catMaidDress = new ArmorMaterial() {
+    public static ArmorMaterial tailedDress = new ArmorMaterial() {
         @Override
         public int getDurabilityForSlot(EquipmentSlot pSlot) {
             return -1;
@@ -123,7 +123,7 @@ public class ArmorMaterials {
 
         @Override
         public String getName() {
-            return "cat_maid_dress";
+            return "tailed_maid_dress";
         }
 
         @Override

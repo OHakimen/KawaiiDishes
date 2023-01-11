@@ -2,18 +2,12 @@ package com.hakimen.kawaiidishes.items.armor;
 
 import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
-import net.minecraft.client.Minecraft;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import software.bernie.geckolib3.GeckoLib;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -30,7 +24,7 @@ public class CatTailArmorItem extends GeoArmorItem implements IAnimatable {
     public String textureLocation;
 
     public CatTailArmorItem(String textureName) {
-        super(ArmorMaterials.catTail, EquipmentSlot.CHEST, new Properties().tab(ItemRegister.cosmetics));
+        super(ArmorMaterials.tail, EquipmentSlot.CHEST, new Properties().tab(ItemRegister.cosmetics));
         textureLocation = textureName;
     }
 

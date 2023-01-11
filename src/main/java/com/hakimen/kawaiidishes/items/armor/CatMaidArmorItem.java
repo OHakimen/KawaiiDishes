@@ -9,7 +9,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import software.bernie.geckolib3.GeckoLib;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -27,7 +26,7 @@ public class CatMaidArmorItem extends GeoArmorItem implements IAnimatable {
     public String textureLocation;
 
     public CatMaidArmorItem(String textureName, Item dress) {
-        super(ArmorMaterials.catMaidDress, EquipmentSlot.CHEST, new Properties().tab(ItemRegister.cosmetics)
+        super(ArmorMaterials.tailedDress, EquipmentSlot.CHEST, new Properties().tab(ItemRegister.cosmetics)
                 .craftRemainder(dress));
         textureLocation = textureName;
     }

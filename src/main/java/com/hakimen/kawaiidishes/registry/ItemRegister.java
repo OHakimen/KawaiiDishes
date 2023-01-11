@@ -50,7 +50,6 @@ public class ItemRegister {
 
     public static final RegistryObject<Item> coffeePress = ITEMS.register("coffee_press", () -> new BlockItem(BlockRegister.coffeePress.get(), new Item.Properties().tab(blocks)));
     public static final RegistryObject<Item> coffeeMachine = ITEMS.register("coffee_machine", () -> new BlockItem(BlockRegister.coffeeMachine.get(), new Item.Properties().tab(blocks)));
-    public static final RegistryObject<Item> mortarAndPestle = ITEMS.register("mortar_and_pestle", () -> new BlockItem(BlockRegister.mortarAndPestle.get(), new Item.Properties().tab(blocks)));
     public static final RegistryObject<Item> blender = ITEMS.register("blender", () -> new BlockItem(BlockRegister.blender.get(), new Item.Properties().tab(blocks)));
 
     public static final RegistryObject<Item> iceCreamMachine = ITEMS.register("ice_cream_machine", () -> new BlockItem(BlockRegister.iceCreamMachine.get(), new Item.Properties().tab(blocks)));

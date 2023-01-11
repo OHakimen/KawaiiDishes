@@ -19,8 +19,6 @@ public class RecipeRegister {
     public static final RegistryObject<RecipeSerializer<CoffeeMachineRecipe>> CoffeeMachineRecipeSerializer =
             SERIALIZERS.register("coffee_machining", () -> CoffeeMachineRecipe.Serializer.INSTANCE);
 
-    public static final RegistryObject<RecipeSerializer<MortarAndPestleRecipe>> MortarGrindingRecipe =
-            SERIALIZERS.register("mortar_grinding", () -> MortarAndPestleRecipe.Serializer.INSTANCE);
 
     public static final RegistryObject<RecipeSerializer<IceCreamMachineRecipe>> IceCreamMakingRecipe =
             SERIALIZERS.register("ice_cream_making", () -> IceCreamMachineRecipe.Serializer.INSTANCE);

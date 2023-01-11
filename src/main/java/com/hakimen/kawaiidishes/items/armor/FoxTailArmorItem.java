@@ -1,8 +1,6 @@
 package com.hakimen.kawaiidishes.items.armor;
 
-import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
@@ -24,7 +22,7 @@ public class FoxTailArmorItem extends GeoArmorItem implements IAnimatable {
     public String textureLocation;
 
     public FoxTailArmorItem(String textureName) {
-        super(ArmorMaterials.catTail, EquipmentSlot.CHEST, new Properties().tab(ItemRegister.cosmetics));
+        super(ArmorMaterials.tail, EquipmentSlot.CHEST, new Properties().tab(ItemRegister.cosmetics));
         textureLocation = textureName;
     }
 
