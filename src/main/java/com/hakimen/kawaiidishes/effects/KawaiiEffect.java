@@ -1,5 +1,7 @@
 package com.hakimen.kawaiidishes.effects;
 
+import com.hakimen.kawaiidishes.config.KawaiiDishesClientConfig;
+import com.hakimen.kawaiidishes.config.KawaiiDishesCommonConfig;
 import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.utils.EntityUtils;
 import com.hakimen.kawaiidishes.utils.KawaiiMessages;
@@ -34,7 +36,9 @@ public class KawaiiEffect extends MobEffect {
         for (Entity entity:entities) {
             if((entity instanceof LivingEntity livingEntity && EntityUtils.isHumanoid(livingEntity)&& pLivingEntity instanceof Player player)){
                 if(r.nextInt(0,10000) < 1){
-                    KawaiiMessages.sendMessage(livingEntity,player);
+                    if(KawaiiDishesCommonConfig.shouldSendMessage.get()){
+                        KawaiiMessages.sendMessage(livingEntity,player);
+                    }
                 }
             }
 

@@ -74,8 +74,6 @@ public class BlockRegister {
     public static final RegistryObject<BlenderBlock> blender = BLOCKS.register("blender", BlenderBlock::new);
 
 
-    public static final RegistryObject<MortarAndPestleBlock> mortarAndPestle = BLOCKS.register("mortar_and_pestle",MortarAndPestleBlock::new);
-
     public static final RegistryObject<CoffeePlantBlock> coffeePlant = BLOCKS.register("coffee_bush", CoffeePlantBlock::new);
 
     public static void register(IEventBus bus){

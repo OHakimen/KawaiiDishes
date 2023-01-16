@@ -5,7 +5,7 @@ import com.hakimen.kawaiidishes.client.block_entity_renderers.CoffeePressRendere
 import com.hakimen.kawaiidishes.client.block_entity_renderers.IceCreamMachineRenderer;
 import com.hakimen.kawaiidishes.client.entity.FoxTailArmorRenderer;
 import com.hakimen.kawaiidishes.client.entity.SeatRenderer;
-import com.hakimen.kawaiidishes.client.entity.blocks.MortarAndPestleRenderer;
+
 import com.hakimen.kawaiidishes.client.entity.maid_dresses.CatMaidDressArmorRenderer;
 import com.hakimen.kawaiidishes.client.entity.CatTailArmorRenderer;
 import com.hakimen.kawaiidishes.client.entity.maid_dresses.FoxMaidDressArmorRenderer;
@@ -35,7 +35,6 @@ public class KawaiiDishesClient {
 
     @SubscribeEvent
     public static void registerBlockRenderers(final EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer(BlockEntityRegister.mortarAndPestle.get(), MortarAndPestleRenderer::new);
 
     }
     @SubscribeEvent

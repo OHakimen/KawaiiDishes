@@ -3,6 +3,8 @@ package com.hakimen.kawaiidishes;
 import com.hakimen.kawaiidishes.client.screens.BlenderScreen;
 import com.hakimen.kawaiidishes.client.screens.CoffeeMachineScreen;
 import com.hakimen.kawaiidishes.client.screens.IceCreamScreen;
+import com.hakimen.kawaiidishes.config.KawaiiDishesClientConfig;
+import com.hakimen.kawaiidishes.config.KawaiiDishesCommonConfig;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
 import com.hakimen.kawaiidishes.registry.ContainerRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
@@ -15,14 +17,18 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.*;
+import net.minecraft.world.entity.monster.piglin.Piglin;
+import net.minecraft.world.entity.monster.piglin.PiglinBrute;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
@@ -42,6 +48,9 @@ public class KawaiiDishes {
     public static final String modId = "kawaiidishes";
 
     public KawaiiDishes() {
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, KawaiiDishesClientConfig.clientSpec, "kawaii-dishes-client.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, KawaiiDishesCommonConfig.commonSpec, "kawaii-dishes-common.toml");
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         Registration.init();
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
@@ -53,18 +62,27 @@ public class KawaiiDishes {
 
     public void onLivingSpecialSpawn(LivingSpawnEvent.SpecialSpawn event) {
         Entity entity = event.getEntity();
-        if (entity instanceof Monster monster && !entity.serializeNBT().getBoolean("isBaby") && event.getWorld().getRandom().nextFloat(0,1) < 0.075f) {
-            ItemStack[] stacks = armorBuild(event.getWorld().getRandom());
+        if (entity instanceof Monster monster && !entity.serializeNBT().getBoolean("isBaby") && event.getWorld().getRandom().nextFloat(0,1) < KawaiiDishesCommonConfig.chanceToSpawnWithDress.get()) {
+            if ((monster instanceof Skeleton
+                    || monster instanceof WitherSkeleton
+                    || monster instanceof Zombie
+                    || monster instanceof Drowned
+                    || monster instanceof Husk
+                    || monster instanceof ZombifiedPiglin
+                    || monster instanceof Piglin
+                    || monster instanceof PiglinBrute) && KawaiiDishesCommonConfig.shouldMobSpawnWithDress.get()) {
+                ItemStack[] stacks = armorBuild(event.getWorld().getRandom());
 
-            monster.setItemSlot(EquipmentSlot.HEAD, stacks[0]);
-            monster.setItemSlot(EquipmentSlot.CHEST, stacks[1]);
-            monster.setItemSlot(EquipmentSlot.LEGS, stacks[2]);
-            monster.setItemSlot(EquipmentSlot.FEET, stacks[3]);
-            monster.setDropChance(EquipmentSlot.HEAD,0.25f);
-            monster.setDropChance(EquipmentSlot.CHEST,0.25f);
-            monster.setDropChance(EquipmentSlot.LEGS,0.25f);
-            monster.setDropChance(EquipmentSlot.FEET,0.25f);
+                monster.setItemSlot(EquipmentSlot.HEAD, stacks[0]);
+                monster.setItemSlot(EquipmentSlot.CHEST, stacks[1]);
+                monster.setItemSlot(EquipmentSlot.LEGS, stacks[2]);
+                monster.setItemSlot(EquipmentSlot.FEET, stacks[3]);
 
+                monster.setDropChance(EquipmentSlot.HEAD, KawaiiDishesCommonConfig.changeToDropArmorSet.get().floatValue());
+                monster.setDropChance(EquipmentSlot.CHEST, KawaiiDishesCommonConfig.changeToDropArmorSet.get().floatValue());
+                monster.setDropChance(EquipmentSlot.LEGS, KawaiiDishesCommonConfig.changeToDropArmorSet.get().floatValue());
+                monster.setDropChance(EquipmentSlot.FEET, KawaiiDishesCommonConfig.changeToDropArmorSet.get().floatValue());
+            }
         }
     }
 
