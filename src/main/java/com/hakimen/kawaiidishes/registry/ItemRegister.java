@@ -58,9 +58,15 @@ public class ItemRegister {
     public static final RegistryObject<CatEars> caramelCatEars = ITEMS.register("caramel_cat_ears", CatEars::new);
     public static final RegistryObject<CatEars> whiteCatEars = ITEMS.register("white_cat_ears", CatEars::new);
 
+
+    public static final RegistryObject<BunnyEars> blackBunnyEars = ITEMS.register("black_bunny_ears", BunnyEars::new);
+    public static final RegistryObject<BunnyEars> caramelBunnyEars = ITEMS.register("caramel_bunny_ears", BunnyEars::new);
+    public static final RegistryObject<BunnyEars> whiteBunnyEars = ITEMS.register("white_bunny_ears", BunnyEars::new);
+
     public static final RegistryObject<FoxEars> blackFoxEars = ITEMS.register("black_fox_ears", FoxEars::new);
     public static final RegistryObject<FoxEars> redFoxEars = ITEMS.register("red_fox_ears", FoxEars::new);
     public static final RegistryObject<FoxEars> whiteFoxEars = ITEMS.register("white_fox_ears", FoxEars::new);
+
 
 
     public static final RegistryObject<Item> blackCatTail = ITEMS.register("black_cat_tail",
@@ -70,28 +76,19 @@ public class ItemRegister {
     public static final RegistryObject<Item> whiteCatTail = ITEMS.register("white_cat_tail",
             () -> new CatTailArmorItem("white_cat_tail.png"));
 
+    public static final RegistryObject<Item> blackBunnyTail = ITEMS.register("black_bunny_tail",
+            () -> new CatTailArmorItem("black_bunny_tail.png"));
+    public static final RegistryObject<Item> caramelBunnyTail = ITEMS.register("caramel_bunny_tail",
+            () -> new CatTailArmorItem("caramel_bunny_tail.png"));
+    public static final RegistryObject<Item> whiteBunnyTail = ITEMS.register("white_bunny_tail",
+            () -> new CatTailArmorItem("white_bunny_tail.png"));
+
     public static final RegistryObject<Item> blackFoxTail = ITEMS.register("black_fox_tail",
             () -> new FoxTailArmorItem("black_fox_tail.png"));
     public static final RegistryObject<Item> redFoxTail = ITEMS.register("red_fox_tail",
             () -> new FoxTailArmorItem("red_fox_tail.png"));
     public static final RegistryObject<Item> whiteFoxTail = ITEMS.register("white_fox_tail",
             () -> new FoxTailArmorItem("white_fox_tail.png"));
-
-    public static final RegistryObject<Item> blackMaidDress = ITEMS.register("black_maid_dress",
-            () -> new MaidDressArmorItem("black_maid_dress_cat_tail_black.png"));
-
-    public static final RegistryObject<Item> blackMaidDressCatTailBlack = ITEMS.register("black_maid_dress_cat_tail_black",
-            () -> new CatMaidArmorItem("black_maid_dress_cat_tail_black.png", blackMaidDress.get()));
-    public static final RegistryObject<Item> blackMaidDressCatTailCaramel = ITEMS.register("black_maid_dress_cat_tail_caramel",
-            () -> new CatMaidArmorItem("black_maid_dress_cat_tail_caramel.png", blackMaidDress.get()));
-    public static final RegistryObject<Item> blackMaidDressCatTailWhite = ITEMS.register("black_maid_dress_cat_tail_white",
-            () -> new CatMaidArmorItem("black_maid_dress_cat_tail_white.png", blackMaidDress.get()));
-    public static final RegistryObject<Item> blackMaidDressFoxTailBlack = ITEMS.register("black_maid_dress_fox_tail_black",
-            () -> new FoxMaidArmorItem("black_maid_dress_fox_tail_black.png", blackMaidDress.get()));
-    public static final RegistryObject<Item> blackMaidDressFoxTailRed = ITEMS.register("black_maid_dress_fox_tail_red",
-            () -> new FoxMaidArmorItem("black_maid_dress_fox_tail_red.png", blackMaidDress.get()));
-    public static final RegistryObject<Item> blackMaidDressFoxTailWhite = ITEMS.register("black_maid_dress_fox_tail_white",
-            () -> new FoxMaidArmorItem("black_maid_dress_fox_tail_white.png", blackMaidDress.get()));
 
 
     public static final RegistryObject<Item> blueMaidDress = ITEMS.register("blue_maid_dress",
@@ -109,6 +106,18 @@ public class ItemRegister {
             () -> new FoxMaidArmorItem("blue_maid_dress_fox_tail_red.png", blueMaidDress.get()));
     public static final RegistryObject<Item> blueMaidDressFoxTailWhite = ITEMS.register("blue_maid_dress_fox_tail_white",
             () -> new FoxMaidArmorItem("blue_maid_dress_fox_tail_white.png", blueMaidDress.get()));
+    public static final RegistryObject<Item> blueMaidDressBunnyTailBlack = ITEMS.register("blue_maid_dress_bunny_tail_black",
+            () -> new BunnyMaidArmorItem("blue_maid_dress_bunny_tail_black.png", blueMaidDress.get()));
+    public static final RegistryObject<Item> blueMaidDressBunnyTailCaramel = ITEMS.register("blue_maid_dress_bunny_tail_caramel",
+            () -> new BunnyMaidArmorItem("blue_maid_dress_bunny_tail_caramel.png", blueMaidDress.get()));
+    public static final RegistryObject<Item> blueMaidDressBunnyTailWhite = ITEMS.register("blue_maid_dress_bunny_tail_white",
+            () -> new BunnyMaidArmorItem("blue_maid_dress_bunny_tail_white.png", blueMaidDress.get()));
+    public static final RegistryObject<Item> blueMaidDressDevilTailBlack = ITEMS.register("blue_maid_dress_devil_tail_black",
+            () -> new DevilMaidArmorItem("blue_maid_dress_devil_tail_black.png", blueMaidDress.get()));
+    public static final RegistryObject<Item> blueMaidDressDevilTailPurple = ITEMS.register("blue_maid_dress_devil_tail_purple",
+            () -> new DevilMaidArmorItem("blue_maid_dress_devil_tail_purple.png", blueMaidDress.get()));
+    public static final RegistryObject<Item> blueMaidDressDevilTailRed = ITEMS.register("blue_maid_dress_devil_tail_red",
+            () -> new DevilMaidArmorItem("blue_maid_dress_devil_tail_red.png", blueMaidDress.get()));
 
 
     public static final RegistryObject<Item> brownMaidDress = ITEMS.register("brown_maid_dress",
@@ -126,6 +135,18 @@ public class ItemRegister {
             () -> new FoxMaidArmorItem("brown_maid_dress_fox_tail_red.png", brownMaidDress.get()));
     public static final RegistryObject<Item> brownMaidDressFoxTailWhite = ITEMS.register("brown_maid_dress_fox_tail_white",
             () -> new FoxMaidArmorItem("brown_maid_dress_fox_tail_white.png", brownMaidDress.get()));
+    public static final RegistryObject<Item> brownMaidDressBunnyTailBlack = ITEMS.register("brown_maid_dress_bunny_tail_black",
+            () -> new BunnyMaidArmorItem("brown_maid_dress_bunny_tail_black.png", brownMaidDress.get()));
+    public static final RegistryObject<Item> brownMaidDressBunnyTailCaramel = ITEMS.register("brown_maid_dress_bunny_tail_caramel",
+            () -> new BunnyMaidArmorItem("brown_maid_dress_bunny_tail_caramel.png", brownMaidDress.get()));
+    public static final RegistryObject<Item> brownMaidDressBunnyTailWhite = ITEMS.register("brown_maid_dress_bunny_tail_white",
+            () -> new BunnyMaidArmorItem("brown_maid_dress_bunny_tail_white.png", brownMaidDress.get()));
+    public static final RegistryObject<Item> brownMaidDressDevilTailBlack = ITEMS.register("brown_maid_dress_devil_tail_black",
+            () -> new DevilMaidArmorItem("brown_maid_dress_devil_tail_black.png", brownMaidDress.get()));
+    public static final RegistryObject<Item> brownMaidDressDevilTailPurple = ITEMS.register("brown_maid_dress_devil_tail_purple",
+            () -> new DevilMaidArmorItem("brown_maid_dress_devil_tail_purple.png", brownMaidDress.get()));
+    public static final RegistryObject<Item> brownMaidDressDevilTailRed = ITEMS.register("brown_maid_dress_devil_tail_red",
+            () -> new DevilMaidArmorItem("brown_maid_dress_devil_tail_red.png", brownMaidDress.get()));
 
 
     public static final RegistryObject<Item> cyanMaidDress = ITEMS.register("cyan_maid_dress",
@@ -143,6 +164,18 @@ public class ItemRegister {
             () -> new FoxMaidArmorItem("cyan_maid_dress_fox_tail_red.png", cyanMaidDress.get()));
     public static final RegistryObject<Item> cyanMaidDressFoxTailWhite = ITEMS.register("cyan_maid_dress_fox_tail_white",
             () -> new FoxMaidArmorItem("cyan_maid_dress_fox_tail_white.png", cyanMaidDress.get()));
+    public static final RegistryObject<Item> cyanMaidDressBunnyTailBlack = ITEMS.register("cyan_maid_dress_bunny_tail_black",
+            () -> new BunnyMaidArmorItem("cyan_maid_dress_bunny_tail_black.png", cyanMaidDress.get()));
+    public static final RegistryObject<Item> cyanMaidDressBunnyTailCaramel = ITEMS.register("cyan_maid_dress_bunny_tail_caramel",
+            () -> new BunnyMaidArmorItem("cyan_maid_dress_bunny_tail_caramel.png", cyanMaidDress.get()));
+    public static final RegistryObject<Item> cyanMaidDressBunnyTailWhite = ITEMS.register("cyan_maid_dress_bunny_tail_white",
+            () -> new BunnyMaidArmorItem("cyan_maid_dress_bunny_tail_white.png", cyanMaidDress.get()));
+    public static final RegistryObject<Item> cyanMaidDressDevilTailBlack = ITEMS.register("cyan_maid_dress_devil_tail_black",
+            () -> new DevilMaidArmorItem("cyan_maid_dress_devil_tail_black.png", cyanMaidDress.get()));
+    public static final RegistryObject<Item> cyanMaidDressDevilTailPurple = ITEMS.register("cyan_maid_dress_devil_tail_purple",
+            () -> new DevilMaidArmorItem("cyan_maid_dress_devil_tail_purple.png", cyanMaidDress.get()));
+    public static final RegistryObject<Item> cyanMaidDressDevilTailRed = ITEMS.register("cyan_maid_dress_devil_tail_red",
+            () -> new DevilMaidArmorItem("cyan_maid_dress_devil_tail_red.png", cyanMaidDress.get()));
 
 
     public static final RegistryObject<Item> grayMaidDress = ITEMS.register("gray_maid_dress",
@@ -160,6 +193,19 @@ public class ItemRegister {
             () -> new FoxMaidArmorItem("gray_maid_dress_fox_tail_red.png", grayMaidDress.get()));
     public static final RegistryObject<Item> grayMaidDressFoxTailWhite = ITEMS.register("gray_maid_dress_fox_tail_white",
             () -> new FoxMaidArmorItem("gray_maid_dress_fox_tail_white.png", grayMaidDress.get()));
+    public static final RegistryObject<Item> grayMaidDressBunnyTailBlack = ITEMS.register("gray_maid_dress_bunny_tail_black",
+            () -> new BunnyMaidArmorItem("gray_maid_dress_bunny_tail_black.png", grayMaidDress.get()));
+    public static final RegistryObject<Item> grayMaidDressBunnyTailCaramel = ITEMS.register("gray_maid_dress_bunny_tail_caramel",
+            () -> new BunnyMaidArmorItem("gray_maid_dress_bunny_tail_caramel.png", grayMaidDress.get()));
+    public static final RegistryObject<Item> grayMaidDressBunnyTailWhite = ITEMS.register("gray_maid_dress_bunny_tail_white",
+            () -> new BunnyMaidArmorItem("gray_maid_dress_bunny_tail_white.png", grayMaidDress.get()));
+    public static final RegistryObject<Item> grayMaidDressDevilTailBlack = ITEMS.register("gray_maid_dress_devil_tail_black",
+            () -> new DevilMaidArmorItem("gray_maid_dress_devil_tail_black.png", grayMaidDress.get()));
+    public static final RegistryObject<Item> grayMaidDressDevilTailPurple = ITEMS.register("gray_maid_dress_devil_tail_purple",
+            () -> new DevilMaidArmorItem("gray_maid_dress_devil_tail_purple.png", grayMaidDress.get()));
+    public static final RegistryObject<Item> grayMaidDressDevilTailRed = ITEMS.register("gray_maid_dress_devil_tail_red",
+            () -> new DevilMaidArmorItem("gray_maid_dress_devil_tail_red.png", grayMaidDress.get()));
+
 
     public static final RegistryObject<Item> greenMaidDress = ITEMS.register("green_maid_dress",
             () -> new MaidDressArmorItem("green_maid_dress_cat_tail_black.png"));
@@ -176,6 +222,19 @@ public class ItemRegister {
             () -> new FoxMaidArmorItem("green_maid_dress_fox_tail_red.png", greenMaidDress.get()));
     public static final RegistryObject<Item> greenMaidDressFoxTailWhite = ITEMS.register("green_maid_dress_fox_tail_white",
             () -> new FoxMaidArmorItem("green_maid_dress_fox_tail_white.png", greenMaidDress.get()));
+    public static final RegistryObject<Item> greenMaidDressBunnyTailBlack = ITEMS.register("green_maid_dress_bunny_tail_black",
+            () -> new BunnyMaidArmorItem("green_maid_dress_bunny_tail_black.png", greenMaidDress.get()));
+    public static final RegistryObject<Item> greenMaidDressBunnyTailCaramel = ITEMS.register("green_maid_dress_bunny_tail_caramel",
+            () -> new BunnyMaidArmorItem("green_maid_dress_bunny_tail_caramel.png", greenMaidDress.get()));
+    public static final RegistryObject<Item> greenMaidDressBunnyTailWhite = ITEMS.register("green_maid_dress_bunny_tail_white",
+            () -> new BunnyMaidArmorItem("green_maid_dress_bunny_tail_white.png", greenMaidDress.get()));
+    public static final RegistryObject<Item> greenMaidDressDevilTailBlack = ITEMS.register("green_maid_dress_devil_tail_black",
+            () -> new DevilMaidArmorItem("green_maid_dress_devil_tail_black.png", greenMaidDress.get()));
+    public static final RegistryObject<Item> greenMaidDressDevilTailPurple = ITEMS.register("green_maid_dress_devil_tail_purple",
+            () -> new DevilMaidArmorItem("green_maid_dress_devil_tail_purple.png", greenMaidDress.get()));
+    public static final RegistryObject<Item> greenMaidDressDevilTailRed = ITEMS.register("green_maid_dress_devil_tail_red",
+            () -> new DevilMaidArmorItem("green_maid_dress_devil_tail_red.png", greenMaidDress.get()));
+
 
     public static final RegistryObject<Item> light_blueMaidDress = ITEMS.register("light_blue_maid_dress",
             () -> new MaidDressArmorItem("light_blue_maid_dress_cat_tail_black.png"));
@@ -192,6 +251,18 @@ public class ItemRegister {
             () -> new FoxMaidArmorItem("light_blue_maid_dress_fox_tail_red.png", light_blueMaidDress.get()));
     public static final RegistryObject<Item> light_blueMaidDressFoxTailWhite = ITEMS.register("light_blue_maid_dress_fox_tail_white",
             () -> new FoxMaidArmorItem("light_blue_maid_dress_fox_tail_white.png", light_blueMaidDress.get()));
+    public static final RegistryObject<Item> light_blueMaidDressBunnyTailBlack = ITEMS.register("light_blue_maid_dress_bunny_tail_black",
+            () -> new BunnyMaidArmorItem("light_blue_maid_dress_bunny_tail_black.png", light_blueMaidDress.get()));
+    public static final RegistryObject<Item> light_blueMaidDressBunnyTailCaramel = ITEMS.register("light_blue_maid_dress_bunny_tail_caramel",
+            () -> new BunnyMaidArmorItem("light_blue_maid_dress_bunny_tail_caramel.png", light_blueMaidDress.get()));
+    public static final RegistryObject<Item> light_blueMaidDressBunnyTailWhite = ITEMS.register("light_blue_maid_dress_bunny_tail_white",
+            () -> new BunnyMaidArmorItem("light_blue_maid_dress_bunny_tail_white.png", light_blueMaidDress.get()));
+    public static final RegistryObject<Item> light_blueMaidDressDevilTailBlack = ITEMS.register("light_blue_maid_dress_devil_tail_black",
+            () -> new DevilMaidArmorItem("light_blue_maid_dress_devil_tail_black.png", light_blueMaidDress.get()));
+    public static final RegistryObject<Item> light_blueMaidDressDevilTailPurple = ITEMS.register("light_blue_maid_dress_devil_tail_purple",
+            () -> new DevilMaidArmorItem("light_blue_maid_dress_devil_tail_purple.png", light_blueMaidDress.get()));
+    public static final RegistryObject<Item> light_blueMaidDressDevilTailRed = ITEMS.register("light_blue_maid_dress_devil_tail_red",
+            () -> new DevilMaidArmorItem("light_blue_maid_dress_devil_tail_red.png", light_blueMaidDress.get()));
 
 
     public static final RegistryObject<Item> light_grayMaidDress = ITEMS.register("light_gray_maid_dress",
@@ -209,6 +280,18 @@ public class ItemRegister {
             () -> new FoxMaidArmorItem("light_gray_maid_dress_fox_tail_red.png", light_grayMaidDress.get()));
     public static final RegistryObject<Item> light_grayMaidDressFoxTailWhite = ITEMS.register("light_gray_maid_dress_fox_tail_white",
             () -> new FoxMaidArmorItem("light_gray_maid_dress_fox_tail_white.png", light_grayMaidDress.get()));
+    public static final RegistryObject<Item> light_grayMaidDressBunnyTailBlack = ITEMS.register("light_gray_maid_dress_bunny_tail_black",
+            () -> new BunnyMaidArmorItem("light_gray_maid_dress_bunny_tail_black.png", light_grayMaidDress.get()));
+    public static final RegistryObject<Item> light_grayMaidDressBunnyTailCaramel = ITEMS.register("light_gray_maid_dress_bunny_tail_caramel",
+            () -> new BunnyMaidArmorItem("light_gray_maid_dress_bunny_tail_caramel.png", light_grayMaidDress.get()));
+    public static final RegistryObject<Item> light_grayMaidDressBunnyTailWhite = ITEMS.register("light_gray_maid_dress_bunny_tail_white",
+            () -> new BunnyMaidArmorItem("light_gray_maid_dress_bunny_tail_white.png", light_grayMaidDress.get()));
+    public static final RegistryObject<Item> light_grayMaidDressDevilTailBlack = ITEMS.register("light_gray_maid_dress_devil_tail_black",
+            () -> new DevilMaidArmorItem("light_gray_maid_dress_devil_tail_black.png", light_grayMaidDress.get()));
+    public static final RegistryObject<Item> light_grayMaidDressDevilTailPurple = ITEMS.register("light_gray_maid_dress_devil_tail_purple",
+            () -> new DevilMaidArmorItem("light_gray_maid_dress_devil_tail_purple.png", light_grayMaidDress.get()));
+    public static final RegistryObject<Item> light_grayMaidDressDevilTailRed = ITEMS.register("light_gray_maid_dress_devil_tail_red",
+            () -> new DevilMaidArmorItem("light_gray_maid_dress_devil_tail_red.png", light_grayMaidDress.get()));
 
 
     public static final RegistryObject<Item> limeMaidDress = ITEMS.register("lime_maid_dress",
@@ -226,6 +309,19 @@ public class ItemRegister {
             () -> new FoxMaidArmorItem("lime_maid_dress_fox_tail_red.png", limeMaidDress.get()));
     public static final RegistryObject<Item> limeMaidDressFoxTailWhite = ITEMS.register("lime_maid_dress_fox_tail_white",
             () -> new FoxMaidArmorItem("lime_maid_dress_fox_tail_white.png", limeMaidDress.get()));
+    public static final RegistryObject<Item> limeMaidDressBunnyTailBlack = ITEMS.register("lime_maid_dress_bunny_tail_black",
+            () -> new BunnyMaidArmorItem("lime_maid_dress_bunny_tail_black.png", limeMaidDress.get()));
+    public static final RegistryObject<Item> limeMaidDressBunnyTailCaramel = ITEMS.register("lime_maid_dress_bunny_tail_caramel",
+            () -> new BunnyMaidArmorItem("lime_maid_dress_bunny_tail_caramel.png", limeMaidDress.get()));
+    public static final RegistryObject<Item> limeMaidDressBunnyTailWhite = ITEMS.register("lime_maid_dress_bunny_tail_white",
+            () -> new BunnyMaidArmorItem("lime_maid_dress_bunny_tail_white.png", limeMaidDress.get()));
+    public static final RegistryObject<Item> limeMaidDressDevilTailBlack = ITEMS.register("lime_maid_dress_devil_tail_black",
+            () -> new DevilMaidArmorItem("lime_maid_dress_devil_tail_black.png", limeMaidDress.get()));
+    public static final RegistryObject<Item> limeMaidDressDevilTailPurple = ITEMS.register("lime_maid_dress_devil_tail_purple",
+            () -> new DevilMaidArmorItem("lime_maid_dress_devil_tail_purple.png", limeMaidDress.get()));
+    public static final RegistryObject<Item> limeMaidDressDevilTailRed = ITEMS.register("lime_maid_dress_devil_tail_red",
+            () -> new DevilMaidArmorItem("lime_maid_dress_devil_tail_red.png", limeMaidDress.get()));
+
 
     public static final RegistryObject<Item> magentaMaidDress = ITEMS.register("magenta_maid_dress",
             () -> new MaidDressArmorItem("magenta_maid_dress_cat_tail_black.png"));
@@ -242,6 +338,18 @@ public class ItemRegister {
             () -> new FoxMaidArmorItem("magenta_maid_dress_fox_tail_red.png", magentaMaidDress.get()));
     public static final RegistryObject<Item> magentaMaidDressFoxTailWhite = ITEMS.register("magenta_maid_dress_fox_tail_white",
             () -> new FoxMaidArmorItem("magenta_maid_dress_fox_tail_white.png", magentaMaidDress.get()));
+    public static final RegistryObject<Item> magentaMaidDressBunnyTailBlack = ITEMS.register("magenta_maid_dress_bunny_tail_black",
+            () -> new BunnyMaidArmorItem("magenta_maid_dress_bunny_tail_black.png", magentaMaidDress.get()));
+    public static final RegistryObject<Item> magentaMaidDressBunnyTailCaramel = ITEMS.register("magenta_maid_dress_bunny_tail_caramel",
+            () -> new BunnyMaidArmorItem("magenta_maid_dress_bunny_tail_caramel.png", magentaMaidDress.get()));
+    public static final RegistryObject<Item> magentaMaidDressBunnyTailWhite = ITEMS.register("magenta_maid_dress_bunny_tail_white",
+            () -> new BunnyMaidArmorItem("magenta_maid_dress_bunny_tail_white.png", magentaMaidDress.get()));
+    public static final RegistryObject<Item> magentaMaidDressDevilTailBlack = ITEMS.register("magenta_maid_dress_devil_tail_black",
+            () -> new DevilMaidArmorItem("magenta_maid_dress_devil_tail_black.png", magentaMaidDress.get()));
+    public static final RegistryObject<Item> magentaMaidDressDevilTailPurple = ITEMS.register("magenta_maid_dress_devil_tail_purple",
+            () -> new DevilMaidArmorItem("magenta_maid_dress_devil_tail_purple.png", magentaMaidDress.get()));
+    public static final RegistryObject<Item> magentaMaidDressDevilTailRed = ITEMS.register("magenta_maid_dress_devil_tail_red",
+            () -> new DevilMaidArmorItem("magenta_maid_dress_devil_tail_red.png", magentaMaidDress.get()));
 
 
     public static final RegistryObject<Item> orangeMaidDress = ITEMS.register("orange_maid_dress",
@@ -259,6 +367,19 @@ public class ItemRegister {
             () -> new FoxMaidArmorItem("orange_maid_dress_fox_tail_red.png", orangeMaidDress.get()));
     public static final RegistryObject<Item> orangeMaidDressFoxTailWhite = ITEMS.register("orange_maid_dress_fox_tail_white",
             () -> new FoxMaidArmorItem("orange_maid_dress_fox_tail_white.png", orangeMaidDress.get()));
+    public static final RegistryObject<Item> orangeMaidDressBunnyTailBlack = ITEMS.register("orange_maid_dress_bunny_tail_black",
+            () -> new BunnyMaidArmorItem("orange_maid_dress_bunny_tail_black.png", orangeMaidDress.get()));
+    public static final RegistryObject<Item> orangeMaidDressBunnyTailCaramel = ITEMS.register("orange_maid_dress_bunny_tail_caramel",
+            () -> new BunnyMaidArmorItem("orange_maid_dress_bunny_tail_caramel.png", orangeMaidDress.get()));
+    public static final RegistryObject<Item> orangeMaidDressBunnyTailWhite = ITEMS.register("orange_maid_dress_bunny_tail_white",
+            () -> new BunnyMaidArmorItem("orange_maid_dress_bunny_tail_white.png", orangeMaidDress.get()));
+    public static final RegistryObject<Item> orangeMaidDressDevilTailBlack = ITEMS.register("orange_maid_dress_devil_tail_black",
+            () -> new DevilMaidArmorItem("orange_maid_dress_devil_tail_black.png", orangeMaidDress.get()));
+    public static final RegistryObject<Item> orangeMaidDressDevilTailPurple = ITEMS.register("orange_maid_dress_devil_tail_purple",
+            () -> new DevilMaidArmorItem("orange_maid_dress_devil_tail_purple.png", orangeMaidDress.get()));
+    public static final RegistryObject<Item> orangeMaidDressDevilTailRed = ITEMS.register("orange_maid_dress_devil_tail_red",
+            () -> new DevilMaidArmorItem("orange_maid_dress_devil_tail_red.png", orangeMaidDress.get()));
+
 
     public static final RegistryObject<Item> pinkMaidDress = ITEMS.register("pink_maid_dress",
             () -> new MaidDressArmorItem("pink_maid_dress_cat_tail_black.png"));
@@ -275,6 +396,19 @@ public class ItemRegister {
             () -> new FoxMaidArmorItem("pink_maid_dress_fox_tail_red.png", pinkMaidDress.get()));
     public static final RegistryObject<Item> pinkMaidDressFoxTailWhite = ITEMS.register("pink_maid_dress_fox_tail_white",
             () -> new FoxMaidArmorItem("pink_maid_dress_fox_tail_white.png", pinkMaidDress.get()));
+    public static final RegistryObject<Item> pinkMaidDressBunnyTailBlack = ITEMS.register("pink_maid_dress_bunny_tail_black",
+            () -> new BunnyMaidArmorItem("pink_maid_dress_bunny_tail_black.png", pinkMaidDress.get()));
+    public static final RegistryObject<Item> pinkMaidDressBunnyTailCaramel = ITEMS.register("pink_maid_dress_bunny_tail_caramel",
+            () -> new BunnyMaidArmorItem("pink_maid_dress_bunny_tail_caramel.png", pinkMaidDress.get()));
+    public static final RegistryObject<Item> pinkMaidDressBunnyTailWhite = ITEMS.register("pink_maid_dress_bunny_tail_white",
+            () -> new BunnyMaidArmorItem("pink_maid_dress_bunny_tail_white.png", pinkMaidDress.get()));
+    public static final RegistryObject<Item> pinkMaidDressDevilTailBlack = ITEMS.register("pink_maid_dress_devil_tail_black",
+            () -> new DevilMaidArmorItem("pink_maid_dress_devil_tail_black.png", pinkMaidDress.get()));
+    public static final RegistryObject<Item> pinkMaidDressDevilTailPurple = ITEMS.register("pink_maid_dress_devil_tail_purple",
+            () -> new DevilMaidArmorItem("pink_maid_dress_devil_tail_purple.png", pinkMaidDress.get()));
+    public static final RegistryObject<Item> pinkMaidDressDevilTailRed = ITEMS.register("pink_maid_dress_devil_tail_red",
+            () -> new DevilMaidArmorItem("pink_maid_dress_devil_tail_red.png", pinkMaidDress.get()));
+
 
     public static final RegistryObject<Item> redMaidDress = ITEMS.register("red_maid_dress",
             () -> new MaidDressArmorItem("red_maid_dress_cat_tail_black.png"));
@@ -291,6 +425,19 @@ public class ItemRegister {
             () -> new FoxMaidArmorItem("red_maid_dress_fox_tail_red.png", redMaidDress.get()));
     public static final RegistryObject<Item> redMaidDressFoxTailWhite = ITEMS.register("red_maid_dress_fox_tail_white",
             () -> new FoxMaidArmorItem("red_maid_dress_fox_tail_white.png", redMaidDress.get()));
+    public static final RegistryObject<Item> redMaidDressBunnyTailBlack = ITEMS.register("red_maid_dress_bunny_tail_black",
+            () -> new BunnyMaidArmorItem("red_maid_dress_bunny_tail_black.png", redMaidDress.get()));
+    public static final RegistryObject<Item> redMaidDressBunnyTailCaramel = ITEMS.register("red_maid_dress_bunny_tail_caramel",
+            () -> new BunnyMaidArmorItem("red_maid_dress_bunny_tail_caramel.png", redMaidDress.get()));
+    public static final RegistryObject<Item> redMaidDressBunnyTailWhite = ITEMS.register("red_maid_dress_bunny_tail_white",
+            () -> new BunnyMaidArmorItem("red_maid_dress_bunny_tail_white.png", redMaidDress.get()));
+    public static final RegistryObject<Item> redMaidDressDevilTailBlack = ITEMS.register("red_maid_dress_devil_tail_black",
+            () -> new DevilMaidArmorItem("red_maid_dress_devil_tail_black.png", redMaidDress.get()));
+    public static final RegistryObject<Item> redMaidDressDevilTailPurple = ITEMS.register("red_maid_dress_devil_tail_purple",
+            () -> new DevilMaidArmorItem("red_maid_dress_devil_tail_purple.png", redMaidDress.get()));
+    public static final RegistryObject<Item> redMaidDressDevilTailRed = ITEMS.register("red_maid_dress_devil_tail_red",
+            () -> new DevilMaidArmorItem("red_maid_dress_devil_tail_red.png", redMaidDress.get()));
+
 
     public static final RegistryObject<Item> whiteMaidDress = ITEMS.register("white_maid_dress",
             () -> new MaidDressArmorItem("white_maid_dress_cat_tail_black.png"));
@@ -307,6 +454,48 @@ public class ItemRegister {
             () -> new FoxMaidArmorItem("white_maid_dress_fox_tail_red.png", whiteMaidDress.get()));
     public static final RegistryObject<Item> whiteMaidDressFoxTailWhite = ITEMS.register("white_maid_dress_fox_tail_white",
             () -> new FoxMaidArmorItem("white_maid_dress_fox_tail_white.png", whiteMaidDress.get()));
+    public static final RegistryObject<Item> whiteMaidDressBunnyTailBlack = ITEMS.register("white_maid_dress_bunny_tail_black",
+            () -> new BunnyMaidArmorItem("white_maid_dress_bunny_tail_black.png", whiteMaidDress.get()));
+    public static final RegistryObject<Item> whiteMaidDressBunnyTailCaramel = ITEMS.register("white_maid_dress_bunny_tail_caramel",
+            () -> new BunnyMaidArmorItem("white_maid_dress_bunny_tail_caramel.png", whiteMaidDress.get()));
+    public static final RegistryObject<Item> whiteMaidDressBunnyTailWhite = ITEMS.register("white_maid_dress_bunny_tail_white",
+            () -> new BunnyMaidArmorItem("white_maid_dress_bunny_tail_white.png", whiteMaidDress.get()));
+    public static final RegistryObject<Item> whiteMaidDressDevilTailBlack = ITEMS.register("white_maid_dress_devil_tail_black",
+            () -> new DevilMaidArmorItem("white_maid_dress_devil_tail_black.png", whiteMaidDress.get()));
+    public static final RegistryObject<Item> whiteMaidDressDevilTailPurple = ITEMS.register("white_maid_dress_devil_tail_purple",
+            () -> new DevilMaidArmorItem("white_maid_dress_devil_tail_purple.png", whiteMaidDress.get()));
+    public static final RegistryObject<Item> whiteMaidDressDevilTailRed = ITEMS.register("white_maid_dress_devil_tail_red",
+            () -> new DevilMaidArmorItem("white_maid_dress_devil_tail_red.png", whiteMaidDress.get()));
+
+
+    public static final RegistryObject<Item> blackMaidDress = ITEMS.register("black_maid_dress",
+            () -> new MaidDressArmorItem("black_maid_dress_cat_tail_black.png"));
+
+    public static final RegistryObject<Item> blackMaidDressCatTailBlack = ITEMS.register("black_maid_dress_cat_tail_black",
+            () -> new CatMaidArmorItem("black_maid_dress_cat_tail_black.png", blackMaidDress.get()));
+    public static final RegistryObject<Item> blackMaidDressCatTailCaramel = ITEMS.register("black_maid_dress_cat_tail_caramel",
+            () -> new CatMaidArmorItem("black_maid_dress_cat_tail_caramel.png", blackMaidDress.get()));
+    public static final RegistryObject<Item> blackMaidDressCatTailWhite = ITEMS.register("black_maid_dress_cat_tail_white",
+            () -> new CatMaidArmorItem("black_maid_dress_cat_tail_white.png", blackMaidDress.get()));
+    public static final RegistryObject<Item> blackMaidDressFoxTailBlack = ITEMS.register("black_maid_dress_fox_tail_black",
+            () -> new FoxMaidArmorItem("black_maid_dress_fox_tail_black.png", blackMaidDress.get()));
+    public static final RegistryObject<Item> blackMaidDressFoxTailRed = ITEMS.register("black_maid_dress_fox_tail_red",
+            () -> new FoxMaidArmorItem("black_maid_dress_fox_tail_red.png", blackMaidDress.get()));
+    public static final RegistryObject<Item> blackMaidDressFoxTailWhite = ITEMS.register("black_maid_dress_fox_tail_white",
+            () -> new FoxMaidArmorItem("black_maid_dress_fox_tail_white.png", blackMaidDress.get()));
+    public static final RegistryObject<Item> blackMaidDressBunnyTailBlack = ITEMS.register("black_maid_dress_bunny_tail_black",
+            () -> new BunnyMaidArmorItem("black_maid_dress_bunny_tail_black.png", blackMaidDress.get()));
+    public static final RegistryObject<Item> blackMaidDressBunnyTailCaramel = ITEMS.register("black_maid_dress_bunny_tail_caramel",
+            () -> new BunnyMaidArmorItem("black_maid_dress_bunny_tail_caramel.png", blackMaidDress.get()));
+    public static final RegistryObject<Item> blackMaidDressBunnyTailWhite = ITEMS.register("black_maid_dress_bunny_tail_white",
+            () -> new BunnyMaidArmorItem("black_maid_dress_bunny_tail_white.png", blackMaidDress.get()));
+    public static final RegistryObject<Item> blackMaidDressDevilTailBlack = ITEMS.register("black_maid_dress_devil_tail_black",
+            () -> new DevilMaidArmorItem("black_maid_dress_devil_tail_black.png", blackMaidDress.get()));
+    public static final RegistryObject<Item> blackMaidDressDevilTailPurple = ITEMS.register("black_maid_dress_devil_tail_purple",
+            () -> new DevilMaidArmorItem("black_maid_dress_devil_tail_purple.png", blackMaidDress.get()));
+    public static final RegistryObject<Item> blackMaidDressDevilTailRed = ITEMS.register("black_maid_dress_devil_tail_red",
+            () -> new DevilMaidArmorItem("black_maid_dress_devil_tail_red.png", blackMaidDress.get()));
+
 
     public static final RegistryObject<Item> yellowMaidDress = ITEMS.register("yellow_maid_dress",
             () -> new MaidDressArmorItem("yellow_maid_dress_cat_tail_black.png"));
@@ -323,6 +512,19 @@ public class ItemRegister {
             () -> new FoxMaidArmorItem("yellow_maid_dress_fox_tail_red.png", yellowMaidDress.get()));
     public static final RegistryObject<Item> yellowMaidDressFoxTailWhite = ITEMS.register("yellow_maid_dress_fox_tail_white",
             () -> new FoxMaidArmorItem("yellow_maid_dress_fox_tail_white.png", yellowMaidDress.get()));
+    public static final RegistryObject<Item> yellowMaidDressBunnyTailBlack = ITEMS.register("yellow_maid_dress_bunny_tail_black",
+            () -> new BunnyMaidArmorItem("yellow_maid_dress_bunny_tail_black.png", yellowMaidDress.get()));
+    public static final RegistryObject<Item> yellowMaidDressBunnyTailCaramel = ITEMS.register("yellow_maid_dress_bunny_tail_caramel",
+            () -> new BunnyMaidArmorItem("yellow_maid_dress_bunny_tail_caramel.png", yellowMaidDress.get()));
+    public static final RegistryObject<Item> yellowMaidDressBunnyTailWhite = ITEMS.register("yellow_maid_dress_bunny_tail_white",
+            () -> new BunnyMaidArmorItem("yellow_maid_dress_bunny_tail_white.png", yellowMaidDress.get()));
+    public static final RegistryObject<Item> yellowMaidDressDevilTailBlack = ITEMS.register("yellow_maid_dress_devil_tail_black",
+            () -> new DevilMaidArmorItem("yellow_maid_dress_devil_tail_black.png", yellowMaidDress.get()));
+    public static final RegistryObject<Item> yellowMaidDressDevilTailPurple = ITEMS.register("yellow_maid_dress_devil_tail_purple",
+            () -> new DevilMaidArmorItem("yellow_maid_dress_devil_tail_purple.png", yellowMaidDress.get()));
+    public static final RegistryObject<Item> yellowMaidDressDevilTailRed = ITEMS.register("yellow_maid_dress_devil_tail_red",
+            () -> new DevilMaidArmorItem("yellow_maid_dress_devil_tail_red.png", yellowMaidDress.get()));
+
 
     public static final RegistryObject<Item> purpleMaidDress = ITEMS.register("purple_maid_dress",
             () -> new MaidDressArmorItem("purple_maid_dress_cat_tail_black.png"));
@@ -339,6 +541,18 @@ public class ItemRegister {
             () -> new FoxMaidArmorItem("purple_maid_dress_fox_tail_red.png", purpleMaidDress.get()));
     public static final RegistryObject<Item> purpleMaidDressFoxTailWhite = ITEMS.register("purple_maid_dress_fox_tail_white",
             () -> new FoxMaidArmorItem("purple_maid_dress_fox_tail_white.png", purpleMaidDress.get()));
+    public static final RegistryObject<Item> purpleMaidDressBunnyTailBlack = ITEMS.register("purple_maid_dress_bunny_tail_black",
+            () -> new BunnyMaidArmorItem("purple_maid_dress_bunny_tail_black.png", purpleMaidDress.get()));
+    public static final RegistryObject<Item> purpleMaidDressBunnyTailCaramel = ITEMS.register("purple_maid_dress_bunny_tail_caramel",
+            () -> new BunnyMaidArmorItem("purple_maid_dress_bunny_tail_caramel.png", purpleMaidDress.get()));
+    public static final RegistryObject<Item> purpleMaidDressBunnyTailWhite = ITEMS.register("purple_maid_dress_bunny_tail_white",
+            () -> new BunnyMaidArmorItem("purple_maid_dress_bunny_tail_white.png", purpleMaidDress.get()));
+    public static final RegistryObject<Item> purpleMaidDressDevilTailBlack = ITEMS.register("purple_maid_dress_devil_tail_black",
+            () -> new DevilMaidArmorItem("purple_maid_dress_devil_tail_black.png", purpleMaidDress.get()));
+    public static final RegistryObject<Item> purpleMaidDressDevilTailPurple = ITEMS.register("purple_maid_dress_devil_tail_purple",
+            () -> new DevilMaidArmorItem("purple_maid_dress_devil_tail_purple.png", purpleMaidDress.get()));
+    public static final RegistryObject<Item> purpleMaidDressDevilTailRed = ITEMS.register("purple_maid_dress_devil_tail_red",
+            () -> new DevilMaidArmorItem("purple_maid_dress_devil_tail_red.png", purpleMaidDress.get()));
 
     public static final RegistryObject<Item> whiteThighHighs = ITEMS.register("white_thigh_highs",
             () -> new ThighHighsArmorItem("white_thigh_highs.png", EquipmentSlot.LEGS));

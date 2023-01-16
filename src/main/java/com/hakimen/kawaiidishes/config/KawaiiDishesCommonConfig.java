@@ -5,14 +5,16 @@ import net.minecraftforge.common.ForgeConfigSpec;
 public class KawaiiDishesCommonConfig {
     public static final ForgeConfigSpec.Builder commonConfigBuilder = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec commonSpec;
-
     public static final ForgeConfigSpec.BooleanValue shouldMobSpawnWithDress;
     public static final ForgeConfigSpec.DoubleValue chanceToSpawnWithDress;
-
+    public static final ForgeConfigSpec.BooleanValue shouldSendMessage;
     public static final ForgeConfigSpec.DoubleValue changeToDropArmorSet;
 
     static {
         commonConfigBuilder.push("Common Configs for Kawaii Dishes");
+
+        shouldSendMessage = commonConfigBuilder.comment("Define if the Kawaii Effect can send messages to the local player")
+                .define("canSendMessage",true);
 
         shouldMobSpawnWithDress = commonConfigBuilder.comment("Should the mobs spawn with the maid dresses")
                         .define("shouldSpawn", true);
@@ -21,7 +23,6 @@ public class KawaiiDishesCommonConfig {
                 .defineInRange("chanceToSpawn", 0.075,0,1);
         changeToDropArmorSet = commonConfigBuilder.comment("Sets the chance for mobs that spawn with maid dresses to drop them")
                 .defineInRange("chanceToDrop", 0.25,0,1);
-
 
 
         commonConfigBuilder.pop();

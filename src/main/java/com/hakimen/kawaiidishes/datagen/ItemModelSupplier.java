@@ -55,6 +55,15 @@ public class ItemModelSupplier extends ItemModelProvider {
                 else if(path.endsWith("_fox_ears_red")) {
                     foxBandItem(item.get(),"fox_ears_red","fox_ears_red");
                 }
+                else if(path.endsWith("_bunny_ears_black")){
+                    bunnyBandItem(item.get(),"bunny_ears_black","bunny_ears_black");
+                }
+                else if(path.endsWith("_bunny_ears_white")){
+                    bunnyBandItem(item.get(),"bunny_ears_white","bunny_ears_white");
+                }
+                else if(path.endsWith("_bunny_ears_caramel")) {
+                    bunnyBandItem(item.get(),"bunny_ears_caramel","bunny_ears_caramel");
+                }
                 else{
                     headBandItem(item.get());
                 }
@@ -124,6 +133,14 @@ public class ItemModelSupplier extends ItemModelProvider {
                 new ResourceLocation(KawaiiDishes.modId,"item/fox_headband"))
                 .texture("0", new ResourceLocation(KawaiiDishes.modId,"item/" + type))
                 .texture("1", new ResourceLocation(KawaiiDishes.modId,"item/headbands/" + Registry.ITEM.getKey(item).toString().replaceAll(KawaiiDishes.modId+":","").replaceAll("_"+name,"")));
+
+    }
+    private ItemModelBuilder bunnyBandItem(Item item,String type,String name) {
+        return withExistingParent(
+                Registry.ITEM.getKey(item).toString().replaceAll(KawaiiDishes.modId+":",""),
+                new ResourceLocation(KawaiiDishes.modId,"item/bunny_headband"))
+                .texture("1", new ResourceLocation(KawaiiDishes.modId,"item/" + type))
+                .texture("0", new ResourceLocation(KawaiiDishes.modId,"item/headbands/" + Registry.ITEM.getKey(item).toString().replaceAll(KawaiiDishes.modId+":","").replaceAll("_"+name,"")));
 
     }
     private ItemModelBuilder headBandItem(Item item) {

@@ -49,15 +49,13 @@ public class KawaiiDishes {
     public static final String modId = "kawaiidishes";
 
     public KawaiiDishes() {
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, KawaiiDishesClientConfig.clientSpec, "kawaii-dishes-client.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, KawaiiDishesCommonConfig.commonSpec, "kawaii-dishes-common.toml");
 
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+
         Registration.init();
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
-
-
         forgeBus.addListener(this::onLivingSpecialSpawn);
         bus.addListener(this::enqueueIMC);
         bus.addListener(this::clientStartup);

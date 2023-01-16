@@ -34,6 +34,7 @@ public class MaidMobEventHandler {
             "none",
             "fox",
             "cat",
+            "bunny"
     };
 
     public static String[] catColors = new String[]{
@@ -63,7 +64,7 @@ public class MaidMobEventHandler {
             case "fox" -> {
                 typeColor = foxColors[r.nextInt(foxColors.length)];
             }
-            case "cat" -> {
+            case "cat","bunny" -> {
                 typeColor = catColors[r.nextInt(catColors.length)];
             }
         }

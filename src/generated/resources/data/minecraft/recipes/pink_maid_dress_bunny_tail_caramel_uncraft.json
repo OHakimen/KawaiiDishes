@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:pink_maid_dress_bunny_tail_caramel"
+    }
+  ],
+  "result": {
+    "item": "kawaiidishes:caramel_bunny_tail"
+  }
+}

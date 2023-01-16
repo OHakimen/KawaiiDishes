@@ -58,6 +58,15 @@ public class LangSupplier extends LanguageProvider {
                 if(itemPath.equals(name +"_fox_tail_white")){
                     add(items.get(),dressNames.get(itemPath.replace("_fox_tail_white",""))+" White Fox Tailed");
                 }
+                if(itemPath.equals(name +"_bunny_tail_black")){
+                    add(items.get(),dressNames.get(itemPath.replace("_bunny_tail_black",""))+" Black Bunny Tailed");
+                }
+                if(itemPath.equals(name +"_bunny_tail_caramel")){
+                    add(items.get(),dressNames.get(itemPath.replace("_bunny_tail_caramel",""))+" Red Bunny Tailed");
+                }
+                if(itemPath.equals(name +"_bunny_tail_white")){
+                    add(items.get(),dressNames.get(itemPath.replace("_bunny_tail_white",""))+" White Bunny Tailed");
+                }
                 if(itemPath.equals(name)){
                     add(items.get(),dressNames.get(itemPath));
                 }
@@ -70,9 +79,11 @@ public class LangSupplier extends LanguageProvider {
                     add(items.get(), setFirstLetterUpperCase(itemPath.replace("_cat_ears", "_with_cat_ears").replaceAll("_", " ")));
                 }else if(itemPath.contains("_fox_ears")){
                     add(items.get(),setFirstLetterUpperCase(itemPath.replace("_fox_ears","_with_fox_ears").replaceAll("_"," ")));
-                }else{
+                }else if(itemPath.contains("_bunny_ears")){
+                    add(items.get(),setFirstLetterUpperCase(itemPath.replace("_bunny_ears","_with_bunny_ears").replaceAll("_"," ")));
+                }
+                else{
                     add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
-
                 }
             }
         }
@@ -119,6 +130,10 @@ public class LangSupplier extends LanguageProvider {
         add(ItemRegister.whiteFoxTail.get(),"White Fox Tail");
         add(ItemRegister.blackFoxTail.get(),"Black Fox Tail");
 
+        add(ItemRegister.caramelBunnyTail.get(),"Caramel Bunny Tail");
+        add(ItemRegister.whiteBunnyTail.get(),"White Bunny Tail");
+        add(ItemRegister.blackBunnyTail.get(),"Black Bunny Tail");
+
         add(ItemRegister.caramelCatEars.get(),"Caramel Cat Ears");
         add(ItemRegister.blackCatEars.get(),"Black Cat Ears");
         add(ItemRegister.whiteCatEars.get(),"White Cat Ears");
@@ -126,6 +141,10 @@ public class LangSupplier extends LanguageProvider {
         add(ItemRegister.redFoxEars.get(),"Red Fox Ears");
         add(ItemRegister.blackFoxEars.get(),"Black Fox Ears");
         add(ItemRegister.whiteFoxEars.get(),"White Fox Ears");
+
+        add(ItemRegister.whiteBunnyEars.get(),"White Bunny Ears");
+        add(ItemRegister.caramelBunnyEars.get(),"Caramel Bunny Ears");
+        add(ItemRegister.blackBunnyEars.get(),"Black Bunny Ears");
 
         add(ItemRegister.blackThighHighs.get(),"Black Thigh Highs");
         add(ItemRegister.whiteThighHighs.get(),"White Thigh Highs");

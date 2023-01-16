@@ -510,6 +510,10 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
         foxEars(pFinishedRecipeConsumer, ItemRegister.whiteFoxEars.get(), Items.WHITE_WOOL);
         foxEars(pFinishedRecipeConsumer, ItemRegister.redFoxEars.get(), Items.ORANGE_WOOL);
 
+        bunnyEars(pFinishedRecipeConsumer, ItemRegister.blackBunnyEars.get(), Items.BLACK_WOOL);
+        bunnyEars(pFinishedRecipeConsumer, ItemRegister.whiteBunnyEars.get(), Items.WHITE_WOOL);
+        bunnyEars(pFinishedRecipeConsumer, ItemRegister.caramelBunnyEars.get(), Items.YELLOW_WOOL);
+
 
         catTails(pFinishedRecipeConsumer, ItemRegister.blackCatTail.get(), Items.BLACK_WOOL);
         catTails(pFinishedRecipeConsumer, ItemRegister.whiteCatTail.get(), Items.WHITE_WOOL);
@@ -518,6 +522,11 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
         foxTails(pFinishedRecipeConsumer, ItemRegister.blackFoxTail.get(), Items.BLACK_WOOL, Items.WHITE_WOOL);
         foxTails(pFinishedRecipeConsumer, ItemRegister.redFoxTail.get(), Items.ORANGE_WOOL, Items.WHITE_WOOL);
         foxTails(pFinishedRecipeConsumer, ItemRegister.whiteFoxTail.get(), Items.WHITE_WOOL, Items.WHITE_WOOL);
+
+        bunnyTails(pFinishedRecipeConsumer, ItemRegister.blackBunnyTail.get(), Items.BLACK_WOOL);
+        bunnyTails(pFinishedRecipeConsumer, ItemRegister.caramelBunnyTail.get(), Items.YELLOW_WOOL);
+        bunnyTails(pFinishedRecipeConsumer, ItemRegister.whiteBunnyTail.get(), Items.WHITE_WOOL);
+
 
         headBands(pFinishedRecipeConsumer, ItemRegister.blackHeadBand.get(), Items.BLACK_WOOL, Items.WHITE_WOOL);
         headBands(pFinishedRecipeConsumer, ItemRegister.whiteHeadBand.get(), Items.WHITE_WOOL, Items.BLACK_WOOL);
@@ -807,6 +816,24 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
                         .unlockedBy(getHasName(i.get()), has(i.get()))
                         .save(consumer,path+"_uncraft");
             }
+            if(path.equals(color+"_maid_dress_bunny_tail_black")){
+                ShapelessRecipeBuilder.shapeless(ItemRegister.blackBunnyTail.get())
+                        .requires(Ingredient.of(i.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(i.get()), has(i.get()))
+                        .save(consumer,path+"_uncraft");
+            }
+            if(path.equals(color+"_maid_dress_bunny_tail_white")){
+                ShapelessRecipeBuilder.shapeless(ItemRegister.whiteBunnyTail.get())
+                        .requires(Ingredient.of(i.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(i.get()), has(i.get()))
+                        .save(consumer,path+"_uncraft");
+            }
+            if(path.equals(color+"_maid_dress_bunny_tail_caramel")){
+                ShapelessRecipeBuilder.shapeless(ItemRegister.caramelBunnyTail.get())
+                        .requires(Ingredient.of(i.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(i.get()), has(i.get()))
+                        .save(consumer,path+"_uncraft");
+            }
             if(path.equals(color+"_maid_dress_fox_tail_black")){
                 ShapelessRecipeBuilder.shapeless(ItemRegister.blackFoxTail.get())
                         .requires(Ingredient.of(i.get().getDefaultInstance()))
@@ -840,6 +867,17 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
     public void catTails(Consumer<FinishedRecipe> consumer, Item result, Item item) {
         ShapedRecipeBuilder.shaped(result)
                 .pattern("  #")
+                .pattern("s##")
+                .pattern("ss ")
+                .define('#', Ingredient.of(item.getDefaultInstance()))
+                .define('s', Ingredient.of(Tags.Items.STRING))
+                .unlockedBy(getHasName(item), has(item))
+                .save(consumer);
+    }
+
+    public void bunnyTails(Consumer<FinishedRecipe> consumer, Item result, Item item) {
+        ShapedRecipeBuilder.shaped(result)
+                .pattern("   ")
                 .pattern("s##")
                 .pattern("ss ")
                 .define('#', Ingredient.of(item.getDefaultInstance()))
@@ -887,6 +925,17 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
                 .pattern("#s#")
                 .pattern("s s")
                 .define('#', Ingredient.of(item.getDefaultInstance()))
+                .define('s', Ingredient.of(Tags.Items.STRING))
+                .unlockedBy(getHasName(item), has(item))
+                .save(consumer);
+    }
+    public void bunnyEars(Consumer<FinishedRecipe> consumer, Item result, Item item) {
+        ShapedRecipeBuilder.shaped(result)
+                .pattern("# #")
+                .pattern("xsx")
+                .pattern("s s")
+                .define('#', Ingredient.of(item.getDefaultInstance()))
+                .define('x', Ingredient.of(Items.WHITE_WOOL))
                 .define('s', Ingredient.of(Tags.Items.STRING))
                 .unlockedBy(getHasName(item), has(item))
                 .save(consumer);
@@ -947,6 +996,27 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
                         .unlockedBy(getHasName(result), has(result))
                         .save(consumer);
             }
+            if (path.equals(result.toString() + "_bunny_ears_black")) {
+                ShapelessRecipeBuilder.shapeless(i.get())
+                        .requires(Ingredient.of(result.getDefaultInstance()))
+                        .requires(Ingredient.of(ItemRegister.blackBunnyEars.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(result), has(result))
+                        .save(consumer);
+            }
+            if (path.equals(result.toString()+ "_bunny_ears_white")) {
+                ShapelessRecipeBuilder.shapeless(i.get())
+                        .requires(Ingredient.of(result.getDefaultInstance()))
+                        .requires(Ingredient.of(ItemRegister.whiteBunnyEars.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(result), has(result))
+                        .save(consumer);
+            }
+            if (path.equals(result.getDescription() + "_bunny_ears_caramel")) {
+                ShapelessRecipeBuilder.shapeless(i.get())
+                        .requires(Ingredient.of(result.getDefaultInstance()))
+                        .requires(Ingredient.of(ItemRegister.caramelBunnyEars.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(result), has(result))
+                        .save(consumer);
+            }
             if (path.equals(result.toString() + "_fox_ears_black")) {
                 ShapelessRecipeBuilder.shapeless(i.get())
                         .requires(Ingredient.of(result.getDefaultInstance()))
@@ -988,6 +1058,24 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
             }
             if(path.equals(color+"_headband_cat_ears_caramel")){
                 ShapelessRecipeBuilder.shapeless(ItemRegister.caramelCatEars.get())
+                        .requires(Ingredient.of(i.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(i.get()), has(i.get()))
+                        .save(consumer,path + "_uncraft");
+            }
+            if(path.equals(color+"_headband_bunny_ears_black")){
+                ShapelessRecipeBuilder.shapeless(ItemRegister.blackBunnyEars.get())
+                        .requires(Ingredient.of(i.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(i.get()), has(i.get()))
+                        .save(consumer,path + "_uncraft");
+            }
+            if(path.equals(color+"_headband_bunny_ears_white")){
+                ShapelessRecipeBuilder.shapeless(ItemRegister.whiteBunnyEars.get())
+                        .requires(Ingredient.of(i.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(i.get()), has(i.get()))
+                        .save(consumer,path + "_uncraft");
+            }
+            if(path.equals(color+"_headband_bunny_ears_caramel")){
+                ShapelessRecipeBuilder.shapeless(ItemRegister.caramelBunnyEars.get())
                         .requires(Ingredient.of(i.get().getDefaultInstance()))
                         .unlockedBy(getHasName(i.get()), has(i.get()))
                         .save(consumer,path + "_uncraft");
@@ -1034,6 +1122,27 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
                 ShapelessRecipeBuilder.shapeless(i.get())
                         .requires(Ingredient.of(result.getDefaultInstance()))
                         .requires(Ingredient.of(ItemRegister.caramelCatTail.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(result), has(result))
+                        .save(consumer);
+            }
+            if (path.equals(result.toString() + "_bunny_tail_black")) {
+                ShapelessRecipeBuilder.shapeless(i.get())
+                        .requires(Ingredient.of(result.getDefaultInstance()))
+                        .requires(Ingredient.of(ItemRegister.blackBunnyTail.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(result), has(result))
+                        .save(consumer);
+            }
+            if (path.equals(result.toString() + "_bunny_tail_white")) {
+                ShapelessRecipeBuilder.shapeless(i.get())
+                        .requires(Ingredient.of(result.getDefaultInstance()))
+                        .requires(Ingredient.of(ItemRegister.whiteBunnyTail.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(result), has(result))
+                        .save(consumer);
+            }
+            if (path.equals(result.toString() + "_bunny_tail_caramel")) {
+                ShapelessRecipeBuilder.shapeless(i.get())
+                        .requires(Ingredient.of(result.getDefaultInstance()))
+                        .requires(Ingredient.of(ItemRegister.caramelBunnyTail.get().getDefaultInstance()))
                         .unlockedBy(getHasName(result), has(result))
                         .save(consumer);
             }

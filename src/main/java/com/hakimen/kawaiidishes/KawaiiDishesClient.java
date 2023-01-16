@@ -3,13 +3,8 @@ package com.hakimen.kawaiidishes;
 import com.hakimen.kawaiidishes.client.block_entity_renderers.CoffeeMachineRenderer;
 import com.hakimen.kawaiidishes.client.block_entity_renderers.CoffeePressRenderer;
 import com.hakimen.kawaiidishes.client.block_entity_renderers.IceCreamMachineRenderer;
-import com.hakimen.kawaiidishes.client.entity.FoxTailArmorRenderer;
-import com.hakimen.kawaiidishes.client.entity.SeatRenderer;
-import com.hakimen.kawaiidishes.client.entity.maid_dresses.CatMaidDressArmorRenderer;
-import com.hakimen.kawaiidishes.client.entity.CatTailArmorRenderer;
-import com.hakimen.kawaiidishes.client.entity.maid_dresses.FoxMaidDressArmorRenderer;
-import com.hakimen.kawaiidishes.client.entity.maid_dresses.MaidDressArmorRenderer;
-import com.hakimen.kawaiidishes.client.entity.ThighHighsArmorRenderer;
+import com.hakimen.kawaiidishes.client.entity.*;
+import com.hakimen.kawaiidishes.client.entity.maid_dresses.*;
 import com.hakimen.kawaiidishes.items.armor.*;
 import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
 import com.hakimen.kawaiidishes.registry.EntityRegister;
@@ -29,6 +24,9 @@ public class KawaiiDishesClient {
         GeoArmorRenderer.registerArmorRenderer(ThighHighsArmorItem.class, ThighHighsArmorRenderer::new);
         GeoArmorRenderer.registerArmorRenderer(FoxMaidArmorItem.class, FoxMaidDressArmorRenderer::new);
         GeoArmorRenderer.registerArmorRenderer(FoxTailArmorItem.class, FoxTailArmorRenderer::new);
+        GeoArmorRenderer.registerArmorRenderer(BunnyMaidArmorItem.class, BunnyMaidDressArmorRenderer::new);
+        GeoArmorRenderer.registerArmorRenderer(BunnyTailArmorItem.class, BunnyTailArmorRenderer::new);
+        GeoArmorRenderer.registerArmorRenderer(DevilMaidArmorItem.class, DevilMaidDressArmorRenderer::new);
 
     }
     @SubscribeEvent

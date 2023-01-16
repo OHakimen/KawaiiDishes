@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kawaiidishes:item/maid_dresses/light_gray_maid_dress_bunny_tail_black"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:black_wool"
+    },
+    "s": {
+      "tag": "forge:string"
+    },
+    "x": {
+      "item": "minecraft:white_wool"
+    }
+  },
+  "pattern": [
+    "# #",
+    "xsx",
+    "s s"
+  ],
+  "result": {
+    "item": "kawaiidishes:black_bunny_ears"
+  }
+}
