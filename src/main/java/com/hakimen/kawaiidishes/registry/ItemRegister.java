@@ -41,6 +41,8 @@ public class ItemRegister {
         }
     };
 
+    public static FoodProperties cake = new FoodProperties.Builder().nutrition(2).saturationMod(0.5f).build();
+
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, modId);
 
     public static final RegistryObject<Item> mug = ITEMS.register("mug", () -> new BlockItem(BlockRegister.mug.get(), new Item.Properties().tab(blocks)));
@@ -67,6 +69,15 @@ public class ItemRegister {
     public static final RegistryObject<FoxEars> redFoxEars = ITEMS.register("red_fox_ears", FoxEars::new);
     public static final RegistryObject<FoxEars> whiteFoxEars = ITEMS.register("white_fox_ears", FoxEars::new);
 
+    public static final RegistryObject<Horns> lightGrayHorns = ITEMS.register("light_gray_horns", Horns::new);
+    public static final RegistryObject<Horns> grayHorns = ITEMS.register("gray_horns", Horns::new);
+    public static final RegistryObject<Horns> whiteHorns = ITEMS.register("white_horns", Horns::new);
+
+
+    public static final RegistryObject<Horns> redHorns = ITEMS.register("red_horns", Horns::new);
+    public static final RegistryObject<Horns> purpleHorns = ITEMS.register("purple_horns", Horns::new);
+    public static final RegistryObject<Horns> blackHorns = ITEMS.register("black_horns", Horns::new);
+
 
 
     public static final RegistryObject<Item> blackCatTail = ITEMS.register("black_cat_tail",
@@ -90,6 +101,12 @@ public class ItemRegister {
     public static final RegistryObject<Item> whiteFoxTail = ITEMS.register("white_fox_tail",
             () -> new FoxTailArmorItem("white_fox_tail.png"));
 
+    public static final RegistryObject<Item> blackDevilTail = ITEMS.register("black_devil_tail",
+            () -> new DevilTailArmorItem("black_devil_tail.png"));
+    public static final RegistryObject<Item> redDevilTail = ITEMS.register("red_devil_tail",
+            () -> new DevilTailArmorItem("red_devil_tail.png"));
+    public static final RegistryObject<Item> purpleDevilTail = ITEMS.register("purple_devil_tail",
+            () -> new DevilTailArmorItem("purple_devil_tail.png"));
 
     public static final RegistryObject<Item> blueMaidDress = ITEMS.register("blue_maid_dress",
             () -> new MaidDressArmorItem("blue_maid_dress_cat_tail_black.png"));
@@ -564,13 +581,7 @@ public class ItemRegister {
     public static final RegistryObject<Item> blackThighHighsShoes = ITEMS.register("dark_brown_shoes",
             () -> new ThighHighsArmorItem("black_thigh_highs.png", EquipmentSlot.FEET));
 
-    public static final RegistryObject<Headband> blackHeadBand = ITEMS.register("black_headband", () -> new Headband(Items.AIR));
-    public static final RegistryObject<CatHeadband> blackHeadBandCatEarsBlack = ITEMS.register("black_headband_cat_ears_black", () -> new CatHeadband(blackHeadBand.get()));
-    public static final RegistryObject<CatHeadband> blackHeadBandCatEarsWhite = ITEMS.register("black_headband_cat_ears_white", () -> new CatHeadband(blackHeadBand.get()));
-    public static final RegistryObject<CatHeadband> blackHeadBandCatEarsCaramel = ITEMS.register("black_headband_cat_ears_caramel", () -> new CatHeadband(blackHeadBand.get()));
-    public static final RegistryObject<Headband> blackHeadBandFoxEarsBlack = ITEMS.register("black_headband_fox_ears_black", () -> new Headband(blackHeadBand.get()));
-    public static final RegistryObject<Headband> blackHeadBandFoxEarsWhite = ITEMS.register("black_headband_fox_ears_white", () -> new Headband(blackHeadBand.get()));
-    public static final RegistryObject<Headband> blackHeadBandFoxEarsRed = ITEMS.register("black_headband_fox_ears_red", () -> new Headband(blackHeadBand.get()));
+
 
 
     public static final RegistryObject<Headband> blueHeadBand = ITEMS.register("blue_headband", () -> new Headband(Items.AIR));
@@ -580,6 +591,15 @@ public class ItemRegister {
     public static final RegistryObject<Headband> blueHeadBandFoxEarsBlack = ITEMS.register("blue_headband_fox_ears_black", () -> new Headband(blueHeadBand.get()));
     public static final RegistryObject<Headband> blueHeadBandFoxEarsWhite = ITEMS.register("blue_headband_fox_ears_white", () -> new Headband(blueHeadBand.get()));
     public static final RegistryObject<Headband> blueHeadBandFoxEarsRed = ITEMS.register("blue_headband_fox_ears_red", () -> new Headband(blueHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> blueHeadBandBunnyEarsBlack = ITEMS.register("blue_headband_bunny_ears_black", () -> new BunnyHeadband(blueHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> blueHeadBandBunnyEarsWhite = ITEMS.register("blue_headband_bunny_ears_white", () -> new BunnyHeadband(blueHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> blueHeadBandBunnyEarsCaramel = ITEMS.register("blue_headband_bunny_ears_caramel", () -> new BunnyHeadband(blueHeadBand.get()));
+    public static final RegistryObject<HornHeadband> blueHeadBandHornsLightGray = ITEMS.register("blue_headband_horns_light_gray", () -> new HornHeadband(blueHeadBand.get()));
+    public static final RegistryObject<HornHeadband> blueHeadBandHornsGray = ITEMS.register("blue_headband_horns_gray", () -> new HornHeadband(blueHeadBand.get()));
+    public static final RegistryObject<HornHeadband> blueHeadBandHornsWhite = ITEMS.register("blue_headband_horns_white", () -> new HornHeadband(blueHeadBand.get()));
+    public static final RegistryObject<HornHeadband> blueHeadBandHornsRed = ITEMS.register("blue_headband_horns_red", () -> new HornHeadband(blueHeadBand.get()));
+    public static final RegistryObject<HornHeadband> blueHeadBandHornsPurple = ITEMS.register("blue_headband_horns_purple", () -> new HornHeadband(blueHeadBand.get()));
+    public static final RegistryObject<HornHeadband> blueHeadBandHornsBlack = ITEMS.register("blue_headband_horns_black", () -> new HornHeadband(blueHeadBand.get()));
 
 
     public static final RegistryObject<Headband> brownHeadBand = ITEMS.register("brown_headband", () -> new Headband(Items.AIR));
@@ -589,6 +609,15 @@ public class ItemRegister {
     public static final RegistryObject<Headband> brownHeadBandFoxEarsBlack = ITEMS.register("brown_headband_fox_ears_black", () -> new Headband(brownHeadBand.get()));
     public static final RegistryObject<Headband> brownHeadBandFoxEarsWhite = ITEMS.register("brown_headband_fox_ears_white", () -> new Headband(brownHeadBand.get()));
     public static final RegistryObject<Headband> brownHeadBandFoxEarsRed = ITEMS.register("brown_headband_fox_ears_red", () -> new Headband(brownHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> brownHeadBandBunnyEarsBlack = ITEMS.register("brown_headband_bunny_ears_black", () -> new BunnyHeadband(brownHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> brownHeadBandBunnyEarsWhite = ITEMS.register("brown_headband_bunny_ears_white", () -> new BunnyHeadband(brownHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> brownHeadBandBunnyEarsCaramel = ITEMS.register("brown_headband_bunny_ears_caramel", () -> new BunnyHeadband(brownHeadBand.get()));
+    public static final RegistryObject<HornHeadband> brownHeadBandHornsLightGray = ITEMS.register("brown_headband_horns_light_gray", () -> new HornHeadband(brownHeadBand.get()));
+    public static final RegistryObject<HornHeadband> brownHeadBandHornsGray = ITEMS.register("brown_headband_horns_gray", () -> new HornHeadband(brownHeadBand.get()));
+    public static final RegistryObject<HornHeadband> brownHeadBandHornsWhite = ITEMS.register("brown_headband_horns_white", () -> new HornHeadband(brownHeadBand.get()));
+    public static final RegistryObject<HornHeadband> brownHeadBandHornsRed = ITEMS.register("brown_headband_horns_red", () -> new HornHeadband(brownHeadBand.get()));
+    public static final RegistryObject<HornHeadband> brownHeadBandHornsPurple = ITEMS.register("brown_headband_horns_purple", () -> new HornHeadband(brownHeadBand.get()));
+    public static final RegistryObject<HornHeadband> brownHeadBandHornsBlack = ITEMS.register("brown_headband_horns_black", () -> new HornHeadband(brownHeadBand.get()));
 
 
     public static final RegistryObject<Headband> cyanHeadBand = ITEMS.register("cyan_headband", () -> new Headband(Items.AIR));
@@ -598,6 +627,16 @@ public class ItemRegister {
     public static final RegistryObject<Headband> cyanHeadBandFoxEarsBlack = ITEMS.register("cyan_headband_fox_ears_black", () -> new Headband(cyanHeadBand.get()));
     public static final RegistryObject<Headband> cyanHeadBandFoxEarsWhite = ITEMS.register("cyan_headband_fox_ears_white", () -> new Headband(cyanHeadBand.get()));
     public static final RegistryObject<Headband> cyanHeadBandFoxEarsRed = ITEMS.register("cyan_headband_fox_ears_red", () -> new Headband(cyanHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> cyanHeadBandBunnyEarsBlack = ITEMS.register("cyan_headband_bunny_ears_black", () -> new BunnyHeadband(cyanHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> cyanHeadBandBunnyEarsWhite = ITEMS.register("cyan_headband_bunny_ears_white", () -> new BunnyHeadband(cyanHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> cyanHeadBandBunnyEarsCaramel = ITEMS.register("cyan_headband_bunny_ears_caramel", () -> new BunnyHeadband(cyanHeadBand.get()));
+    public static final RegistryObject<HornHeadband> cyanHeadBandHornsLightGray = ITEMS.register("cyan_headband_horns_light_gray", () -> new HornHeadband(cyanHeadBand.get()));
+    public static final RegistryObject<HornHeadband> cyanHeadBandHornsGray = ITEMS.register("cyan_headband_horns_gray", () -> new HornHeadband(cyanHeadBand.get()));
+    public static final RegistryObject<HornHeadband> cyanHeadBandHornsWhite = ITEMS.register("cyan_headband_horns_white", () -> new HornHeadband(cyanHeadBand.get()));
+    public static final RegistryObject<HornHeadband> cyanHeadBandHornsRed = ITEMS.register("cyan_headband_horns_red", () -> new HornHeadband(cyanHeadBand.get()));
+    public static final RegistryObject<HornHeadband> cyanHeadBandHornsPurple = ITEMS.register("cyan_headband_horns_purple", () -> new HornHeadband(cyanHeadBand.get()));
+    public static final RegistryObject<HornHeadband> cyanHeadBandHornsBlack = ITEMS.register("cyan_headband_horns_black", () -> new HornHeadband(cyanHeadBand.get()));
+
 
     public static final RegistryObject<Headband> grayHeadBand = ITEMS.register("gray_headband", () -> new Headband(Items.AIR));
     public static final RegistryObject<CatHeadband> grayHeadBandCatEarsBlack = ITEMS.register("gray_headband_cat_ears_black", () -> new CatHeadband(grayHeadBand.get()));
@@ -606,6 +645,16 @@ public class ItemRegister {
     public static final RegistryObject<Headband> grayHeadBandFoxEarsBlack = ITEMS.register("gray_headband_fox_ears_black", () -> new Headband(grayHeadBand.get()));
     public static final RegistryObject<Headband> grayHeadBandFoxEarsWhite = ITEMS.register("gray_headband_fox_ears_white", () -> new Headband(grayHeadBand.get()));
     public static final RegistryObject<Headband> grayHeadBandFoxEarsRed = ITEMS.register("gray_headband_fox_ears_red", () -> new Headband(grayHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> grayHeadBandBunnyEarsBlack = ITEMS.register("gray_headband_bunny_ears_black", () -> new BunnyHeadband(grayHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> grayHeadBandBunnyEarsWhite = ITEMS.register("gray_headband_bunny_ears_white", () -> new BunnyHeadband(grayHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> grayHeadBandBunnyEarsCaramel = ITEMS.register("gray_headband_bunny_ears_caramel", () -> new BunnyHeadband(grayHeadBand.get()));
+    public static final RegistryObject<HornHeadband> grayHeadBandHornsLightGray = ITEMS.register("gray_headband_horns_light_gray", () -> new HornHeadband(grayHeadBand.get()));
+    public static final RegistryObject<HornHeadband> grayHeadBandHornsGray = ITEMS.register("gray_headband_horns_gray", () -> new HornHeadband(grayHeadBand.get()));
+    public static final RegistryObject<HornHeadband> grayHeadBandHornsWhite = ITEMS.register("gray_headband_horns_white", () -> new HornHeadband(grayHeadBand.get()));
+    public static final RegistryObject<HornHeadband> grayHeadBandHornsRed = ITEMS.register("gray_headband_horns_red", () -> new HornHeadband(grayHeadBand.get()));
+    public static final RegistryObject<HornHeadband> grayHeadBandHornsPurple = ITEMS.register("gray_headband_horns_purple", () -> new HornHeadband(grayHeadBand.get()));
+    public static final RegistryObject<HornHeadband> grayHeadBandHornsBlack = ITEMS.register("gray_headband_horns_black", () -> new HornHeadband(grayHeadBand.get()));
+
 
     public static final RegistryObject<Headband> greenHeadBand = ITEMS.register("green_headband", () -> new Headband(Items.AIR));
     public static final RegistryObject<CatHeadband> greenHeadBandCatEarsBlack = ITEMS.register("green_headband_cat_ears_black", () -> new CatHeadband(greenHeadBand.get()));
@@ -614,22 +663,52 @@ public class ItemRegister {
     public static final RegistryObject<Headband> greenHeadBandFoxEarsBlack = ITEMS.register("green_headband_fox_ears_black", () -> new Headband(greenHeadBand.get()));
     public static final RegistryObject<Headband> greenHeadBandFoxEarsWhite = ITEMS.register("green_headband_fox_ears_white", () -> new Headband(greenHeadBand.get()));
     public static final RegistryObject<Headband> greenHeadBandFoxEarsRed = ITEMS.register("green_headband_fox_ears_red", () -> new Headband(greenHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> greenHeadBandBunnyEarsBlack = ITEMS.register("green_headband_bunny_ears_black", () -> new BunnyHeadband(greenHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> greenHeadBandBunnyEarsWhite = ITEMS.register("green_headband_bunny_ears_white", () -> new BunnyHeadband(greenHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> greenHeadBandBunnyEarsCaramel = ITEMS.register("green_headband_bunny_ears_caramel", () -> new BunnyHeadband(greenHeadBand.get()));
+    public static final RegistryObject<HornHeadband> greenHeadBandHornsLightGray = ITEMS.register("green_headband_horns_light_gray", () -> new HornHeadband(greenHeadBand.get()));
+    public static final RegistryObject<HornHeadband> greenHeadBandHornsGray = ITEMS.register("green_headband_horns_gray", () -> new HornHeadband(greenHeadBand.get()));
+    public static final RegistryObject<HornHeadband> greenHeadBandHornsWhite = ITEMS.register("green_headband_horns_white", () -> new HornHeadband(greenHeadBand.get()));
+    public static final RegistryObject<HornHeadband> greenHeadBandHornsRed = ITEMS.register("green_headband_horns_red", () -> new HornHeadband(greenHeadBand.get()));
+    public static final RegistryObject<HornHeadband> greenHeadBandHornsPurple = ITEMS.register("green_headband_horns_purple", () -> new HornHeadband(greenHeadBand.get()));
+    public static final RegistryObject<HornHeadband> greenHeadBandHornsBlack = ITEMS.register("green_headband_horns_black", () -> new HornHeadband(greenHeadBand.get()));
 
-    public static final RegistryObject<Headband> lightBlueHeadBand = ITEMS.register("light_blue_headband", () -> new Headband(Items.AIR));
-    public static final RegistryObject<CatHeadband> lightBlueHeadBandCatEarsBlack = ITEMS.register("light_blue_headband_cat_ears_black", () -> new CatHeadband(lightBlueHeadBand.get()));
-    public static final RegistryObject<CatHeadband> lightBlueHeadBandCatEarsWhite = ITEMS.register("light_blue_headband_cat_ears_white", () -> new CatHeadband(lightBlueHeadBand.get()));
-    public static final RegistryObject<CatHeadband> lightBlueHeadBandCatEarsCaramel = ITEMS.register("light_blue_headband_cat_ears_caramel", () -> new CatHeadband(lightBlueHeadBand.get()));
-    public static final RegistryObject<Headband> lightBlueHeadBandFoxEarsBlack = ITEMS.register("light_blue_headband_fox_ears_black", () -> new Headband(lightBlueHeadBand.get()));
-    public static final RegistryObject<Headband> lightBlueHeadBandFoxEarsWhite = ITEMS.register("light_blue_headband_fox_ears_white", () -> new Headband(lightBlueHeadBand.get()));
-    public static final RegistryObject<Headband> lightBlueHeadBandFoxEarsRed = ITEMS.register("light_blue_headband_fox_ears_red", () -> new Headband(lightBlueHeadBand.get()));
 
-    public static final RegistryObject<Headband> lightGrayHeadBand = ITEMS.register("light_gray_headband", () -> new Headband(Items.AIR));
-    public static final RegistryObject<CatHeadband> lightGrayHeadBandCatEarsBlack = ITEMS.register("light_gray_headband_cat_ears_black", () -> new CatHeadband(lightGrayHeadBand.get()));
-    public static final RegistryObject<CatHeadband> lightGrayHeadBandCatEarsWhite = ITEMS.register("light_gray_headband_cat_ears_white", () -> new CatHeadband(lightGrayHeadBand.get()));
-    public static final RegistryObject<CatHeadband> lightGrayHeadBandCatEarsCaramel = ITEMS.register("light_gray_headband_cat_ears_caramel", () -> new CatHeadband(lightGrayHeadBand.get()));
-    public static final RegistryObject<Headband> lightGrayHeadBandFoxEarsBlack = ITEMS.register("light_gray_headband_fox_ears_black", () -> new Headband(lightGrayHeadBand.get()));
-    public static final RegistryObject<Headband> lightGrayHeadBandFoxEarsWhite = ITEMS.register("light_gray_headband_fox_ears_white", () -> new Headband(lightGrayHeadBand.get()));
-    public static final RegistryObject<Headband> lightGrayHeadBandFoxEarsRed = ITEMS.register("light_gray_headband_fox_ears_red", () -> new Headband(lightGrayHeadBand.get()));
+    public static final RegistryObject<Headband> light_blueHeadBand = ITEMS.register("light_blue_headband", () -> new Headband(Items.AIR));
+    public static final RegistryObject<CatHeadband> light_blueHeadBandCatEarsBlack = ITEMS.register("light_blue_headband_cat_ears_black", () -> new CatHeadband(light_blueHeadBand.get()));
+    public static final RegistryObject<CatHeadband> light_blueHeadBandCatEarsWhite = ITEMS.register("light_blue_headband_cat_ears_white", () -> new CatHeadband(light_blueHeadBand.get()));
+    public static final RegistryObject<CatHeadband> light_blueHeadBandCatEarsCaramel = ITEMS.register("light_blue_headband_cat_ears_caramel", () -> new CatHeadband(light_blueHeadBand.get()));
+    public static final RegistryObject<Headband> light_blueHeadBandFoxEarsBlack = ITEMS.register("light_blue_headband_fox_ears_black", () -> new Headband(light_blueHeadBand.get()));
+    public static final RegistryObject<Headband> light_blueHeadBandFoxEarsWhite = ITEMS.register("light_blue_headband_fox_ears_white", () -> new Headband(light_blueHeadBand.get()));
+    public static final RegistryObject<Headband> light_blueHeadBandFoxEarsRed = ITEMS.register("light_blue_headband_fox_ears_red", () -> new Headband(light_blueHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> light_blueHeadBandBunnyEarsBlack = ITEMS.register("light_blue_headband_bunny_ears_black", () -> new BunnyHeadband(light_blueHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> light_blueHeadBandBunnyEarsWhite = ITEMS.register("light_blue_headband_bunny_ears_white", () -> new BunnyHeadband(light_blueHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> light_blueHeadBandBunnyEarsCaramel = ITEMS.register("light_blue_headband_bunny_ears_caramel", () -> new BunnyHeadband(light_blueHeadBand.get()));
+    public static final RegistryObject<HornHeadband> light_blueHeadBandHornsLightGray = ITEMS.register("light_blue_headband_horns_light_gray", () -> new HornHeadband(light_blueHeadBand.get()));
+    public static final RegistryObject<HornHeadband> light_blueHeadBandHornsGray = ITEMS.register("light_blue_headband_horns_gray", () -> new HornHeadband(light_blueHeadBand.get()));
+    public static final RegistryObject<HornHeadband> light_blueHeadBandHornsWhite = ITEMS.register("light_blue_headband_horns_white", () -> new HornHeadband(light_blueHeadBand.get()));
+    public static final RegistryObject<HornHeadband> light_blueHeadBandHornsRed = ITEMS.register("light_blue_headband_horns_red", () -> new HornHeadband(light_blueHeadBand.get()));
+    public static final RegistryObject<HornHeadband> light_blueHeadBandHornsPurple = ITEMS.register("light_blue_headband_horns_purple", () -> new HornHeadband(light_blueHeadBand.get()));
+    public static final RegistryObject<HornHeadband> light_blueHeadBandHornsBlack = ITEMS.register("light_blue_headband_horns_black", () -> new HornHeadband(light_blueHeadBand.get()));
+
+
+    public static final RegistryObject<Headband> light_grayHeadBand = ITEMS.register("light_gray_headband", () -> new Headband(Items.AIR));
+    public static final RegistryObject<CatHeadband> light_grayHeadBandCatEarsBlack = ITEMS.register("light_gray_headband_cat_ears_black", () -> new CatHeadband(light_grayHeadBand.get()));
+    public static final RegistryObject<CatHeadband> light_grayHeadBandCatEarsWhite = ITEMS.register("light_gray_headband_cat_ears_white", () -> new CatHeadband(light_grayHeadBand.get()));
+    public static final RegistryObject<CatHeadband> light_grayHeadBandCatEarsCaramel = ITEMS.register("light_gray_headband_cat_ears_caramel", () -> new CatHeadband(light_grayHeadBand.get()));
+    public static final RegistryObject<Headband> light_grayHeadBandFoxEarsBlack = ITEMS.register("light_gray_headband_fox_ears_black", () -> new Headband(light_grayHeadBand.get()));
+    public static final RegistryObject<Headband> light_grayHeadBandFoxEarsWhite = ITEMS.register("light_gray_headband_fox_ears_white", () -> new Headband(light_grayHeadBand.get()));
+    public static final RegistryObject<Headband> light_grayHeadBandFoxEarsRed = ITEMS.register("light_gray_headband_fox_ears_red", () -> new Headband(light_grayHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> light_grayHeadBandBunnyEarsBlack = ITEMS.register("light_gray_headband_bunny_ears_black", () -> new BunnyHeadband(light_grayHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> light_grayHeadBandBunnyEarsWhite = ITEMS.register("light_gray_headband_bunny_ears_white", () -> new BunnyHeadband(light_grayHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> light_grayHeadBandBunnyEarsCaramel = ITEMS.register("light_gray_headband_bunny_ears_caramel", () -> new BunnyHeadband(light_grayHeadBand.get()));
+    public static final RegistryObject<HornHeadband> light_grayHeadBandHornsLightGray = ITEMS.register("light_gray_headband_horns_light_gray", () -> new HornHeadband(light_grayHeadBand.get()));
+    public static final RegistryObject<HornHeadband> light_grayHeadBandHornsGray = ITEMS.register("light_gray_headband_horns_gray", () -> new HornHeadband(light_grayHeadBand.get()));
+    public static final RegistryObject<HornHeadband> light_grayHeadBandHornsWhite = ITEMS.register("light_gray_headband_horns_white", () -> new HornHeadband(light_grayHeadBand.get()));
+    public static final RegistryObject<HornHeadband> light_grayHeadBandHornsRed = ITEMS.register("light_gray_headband_horns_red", () -> new HornHeadband(light_grayHeadBand.get()));
+    public static final RegistryObject<HornHeadband> light_grayHeadBandHornsPurple = ITEMS.register("light_gray_headband_horns_purple", () -> new HornHeadband(light_grayHeadBand.get()));
+    public static final RegistryObject<HornHeadband> light_grayHeadBandHornsBlack = ITEMS.register("light_gray_headband_horns_black", () -> new HornHeadband(light_grayHeadBand.get()));
+
 
     public static final RegistryObject<Headband> limeHeadBand = ITEMS.register("lime_headband", () -> new Headband(Items.AIR));
     public static final RegistryObject<CatHeadband> limeHeadBandCatEarsBlack = ITEMS.register("lime_headband_cat_ears_black", () -> new CatHeadband(limeHeadBand.get()));
@@ -638,6 +717,16 @@ public class ItemRegister {
     public static final RegistryObject<Headband> limeHeadBandFoxEarsBlack = ITEMS.register("lime_headband_fox_ears_black", () -> new Headband(limeHeadBand.get()));
     public static final RegistryObject<Headband> limeHeadBandFoxEarsWhite = ITEMS.register("lime_headband_fox_ears_white", () -> new Headband(limeHeadBand.get()));
     public static final RegistryObject<Headband> limeHeadBandFoxEarsRed = ITEMS.register("lime_headband_fox_ears_red", () -> new Headband(limeHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> limeHeadBandBunnyEarsBlack = ITEMS.register("lime_headband_bunny_ears_black", () -> new BunnyHeadband(limeHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> limeHeadBandBunnyEarsWhite = ITEMS.register("lime_headband_bunny_ears_white", () -> new BunnyHeadband(limeHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> limeHeadBandBunnyEarsCaramel = ITEMS.register("lime_headband_bunny_ears_caramel", () -> new BunnyHeadband(limeHeadBand.get()));
+    public static final RegistryObject<HornHeadband> limeHeadBandHornsLightGray = ITEMS.register("lime_headband_horns_light_gray", () -> new HornHeadband(limeHeadBand.get()));
+    public static final RegistryObject<HornHeadband> limeHeadBandHornsGray = ITEMS.register("lime_headband_horns_gray", () -> new HornHeadband(limeHeadBand.get()));
+    public static final RegistryObject<HornHeadband> limeHeadBandHornsWhite = ITEMS.register("lime_headband_horns_white", () -> new HornHeadband(limeHeadBand.get()));
+    public static final RegistryObject<HornHeadband> limeHeadBandHornsRed = ITEMS.register("lime_headband_horns_red", () -> new HornHeadband(limeHeadBand.get()));
+    public static final RegistryObject<HornHeadband> limeHeadBandHornsPurple = ITEMS.register("lime_headband_horns_purple", () -> new HornHeadband(limeHeadBand.get()));
+    public static final RegistryObject<HornHeadband> limeHeadBandHornsBlack = ITEMS.register("lime_headband_horns_black", () -> new HornHeadband(limeHeadBand.get()));
+
 
     public static final RegistryObject<Headband> magentaHeadBand = ITEMS.register("magenta_headband", () -> new Headband(Items.AIR));
     public static final RegistryObject<CatHeadband> magentaHeadBandCatEarsBlack = ITEMS.register("magenta_headband_cat_ears_black", () -> new CatHeadband(magentaHeadBand.get()));
@@ -646,6 +735,16 @@ public class ItemRegister {
     public static final RegistryObject<Headband> magentaHeadBandFoxEarsBlack = ITEMS.register("magenta_headband_fox_ears_black", () -> new Headband(magentaHeadBand.get()));
     public static final RegistryObject<Headband> magentaHeadBandFoxEarsWhite = ITEMS.register("magenta_headband_fox_ears_white", () -> new Headband(magentaHeadBand.get()));
     public static final RegistryObject<Headband> magentaHeadBandFoxEarsRed = ITEMS.register("magenta_headband_fox_ears_red", () -> new Headband(magentaHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> magentaHeadBandBunnyEarsBlack = ITEMS.register("magenta_headband_bunny_ears_black", () -> new BunnyHeadband(magentaHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> magentaHeadBandBunnyEarsWhite = ITEMS.register("magenta_headband_bunny_ears_white", () -> new BunnyHeadband(magentaHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> magentaHeadBandBunnyEarsCaramel = ITEMS.register("magenta_headband_bunny_ears_caramel", () -> new BunnyHeadband(magentaHeadBand.get()));
+    public static final RegistryObject<HornHeadband> magentaHeadBandHornsLightGray = ITEMS.register("magenta_headband_horns_light_gray", () -> new HornHeadband(magentaHeadBand.get()));
+    public static final RegistryObject<HornHeadband> magentaHeadBandHornsGray = ITEMS.register("magenta_headband_horns_gray", () -> new HornHeadband(magentaHeadBand.get()));
+    public static final RegistryObject<HornHeadband> magentaHeadBandHornsWhite = ITEMS.register("magenta_headband_horns_white", () -> new HornHeadband(magentaHeadBand.get()));
+    public static final RegistryObject<HornHeadband> magentaHeadBandHornsRed = ITEMS.register("magenta_headband_horns_red", () -> new HornHeadband(magentaHeadBand.get()));
+    public static final RegistryObject<HornHeadband> magentaHeadBandHornsPurple = ITEMS.register("magenta_headband_horns_purple", () -> new HornHeadband(magentaHeadBand.get()));
+    public static final RegistryObject<HornHeadband> magentaHeadBandHornsBlack = ITEMS.register("magenta_headband_horns_black", () -> new HornHeadband(magentaHeadBand.get()));
+
 
     public static final RegistryObject<Headband> orangeHeadBand = ITEMS.register("orange_headband", () -> new Headband(Items.AIR));
     public static final RegistryObject<CatHeadband> orangeHeadBandCatEarsBlack = ITEMS.register("orange_headband_cat_ears_black", () -> new CatHeadband(orangeHeadBand.get()));
@@ -654,6 +753,16 @@ public class ItemRegister {
     public static final RegistryObject<Headband> orangeHeadBandFoxEarsBlack = ITEMS.register("orange_headband_fox_ears_black", () -> new Headband(orangeHeadBand.get()));
     public static final RegistryObject<Headband> orangeHeadBandFoxEarsWhite = ITEMS.register("orange_headband_fox_ears_white", () -> new Headband(orangeHeadBand.get()));
     public static final RegistryObject<Headband> orangeHeadBandFoxEarsRed = ITEMS.register("orange_headband_fox_ears_red", () -> new Headband(orangeHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> orangeHeadBandBunnyEarsBlack = ITEMS.register("orange_headband_bunny_ears_black", () -> new BunnyHeadband(orangeHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> orangeHeadBandBunnyEarsWhite = ITEMS.register("orange_headband_bunny_ears_white", () -> new BunnyHeadband(orangeHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> orangeHeadBandBunnyEarsCaramel = ITEMS.register("orange_headband_bunny_ears_caramel", () -> new BunnyHeadband(orangeHeadBand.get()));
+    public static final RegistryObject<HornHeadband> orangeHeadBandHornsLightGray = ITEMS.register("orange_headband_horns_light_gray", () -> new HornHeadband(orangeHeadBand.get()));
+    public static final RegistryObject<HornHeadband> orangeHeadBandHornsGray = ITEMS.register("orange_headband_horns_gray", () -> new HornHeadband(orangeHeadBand.get()));
+    public static final RegistryObject<HornHeadband> orangeHeadBandHornsWhite = ITEMS.register("orange_headband_horns_white", () -> new HornHeadband(orangeHeadBand.get()));
+    public static final RegistryObject<HornHeadband> orangeHeadBandHornsRed = ITEMS.register("orange_headband_horns_red", () -> new HornHeadband(orangeHeadBand.get()));
+    public static final RegistryObject<HornHeadband> orangeHeadBandHornsPurple = ITEMS.register("orange_headband_horns_purple", () -> new HornHeadband(orangeHeadBand.get()));
+    public static final RegistryObject<HornHeadband> orangeHeadBandHornsBlack = ITEMS.register("orange_headband_horns_black", () -> new HornHeadband(orangeHeadBand.get()));
+
 
     public static final RegistryObject<Headband> pinkHeadBand = ITEMS.register("pink_headband", () -> new Headband(Items.AIR));
     public static final RegistryObject<CatHeadband> pinkHeadBandCatEarsBlack = ITEMS.register("pink_headband_cat_ears_black", () -> new CatHeadband(pinkHeadBand.get()));
@@ -662,14 +771,16 @@ public class ItemRegister {
     public static final RegistryObject<Headband> pinkHeadBandFoxEarsBlack = ITEMS.register("pink_headband_fox_ears_black", () -> new Headband(pinkHeadBand.get()));
     public static final RegistryObject<Headband> pinkHeadBandFoxEarsWhite = ITEMS.register("pink_headband_fox_ears_white", () -> new Headband(pinkHeadBand.get()));
     public static final RegistryObject<Headband> pinkHeadBandFoxEarsRed = ITEMS.register("pink_headband_fox_ears_red", () -> new Headband(pinkHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> pinkHeadBandBunnyEarsBlack = ITEMS.register("pink_headband_bunny_ears_black", () -> new BunnyHeadband(pinkHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> pinkHeadBandBunnyEarsWhite = ITEMS.register("pink_headband_bunny_ears_white", () -> new BunnyHeadband(pinkHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> pinkHeadBandBunnyEarsCaramel = ITEMS.register("pink_headband_bunny_ears_caramel", () -> new BunnyHeadband(pinkHeadBand.get()));
+    public static final RegistryObject<HornHeadband> pinkHeadBandHornsLightGray = ITEMS.register("pink_headband_horns_light_gray", () -> new HornHeadband(pinkHeadBand.get()));
+    public static final RegistryObject<HornHeadband> pinkHeadBandHornsGray = ITEMS.register("pink_headband_horns_gray", () -> new HornHeadband(pinkHeadBand.get()));
+    public static final RegistryObject<HornHeadband> pinkHeadBandHornsWhite = ITEMS.register("pink_headband_horns_white", () -> new HornHeadband(pinkHeadBand.get()));
+    public static final RegistryObject<HornHeadband> pinkHeadBandHornsRed = ITEMS.register("pink_headband_horns_red", () -> new HornHeadband(pinkHeadBand.get()));
+    public static final RegistryObject<HornHeadband> pinkHeadBandHornsPurple = ITEMS.register("pink_headband_horns_purple", () -> new HornHeadband(pinkHeadBand.get()));
+    public static final RegistryObject<HornHeadband> pinkHeadBandHornsBlack = ITEMS.register("pink_headband_horns_black", () -> new HornHeadband(pinkHeadBand.get()));
 
-    public static final RegistryObject<Headband> purpleHeadBand = ITEMS.register("purple_headband", () -> new Headband(Items.AIR));
-    public static final RegistryObject<CatHeadband> purpleHeadBandCatEarsBlack = ITEMS.register("purple_headband_cat_ears_black", () -> new CatHeadband(purpleHeadBand.get()));
-    public static final RegistryObject<CatHeadband> purpleHeadBandCatEarsWhite = ITEMS.register("purple_headband_cat_ears_white", () -> new CatHeadband(purpleHeadBand.get()));
-    public static final RegistryObject<CatHeadband> purpleHeadBandCatEarsCaramel = ITEMS.register("purple_headband_cat_ears_caramel", () -> new CatHeadband(purpleHeadBand.get()));
-    public static final RegistryObject<Headband> purpleHeadBandFoxEarsBlack = ITEMS.register("purple_headband_fox_ears_black", () -> new Headband(purpleHeadBand.get()));
-    public static final RegistryObject<Headband> purpleHeadBandFoxEarsWhite = ITEMS.register("purple_headband_fox_ears_white", () -> new Headband(purpleHeadBand.get()));
-    public static final RegistryObject<Headband> purpleHeadBandFoxEarsRed = ITEMS.register("purple_headband_fox_ears_red", () -> new Headband(purpleHeadBand.get()));
 
     public static final RegistryObject<Headband> redHeadBand = ITEMS.register("red_headband", () -> new Headband(Items.AIR));
     public static final RegistryObject<CatHeadband> redHeadBandCatEarsBlack = ITEMS.register("red_headband_cat_ears_black", () -> new CatHeadband(redHeadBand.get()));
@@ -678,14 +789,52 @@ public class ItemRegister {
     public static final RegistryObject<Headband> redHeadBandFoxEarsBlack = ITEMS.register("red_headband_fox_ears_black", () -> new Headband(redHeadBand.get()));
     public static final RegistryObject<Headband> redHeadBandFoxEarsWhite = ITEMS.register("red_headband_fox_ears_white", () -> new Headband(redHeadBand.get()));
     public static final RegistryObject<Headband> redHeadBandFoxEarsRed = ITEMS.register("red_headband_fox_ears_red", () -> new Headband(redHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> redHeadBandBunnyEarsBlack = ITEMS.register("red_headband_bunny_ears_black", () -> new BunnyHeadband(redHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> redHeadBandBunnyEarsWhite = ITEMS.register("red_headband_bunny_ears_white", () -> new BunnyHeadband(redHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> redHeadBandBunnyEarsCaramel = ITEMS.register("red_headband_bunny_ears_caramel", () -> new BunnyHeadband(redHeadBand.get()));
+    public static final RegistryObject<HornHeadband> redHeadBandHornsLightGray = ITEMS.register("red_headband_horns_light_gray", () -> new HornHeadband(redHeadBand.get()));
+    public static final RegistryObject<HornHeadband> redHeadBandHornsGray = ITEMS.register("red_headband_horns_gray", () -> new HornHeadband(redHeadBand.get()));
+    public static final RegistryObject<HornHeadband> redHeadBandHornsWhite = ITEMS.register("red_headband_horns_white", () -> new HornHeadband(redHeadBand.get()));
+    public static final RegistryObject<HornHeadband> redHeadBandHornsRed = ITEMS.register("red_headband_horns_red", () -> new HornHeadband(redHeadBand.get()));
+    public static final RegistryObject<HornHeadband> redHeadBandHornsPurple = ITEMS.register("red_headband_horns_purple", () -> new HornHeadband(redHeadBand.get()));
+    public static final RegistryObject<HornHeadband> redHeadBandHornsBlack = ITEMS.register("red_headband_horns_black", () -> new HornHeadband(redHeadBand.get()));
 
-    public static final RegistryObject<Headband> whiteHeadBand = ITEMS.register("white_headband",()-> new Headband(Items.AIR));
+
+    public static final RegistryObject<Headband> whiteHeadBand = ITEMS.register("white_headband", () -> new Headband(Items.AIR));
     public static final RegistryObject<CatHeadband> whiteHeadBandCatEarsBlack = ITEMS.register("white_headband_cat_ears_black", () -> new CatHeadband(whiteHeadBand.get()));
     public static final RegistryObject<CatHeadband> whiteHeadBandCatEarsWhite = ITEMS.register("white_headband_cat_ears_white", () -> new CatHeadband(whiteHeadBand.get()));
     public static final RegistryObject<CatHeadband> whiteHeadBandCatEarsCaramel = ITEMS.register("white_headband_cat_ears_caramel", () -> new CatHeadband(whiteHeadBand.get()));
     public static final RegistryObject<Headband> whiteHeadBandFoxEarsBlack = ITEMS.register("white_headband_fox_ears_black", () -> new Headband(whiteHeadBand.get()));
     public static final RegistryObject<Headband> whiteHeadBandFoxEarsWhite = ITEMS.register("white_headband_fox_ears_white", () -> new Headband(whiteHeadBand.get()));
     public static final RegistryObject<Headband> whiteHeadBandFoxEarsRed = ITEMS.register("white_headband_fox_ears_red", () -> new Headband(whiteHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> whiteHeadBandBunnyEarsBlack = ITEMS.register("white_headband_bunny_ears_black", () -> new BunnyHeadband(whiteHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> whiteHeadBandBunnyEarsWhite = ITEMS.register("white_headband_bunny_ears_white", () -> new BunnyHeadband(whiteHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> whiteHeadBandBunnyEarsCaramel = ITEMS.register("white_headband_bunny_ears_caramel", () -> new BunnyHeadband(whiteHeadBand.get()));
+    public static final RegistryObject<HornHeadband> whiteHeadBandHornsLightGray = ITEMS.register("white_headband_horns_light_gray", () -> new HornHeadband(whiteHeadBand.get()));
+    public static final RegistryObject<HornHeadband> whiteHeadBandHornsGray = ITEMS.register("white_headband_horns_gray", () -> new HornHeadband(whiteHeadBand.get()));
+    public static final RegistryObject<HornHeadband> whiteHeadBandHornsWhite = ITEMS.register("white_headband_horns_white", () -> new HornHeadband(whiteHeadBand.get()));
+    public static final RegistryObject<HornHeadband> whiteHeadBandHornsRed = ITEMS.register("white_headband_horns_red", () -> new HornHeadband(whiteHeadBand.get()));
+    public static final RegistryObject<HornHeadband> whiteHeadBandHornsPurple = ITEMS.register("white_headband_horns_purple", () -> new HornHeadband(whiteHeadBand.get()));
+    public static final RegistryObject<HornHeadband> whiteHeadBandHornsBlack = ITEMS.register("white_headband_horns_black", () -> new HornHeadband(whiteHeadBand.get()));
+
+
+    public static final RegistryObject<Headband> blackHeadBand = ITEMS.register("black_headband", () -> new Headband(Items.AIR));
+    public static final RegistryObject<CatHeadband> blackHeadBandCatEarsBlack = ITEMS.register("black_headband_cat_ears_black", () -> new CatHeadband(blackHeadBand.get()));
+    public static final RegistryObject<CatHeadband> blackHeadBandCatEarsWhite = ITEMS.register("black_headband_cat_ears_white", () -> new CatHeadband(blackHeadBand.get()));
+    public static final RegistryObject<CatHeadband> blackHeadBandCatEarsCaramel = ITEMS.register("black_headband_cat_ears_caramel", () -> new CatHeadband(blackHeadBand.get()));
+    public static final RegistryObject<Headband> blackHeadBandFoxEarsBlack = ITEMS.register("black_headband_fox_ears_black", () -> new Headband(blackHeadBand.get()));
+    public static final RegistryObject<Headband> blackHeadBandFoxEarsWhite = ITEMS.register("black_headband_fox_ears_white", () -> new Headband(blackHeadBand.get()));
+    public static final RegistryObject<Headband> blackHeadBandFoxEarsRed = ITEMS.register("black_headband_fox_ears_red", () -> new Headband(blackHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> blackHeadBandBunnyEarsBlack = ITEMS.register("black_headband_bunny_ears_black", () -> new BunnyHeadband(blackHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> blackHeadBandBunnyEarsWhite = ITEMS.register("black_headband_bunny_ears_white", () -> new BunnyHeadband(blackHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> blackHeadBandBunnyEarsCaramel = ITEMS.register("black_headband_bunny_ears_caramel", () -> new BunnyHeadband(blackHeadBand.get()));
+    public static final RegistryObject<HornHeadband> blackHeadBandHornsLightGray = ITEMS.register("black_headband_horns_light_gray", () -> new HornHeadband(blackHeadBand.get()));
+    public static final RegistryObject<HornHeadband> blackHeadBandHornsGray = ITEMS.register("black_headband_horns_gray", () -> new HornHeadband(blackHeadBand.get()));
+    public static final RegistryObject<HornHeadband> blackHeadBandHornsWhite = ITEMS.register("black_headband_horns_white", () -> new HornHeadband(blackHeadBand.get()));
+    public static final RegistryObject<HornHeadband> blackHeadBandHornsRed = ITEMS.register("black_headband_horns_red", () -> new HornHeadband(blackHeadBand.get()));
+    public static final RegistryObject<HornHeadband> blackHeadBandHornsPurple = ITEMS.register("black_headband_horns_purple", () -> new HornHeadband(blackHeadBand.get()));
+    public static final RegistryObject<HornHeadband> blackHeadBandHornsBlack = ITEMS.register("black_headband_horns_black", () -> new HornHeadband(blackHeadBand.get()));
+
 
     public static final RegistryObject<Headband> yellowHeadBand = ITEMS.register("yellow_headband", () -> new Headband(Items.AIR));
     public static final RegistryObject<CatHeadband> yellowHeadBandCatEarsBlack = ITEMS.register("yellow_headband_cat_ears_black", () -> new CatHeadband(yellowHeadBand.get()));
@@ -694,7 +843,33 @@ public class ItemRegister {
     public static final RegistryObject<Headband> yellowHeadBandFoxEarsBlack = ITEMS.register("yellow_headband_fox_ears_black", () -> new Headband(yellowHeadBand.get()));
     public static final RegistryObject<Headband> yellowHeadBandFoxEarsWhite = ITEMS.register("yellow_headband_fox_ears_white", () -> new Headband(yellowHeadBand.get()));
     public static final RegistryObject<Headband> yellowHeadBandFoxEarsRed = ITEMS.register("yellow_headband_fox_ears_red", () -> new Headband(yellowHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> yellowHeadBandBunnyEarsBlack = ITEMS.register("yellow_headband_bunny_ears_black", () -> new BunnyHeadband(yellowHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> yellowHeadBandBunnyEarsWhite = ITEMS.register("yellow_headband_bunny_ears_white", () -> new BunnyHeadband(yellowHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> yellowHeadBandBunnyEarsCaramel = ITEMS.register("yellow_headband_bunny_ears_caramel", () -> new BunnyHeadband(yellowHeadBand.get()));
+    public static final RegistryObject<HornHeadband> yellowHeadBandHornsLightGray = ITEMS.register("yellow_headband_horns_light_gray", () -> new HornHeadband(yellowHeadBand.get()));
+    public static final RegistryObject<HornHeadband> yellowHeadBandHornsGray = ITEMS.register("yellow_headband_horns_gray", () -> new HornHeadband(yellowHeadBand.get()));
+    public static final RegistryObject<HornHeadband> yellowHeadBandHornsWhite = ITEMS.register("yellow_headband_horns_white", () -> new HornHeadband(yellowHeadBand.get()));
+    public static final RegistryObject<HornHeadband> yellowHeadBandHornsRed = ITEMS.register("yellow_headband_horns_red", () -> new HornHeadband(yellowHeadBand.get()));
+    public static final RegistryObject<HornHeadband> yellowHeadBandHornsPurple = ITEMS.register("yellow_headband_horns_purple", () -> new HornHeadband(yellowHeadBand.get()));
+    public static final RegistryObject<HornHeadband> yellowHeadBandHornsBlack = ITEMS.register("yellow_headband_horns_black", () -> new HornHeadband(yellowHeadBand.get()));
 
+
+    public static final RegistryObject<Headband> purpleHeadBand = ITEMS.register("purple_headband", () -> new Headband(Items.AIR));
+    public static final RegistryObject<CatHeadband> purpleHeadBandCatEarsBlack = ITEMS.register("purple_headband_cat_ears_black", () -> new CatHeadband(purpleHeadBand.get()));
+    public static final RegistryObject<CatHeadband> purpleHeadBandCatEarsWhite = ITEMS.register("purple_headband_cat_ears_white", () -> new CatHeadband(purpleHeadBand.get()));
+    public static final RegistryObject<CatHeadband> purpleHeadBandCatEarsCaramel = ITEMS.register("purple_headband_cat_ears_caramel", () -> new CatHeadband(purpleHeadBand.get()));
+    public static final RegistryObject<Headband> purpleHeadBandFoxEarsBlack = ITEMS.register("purple_headband_fox_ears_black", () -> new Headband(purpleHeadBand.get()));
+    public static final RegistryObject<Headband> purpleHeadBandFoxEarsWhite = ITEMS.register("purple_headband_fox_ears_white", () -> new Headband(purpleHeadBand.get()));
+    public static final RegistryObject<Headband> purpleHeadBandFoxEarsRed = ITEMS.register("purple_headband_fox_ears_red", () -> new Headband(purpleHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> purpleHeadBandBunnyEarsBlack = ITEMS.register("purple_headband_bunny_ears_black", () -> new BunnyHeadband(purpleHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> purpleHeadBandBunnyEarsWhite = ITEMS.register("purple_headband_bunny_ears_white", () -> new BunnyHeadband(purpleHeadBand.get()));
+    public static final RegistryObject<BunnyHeadband> purpleHeadBandBunnyEarsCaramel = ITEMS.register("purple_headband_bunny_ears_caramel", () -> new BunnyHeadband(purpleHeadBand.get()));
+    public static final RegistryObject<HornHeadband> purpleHeadBandHornsLightGray = ITEMS.register("purple_headband_horns_light_gray", () -> new HornHeadband(purpleHeadBand.get()));
+    public static final RegistryObject<HornHeadband> purpleHeadBandHornsGray = ITEMS.register("purple_headband_horns_gray", () -> new HornHeadband(purpleHeadBand.get()));
+    public static final RegistryObject<HornHeadband> purpleHeadBandHornsWhite = ITEMS.register("purple_headband_horns_white", () -> new HornHeadband(purpleHeadBand.get()));
+    public static final RegistryObject<HornHeadband> purpleHeadBandHornsRed = ITEMS.register("purple_headband_horns_red", () -> new HornHeadband(purpleHeadBand.get()));
+    public static final RegistryObject<HornHeadband> purpleHeadBandHornsPurple = ITEMS.register("purple_headband_horns_purple", () -> new HornHeadband(purpleHeadBand.get()));
+    public static final RegistryObject<HornHeadband> purpleHeadBandHornsBlack = ITEMS.register("purple_headband_horns_black", () -> new HornHeadband(purpleHeadBand.get()));
 
     public static final RegistryObject<Item> coffeeFruit = ITEMS.register("coffee_fruit", () -> new BlockItem(
             BlockRegister.coffeePlant.get(), new Item.Properties().tab(foods).food(new FoodProperties.Builder().fast().nutrition(2).saturationMod(1.125f).build()
@@ -739,8 +914,18 @@ public class ItemRegister {
     public static final RegistryObject<Item> condensedMilk = ITEMS.register("condensed_milk", () -> new Item(new Item.Properties().tab(foods)));
     public static final RegistryObject<Item> brigadeiroMix = ITEMS.register("brigadeiro_mix", () -> new Item(new Item.Properties().tab(foods)));
 
+    public static final RegistryObject<Item> creamCheese = ITEMS.register("cream_cheese", () -> new Item(new Item.Properties().tab(foods)));
+
+    public static final RegistryObject<Item> cakePiece = ITEMS.register("piece_of_cake", () -> new Item(new Item.Properties().tab(foods).food(cake)));
+    public static final RegistryObject<Item> chesseCakePiece = ITEMS.register("piece_of_cheesecake", () -> new Item(new Item.Properties().tab(foods).food(cake)));
+    public static final RegistryObject<Item> chocolateChesseCakePiece = ITEMS.register("piece_of_chocolate_cheesecake", () -> new Item(new Item.Properties().tab(foods).food(cake)));
+
+    public static final RegistryObject<Item> cheeseCake = ITEMS.register("cheese_cake", ()-> new BlockItem(BlockRegister.cheeseCake.get(), new Item.Properties().tab(foods)));
+    public static final RegistryObject<Item> chocolateCheeseCake = ITEMS.register("chocolate_cheese_cake", ()-> new BlockItem(BlockRegister.chocolateCheeseCake.get(), new Item.Properties().tab(foods)));
+
     public static final RegistryObject<Candy> beijinho = ITEMS.register("beijinho", () -> new Candy(BlockRegister.beijinho.get(), 3, 1.2f));
     public static final RegistryObject<Candy> brigadeiro = ITEMS.register("brigadeiro", () -> new Candy(BlockRegister.brigadeiro.get(), 3, 1.2f));
+
 
     public static final RegistryObject<Item> sweetBerryCookie = ITEMS.register("sweet_berry_cookie", () -> new Item(new Item.Properties().tab(foods).food(new FoodProperties.Builder().saturationMod(1).nutrition(3).build())));
     public static final RegistryObject<Item> honeyCookie = ITEMS.register("honey_cookie", () -> new Item(new Item.Properties().tab(foods).food(new FoodProperties.Builder().saturationMod(1).nutrition(3).build())));
@@ -767,8 +952,8 @@ public class ItemRegister {
     public static final RegistryObject<Item> whiteStool = ITEMS.register("white_stool", () -> new BlockItem(BlockRegister.whiteStool.get(), new Item.Properties().tab(decoration)));
     public static final RegistryObject<Item> yellowStool = ITEMS.register("yellow_stool", () -> new BlockItem(BlockRegister.yellowStool.get(), new Item.Properties().tab(decoration)));
 
-
     public static void register(IEventBus bus) {
+
         ITEMS.register(bus);
     }
 }

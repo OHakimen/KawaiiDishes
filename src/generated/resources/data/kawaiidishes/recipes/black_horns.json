@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:black_wool"
+    }
+  },
+  "pattern": [
+    "# #"
+  ],
+  "result": {
+    "item": "kawaiidishes:black_horns"
+  }
+}

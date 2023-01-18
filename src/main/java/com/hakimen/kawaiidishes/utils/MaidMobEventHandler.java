@@ -1,6 +1,7 @@
 package com.hakimen.kawaiidishes.utils;
 
 import com.hakimen.kawaiidishes.registry.ItemRegister;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
@@ -34,7 +35,8 @@ public class MaidMobEventHandler {
             "none",
             "fox",
             "cat",
-            "bunny"
+            "bunny",
+            "devil"
     };
 
     public static String[] catColors = new String[]{
@@ -49,6 +51,11 @@ public class MaidMobEventHandler {
             "red",
     };
 
+    public static String[] devilColors = new String[]{
+            "red",
+            "black",
+            "purple",
+    };
 
 
 
@@ -67,6 +74,9 @@ public class MaidMobEventHandler {
             case "cat","bunny" -> {
                 typeColor = catColors[r.nextInt(catColors.length)];
             }
+            case "devil" -> {
+                typeColor = devilColors[r.nextInt(devilColors.length)];
+            }
         }
 
         ItemStack[] stacks = new ItemStack[]{
@@ -83,6 +93,9 @@ public class MaidMobEventHandler {
             if (stack.contains(color + "_headband")) {
                 if (!type.equals("none")) {
                     if (stack.endsWith("_" + type + "_ears_" + typeColor)) {
+                        stacks[0] = item.get().getDefaultInstance();
+                    }
+                    if (stack.endsWith("_horns_" + typeColor)) {
                         stacks[0] = item.get().getDefaultInstance();
                     }
                 } else if (!stack.contains("ears")) {

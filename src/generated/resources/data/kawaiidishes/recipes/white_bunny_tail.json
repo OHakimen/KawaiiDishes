@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:white_wool"
+    },
+    "s": {
+      "tag": "forge:string"
+    }
+  },
+  "pattern": [
+    "   ",
+    "s##",
+    "ss "
+  ],
+  "result": {
+    "item": "kawaiidishes:white_bunny_tail"
+  }
+}

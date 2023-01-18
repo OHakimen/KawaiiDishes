@@ -1,0 +1,14 @@
+{
+  "type": "kawaiidishes:blending",
+  "ingredients": [
+    {
+      "item": "minecraft:milk_bucket"
+    }
+  ],
+  "output": {
+    "count": 4,
+    "item": "kawaiidishes:cream_cheese",
+    "nbt": "{}"
+  },
+  "ticks": 100
+}

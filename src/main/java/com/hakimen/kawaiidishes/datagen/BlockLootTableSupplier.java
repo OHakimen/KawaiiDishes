@@ -26,6 +26,9 @@ public class BlockLootTableSupplier extends BlockLoot {
         this.dropOther(BlockRegister.doppioMug.get(), Items.AIR);
         this.dropOther(BlockRegister.cafeAuLaitMug.get(), Items.AIR);
         this.dropOther(BlockRegister.coffeePlant.get(), Items.AIR);
+
+        this.dropOther(BlockRegister.chocolateCheeseCake.get(), Items.AIR);
+        this.dropOther(BlockRegister.cheeseCake.get(), Items.AIR);
     }
     @Override
     protected Iterable<Block> getKnownBlocks() {

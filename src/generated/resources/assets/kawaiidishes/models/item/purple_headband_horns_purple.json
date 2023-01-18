@@ -1,0 +1,7 @@
+{
+  "parent": "kawaiidishes:item/horns_headband",
+  "textures": {
+    "0": "kawaiidishes:item/headbands/purple_headband",
+    "1": "kawaiidishes:item/horns/purple_horns"
+  }
+}

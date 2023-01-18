@@ -39,6 +39,7 @@ public class CoffeePlantBlock extends BushBlock implements BonemealableBlock {
                 .noCollission()
                 .sound(SoundType.SWEET_BERRY_BUSH));
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, Integer.valueOf(0)));
+
     }
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         if (pState.getValue(AGE) == 0) {

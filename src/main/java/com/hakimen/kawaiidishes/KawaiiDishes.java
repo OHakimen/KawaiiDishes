@@ -6,20 +6,17 @@ import com.hakimen.kawaiidishes.client.screens.IceCreamScreen;
 import com.hakimen.kawaiidishes.config.KawaiiDishesClientConfig;
 import com.hakimen.kawaiidishes.config.KawaiiDishesCommonConfig;
 import com.hakimen.kawaiidishes.registry.*;
-import com.mojang.authlib.GameProfile;
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.monster.piglin.PiglinBrute;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -56,9 +53,11 @@ public class KawaiiDishes {
 
         Registration.init();
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+
         forgeBus.addListener(this::onLivingSpecialSpawn);
         bus.addListener(this::enqueueIMC);
         bus.addListener(this::clientStartup);
+        bus.addListener(this::setup);
     }
 
     public void onLivingSpecialSpawn(LivingSpawnEvent.SpecialSpawn event) {
@@ -90,7 +89,12 @@ public class KawaiiDishes {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.coffeeFruit.get(),0.25f);
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.driedCoffeeBeans.get(),0.50f);
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.roastedCoffeeBeans.get(),0.75f);
 
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.driedCocoaBeans.get(),0.50f);
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.roastedCocoaBeans.get(),0.75f);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
@@ -123,6 +127,10 @@ public class KawaiiDishes {
         }
 
         ItemBlockRenderTypes.setRenderLayer(BlockRegister.iceCreamMachine.get(), RenderType.cutout());
+
+        ItemBlockRenderTypes.setRenderLayer(BlockRegister.cheeseCake.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(BlockRegister.chocolateCheeseCake.get(), RenderType.cutout());
+
 
 
         ItemBlockRenderTypes.setRenderLayer(BlockRegister.glassCup.get(), RenderType.cutout());

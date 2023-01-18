@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_green_headband": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:green_headband"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "kawaiidishes:green_headband_horns_black"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_green_headband",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:green_headband_horns_black"
+    ]
+  }
+}

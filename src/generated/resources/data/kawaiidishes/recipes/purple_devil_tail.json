@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:purple_wool"
+    },
+    "s": {
+      "tag": "forge:string"
+    }
+  },
+  "pattern": [
+    "  #",
+    "#s#",
+    "s# "
+  ],
+  "result": {
+    "item": "kawaiidishes:purple_devil_tail"
+  }
+}

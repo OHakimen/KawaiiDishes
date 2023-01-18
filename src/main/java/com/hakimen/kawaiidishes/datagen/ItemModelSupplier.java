@@ -29,7 +29,10 @@ public class ItemModelSupplier extends ItemModelProvider {
                 coffee(block.get());
             }else if(path.endsWith("ice_cream")){
                 iceCream(block.get());
-            } else if(path.contains("coffee_bush") || path.contains("mortar_and_pestle")){
+            }else if(path.endsWith("cake")){
+                cake(block.get());
+            }
+            else if(path.contains("coffee_bush") || path.contains("mortar_and_pestle")){
                 continue;
             }else
                 block(block.get());
@@ -64,10 +67,28 @@ public class ItemModelSupplier extends ItemModelProvider {
                 else if(path.endsWith("_bunny_ears_caramel")) {
                     bunnyBandItem(item.get(),"bunny_ears_caramel","bunny_ears_caramel");
                 }
+                else if(path.endsWith("_horns_white")){
+                    bigHornBandItem(item.get(),"white_horn","horns_white");
+                }
+                else if(path.endsWith("_horns_gray")){
+                    bigHornBandItem(item.get(),"gray_horn","horns_gray");
+                }
+                else if(path.endsWith("_horns_light_gray")){
+                    bigHornBandItem(item.get(),"light_gray_horn","horns_light_gray");
+                }
+                else if(path.endsWith("_horns_red")){
+                    hornBandItem(item.get(),"red_horns","horns_red");
+                }
+                else if(path.endsWith("_horns_purple")){
+                    hornBandItem(item.get(),"purple_horns","horns_purple");
+                }
+                else if(path.endsWith("_horns_black")){
+                    hornBandItem(item.get(),"black_horns","horns_black");
+                }
                 else{
                     headBandItem(item.get());
                 }
-            }else if(path.contains("_maid_dress")){
+            }else if(path.contains("_maid_dress")) {
                 maidDressItem(item.get());
             }
         }
@@ -79,12 +100,17 @@ public class ItemModelSupplier extends ItemModelProvider {
         cookieItem(ItemRegister.goldenCookie.get());
         cookieItem(ItemRegister.unbindingCookie.get());
 
+        simpleItem(ItemRegister.cakePiece.get());
+        simpleItem(ItemRegister.chesseCakePiece.get());
+        simpleItem(ItemRegister.chocolateChesseCakePiece.get());
+
         simpleItem(ItemRegister.whiteChocolateBar.get());
         simpleItem(ItemRegister.darkChocolateBar.get());
         simpleItem(ItemRegister.milkChocolateBar.get());
 
         simpleItem(ItemRegister.condensedMilk.get());
         simpleItem(ItemRegister.brigadeiroMix.get());
+        simpleItem(ItemRegister.creamCheese.get());
 
         simpleItem(ItemRegister.driedCocoaBeans.get());
         simpleItem(ItemRegister.roastedCocoaBeans.get());
@@ -119,6 +145,9 @@ public class ItemModelSupplier extends ItemModelProvider {
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(KawaiiDishes.modId,"item/cookie/" + Registry.ITEM.getKey(item).toString().replaceAll(KawaiiDishes.modId+":","")));
     }
+
+
+
     private ItemModelBuilder catBandItem(Item item,String type) {
         return withExistingParent(
                 Registry.ITEM.getKey(item).toString().replaceAll(KawaiiDishes.modId+":",""),
@@ -141,18 +170,38 @@ public class ItemModelSupplier extends ItemModelProvider {
                 new ResourceLocation(KawaiiDishes.modId,"item/bunny_headband"))
                 .texture("1", new ResourceLocation(KawaiiDishes.modId,"item/" + type))
                 .texture("0", new ResourceLocation(KawaiiDishes.modId,"item/headbands/" + Registry.ITEM.getKey(item).toString().replaceAll(KawaiiDishes.modId+":","").replaceAll("_"+name,"")));
-
     }
+
+    private ItemModelBuilder bigHornBandItem(Item item,String type,String name) {
+        return withExistingParent(
+                Registry.ITEM.getKey(item).toString().replaceAll(KawaiiDishes.modId+":",""),
+                new ResourceLocation(KawaiiDishes.modId,"item/big_horn_headband"))
+                .texture("1", new ResourceLocation(KawaiiDishes.modId,"item/horns/" + type))
+                .texture("0", new ResourceLocation(KawaiiDishes.modId,"item/headbands/" + Registry.ITEM.getKey(item).toString().replaceAll(KawaiiDishes.modId+":","").replaceAll("_"+name,"")));
+    }
+    private ItemModelBuilder hornBandItem(Item item,String type,String name) {
+        return withExistingParent(
+                Registry.ITEM.getKey(item).toString().replaceAll(KawaiiDishes.modId+":",""),
+                new ResourceLocation(KawaiiDishes.modId,"item/horns_headband"))
+                .texture("1", new ResourceLocation(KawaiiDishes.modId,"item/horns/" + type))
+                .texture("0", new ResourceLocation(KawaiiDishes.modId,"item/headbands/" + Registry.ITEM.getKey(item).toString().replaceAll(KawaiiDishes.modId+":","").replaceAll("_"+name,"")));
+    }
+
     private ItemModelBuilder headBandItem(Item item) {
         return withExistingParent(
                 Registry.ITEM.getKey(item).toString().replaceAll(KawaiiDishes.modId+":",""),
                 new ResourceLocation(KawaiiDishes.modId,"item/headband"))
                 .texture("0", new ResourceLocation(KawaiiDishes.modId,"item/headbands/" + Registry.ITEM.getKey(item).toString().replaceAll(KawaiiDishes.modId+":","")));
-
     }
     private ItemModelBuilder block(Block block){
         return withExistingParent(Registry.BLOCK.getKey(block).toString().replaceAll(KawaiiDishes.modId+":",""),new ResourceLocation(KawaiiDishes.modId,"block/"+Registry.BLOCK.getKey(block).toString().replaceAll(KawaiiDishes.modId+":","")));
     }
+
+    private ItemModelBuilder cake(Block block){
+        return withExistingParent(Registry.BLOCK.getKey(block).toString().replaceAll(KawaiiDishes.modId+":",""),new ResourceLocation(KawaiiDishes.modId,"block/cake/cakes/"+Registry.BLOCK.getKey(block).toString().replaceAll(KawaiiDishes.modId+":","")));
+    }
+
+
 
     private ItemModelBuilder milkshake(Block block){
         return withExistingParent(Registry.BLOCK.getKey(block).toString().replaceAll(KawaiiDishes.modId+":",""),new ResourceLocation(KawaiiDishes.modId,"block/milk_shakes/"+Registry.BLOCK.getKey(block).toString().replaceAll(KawaiiDishes.modId+":","")));

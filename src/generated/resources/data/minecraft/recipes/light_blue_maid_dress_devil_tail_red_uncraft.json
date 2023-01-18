@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:light_blue_maid_dress_devil_tail_red"
+    }
+  ],
+  "result": {
+    "item": "kawaiidishes:red_devil_tail"
+  }
+}

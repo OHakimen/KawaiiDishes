@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:light_gray_headband"
+    },
+    {
+      "item": "kawaiidishes:purple_horns"
+    }
+  ],
+  "result": {
+    "item": "kawaiidishes:light_gray_headband_horns_purple"
+  }
+}

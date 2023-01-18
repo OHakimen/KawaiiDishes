@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:green_headband_bunny_ears_caramel"
+    }
+  ],
+  "result": {
+    "item": "kawaiidishes:caramel_bunny_ears"
+  }
+}

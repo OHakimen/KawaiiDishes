@@ -1,0 +1,11 @@
+{
+  "replace" : false,
+  "values": [
+    "kawaiidishes:black_horns",
+    "kawaiidishes:red_horns",
+    "kawaiidishes:purple_horns",
+    "kawaiidishes:light_gray_horns",
+    "kawaiidishes:gray_horns",
+    "kawaiidishes:white_horns"
+  ]
+}

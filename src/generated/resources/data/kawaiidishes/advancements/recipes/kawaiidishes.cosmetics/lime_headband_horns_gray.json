@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_lime_headband": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:lime_headband"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "kawaiidishes:lime_headband_horns_gray"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_lime_headband",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:lime_headband_horns_gray"
+    ]
+  }
+}

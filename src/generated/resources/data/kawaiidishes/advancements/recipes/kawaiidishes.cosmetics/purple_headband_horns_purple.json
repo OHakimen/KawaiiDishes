@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_purple_headband": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:purple_headband"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "kawaiidishes:purple_headband_horns_purple"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_purple_headband",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:purple_headband_horns_purple"
+    ]
+  }
+}

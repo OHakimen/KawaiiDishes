@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:white_headband_bunny_ears_black_uncraft"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_headband_bunny_ears_black": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:white_headband_bunny_ears_black"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_white_headband_bunny_ears_black",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:white_headband_bunny_ears_black_uncraft"
+    ]
+  }
+}

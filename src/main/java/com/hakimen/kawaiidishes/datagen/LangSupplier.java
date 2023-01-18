@@ -6,7 +6,6 @@ import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.LanguageProvider;
 
 import java.util.HashMap;
@@ -67,6 +66,15 @@ public class LangSupplier extends LanguageProvider {
                 if(itemPath.equals(name +"_bunny_tail_white")){
                     add(items.get(),dressNames.get(itemPath.replace("_bunny_tail_white",""))+" White Bunny Tailed");
                 }
+                if(itemPath.equals(name +"_devil_tail_black")){
+                    add(items.get(),dressNames.get(itemPath.replace("_devil_tail_black",""))+" Black Devil Tailed");
+                }
+                if(itemPath.equals(name +"_devil_tail_red")){
+                    add(items.get(),dressNames.get(itemPath.replace("_devil_tail_red",""))+" Red Devil Tailed");
+                }
+                if(itemPath.equals(name +"_devil_tail_purple")){
+                    add(items.get(),dressNames.get(itemPath.replace("_devil_tail_purple",""))+" Purple Devil Tailed");
+                }
                 if(itemPath.equals(name)){
                     add(items.get(),dressNames.get(itemPath));
                 }
@@ -87,6 +95,15 @@ public class LangSupplier extends LanguageProvider {
                 }
             }
         }
+
+
+        add(ItemRegister.cakePiece.get(),"Piece of Cake");
+        add(ItemRegister.chocolateChesseCakePiece.get(),"Piece of Chocolate Cheesecake");
+        add(ItemRegister.chesseCakePiece.get(),"Piece of Cheesecake");
+        add(ItemRegister.cheeseCake.get(),"Cheesecake");
+        add(ItemRegister.chocolateCheeseCake.get(),"Chocolate Cheesecake");
+
+        add(ItemRegister.creamCheese.get(),"Cream Cheese");
 
 
         add(ItemRegister.beijinho.get(),"Beijinho");
@@ -134,6 +151,10 @@ public class LangSupplier extends LanguageProvider {
         add(ItemRegister.whiteBunnyTail.get(),"White Bunny Tail");
         add(ItemRegister.blackBunnyTail.get(),"Black Bunny Tail");
 
+        add(ItemRegister.blackDevilTail.get(),"Black Devil Tail");
+        add(ItemRegister.purpleDevilTail.get(),"Purple Devil Tail");
+        add(ItemRegister.redDevilTail.get(),"Red Devil Tail");
+
         add(ItemRegister.caramelCatEars.get(),"Caramel Cat Ears");
         add(ItemRegister.blackCatEars.get(),"Black Cat Ears");
         add(ItemRegister.whiteCatEars.get(),"White Cat Ears");
@@ -141,6 +162,14 @@ public class LangSupplier extends LanguageProvider {
         add(ItemRegister.redFoxEars.get(),"Red Fox Ears");
         add(ItemRegister.blackFoxEars.get(),"Black Fox Ears");
         add(ItemRegister.whiteFoxEars.get(),"White Fox Ears");
+
+        add(ItemRegister.blackHorns.get(),"Black Devil Horn");
+        add(ItemRegister.purpleHorns.get(),"Purple Devil Horn");
+        add(ItemRegister.redHorns.get(),"Red Devil Horn");
+
+        add(ItemRegister.grayHorns.get(),"Gray Devil Horn");
+        add(ItemRegister.lightGrayHorns.get(),"Light Gray Devil Horn");
+        add(ItemRegister.whiteHorns.get(),"White Devil Horn");
 
         add(ItemRegister.whiteBunnyEars.get(),"White Bunny Ears");
         add(ItemRegister.caramelBunnyEars.get(),"Caramel Bunny Ears");

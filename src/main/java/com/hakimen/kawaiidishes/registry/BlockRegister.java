@@ -48,6 +48,10 @@ public class BlockRegister {
     public static final RegistryObject<SmallCandy> brigadeiro = BLOCKS.register("brigadeiro", SmallCandy::new);
 
 
+    public static final RegistryObject<CakeBlock> cheeseCake = BLOCKS.register("cheese_cake", CakeBlock::new);
+    public static final RegistryObject<CakeBlock> chocolateCheeseCake = BLOCKS.register("chocolate_cheese_cake", CakeBlock::new);
+
+
     public static final RegistryObject<StoolBlock> blackStool = BLOCKS.register("black_stool",StoolBlock::new);
     public static final RegistryObject<StoolBlock> blueStool = BLOCKS.register("blue_stool",StoolBlock::new);
     public static final RegistryObject<StoolBlock> brownStool = BLOCKS.register("brown_stool",StoolBlock::new);

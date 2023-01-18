@@ -27,6 +27,7 @@ public class KawaiiDishesClient {
         GeoArmorRenderer.registerArmorRenderer(BunnyMaidArmorItem.class, BunnyMaidDressArmorRenderer::new);
         GeoArmorRenderer.registerArmorRenderer(BunnyTailArmorItem.class, BunnyTailArmorRenderer::new);
         GeoArmorRenderer.registerArmorRenderer(DevilMaidArmorItem.class, DevilMaidDressArmorRenderer::new);
+        GeoArmorRenderer.registerArmorRenderer(DevilTailArmorItem.class, DevilTailArmorRenderer::new);
 
     }
     @SubscribeEvent

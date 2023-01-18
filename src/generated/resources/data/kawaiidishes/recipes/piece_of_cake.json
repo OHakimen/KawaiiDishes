@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:cake"
+    }
+  ],
+  "result": {
+    "count": 8,
+    "item": "kawaiidishes:piece_of_cake"
+  }
+}

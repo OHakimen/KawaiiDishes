@@ -1,5 +1,6 @@
 package com.hakimen.kawaiidishes.registry;
 
+import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -15,5 +16,6 @@ public class Registration {
         EffectRegister.register(bus);
         EntityRegister.register(bus);
         PlacedFeaturesRegistry.register(bus);
+
     }
 }

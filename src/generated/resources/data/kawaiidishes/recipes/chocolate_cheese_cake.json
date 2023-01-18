@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "e": {
+      "item": "kawaiidishes:cocoa_powder"
+    },
+    "w": {
+      "item": "minecraft:wheat"
+    },
+    "x": {
+      "item": "kawaiidishes:cream_cheese"
+    }
+  },
+  "pattern": [
+    "xex",
+    "www"
+  ],
+  "result": {
+    "item": "kawaiidishes:chocolate_cheese_cake"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:gray_wool"
+    },
+    "h": {
+      "item": "minecraft:goat_horn"
+    }
+  },
+  "pattern": [
+    "h h",
+    "# #"
+  ],
+  "result": {
+    "item": "kawaiidishes:gray_horns"
+  }
+}
