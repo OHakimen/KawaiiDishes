@@ -88,7 +88,7 @@ public class SittableEntity extends Entity {
         super.tick();
         if (this.seat == null) {
             this.seat = getCommandSenderWorld().getBlockState(blockPosition());
-            if (this.seat == null || this.seat.isAir()) {
+            if (this.seat.isAir()) {
                 kill();
             }
         }
@@ -97,14 +97,6 @@ public class SittableEntity extends Entity {
     @Override
     protected void addAdditionalSaveData(CompoundTag compound) {
 
-    }
-
-    protected void applyYawToEntity(Entity entityToUpdate) {
-        entityToUpdate.setYBodyRot(this.yRotO);
-        final float rotation = Mth.wrapDegrees(entityToUpdate.yRotO - this.yRotO);
-        final float clampedRotation = Mth.clamp(rotation, -75.0F, 75.0F);
-        entityToUpdate.yRotO += clampedRotation - rotation;
-        entityToUpdate.setYHeadRot(entityToUpdate.yRotO);
     }
 
     @Override

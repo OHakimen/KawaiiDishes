@@ -67,6 +67,7 @@ public class KawaiiDishes {
         if (entity instanceof Monster monster && !entity.serializeNBT().getBoolean("isBaby") && RANDOM.nextFloat(0,1) < KawaiiDishesCommonConfig.chanceToSpawnWithDress.get()) {
             if((monster instanceof Skeleton
                     || monster instanceof WitherSkeleton
+                    || monster instanceof Stray
                     || monster instanceof Zombie
                     || monster instanceof Drowned
                     || monster instanceof Husk

@@ -52,7 +52,6 @@ public class ItemRegister {
     public static final RegistryObject<Item> glassCup = ITEMS.register("glass_cup", () -> new BlockItem(BlockRegister.glassCup.get(), new Item.Properties().tab(blocks)));
     public static final RegistryObject<Item> milkshakeCup = ITEMS.register("milkshake_cup", () -> new BlockItem(BlockRegister.milkshakeCup.get(), new Item.Properties().tab(blocks)));
 
-
     public static final RegistryObject<Item> coffeePress = ITEMS.register("coffee_press", () -> new BlockItem(BlockRegister.coffeePress.get(), new Item.Properties().tab(blocks)));
     public static final RegistryObject<Item> coffeeMachine = ITEMS.register("coffee_machine", () -> new BlockItem(BlockRegister.coffeeMachine.get(), new Item.Properties().tab(blocks)));
     public static final RegistryObject<Item> blender = ITEMS.register("blender", () -> new BlockItem(BlockRegister.blender.get(), new Item.Properties().tab(blocks)));
@@ -62,7 +61,6 @@ public class ItemRegister {
     public static final RegistryObject<CatEars> blackCatEars = ITEMS.register("black_cat_ears", CatEars::new);
     public static final RegistryObject<CatEars> caramelCatEars = ITEMS.register("caramel_cat_ears", CatEars::new);
     public static final RegistryObject<CatEars> whiteCatEars = ITEMS.register("white_cat_ears", CatEars::new);
-
 
     public static final RegistryObject<BunnyEars> blackBunnyEars = ITEMS.register("black_bunny_ears", BunnyEars::new);
     public static final RegistryObject<BunnyEars> caramelBunnyEars = ITEMS.register("caramel_bunny_ears", BunnyEars::new);
@@ -76,11 +74,9 @@ public class ItemRegister {
     public static final RegistryObject<Horns> grayHorns = ITEMS.register("gray_horns", Horns::new);
     public static final RegistryObject<Horns> whiteHorns = ITEMS.register("white_horns", Horns::new);
 
-
     public static final RegistryObject<Horns> redHorns = ITEMS.register("red_horns", Horns::new);
     public static final RegistryObject<Horns> purpleHorns = ITEMS.register("purple_horns", Horns::new);
     public static final RegistryObject<Horns> blackHorns = ITEMS.register("black_horns", Horns::new);
-
 
     public static final RegistryObject<Item> blackCatTail = ITEMS.register("black_cat_tail",
             () -> new CatTailArmorItem("black_cat_tail.png"));
@@ -109,7 +105,6 @@ public class ItemRegister {
             () -> new DevilTailArmorItem("red_devil_tail.png"));
     public static final RegistryObject<Item> purpleDevilTail = ITEMS.register("purple_devil_tail",
             () -> new DevilTailArmorItem("purple_devil_tail.png"));
-
 
     public static final RegistryObject<Item> whiteThighHighs = ITEMS.register("white_thigh_highs",
             () -> new ThighHighsArmorItem("white_thigh_highs.png", EquipmentSlot.LEGS));

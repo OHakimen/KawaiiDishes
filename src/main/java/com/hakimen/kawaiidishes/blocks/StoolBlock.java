@@ -47,18 +47,14 @@ public class StoolBlock extends Block  implements EntityBlock {
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         final var stool = (StoolBlockEntity) pLevel.getBlockEntity(pPos);
         if (!pLevel.isClientSide() && !pPlayer.isShiftKeyDown()) {
-            if(stool.seat == null){
-                stool.getOrCreateSeat();
-            }
+            stool.getOrCreateSeat();
             final boolean success = pPlayer.startRiding(stool.seat);
             if (success) {
                 stool.setChanged();
             }
             return success ? InteractionResult.SUCCESS : InteractionResult.PASS;
         }
-        if (pPlayer.isShiftKeyDown()){
-            stool.seat.kill();
-        }
+
         return InteractionResult.PASS;
     }
 }
