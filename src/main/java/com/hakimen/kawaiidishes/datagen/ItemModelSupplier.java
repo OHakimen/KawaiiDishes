@@ -101,8 +101,9 @@ public class ItemModelSupplier extends ItemModelProvider {
         cookieItem(ItemRegister.unbindingCookie.get());
 
         simpleItem(ItemRegister.cakePiece.get());
-        simpleItem(ItemRegister.chesseCakePiece.get());
-        simpleItem(ItemRegister.chocolateChesseCakePiece.get());
+        simpleItem(ItemRegister.cheeseCakePiece.get());
+        simpleItem(ItemRegister.chocolateCheeseCakePiece.get());
+        simpleItem(ItemRegister.honeyCheeseCakePiece.get());
 
         simpleItem(ItemRegister.whiteChocolateBar.get());
         simpleItem(ItemRegister.darkChocolateBar.get());

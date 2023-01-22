@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "e": {
+      "item": "minecraft:honey_bottle"
+    },
+    "w": {
+      "item": "minecraft:wheat"
+    },
+    "x": {
+      "item": "kawaiidishes:cream_cheese"
+    }
+  },
+  "pattern": [
+    "xex",
+    "www"
+  ],
+  "result": {
+    "item": "kawaiidishes:honey_cheese_cake"
+  }
+}

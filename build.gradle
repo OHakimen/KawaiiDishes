@@ -164,9 +164,11 @@ repositories {
         url "https://cursemaven.com"
     }
 
-    //Curios
     maven {
-        url = "https://maven.theillusivec4.top/"
+        url 'https://squiddev.cc/maven/'
+        content {
+            includeGroup 'org.squiddev'
+        }
     }
 
 }
@@ -196,6 +198,10 @@ dependencies {
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
     // at runtime, use the full JEI jar for Forge
     runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
+
+
+    implementation fg.deobf("org.squiddev:cc-tweaked-1.19.2:1.101.1")
+
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }

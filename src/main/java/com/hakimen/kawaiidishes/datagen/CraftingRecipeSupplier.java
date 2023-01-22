@@ -175,19 +175,33 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
                 .unlockedBy(getHasName(ItemRegister.creamCheese.get()), has(ItemRegister.creamCheese.get()))
                 .save(pFinishedRecipeConsumer);
 
+        ShapedRecipeBuilder.shaped(ItemRegister.honeyCheeseCake.get())
+                .pattern("xex")
+                .pattern("www")
+                .define('x',ItemRegister.creamCheese.get())
+                .define('e',Items.HONEY_BOTTLE)
+                .define('w',Items.WHEAT)
+                .unlockedBy(getHasName(ItemRegister.creamCheese.get()), has(ItemRegister.creamCheese.get()))
+                .save(pFinishedRecipeConsumer);
+
         ShapelessRecipeBuilder.shapeless(ItemRegister.cakePiece.get(),8)
                 .requires(Items.CAKE)
                 .unlockedBy(getHasName(Items.CAKE), has(Items.CAKE))
                 .save(pFinishedRecipeConsumer);
 
-        ShapelessRecipeBuilder.shapeless(ItemRegister.chesseCakePiece.get(),8)
+        ShapelessRecipeBuilder.shapeless(ItemRegister.cheeseCakePiece.get(),8)
                 .requires(ItemRegister.cheeseCake.get())
                 .unlockedBy(getHasName(ItemRegister.cheeseCake.get()), has(ItemRegister.cheeseCake.get()))
                 .save(pFinishedRecipeConsumer);
 
-        ShapelessRecipeBuilder.shapeless(ItemRegister.chocolateChesseCakePiece.get(),8)
+        ShapelessRecipeBuilder.shapeless(ItemRegister.chocolateCheeseCakePiece.get(),8)
                 .requires(ItemRegister.chocolateCheeseCake.get())
                 .unlockedBy(getHasName(ItemRegister.chocolateCheeseCake.get()), has(ItemRegister.chocolateCheeseCake.get()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(ItemRegister.honeyCheeseCakePiece.get(),8)
+                .requires(ItemRegister.honeyCheeseCake.get())
+                .unlockedBy(getHasName(ItemRegister.honeyCheeseCake.get()), has(ItemRegister.honeyCheeseCake.get()))
                 .save(pFinishedRecipeConsumer);
 
         cookie(pFinishedRecipeConsumer,ItemRegister.honeyCookie.get(),8,Items.HONEY_BOTTLE);

@@ -10,8 +10,10 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.SquidRenderer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.animal.Squid;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.monster.piglin.PiglinBrute;
@@ -62,7 +64,6 @@ public class KawaiiDishes {
 
     public void onLivingSpecialSpawn(LivingSpawnEvent.SpecialSpawn event) {
         Entity entity = event.getEntity();
-
         if (entity instanceof Monster monster && !entity.serializeNBT().getBoolean("isBaby") && RANDOM.nextFloat(0,1) < KawaiiDishesCommonConfig.chanceToSpawnWithDress.get()) {
             if((monster instanceof Skeleton
                     || monster instanceof WitherSkeleton

@@ -1,4 +1,4 @@
-// 1.19.2	2023-01-17T20:25:07.1538146	Item Models: kawaiidishes
+// 1.19.2	2023-01-19T13:52:57.3309289	Item Models: kawaiidishes
 0af50e289067fd52fc313acd8dff63d6555178a2 assets/kawaiidishes/models/item/american_coffee.json
 2a66015a70563855eb9e14da50053a238d668d0a assets/kawaiidishes/models/item/beijinho.json
 aa72e928949935595622c0acd2a2166f6ee08d09 assets/kawaiidishes/models/item/black_headband.json
@@ -215,6 +215,7 @@ d3d6d3e418e7bd6e2719347d1bc4cfe303491460 assets/kawaiidishes/models/item/green_m
 479b79b2ee054495fcd6524bdb785fe760aae1a8 assets/kawaiidishes/models/item/green_maid_dress_fox_tail_red.json
 334874efdd064771ed420ef903ef752cd121773d assets/kawaiidishes/models/item/green_maid_dress_fox_tail_white.json
 ef598bede48fc8677e1d7d3464482e1ab624f27d assets/kawaiidishes/models/item/green_stool.json
+f09c96a528a2257a7e190fd2290b450ef1f70ba7 assets/kawaiidishes/models/item/honey_cheese_cake.json
 ddbcca56dff08dda0a59a448b0b1255ea30acc7c assets/kawaiidishes/models/item/honey_cookie.json
 937ac77a9b11021413d60e32f2277d41e6fa391d assets/kawaiidishes/models/item/ice_cream_machine.json
 4c6581371d2f4ce62b09788c023a937de2b36669 assets/kawaiidishes/models/item/latte_coffee.json
@@ -380,6 +381,7 @@ a00c1b05e0cd2d35b6986e4db5bc604c58be217f assets/kawaiidishes/models/item/orange_
 153ab17d73cb5fa5b56523f0e8bd601baf5d6f03 assets/kawaiidishes/models/item/piece_of_cake.json
 ca62042a1581825276c9c4074203d98e8f37680c assets/kawaiidishes/models/item/piece_of_cheesecake.json
 9cb81cda5b6044a8978d30b0b8594a465ebec2e0 assets/kawaiidishes/models/item/piece_of_chocolate_cheesecake.json
+f345a3521323ee73e27d8a585084f97b1028b395 assets/kawaiidishes/models/item/piece_of_honey_cheesecake.json
 a8242712766c77dd378e5da6a52aff4239158fe7 assets/kawaiidishes/models/item/pink_headband.json
 226239aa4a9757430995710f829dbb7a2fe89d57 assets/kawaiidishes/models/item/pink_headband_bunny_ears_black.json
 7312e86e9cf1c2c39c24b80579c47796386cf087 assets/kawaiidishes/models/item/pink_headband_bunny_ears_caramel.json

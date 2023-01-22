@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kawaiidishes:item/piece_of_honey_cheesecake"
+  }
+}

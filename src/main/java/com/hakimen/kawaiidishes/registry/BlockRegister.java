@@ -50,6 +50,7 @@ public class BlockRegister {
 
     public static final RegistryObject<CakeBlock> cheeseCake = BLOCKS.register("cheese_cake", CakeBlock::new);
     public static final RegistryObject<CakeBlock> chocolateCheeseCake = BLOCKS.register("chocolate_cheese_cake", CakeBlock::new);
+    public static final RegistryObject<CakeBlock> honeyCheeseCake = BLOCKS.register("honey_cheese_cake", CakeBlock::new);
 
 
     public static final RegistryObject<StoolBlock> blackStool = BLOCKS.register("black_stool",StoolBlock::new);

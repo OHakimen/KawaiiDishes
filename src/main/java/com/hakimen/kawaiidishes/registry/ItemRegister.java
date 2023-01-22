@@ -88,11 +88,11 @@ public class ItemRegister {
             () -> new CatTailArmorItem("white_cat_tail.png"));
 
     public static final RegistryObject<Item> blackBunnyTail = ITEMS.register("black_bunny_tail",
-            () -> new CatTailArmorItem("black_bunny_tail.png"));
+            () -> new BunnyTailArmorItem("black_bunny_tail.png"));
     public static final RegistryObject<Item> caramelBunnyTail = ITEMS.register("caramel_bunny_tail",
-            () -> new CatTailArmorItem("caramel_bunny_tail.png"));
+            () -> new BunnyTailArmorItem("caramel_bunny_tail.png"));
     public static final RegistryObject<Item> whiteBunnyTail = ITEMS.register("white_bunny_tail",
-            () -> new CatTailArmorItem("white_bunny_tail.png"));
+            () -> new BunnyTailArmorItem("white_bunny_tail.png"));
 
     public static final RegistryObject<Item> blackFoxTail = ITEMS.register("black_fox_tail",
             () -> new FoxTailArmorItem("black_fox_tail.png"));
@@ -917,11 +917,14 @@ public class ItemRegister {
     public static final RegistryObject<Item> creamCheese = ITEMS.register("cream_cheese", () -> new Item(new Item.Properties().tab(foods)));
 
     public static final RegistryObject<Item> cakePiece = ITEMS.register("piece_of_cake", () -> new Item(new Item.Properties().tab(foods).food(cake)));
-    public static final RegistryObject<Item> chesseCakePiece = ITEMS.register("piece_of_cheesecake", () -> new Item(new Item.Properties().tab(foods).food(cake)));
-    public static final RegistryObject<Item> chocolateChesseCakePiece = ITEMS.register("piece_of_chocolate_cheesecake", () -> new Item(new Item.Properties().tab(foods).food(cake)));
+    public static final RegistryObject<Item> cheeseCakePiece = ITEMS.register("piece_of_cheesecake", () -> new Item(new Item.Properties().tab(foods).food(cake)));
+    public static final RegistryObject<Item> chocolateCheeseCakePiece = ITEMS.register("piece_of_chocolate_cheesecake", () -> new Item(new Item.Properties().tab(foods).food(cake)));
+
+    public static final RegistryObject<Item> honeyCheeseCakePiece = ITEMS.register("piece_of_honey_cheesecake", () -> new Item(new Item.Properties().tab(foods).food(cake)));
 
     public static final RegistryObject<Item> cheeseCake = ITEMS.register("cheese_cake", ()-> new BlockItem(BlockRegister.cheeseCake.get(), new Item.Properties().tab(foods)));
     public static final RegistryObject<Item> chocolateCheeseCake = ITEMS.register("chocolate_cheese_cake", ()-> new BlockItem(BlockRegister.chocolateCheeseCake.get(), new Item.Properties().tab(foods)));
+    public static final RegistryObject<Item> honeyCheeseCake = ITEMS.register("honey_cheese_cake", () -> new BlockItem(BlockRegister.honeyCheeseCake.get(),new Item.Properties().tab(foods)));
 
     public static final RegistryObject<Candy> beijinho = ITEMS.register("beijinho", () -> new Candy(BlockRegister.beijinho.get(), 3, 1.2f));
     public static final RegistryObject<Candy> brigadeiro = ITEMS.register("brigadeiro", () -> new Candy(BlockRegister.brigadeiro.get(), 3, 1.2f));

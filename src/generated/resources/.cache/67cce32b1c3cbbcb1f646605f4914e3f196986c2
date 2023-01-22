@@ -1,4 +1,4 @@
-// 1.19.2	2023-01-17T20:25:07.1576574	LootTables
+// 1.19.2	2023-01-21T19:17:54.1076366	LootTables
 2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data/kawaiidishes/loot_tables/blocks/american_coffee.json
 45a86ed3f9837fdc090688753ea37829b2da4c92 data/kawaiidishes/loot_tables/blocks/beijinho.json
 382918992c7048cdb9f656332aae6845ed5ba7e6 data/kawaiidishes/loot_tables/blocks/black_stool.json
@@ -27,6 +27,7 @@ cbeb7680e048d69c1149a0dd0351318a8384113b data/kawaiidishes/loot_tables/blocks/co
 0c9b4022192faa15eed99407a20e0bae18ce2d4d data/kawaiidishes/loot_tables/blocks/glow_berry_milkshake.json
 4cbefd25e3c6aea706cb51cfa1edfa1ee49b34db data/kawaiidishes/loot_tables/blocks/gray_stool.json
 afa1b171662ed6739061cc7f827a338c1e7f10df data/kawaiidishes/loot_tables/blocks/green_stool.json
+2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data/kawaiidishes/loot_tables/blocks/honey_cheese_cake.json
 23d1bee3688a0df465fc22a11e1373fbf9493f09 data/kawaiidishes/loot_tables/blocks/ice_cream_machine.json
 2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data/kawaiidishes/loot_tables/blocks/latte_coffee.json
 1e0c2b6569dbd67f75e930c1aed0a13ce2479f00 data/kawaiidishes/loot_tables/blocks/light_blue_stool.json

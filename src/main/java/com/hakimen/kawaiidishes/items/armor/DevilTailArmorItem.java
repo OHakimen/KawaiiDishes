@@ -6,6 +6,7 @@ import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -28,6 +29,10 @@ public class DevilTailArmorItem extends GeoArmorItem implements IAnimatable {
     public DevilTailArmorItem(String textureName) {
         super(ArmorMaterials.tail, EquipmentSlot.CHEST, new Properties().tab(ItemRegister.cosmetics));
         textureLocation = textureName;
+    }
+    @Override
+    public boolean makesPiglinsNeutral(ItemStack stack, LivingEntity wearer) {
+        return true;
     }
 
     @Override
