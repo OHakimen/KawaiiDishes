@@ -492,40 +492,41 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
     }
 
     public void cosmetics(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
-        maidOutfit(pFinishedRecipeConsumer, ItemRegister.blackMaidDress.get(), Items.BLACK_WOOL, Items.WHITE_WOOL);
-        maidOutfit(pFinishedRecipeConsumer, ItemRegister.whiteMaidDress.get(), Items.WHITE_WOOL, Items.BLACK_WOOL);
-        maidOutfit(pFinishedRecipeConsumer, ItemRegister.grayMaidDress.get(), Items.GRAY_WOOL, Items.WHITE_WOOL);
-        maidOutfit(pFinishedRecipeConsumer, ItemRegister.light_grayMaidDress.get(), Items.LIGHT_GRAY_WOOL, Items.WHITE_WOOL);
-        maidOutfit(pFinishedRecipeConsumer, ItemRegister.light_blueMaidDress.get(), Items.LIGHT_BLUE_WOOL, Items.WHITE_WOOL);
-        maidOutfit(pFinishedRecipeConsumer, ItemRegister.redMaidDress.get(), Items.RED_WOOL, Items.WHITE_WOOL);
-        maidOutfit(pFinishedRecipeConsumer, ItemRegister.pinkMaidDress.get(), Items.PINK_WOOL, Items.WHITE_WOOL);
-        maidOutfit(pFinishedRecipeConsumer, ItemRegister.magentaMaidDress.get(), Items.MAGENTA_WOOL, Items.WHITE_WOOL);
-        maidOutfit(pFinishedRecipeConsumer, ItemRegister.purpleMaidDress.get(), Items.PURPLE_WOOL, Items.WHITE_WOOL);
-        maidOutfit(pFinishedRecipeConsumer, ItemRegister.greenMaidDress.get(), Items.GREEN_WOOL, Items.WHITE_WOOL);
-        maidOutfit(pFinishedRecipeConsumer, ItemRegister.limeMaidDress.get(), Items.LIME_WOOL, Items.WHITE_WOOL);
-        maidOutfit(pFinishedRecipeConsumer, ItemRegister.blueMaidDress.get(), Items.BLUE_WOOL, Items.WHITE_WOOL);
-        maidOutfit(pFinishedRecipeConsumer, ItemRegister.cyanMaidDress.get(), Items.CYAN_WOOL, Items.WHITE_WOOL);
-        maidOutfit(pFinishedRecipeConsumer, ItemRegister.yellowMaidDress.get(), Items.YELLOW_WOOL, Items.WHITE_WOOL);
-        maidOutfit(pFinishedRecipeConsumer, ItemRegister.orangeMaidDress.get(), Items.ORANGE_WOOL, Items.WHITE_WOOL);
-        maidOutfit(pFinishedRecipeConsumer, ItemRegister.brownMaidDress.get(), Items.BROWN_WOOL, Items.WHITE_WOOL);
+
+        maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("black").get(), Items.BLACK_WOOL, Items.WHITE_WOOL);
+        maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("white").get(), Items.WHITE_WOOL, Items.BLACK_WOOL);
+        maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("gray").get(), Items.GRAY_WOOL, Items.WHITE_WOOL);
+        maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("light_gray").get(), Items.LIGHT_GRAY_WOOL, Items.WHITE_WOOL);
+        maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("light_blue").get(), Items.LIGHT_BLUE_WOOL, Items.WHITE_WOOL);
+        maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("red").get(), Items.RED_WOOL, Items.WHITE_WOOL);
+        maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("pink").get(), Items.PINK_WOOL, Items.WHITE_WOOL);
+        maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("magenta").get(), Items.MAGENTA_WOOL, Items.WHITE_WOOL);
+        maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("purple").get(), Items.PURPLE_WOOL, Items.WHITE_WOOL);
+        maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("green").get(), Items.GREEN_WOOL, Items.WHITE_WOOL);
+        maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("lime").get(), Items.LIME_WOOL, Items.WHITE_WOOL);
+        maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("blue").get(), Items.BLUE_WOOL, Items.WHITE_WOOL);
+        maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("cyan").get(), Items.CYAN_WOOL, Items.WHITE_WOOL);
+        maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("yellow").get(), Items.YELLOW_WOOL, Items.WHITE_WOOL);
+        maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("orange").get(), Items.ORANGE_WOOL, Items.WHITE_WOOL);
+        maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("brown").get(), Items.BROWN_WOOL, Items.WHITE_WOOL);
 
 
-        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.blackMaidDress.get());
-        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.whiteMaidDress.get());
-        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.grayMaidDress.get());
-        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.light_grayMaidDress.get());
-        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.light_blueMaidDress.get());
-        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.redMaidDress.get());
-        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.pinkMaidDress.get());
-        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.magentaMaidDress.get());
-        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.purpleMaidDress.get());
-        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.greenMaidDress.get());
-        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.limeMaidDress.get());
-        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.blueMaidDress.get());
-        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.orangeMaidDress.get());
-        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.brownMaidDress.get());
-        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.cyanMaidDress.get());
-        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.yellowMaidDress.get());
+        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.dresses.get("black").get());
+        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.dresses.get("white").get());
+        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.dresses.get("gray").get());
+        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.dresses.get("light_gray").get());
+        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.dresses.get("light_blue").get());
+        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.dresses.get("red").get());
+        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.dresses.get("pink").get());
+        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.dresses.get("magenta").get());
+        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.dresses.get("purple").get());
+        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.dresses.get("green").get());
+        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.dresses.get("lime").get());
+        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.dresses.get("blue").get());
+        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.dresses.get("orange").get());
+        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.dresses.get("brown").get());
+        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.dresses.get("cyan").get());
+        maidOutfitVariations(pFinishedRecipeConsumer, ItemRegister.dresses.get("yellow").get());
 
         maidOutfitUncrafts(pFinishedRecipeConsumer,"black");
         maidOutfitUncrafts(pFinishedRecipeConsumer,"white");
@@ -590,22 +591,22 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
         devilTails(pFinishedRecipeConsumer, ItemRegister.purpleDevilTail.get(), Items.PURPLE_WOOL);
 
 
-        headBands(pFinishedRecipeConsumer, ItemRegister.blackHeadBand.get(), Items.BLACK_WOOL, Items.WHITE_WOOL);
-        headBands(pFinishedRecipeConsumer, ItemRegister.whiteHeadBand.get(), Items.WHITE_WOOL, Items.BLACK_WOOL);
-        headBands(pFinishedRecipeConsumer, ItemRegister.grayHeadBand.get(), Items.GRAY_WOOL, Items.WHITE_WOOL);
-        headBands(pFinishedRecipeConsumer, ItemRegister.light_grayHeadBand.get(), Items.LIGHT_GRAY_WOOL, Items.WHITE_WOOL);
-        headBands(pFinishedRecipeConsumer, ItemRegister.light_blueHeadBand.get(), Items.LIGHT_BLUE_WOOL, Items.WHITE_WOOL);
-        headBands(pFinishedRecipeConsumer, ItemRegister.redHeadBand.get(), Items.RED_WOOL, Items.WHITE_WOOL);
-        headBands(pFinishedRecipeConsumer, ItemRegister.pinkHeadBand.get(), Items.PINK_WOOL, Items.WHITE_WOOL);
-        headBands(pFinishedRecipeConsumer, ItemRegister.magentaHeadBand.get(), Items.MAGENTA_WOOL, Items.WHITE_WOOL);
-        headBands(pFinishedRecipeConsumer, ItemRegister.purpleHeadBand.get(), Items.PURPLE_WOOL, Items.WHITE_WOOL);
-        headBands(pFinishedRecipeConsumer, ItemRegister.greenHeadBand.get(), Items.GREEN_WOOL, Items.WHITE_WOOL);
-        headBands(pFinishedRecipeConsumer, ItemRegister.limeHeadBand.get(), Items.LIME_WOOL, Items.WHITE_WOOL);
-        headBands(pFinishedRecipeConsumer, ItemRegister.blueHeadBand.get(), Items.BLUE_WOOL, Items.WHITE_WOOL);
-        headBands(pFinishedRecipeConsumer, ItemRegister.cyanHeadBand.get(), Items.CYAN_WOOL, Items.WHITE_WOOL);
-        headBands(pFinishedRecipeConsumer, ItemRegister.yellowHeadBand.get(), Items.YELLOW_WOOL, Items.WHITE_WOOL);
-        headBands(pFinishedRecipeConsumer, ItemRegister.orangeHeadBand.get(), Items.ORANGE_WOOL, Items.WHITE_WOOL);
-        headBands(pFinishedRecipeConsumer, ItemRegister.brownHeadBand.get(), Items.BROWN_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.headbands.get("black").get(), Items.BLACK_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.headbands.get("white").get(), Items.WHITE_WOOL, Items.BLACK_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.headbands.get("gray").get(), Items.GRAY_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.headbands.get("light_gray").get(), Items.LIGHT_GRAY_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.headbands.get("light_blue").get(), Items.LIGHT_BLUE_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.headbands.get("red").get(), Items.RED_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.headbands.get("pink").get(), Items.PINK_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.headbands.get("magenta").get(), Items.MAGENTA_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.headbands.get("purple").get(), Items.PURPLE_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.headbands.get("green").get(), Items.GREEN_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.headbands.get("lime").get(), Items.LIME_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.headbands.get("blue").get(), Items.BLUE_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.headbands.get("cyan").get(), Items.CYAN_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.headbands.get("yellow").get(), Items.YELLOW_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.headbands.get("orange").get(), Items.ORANGE_WOOL, Items.WHITE_WOOL);
+        headBands(pFinishedRecipeConsumer, ItemRegister.headbands.get("brown").get(), Items.BROWN_WOOL, Items.WHITE_WOOL);
 
 
         headBandsUncraft(pFinishedRecipeConsumer,"black");

@@ -10,7 +10,5 @@
         "defaultRequire": 1
     },
     "client": [
-        "GlowSquidRendererMixin",
-        "SquidRendererMixin"
     ]
 }
