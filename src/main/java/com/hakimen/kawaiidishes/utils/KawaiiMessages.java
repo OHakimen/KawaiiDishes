@@ -1,5 +1,6 @@
 package com.hakimen.kawaiidishes.utils;
 
+import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.config.KawaiiDishesClientConfig;
 import com.hakimen.kawaiidishes.config.KawaiiDishesCommonConfig;
 import com.hakimen.kawaiidishes.items.CatEars;
@@ -26,7 +27,7 @@ public class KawaiiMessages {
                 "Hi Cutie !",
                 "Hey sweetie!"
         };
-        Random r = (Random) target.getRandom();
+        Random r = KawaiiDishes.RANDOM;
         var msg = Component.literal("<").append(entity.getDisplayName()).append("> ");
         int option = r.nextInt(0,messages.length);
         var value = messages[option];

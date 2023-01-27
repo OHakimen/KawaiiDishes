@@ -69,9 +69,6 @@ public class KawaiiDishes {
                     || monster instanceof WitherSkeleton
                     || monster instanceof Stray
                     || monster instanceof Zombie
-                    || monster instanceof Drowned
-                    || monster instanceof Husk
-                    || monster instanceof ZombifiedPiglin
                     || monster instanceof Piglin
                     || monster instanceof PiglinBrute) && KawaiiDishesCommonConfig.shouldMobSpawnWithDress.get()){
                 ItemStack[] stacks = armorBuild(RANDOM);
