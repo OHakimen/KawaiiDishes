@@ -5,6 +5,7 @@
 		"0": "kawaiidishes:block/coffee_press",
 		"particle": "kawaiidishes:block/coffee_press"
 	},
+	"render_type": "translucent",
 	"elements": [
 		{
 			"from": [4.5, 9, 4.5],

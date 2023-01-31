@@ -5,6 +5,7 @@
 		"0": "kawaiidishes:block/cake/chocolate_cake",
 		"particle": "kawaiidishes:block/cake/chocolate_cake"
 	},
+	"render_type": "cutout",
 	"elements": [
 		{
 			"from": [1, 0, 1],

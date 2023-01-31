@@ -6,6 +6,7 @@
 		"1": "kawaiidishes:block/stools/magenta_stool",
 		"particle": "kawaiidishes:block/stools/stool"
 	},
+	"render_type": "cutout",
 	"elements": [
 		{
 			"from": [2, 8, 2],

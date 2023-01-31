@@ -5,6 +5,7 @@
 		"0": "kawaiidishes:block/ice_cream_machine",
 		"particle": "kawaiidishes:block/ice_cream_machine"
 	},
+	"render_type": "cutout",
 	"elements": [
 		{
 			"from": [2, 0, 2],

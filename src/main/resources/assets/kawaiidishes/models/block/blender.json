@@ -5,6 +5,7 @@
 		"0": "kawaiidishes:block/blender",
 		"particle": "kawaiidishes:block/blender"
 	},
+	"render_type": "translucent",
 	"elements": [
 		{
 			"from": [4.25, 0, 4.25],

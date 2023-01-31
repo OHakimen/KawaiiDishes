@@ -5,6 +5,7 @@
 		"0": "kawaiidishes:block/glass_cup",
 		"particle": "kawaiidishes:block/glass_cup"
 	},
+	"render_type": "cutout",
 	"elements": [
 		{
 			"from": [5, 0, 5],

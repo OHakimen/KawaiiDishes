@@ -5,6 +5,7 @@
 		"1": "kawaiidishes:block/ice_cream/coffee_cream",
 		"particle": "kawaiidishes:block/ice_cream/coffee_cream"
 	},
+	"render_type": "cutout",
 	"elements": [
 		{
 			"from": [5, 0, 5],

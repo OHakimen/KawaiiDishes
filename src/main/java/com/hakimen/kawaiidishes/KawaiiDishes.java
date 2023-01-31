@@ -5,15 +5,13 @@ import com.hakimen.kawaiidishes.client.screens.CoffeeMachineScreen;
 import com.hakimen.kawaiidishes.client.screens.IceCreamScreen;
 import com.hakimen.kawaiidishes.config.KawaiiDishesClientConfig;
 import com.hakimen.kawaiidishes.config.KawaiiDishesCommonConfig;
-import com.hakimen.kawaiidishes.registry.*;
+import com.hakimen.kawaiidishes.registry.ContainerRegister;
+import com.hakimen.kawaiidishes.registry.ItemRegister;
+import com.hakimen.kawaiidishes.registry.Registration;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.SquidRenderer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.animal.Squid;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.monster.piglin.PiglinBrute;
@@ -21,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -30,7 +29,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
@@ -113,30 +111,5 @@ public class KawaiiDishes {
             MenuScreens.register(ContainerRegister.iceCreamMachine.get(), IceCreamScreen::new);
             MenuScreens.register(ContainerRegister.blenderContainer.get(), BlenderScreen::new);
         });
-
-
-        for(var block: BlockRegister.BLOCKS.getEntries().stream().toList()){
-            if(block.get().getDescriptionId().contains("_stool")){
-                ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.cutout());
-            }else if(block.get().getDescriptionId().contains("_ice_cream")){
-                ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.cutout());
-            }else if(block.get().getDescriptionId().contains("_milkshake")){
-                ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.translucent());
-            }
-        }
-
-        ItemBlockRenderTypes.setRenderLayer(BlockRegister.iceCreamMachine.get(), RenderType.cutout());
-
-        ItemBlockRenderTypes.setRenderLayer(BlockRegister.cheeseCake.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(BlockRegister.chocolateCheeseCake.get(), RenderType.cutout());
-
-
-
-        ItemBlockRenderTypes.setRenderLayer(BlockRegister.glassCup.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(BlockRegister.coffeePlant.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(BlockRegister.coffeePress.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(BlockRegister.blender.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(BlockRegister.milkshakeCup.get(), RenderType.translucent());
-
     }
 }
