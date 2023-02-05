@@ -1,4 +1,5 @@
-package com.hakimen.kawaiidishes.items;
+package com.hakimen.kawaiidishes.items.headbands;
+import com.hakimen.kawaiidishes.items.Hat;
 import com.hakimen.kawaiidishes.registry.EffectRegister;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -7,7 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class Headband extends Hat{
+public class Headband extends Hat {
 
     public Headband(Item item) {
         super(item);

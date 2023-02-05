@@ -2,6 +2,14 @@ package com.hakimen.kawaiidishes.registry;
 
 import com.hakimen.kawaiidishes.items.*;
 import com.hakimen.kawaiidishes.items.armor.*;
+import com.hakimen.kawaiidishes.items.ears.BunnyEars;
+import com.hakimen.kawaiidishes.items.ears.CatEars;
+import com.hakimen.kawaiidishes.items.ears.FoxEars;
+import com.hakimen.kawaiidishes.items.ears.Horns;
+import com.hakimen.kawaiidishes.items.headbands.BunnyHeadband;
+import com.hakimen.kawaiidishes.items.headbands.CatHeadband;
+import com.hakimen.kawaiidishes.items.headbands.Headband;
+import com.hakimen.kawaiidishes.items.headbands.HornHeadband;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
