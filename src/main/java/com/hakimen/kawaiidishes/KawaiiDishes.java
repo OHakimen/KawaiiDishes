@@ -76,10 +76,10 @@ public class KawaiiDishes {
                 monster.setItemSlot(EquipmentSlot.LEGS, stacks[2]);
                 monster.setItemSlot(EquipmentSlot.FEET, stacks[3]);
 
-                monster.setDropChance(EquipmentSlot.HEAD,KawaiiDishesCommonConfig.changeToDropArmorSet.get().floatValue());
-                monster.setDropChance(EquipmentSlot.CHEST,KawaiiDishesCommonConfig.changeToDropArmorSet.get().floatValue());
-                monster.setDropChance(EquipmentSlot.LEGS,KawaiiDishesCommonConfig.changeToDropArmorSet.get().floatValue());
-                monster.setDropChance(EquipmentSlot.FEET,KawaiiDishesCommonConfig.changeToDropArmorSet.get().floatValue());
+                monster.setDropChance(EquipmentSlot.HEAD,KawaiiDishesCommonConfig.chanceToDropArmorSet.get().floatValue());
+                monster.setDropChance(EquipmentSlot.CHEST,KawaiiDishesCommonConfig.chanceToDropArmorSet.get().floatValue());
+                monster.setDropChance(EquipmentSlot.LEGS,KawaiiDishesCommonConfig.chanceToDropArmorSet.get().floatValue());
+                monster.setDropChance(EquipmentSlot.FEET,KawaiiDishesCommonConfig.chanceToDropArmorSet.get().floatValue());
 
             }
         }

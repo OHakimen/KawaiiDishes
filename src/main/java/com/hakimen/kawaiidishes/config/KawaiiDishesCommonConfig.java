@@ -7,9 +7,11 @@ public class KawaiiDishesCommonConfig {
     public static final ForgeConfigSpec commonSpec;
     public static final ForgeConfigSpec.BooleanValue shouldMobSpawnWithDress;
     public static final ForgeConfigSpec.DoubleValue chanceToSpawnWithDress;
+
+    public static final ForgeConfigSpec.DoubleValue chanceToMessage;
     public static final ForgeConfigSpec.BooleanValue shouldSendMessage;
 
-    public static final ForgeConfigSpec.DoubleValue changeToDropArmorSet;
+    public static final ForgeConfigSpec.DoubleValue chanceToDropArmorSet;
 
     static {
         commonConfigBuilder.push("Common Configs for Kawaii Dishes");
@@ -23,9 +25,11 @@ public class KawaiiDishesCommonConfig {
         chanceToSpawnWithDress = commonConfigBuilder.comment("Sets the chance for mobs to spawn with maid dresses")
                 .defineInRange("chanceToSpawn", 0.075,0,1);
 
-        changeToDropArmorSet = commonConfigBuilder.comment("Sets the chance for mobs that spawn with maid dresses to drop them")
+        chanceToDropArmorSet = commonConfigBuilder.comment("Sets the chance for mobs that spawn with maid dresses to drop them")
                 .defineInRange("chanceToDrop", 0.25,0,1);
 
+        chanceToMessage = commonConfigBuilder.comment("Set the chance to message the player")
+                .defineInRange("chanceToMessage",  0.00025,0,1);
 
         commonConfigBuilder.pop();
         commonSpec = commonConfigBuilder.build();
