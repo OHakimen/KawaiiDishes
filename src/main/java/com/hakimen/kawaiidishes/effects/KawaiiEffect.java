@@ -33,9 +33,7 @@ public class KawaiiEffect extends MobEffect {
         for (Entity entity:entities) {
             if((entity instanceof LivingEntity livingEntity && EntityUtils.isHumanoid(livingEntity)&& pLivingEntity instanceof Player player)){
                 if(r.nextFloat(0,1) <  KawaiiDishesCommonConfig.chanceToMessage.get()){
-                    if(KawaiiDishesCommonConfig.shouldSendMessage.get()){
-                        KawaiiMessages.sendMessage(livingEntity,player);
-                    }
+                    KawaiiMessages.sendMessage(livingEntity,player);
                 }
             }
 
@@ -47,8 +45,4 @@ public class KawaiiEffect extends MobEffect {
     public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
         return true;
     }
-
-
-
-
 }

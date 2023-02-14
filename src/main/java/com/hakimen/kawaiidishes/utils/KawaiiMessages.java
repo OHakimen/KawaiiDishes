@@ -1,6 +1,7 @@
 package com.hakimen.kawaiidishes.utils;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
+import com.hakimen.kawaiidishes.config.KawaiiDishesCommonConfig;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -24,8 +25,9 @@ public class KawaiiMessages {
         int option = r.nextInt(0,messages.length);
         var value = messages[option];
         msg.append(value);
-        target.displayClientMessage(msg,false);
-
+        if(KawaiiDishesCommonConfig.shouldSendMessage.get()) {
+            target.displayClientMessage(msg, false);
+        }
     }
 
 }

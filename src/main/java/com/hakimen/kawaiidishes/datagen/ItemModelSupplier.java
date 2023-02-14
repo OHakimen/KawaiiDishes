@@ -58,6 +58,9 @@ public class ItemModelSupplier extends ItemModelProvider {
                 else if(path.endsWith("_fox_ears_red")) {
                     foxBandItem(item.get(),"fox_ears_red","fox_ears_red");
                 }
+                else if(path.endsWith("_fox_ears_brown")) {
+                    foxBandItem(item.get(),"fox_ears_brown","fox_ears_brown");
+                }
                 else if(path.endsWith("_bunny_ears_black")){
                     bunnyBandItem(item.get(),"bunny_ears_black","bunny_ears_black");
                 }

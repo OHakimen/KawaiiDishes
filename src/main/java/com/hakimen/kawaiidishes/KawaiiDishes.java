@@ -45,6 +45,7 @@ public class KawaiiDishes {
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String modId = "kawaiidishes";
 
+
     public KawaiiDishes() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, KawaiiDishesClientConfig.clientSpec, "kawaii-dishes-client.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, KawaiiDishesCommonConfig.commonSpec, "kawaii-dishes-common.toml");
@@ -92,12 +93,23 @@ public class KawaiiDishes {
 
         ComposterBlock.COMPOSTABLES.put(ItemRegister.driedCocoaBeans.get(),0.50f);
         ComposterBlock.COMPOSTABLES.put(ItemRegister.roastedCocoaBeans.get(),0.75f);
+
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.cakePiece.get(),0.65f);
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.honeyCheeseCakePiece.get(),0.65f);
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.chocolateCheeseCakePiece.get(),0.65f);
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.cheeseCakePiece.get(),0.65f);
+
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.honeyCheeseCake.get(),1f);
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.chocolateCheeseCake.get(),1f);
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.cheeseCake.get(),1f);
+
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
     }
 
     private void processIMC(final InterModProcessEvent event) {
+
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -105,7 +117,6 @@ public class KawaiiDishes {
     public void onServerStarting(ServerStartingEvent event) {
     }
     private void clientStartup(final FMLClientSetupEvent event){
-
         event.enqueueWork(() -> {
             MenuScreens.register(ContainerRegister.coffeeMachine.get(), CoffeeMachineScreen::new);
             MenuScreens.register(ContainerRegister.iceCreamMachine.get(), IceCreamScreen::new);

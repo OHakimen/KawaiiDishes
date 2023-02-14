@@ -1,7 +1,6 @@
 package com.hakimen.kawaiidishes.utils;
 
 import com.hakimen.kawaiidishes.registry.ItemRegister;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
@@ -48,6 +47,7 @@ public class MaidMobEventHandler {
     public static String[] foxColors = new String[]{
             "black",
             "white",
+            "brown",
             "red",
     };
 

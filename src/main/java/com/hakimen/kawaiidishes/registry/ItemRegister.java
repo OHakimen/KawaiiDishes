@@ -53,7 +53,6 @@ public class ItemRegister {
     };
 
     public static FoodProperties cake = new FoodProperties.Builder().nutrition(2).saturationMod(0.5f).build();
-
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, modId);
 
     public static final RegistryObject<Item> mug = ITEMS.register("mug", () -> new BlockItem(BlockRegister.mug.get(), new Item.Properties().tab(blocks)));
@@ -77,6 +76,8 @@ public class ItemRegister {
     public static final RegistryObject<FoxEars> blackFoxEars = ITEMS.register("black_fox_ears", FoxEars::new);
     public static final RegistryObject<FoxEars> redFoxEars = ITEMS.register("red_fox_ears", FoxEars::new);
     public static final RegistryObject<FoxEars> whiteFoxEars = ITEMS.register("white_fox_ears", FoxEars::new);
+
+    public static final RegistryObject<FoxEars> brownFoxEars = ITEMS.register("brown_fox_ears", FoxEars::new);
 
     public static final RegistryObject<Horns> lightGrayHorns = ITEMS.register("light_gray_horns", Horns::new);
     public static final RegistryObject<Horns> grayHorns = ITEMS.register("gray_horns", Horns::new);
@@ -107,6 +108,8 @@ public class ItemRegister {
     public static final RegistryObject<Item> whiteFoxTail = ITEMS.register("white_fox_tail",
             () -> new FoxTailArmorItem("white_fox_tail.png"));
 
+    public static final RegistryObject<Item> brownFoxTail = ITEMS.register("brown_fox_tail",
+            () -> new FoxTailArmorItem("brown_fox_tail.png"));
     public static final RegistryObject<Item> blackDevilTail = ITEMS.register("black_devil_tail",
             () -> new DevilTailArmorItem("black_devil_tail.png"));
     public static final RegistryObject<Item> redDevilTail = ITEMS.register("red_devil_tail",
@@ -224,6 +227,8 @@ public class ItemRegister {
                 () -> new FoxMaidArmorItem(color + "_maid_dress_fox_tail_red.png", toReturn.get()));
         ITEMS.register(color + "_maid_dress_fox_tail_white",
                 () -> new FoxMaidArmorItem(color + "_maid_dress_fox_tail_white.png", toReturn.get()));
+        ITEMS.register(color + "_maid_dress_fox_tail_brown",
+                () -> new FoxMaidArmorItem(color + "_maid_dress_fox_tail_brown.png", toReturn.get()));
         ITEMS.register(color + "_maid_dress_bunny_tail_black",
                 () -> new BunnyMaidArmorItem(color + "_maid_dress_bunny_tail_black.png", toReturn.get()));
         ITEMS.register(color + "_maid_dress_bunny_tail_caramel",
@@ -249,6 +254,7 @@ public class ItemRegister {
         ITEMS.register(color+"_headband_fox_ears_black", () -> new Headband(toReturn.get()));
         ITEMS.register(color+"_headband_fox_ears_white", () -> new Headband(toReturn.get()));
         ITEMS.register(color+"_headband_fox_ears_red", () -> new Headband(toReturn.get()));
+        ITEMS.register(color+"_headband_fox_ears_brown", () -> new Headband(toReturn.get()));
         ITEMS.register(color+"_headband_bunny_ears_black", () -> new BunnyHeadband(toReturn.get()));
         ITEMS.register(color+"_headband_bunny_ears_white", () -> new BunnyHeadband(toReturn.get()));
         ITEMS.register(color+"_headband_bunny_ears_caramel", () -> new BunnyHeadband(toReturn.get()));

@@ -57,6 +57,9 @@ public class LangSupplier extends LanguageProvider {
                 if(itemPath.equals(name +"_fox_tail_white")){
                     add(items.get(),dressNames.get(itemPath.replace("_fox_tail_white",""))+" White Fox Tailed");
                 }
+                if(itemPath.equals(name +"_fox_tail_brown")){
+                    add(items.get(),dressNames.get(itemPath.replace("_fox_tail_brown",""))+" Brown Fox Tailed");
+                }
                 if(itemPath.equals(name +"_bunny_tail_black")){
                     add(items.get(),dressNames.get(itemPath.replace("_bunny_tail_black",""))+" Black Bunny Tailed");
                 }
@@ -149,6 +152,7 @@ public class LangSupplier extends LanguageProvider {
         add(ItemRegister.redFoxTail.get(),"Red Fox Tail");
         add(ItemRegister.whiteFoxTail.get(),"White Fox Tail");
         add(ItemRegister.blackFoxTail.get(),"Black Fox Tail");
+        add(ItemRegister.brownFoxTail.get(),"Brown Fox Tail");
 
         add(ItemRegister.caramelBunnyTail.get(),"Caramel Bunny Tail");
         add(ItemRegister.whiteBunnyTail.get(),"White Bunny Tail");
@@ -165,6 +169,7 @@ public class LangSupplier extends LanguageProvider {
         add(ItemRegister.redFoxEars.get(),"Red Fox Ears");
         add(ItemRegister.blackFoxEars.get(),"Black Fox Ears");
         add(ItemRegister.whiteFoxEars.get(),"White Fox Ears");
+        add(ItemRegister.brownFoxEars.get(),"Brown Fox Ears");
 
         add(ItemRegister.blackHorns.get(),"Black Devil Horn");
         add(ItemRegister.purpleHorns.get(),"Purple Devil Horn");

@@ -3,7 +3,6 @@ package com.hakimen.kawaiidishes.registry;
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.recipes.*;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.levelgen.blending.Blender;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -23,7 +22,7 @@ public class RecipeRegister {
     public static final RegistryObject<RecipeSerializer<IceCreamMachineRecipe>> IceCreamMakingRecipe =
             SERIALIZERS.register("ice_cream_making", () -> IceCreamMachineRecipe.Serializer.INSTANCE);
 
-    public static final RegistryObject<RecipeSerializer<BlenderRecipe>> blenderRecipe =
+    public static final RegistryObject<RecipeSerializer<BlenderRecipe>> BlendingRecipe =
             SERIALIZERS.register("blending", () -> BlenderRecipe.Serializer.INSTANCE);
 
 

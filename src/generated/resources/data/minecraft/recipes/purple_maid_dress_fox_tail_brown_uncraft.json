@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:purple_maid_dress_fox_tail_brown"
+    }
+  ],
+  "result": {
+    "item": "kawaiidishes:brown_fox_tail"
+  }
+}

@@ -560,6 +560,7 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
         foxEars(pFinishedRecipeConsumer, ItemRegister.blackFoxEars.get(), Items.BLACK_WOOL);
         foxEars(pFinishedRecipeConsumer, ItemRegister.whiteFoxEars.get(), Items.WHITE_WOOL);
         foxEars(pFinishedRecipeConsumer, ItemRegister.redFoxEars.get(), Items.ORANGE_WOOL);
+        foxEars(pFinishedRecipeConsumer, ItemRegister.brownFoxEars.get(), Items.BROWN_WOOL);
 
         bunnyEars(pFinishedRecipeConsumer, ItemRegister.blackBunnyEars.get(), Items.BLACK_WOOL);
         bunnyEars(pFinishedRecipeConsumer, ItemRegister.whiteBunnyEars.get(), Items.WHITE_WOOL);
@@ -581,6 +582,7 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
         foxTails(pFinishedRecipeConsumer, ItemRegister.blackFoxTail.get(), Items.BLACK_WOOL, Items.WHITE_WOOL);
         foxTails(pFinishedRecipeConsumer, ItemRegister.redFoxTail.get(), Items.ORANGE_WOOL, Items.WHITE_WOOL);
         foxTails(pFinishedRecipeConsumer, ItemRegister.whiteFoxTail.get(), Items.WHITE_WOOL, Items.WHITE_WOOL);
+        foxTails(pFinishedRecipeConsumer, ItemRegister.brownFoxTail.get(), Items.BROWN_WOOL, Items.WHITE_WOOL);
 
         bunnyTails(pFinishedRecipeConsumer, ItemRegister.blackBunnyTail.get(), Items.BLACK_WOOL);
         bunnyTails(pFinishedRecipeConsumer, ItemRegister.caramelBunnyTail.get(), Items.YELLOW_WOOL);
@@ -903,6 +905,12 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
                         .unlockedBy(getHasName(i.get()), has(i.get()))
                         .save(consumer,path+"_uncraft");
             }
+            if(path.equals(color+"_maid_dress_fox_tail_brown")){
+                ShapelessRecipeBuilder.shapeless(ItemRegister.brownFoxTail.get())
+                        .requires(Ingredient.of(i.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(i.get()), has(i.get()))
+                        .save(consumer,path+"_uncraft");
+            }
             if(path.equals(color+"_maid_dress_fox_tail_white")){
                 ShapelessRecipeBuilder.shapeless(ItemRegister.whiteFoxTail.get())
                         .requires(Ingredient.of(i.get().getDefaultInstance()))
@@ -1134,6 +1142,13 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
                         .unlockedBy(getHasName(result), has(result))
                         .save(consumer);
             }
+            if (path.equals(result.toString() + "_fox_ears_brown")) {
+                ShapelessRecipeBuilder.shapeless(i.get())
+                        .requires(Ingredient.of(result.getDefaultInstance()))
+                        .requires(Ingredient.of(ItemRegister.brownFoxEars.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(result), has(result))
+                        .save(consumer);
+            }
             if (path.equals(result.toString() + "_fox_ears_red")) {
                 ShapelessRecipeBuilder.shapeless(i.get())
                         .requires(Ingredient.of(result.getDefaultInstance()))
@@ -1228,6 +1243,12 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
             }
             if(path.equals(color+"_headband_fox_ears_black")){
                 ShapelessRecipeBuilder.shapeless(ItemRegister.blackFoxEars.get())
+                        .requires(Ingredient.of(i.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(i.get()), has(i.get()))
+                        .save(consumer,path + "_uncraft");
+            }
+            if(path.equals(color+"_headband_fox_ears_brown")){
+                ShapelessRecipeBuilder.shapeless(ItemRegister.brownFoxEars.get())
                         .requires(Ingredient.of(i.get().getDefaultInstance()))
                         .unlockedBy(getHasName(i.get()), has(i.get()))
                         .save(consumer,path + "_uncraft");
@@ -1339,6 +1360,13 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
                 ShapelessRecipeBuilder.shapeless(i.get())
                         .requires(Ingredient.of(result.getDefaultInstance()))
                         .requires(Ingredient.of(ItemRegister.redFoxTail.get().getDefaultInstance()))
+                        .unlockedBy(getHasName(result), has(result))
+                        .save(consumer);
+            }
+            if (path.equals(result.toString() + "_fox_tail_brown")) {
+                ShapelessRecipeBuilder.shapeless(i.get())
+                        .requires(Ingredient.of(result.getDefaultInstance()))
+                        .requires(Ingredient.of(ItemRegister.brownFoxTail.get().getDefaultInstance()))
                         .unlockedBy(getHasName(result), has(result))
                         .save(consumer);
             }

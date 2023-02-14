@@ -10,6 +10,7 @@
         "defaultRequire": 1
     },
     "client": [
+        "clientside.FoxRendererMixin",
         "clientside.GlowSquidRendererMixin",
         "clientside.SquidRendererMixin"
     ]
