@@ -11,12 +11,15 @@ public class KawaiiDishesCommonConfig {
     public static final ForgeConfigSpec.DoubleValue chanceToMessage;
     public static final ForgeConfigSpec.BooleanValue shouldSendMessage;
 
+
+    public static final ForgeConfigSpec.BooleanValue wanderingTraderTrades;
+    public static final ForgeConfigSpec.BooleanValue villagerTrades;
     public static final ForgeConfigSpec.DoubleValue chanceToDropArmorSet;
 
     static {
         commonConfigBuilder.push("Common Configs for Kawaii Dishes");
 
-        shouldSendMessage = commonConfigBuilder.comment("Define if the Kawaii Effect can send messages to the local player")
+        shouldSendMessage = commonConfigBuilder.comment("Define if the Kawaii Effect can send messages to local players")
                 .define("canSendMessage",true);
 
         shouldMobSpawnWithDress = commonConfigBuilder.comment("Should the mobs spawn with the maid dresses")
@@ -30,6 +33,11 @@ public class KawaiiDishesCommonConfig {
 
         chanceToMessage = commonConfigBuilder.comment("Set the chance to message the player")
                 .defineInRange("chanceToMessage",  0.00025,0,1);
+
+        villagerTrades = commonConfigBuilder.comment("Should the add item trades for villagers")
+                .define("villagerTrades", true);
+        wanderingTraderTrades = commonConfigBuilder.comment("Should the add item trades for wandering traders")
+                .define("wanderingTraderTrades", true);
 
         commonConfigBuilder.pop();
         commonSpec = commonConfigBuilder.build();

@@ -53,12 +53,13 @@ public class KawaiiDishes {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
         Registration.init();
-        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
-        forgeBus.addListener(this::onLivingSpecialSpawn);
         bus.addListener(this::enqueueIMC);
         bus.addListener(this::clientStartup);
         bus.addListener(this::setup);
+
+        MinecraftForge.EVENT_BUS.addListener(this::onLivingSpecialSpawn);
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     public void onLivingSpecialSpawn(LivingSpawnEvent.SpecialSpawn event) {
@@ -102,7 +103,6 @@ public class KawaiiDishes {
         ComposterBlock.COMPOSTABLES.put(ItemRegister.honeyCheeseCake.get(),1f);
         ComposterBlock.COMPOSTABLES.put(ItemRegister.chocolateCheeseCake.get(),1f);
         ComposterBlock.COMPOSTABLES.put(ItemRegister.cheeseCake.get(),1f);
-
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
