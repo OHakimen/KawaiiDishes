@@ -2,8 +2,8 @@ package com.hakimen.kawaiidishes.effects;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.config.KawaiiDishesCommonConfig;
-import com.hakimen.kawaiidishes.utils.EntityUtils;
-import com.hakimen.kawaiidishes.utils.KawaiiMessages;
+import com.hakimen.kawaiidishes.integration.jei.categories.utils.EntityUtils;
+import com.hakimen.kawaiidishes.integration.jei.categories.utils.KawaiiMessages;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;

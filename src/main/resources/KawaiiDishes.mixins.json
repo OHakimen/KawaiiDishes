@@ -5,11 +5,14 @@
     "compatibilityLevel": "JAVA_8",
     "refmap": "kawaiidishes.refmap.json",
     "mixins": [
+
     ],
     "injectors": {
         "defaultRequire": 1
     },
     "client": [
+        "clientside.CCClientRegistryMixin",
+        "clientside.CCTurtleMixin",
         "clientside.FoxRendererMixin",
         "clientside.GlowSquidRendererMixin",
         "clientside.SquidRendererMixin"

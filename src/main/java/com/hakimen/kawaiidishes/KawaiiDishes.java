@@ -34,7 +34,7 @@ import org.slf4j.Logger;
 
 import java.util.Random;
 
-import static com.hakimen.kawaiidishes.utils.MaidMobEventHandler.armorBuild;
+import static com.hakimen.kawaiidishes.integration.jei.categories.utils.MaidMobEventHandler.armorBuild;
 
 
 @Mod("kawaiidishes")
@@ -115,6 +115,7 @@ public class KawaiiDishes {
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
+
     }
     private void clientStartup(final FMLClientSetupEvent event){
         event.enqueueWork(() -> {

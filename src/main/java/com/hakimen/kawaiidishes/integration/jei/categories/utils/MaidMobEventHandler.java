@@ -1,4 +1,4 @@
-package com.hakimen.kawaiidishes.utils;
+package com.hakimen.kawaiidishes.integration.jei.categories.utils;
 
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.world.item.ItemStack;

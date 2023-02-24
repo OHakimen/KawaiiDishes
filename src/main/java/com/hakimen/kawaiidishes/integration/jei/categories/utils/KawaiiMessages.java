@@ -1,4 +1,4 @@
-package com.hakimen.kawaiidishes.utils;
+package com.hakimen.kawaiidishes.integration.jei.categories.utils;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.config.KawaiiDishesCommonConfig;
