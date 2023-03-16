@@ -2,6 +2,9 @@ package com.hakimen.kawaiidishes.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class KawaiiDishesCommonConfig {
     public static final ForgeConfigSpec.Builder commonConfigBuilder = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec commonSpec;
@@ -16,11 +19,23 @@ public class KawaiiDishesCommonConfig {
     public static final ForgeConfigSpec.BooleanValue villagerTrades;
     public static final ForgeConfigSpec.DoubleValue chanceToDropArmorSet;
 
+    public static final ForgeConfigSpec.ConfigValue<List<String>> messages;
     static {
         commonConfigBuilder.push("Common Configs for Kawaii Dishes");
 
         shouldSendMessage = commonConfigBuilder.comment("Define if the Kawaii Effect can send messages to local players")
                 .define("canSendMessage",true);
+
+        chanceToMessage = commonConfigBuilder.comment("Set the chance to message the player")
+                .defineInRange("chanceToMessage",  0.00025,0,1);
+
+        messages = commonConfigBuilder.comment("Sets the messages that are sent to the player")
+                .define("messages", Arrays.asList("You look so kawaii !!",
+                        "OuO",
+                        "Cute <3",
+                        "You look nice today",
+                        "Hi Cutie !",
+                        "Hey sweetie!"));
 
         shouldMobSpawnWithDress = commonConfigBuilder.comment("Should the mobs spawn with the maid dresses")
                         .define("shouldSpawn", true);
@@ -31,8 +46,6 @@ public class KawaiiDishesCommonConfig {
         chanceToDropArmorSet = commonConfigBuilder.comment("Sets the chance for mobs that spawn with maid dresses to drop them")
                 .defineInRange("chanceToDrop", 0.25,0,1);
 
-        chanceToMessage = commonConfigBuilder.comment("Set the chance to message the player")
-                .defineInRange("chanceToMessage",  0.00025,0,1);
 
         villagerTrades = commonConfigBuilder.comment("Should the add item trades for villagers")
                 .define("villagerTrades", true);

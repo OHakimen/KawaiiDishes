@@ -8,6 +8,7 @@ import com.hakimen.kawaiidishes.config.KawaiiDishesCommonConfig;
 import com.hakimen.kawaiidishes.registry.ContainerRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import com.hakimen.kawaiidishes.registry.Registration;
+import com.hakimen.kawaiidishes.utils.MaidMobEventHandler;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.entity.Entity;
@@ -34,7 +35,6 @@ import org.slf4j.Logger;
 
 import java.util.Random;
 
-import static com.hakimen.kawaiidishes.integration.jei.categories.utils.MaidMobEventHandler.armorBuild;
 
 
 @Mod("kawaiidishes")
@@ -71,7 +71,7 @@ public class KawaiiDishes {
                     || monster instanceof Zombie
                     || monster instanceof Piglin
                     || monster instanceof PiglinBrute) && KawaiiDishesCommonConfig.shouldMobSpawnWithDress.get()){
-                ItemStack[] stacks = armorBuild(RANDOM);
+                ItemStack[] stacks = MaidMobEventHandler.armorBuild(RANDOM);
 
                 monster.setItemSlot(EquipmentSlot.HEAD, stacks[0]);
                 monster.setItemSlot(EquipmentSlot.CHEST, stacks[1]);

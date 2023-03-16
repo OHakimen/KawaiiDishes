@@ -2,8 +2,8 @@ package com.hakimen.kawaiidishes.effects;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.config.KawaiiDishesCommonConfig;
-import com.hakimen.kawaiidishes.integration.jei.categories.utils.EntityUtils;
-import com.hakimen.kawaiidishes.integration.jei.categories.utils.KawaiiMessages;
+import com.hakimen.kawaiidishes.utils.EntityUtils;
+import com.hakimen.kawaiidishes.utils.KawaiiMessages;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
@@ -32,7 +32,7 @@ public class KawaiiEffect extends MobEffect {
         Random r = KawaiiDishes.RANDOM;
         for (Entity entity:entities) {
             if((entity instanceof LivingEntity livingEntity && EntityUtils.isHumanoid(livingEntity)&& pLivingEntity instanceof Player player)){
-                if(r.nextFloat(0,1) <  KawaiiDishesCommonConfig.chanceToMessage.get()){
+                if(r.nextFloat(0,1) < KawaiiDishesCommonConfig.chanceToMessage.get()){
                     KawaiiMessages.sendMessage(livingEntity,player);
                 }
             }

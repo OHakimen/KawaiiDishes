@@ -1,4 +1,4 @@
-package com.hakimen.kawaiidishes.integration.jei.categories.utils;
+package com.hakimen.kawaiidishes.utils;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;

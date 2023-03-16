@@ -11,8 +11,8 @@
         "defaultRequire": 1
     },
     "client": [
-        "clientside.CCClientRegistryMixin",
-        "clientside.CCTurtleMixin",
+        "clientside.cc.CCClientRegistryMixin",
+        "clientside.cc.CCTurtleMixin",
         "clientside.FoxRendererMixin",
         "clientside.GlowSquidRendererMixin",
         "clientside.SquidRendererMixin"
