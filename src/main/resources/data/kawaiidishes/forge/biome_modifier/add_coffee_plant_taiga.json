@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_taiga",
+  "features": "kawaiidishes:coffee_plant",
+  "step": "vegetal_decoration"
+}

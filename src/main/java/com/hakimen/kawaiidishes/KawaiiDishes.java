@@ -131,6 +131,7 @@ public class KawaiiDishes {
                         out.accept(ItemRegister.driedCoffeeBeans.get());
                         out.accept(ItemRegister.roastedCoffeeBeans.get());
 
+                        out.accept(ItemRegister.cocoaPowder.get());
                         out.accept(ItemRegister.driedCocoaBeans.get());
                         out.accept(ItemRegister.roastedCocoaBeans.get());
                         ItemRegister.ITEMS.getEntries().forEach(x -> {

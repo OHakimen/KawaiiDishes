@@ -35,7 +35,26 @@ public class GenericGeoArmorItem extends ArmorItem implements GeoItem {
 
     public Function<AnimationState<GenericGeoArmorItem>,PlayState> animationControlling;
     public TriConsumer<ItemStack,Level,Player> armorTick;
-    Item remainder;
+    public Item remainder;
+
+    public boolean canStandOnPowderSnow;
+    public boolean makesPiglinsNeutral;
+
+    public GenericGeoArmorItem setRemainder(Item remainder) {
+        this.remainder = remainder;
+        return this;
+    }
+
+    public GenericGeoArmorItem setCanStandOnPowderSnow(boolean canStandOnPowderSnow) {
+        this.canStandOnPowderSnow = canStandOnPowderSnow;
+        return this;
+    }
+
+    public GenericGeoArmorItem setMakesPiglinsNeutral(boolean makesPiglinsNeutral) {
+        this.makesPiglinsNeutral = makesPiglinsNeutral;
+        return this;
+    }
+
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public GenericGeoArmorItem(ArmorMaterial pMaterial, EquipmentSlot pSlot, Properties pProperties, String textureLocation, String modelLocation, String animationLocation, Function<AnimationState<GenericGeoArmorItem>,PlayState> animationControlling, TriConsumer<ItemStack, Level, Player> armorTick) {
@@ -45,6 +64,16 @@ public class GenericGeoArmorItem extends ArmorItem implements GeoItem {
         this.animationLocation = new ResourceLocation(KawaiiDishes.modId,"animations/"+animationLocation);
         this.animationControlling = animationControlling;
         this.armorTick = armorTick;
+    }
+
+    @Override
+    public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer) {
+        return canStandOnPowderSnow;
+    }
+
+    @Override
+    public boolean makesPiglinsNeutral(ItemStack stack, LivingEntity wearer) {
+        return makesPiglinsNeutral;
     }
 
     public GenericGeoArmorItem(ArmorMaterial pMaterial, EquipmentSlot pSlot, Properties pProperties, String textureLocation, String modelLocation, String animationLocation, Function<AnimationState<GenericGeoArmorItem>,PlayState> animationControlling, TriConsumer<ItemStack, Level, Player> armorTick, Item remainder) {
