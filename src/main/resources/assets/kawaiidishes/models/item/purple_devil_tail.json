@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "kawaiidishes:models/armor/purple_devil_tail",
-		"particle": "kawaiidishes:models/armor/purple_devil_tail"
+		"0": "kawaiidishes:item/tails/purple_devil_tail",
+		"particle": "kawaiidishes:item/tails/purple_devil_tail"
 	},
 	"elements": [
 		{

@@ -4,7 +4,7 @@ import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
 import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
 
@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class LangSupplier extends LanguageProvider {
     public LangSupplier(DataGenerator gen, String locale) {
-        super(gen, KawaiiDishes.modId, locale);
+        super(gen.getPackOutput(), KawaiiDishes.modId, locale);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class LangSupplier extends LanguageProvider {
                 dressNames.put("purple_maid_dress","Purple Maid Dress");
                 
         for (var items:ItemRegister.ITEMS.getEntries().stream().toList()) {
-            String itemPath = Registry.ITEM.getKey(items.get()).toString().replaceAll(KawaiiDishes.modId+":","");
+            String itemPath = BuiltInRegistries.ITEM.getKey(items.get()).toString().replaceAll(KawaiiDishes.modId+":","");
             for (int i = 0; i < dressNames.keySet().size(); i++) {
                 String name = dressNames.keySet().stream().toArray()[i].toString().replaceAll(KawaiiDishes.modId+":","");
                 if(itemPath.equals(name +"_cat_tail_black")){

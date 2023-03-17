@@ -2,14 +2,13 @@ package com.hakimen.kawaiidishes.client.block_entity_renderers;
 
 import com.hakimen.kawaiidishes.blocks.block_entities.CoffeePressBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Quaternion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.world.item.ItemStack;
+import org.joml.Quaternionf;
 
 public class CoffeePressRenderer  implements BlockEntityRenderer<CoffeePressBlockEntity> {
     BlockEntityRendererProvider.Context context;
@@ -25,7 +24,7 @@ public class CoffeePressRenderer  implements BlockEntityRenderer<CoffeePressBloc
             var itemStack = pBlockEntity.inventory.getStackInSlot(i);
             pPoseStack.translate(0.5, .35f+(i/16f), 0.5f);
             pPoseStack.scale(0.25f,0.25f,0.25f);
-            pPoseStack.mulPose(Quaternion.fromXYZ(0,(float)(Math.sin(i)*2),0));
+            pPoseStack.mulPose(new Quaternionf().rotateXYZ(0,(float)(Math.sin(i)*2),0));
             itemRenderer.renderStatic(null,
                     itemStack,
                     ItemTransforms.TransformType.FIXED,

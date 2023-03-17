@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "kawaiidishes:models/armor/black_cat_tail",
-		"particle": "kawaiidishes:models/armor/black_cat_tail"
+		"0": "kawaiidishes:item/tails/black_cat_tail",
+		"particle": "kawaiidishes:item/tails/black_cat_tail"
 	},
 	"elements": [
 		{

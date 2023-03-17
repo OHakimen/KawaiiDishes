@@ -4,13 +4,12 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.recipes.BlenderRecipe;
-import com.hakimen.kawaiidishes.recipes.CoffeeMachineRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.nbt.CompoundTag;
@@ -165,11 +164,11 @@ public class BlenderRecipeBuilder implements RecipeBuilder {
 
             pJson.add("ingredients", jsonarray);
             JsonObject jsonobject = new JsonObject();
-            jsonobject.addProperty("item", Registry.ITEM.getKey(this.result.getItem()).toString());
+            jsonobject.addProperty("item", BuiltInRegistries.ITEM.getKey(this.result.getItem()).toString());
             jsonobject.addProperty("nbt", this.result.getOrCreateTag().toString());
 
             JsonObject onOut = new JsonObject();
-            onOut.addProperty("item",Registry.ITEM.getKey(this.onOutput.getItem()).toString());
+            onOut.addProperty("item",BuiltInRegistries.ITEM.getKey(this.onOutput.getItem()).toString());
 
             if (this.count > 1) {
                 jsonobject.addProperty("count", this.count);
@@ -185,7 +184,7 @@ public class BlenderRecipeBuilder implements RecipeBuilder {
         @Override
         public ResourceLocation getId() {
             return new ResourceLocation(KawaiiDishes.modId,
-                    Registry.ITEM.getKey(this.result.getItem()).toString().replaceAll(KawaiiDishes.modId+":","")+"_from_blending");
+                    BuiltInRegistries.ITEM.getKey(this.result.getItem()).toString().replaceAll(KawaiiDishes.modId+":","")+"_from_blending");
         }
 
         @Override

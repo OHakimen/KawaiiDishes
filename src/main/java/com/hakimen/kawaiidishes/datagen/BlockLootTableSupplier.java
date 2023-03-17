@@ -1,19 +1,26 @@
 package com.hakimen.kawaiidishes.datagen;
 
 import com.hakimen.kawaiidishes.registry.BlockRegister;
-import net.minecraft.core.Registry;
-import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegistryObject;
 
-public class BlockLootTableSupplier extends BlockLoot {
+import java.util.Set;
+
+public class BlockLootTableSupplier extends BlockLootSubProvider {
+
+    public BlockLootTableSupplier() {
+        super(Set.of(), FeatureFlags.DEFAULT_FLAGS);
+    }
 
     @Override
-    protected void addTables() {
+    protected void generate() {
         for (var i: BlockRegister.BLOCKS.getEntries().stream().toList()) {
             if(!i.get().equals(BlockRegister.coffeePlant.get())
-            && !Registry.BLOCK.getKey(i.get()).toString().contains("_coffee")){
+            && !BuiltInRegistries.BLOCK.getKey(i.get()).toString().contains("_coffee")){
                 this.dropSelf(i.get());
             }
         }

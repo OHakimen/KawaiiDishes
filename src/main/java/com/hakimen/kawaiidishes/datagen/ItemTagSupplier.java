@@ -2,30 +2,33 @@ package com.hakimen.kawaiidishes.datagen;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
-import net.minecraft.core.Registry;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.concurrent.CompletableFuture;
+
 public class ItemTagSupplier extends ItemTagsProvider {
-    public ItemTagSupplier(DataGenerator pGenerator, BlockTagsProvider pBlockTagsProvider,  @Nullable ExistingFileHelper existingFileHelper) {
-        super(pGenerator, pBlockTagsProvider, KawaiiDishes.modId, existingFileHelper);
+    public ItemTagSupplier(DataGenerator pGenerator, CompletableFuture<HolderLookup.Provider> lookup, BlockTagsProvider pBlockTagsProvider, @Nullable ExistingFileHelper existingFileHelper) {
+        super(pGenerator.getPackOutput(), lookup, pBlockTagsProvider, KawaiiDishes.modId ,existingFileHelper);
     }
-    TagKey<Item> maid_dresses = TagKey.create(Registry.ITEM_REGISTRY,new ResourceLocation(KawaiiDishes.modId,"maid_dresses"));
-    TagKey<Item> tailed_maid_dresses = TagKey.create(Registry.ITEM_REGISTRY,new ResourceLocation(KawaiiDishes.modId,"tailed_maid_dresses"));
-    TagKey<Item> tails = TagKey.create(Registry.ITEM_REGISTRY,new ResourceLocation(KawaiiDishes.modId,"tails"));
-    TagKey<Item> ears = TagKey.create(Registry.ITEM_REGISTRY,new ResourceLocation(KawaiiDishes.modId,"ears"));
-    TagKey<Item> headbands = TagKey.create(Registry.ITEM_REGISTRY,new ResourceLocation(KawaiiDishes.modId,"headbands"));
-    TagKey<Item> eared_headbands = TagKey.create(Registry.ITEM_REGISTRY,new ResourceLocation(KawaiiDishes.modId,"eared_headbands"));
+    TagKey<Item> maid_dresses = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(),new ResourceLocation(KawaiiDishes.modId,"maid_dresses"));
+    TagKey<Item> tailed_maid_dresses = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(),new ResourceLocation(KawaiiDishes.modId,"tailed_maid_dresses"));
+    TagKey<Item> tails = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(),new ResourceLocation(KawaiiDishes.modId,"tails"));
+    TagKey<Item> ears = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(),new ResourceLocation(KawaiiDishes.modId,"ears"));
+    TagKey<Item> headbands = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(),new ResourceLocation(KawaiiDishes.modId,"headbands"));
+    TagKey<Item> eared_headbands = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(),new ResourceLocation(KawaiiDishes.modId,"eared_headbands"));
 
 
     @Override
-    protected void addTags() {
+    protected void addTags(HolderLookup.Provider pProvider) {
         for(var item: ItemRegister.ITEMS.getEntries()){
             String name = item.get().toString();
             if(name.contains("maid_dress")){

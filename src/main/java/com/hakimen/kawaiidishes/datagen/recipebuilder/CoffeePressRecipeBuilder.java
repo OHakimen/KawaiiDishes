@@ -9,7 +9,7 @@ import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.nbt.CompoundTag;
@@ -163,7 +163,7 @@ public class CoffeePressRecipeBuilder implements RecipeBuilder {
 
             pJson.add("ingredients", jsonarray);
             JsonObject jsonobject = new JsonObject();
-            jsonobject.addProperty("item", Registry.ITEM.getKey(this.result.getItem()).toString());
+            jsonobject.addProperty("item", BuiltInRegistries.ITEM.getKey(this.result.getItem()).toString());
             if (this.count > 1) {
                 jsonobject.addProperty("count", this.count);
             }
@@ -174,7 +174,7 @@ public class CoffeePressRecipeBuilder implements RecipeBuilder {
         @Override
         public ResourceLocation getId() {
             return new ResourceLocation(KawaiiDishes.modId,
-                            Registry.ITEM.getKey(this.result.getItem()).toString().replaceAll(KawaiiDishes.modId+":","")+"_from_coffee_pressing");
+                            BuiltInRegistries.ITEM.getKey(this.result.getItem()).toString().replaceAll(KawaiiDishes.modId+":","")+"_from_coffee_pressing");
         }
 
         @Override

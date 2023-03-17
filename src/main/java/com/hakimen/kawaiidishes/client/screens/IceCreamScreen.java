@@ -1,7 +1,6 @@
 package com.hakimen.kawaiidishes.client.screens;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
-import com.hakimen.kawaiidishes.containers.CoffeeMachineContainer;
 import com.hakimen.kawaiidishes.containers.IceCreamMachineContainer;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;

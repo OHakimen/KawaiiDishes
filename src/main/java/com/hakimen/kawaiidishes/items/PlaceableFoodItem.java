@@ -1,11 +1,8 @@
 package com.hakimen.kawaiidishes.items;
 
-import com.hakimen.kawaiidishes.blocks.MilkshakeBlock;
-import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
@@ -30,7 +27,7 @@ public class PlaceableFoodItem extends BlockItem {
     Item remainder;
     public PlaceableFoodItem(Block pBlock, int nutrition, float saturation, Item remainder) {
         super(pBlock, new Properties().food(new FoodProperties.Builder().nutrition(nutrition).saturationMod(saturation).fast().build())
-                .tab(ItemRegister.foods).stacksTo(16).craftRemainder(
+                .stacksTo(16).craftRemainder(
                         remainder
                 ));
         this.remainder = remainder;

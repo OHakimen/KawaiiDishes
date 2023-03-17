@@ -43,7 +43,7 @@ public class FoxRendererMixin {
             }
         }
 
-        if (pEntity.getFoxType() == Fox.Type.RED) {
+        if (pEntity.getVariant() == Fox.Type.RED) {
             return pEntity.isSleeping() ? RED_FOX_SLEEP_TEXTURE : RED_FOX_TEXTURE;
         } else {
             return pEntity.isSleeping() ? SNOW_FOX_SLEEP_TEXTURE : SNOW_FOX_TEXTURE;

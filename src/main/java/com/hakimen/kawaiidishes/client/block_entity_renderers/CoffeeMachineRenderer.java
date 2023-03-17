@@ -4,18 +4,14 @@ import com.hakimen.kawaiidishes.blocks.CoffeeMachineBlock;
 import com.hakimen.kawaiidishes.blocks.block_entities.CoffeeMachineBlockEntity;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.DustParticle;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.*;
-import net.minecraft.world.phys.Vec3;
+import org.joml.Quaternionf;
 
 import java.util.Objects;
 
@@ -38,19 +34,19 @@ public class CoffeeMachineRenderer implements BlockEntityRenderer<CoffeeMachineB
             if (direction == Direction.WEST) {
                 pPoseStack.translate(0.25, .25f, .25f);
                 pPoseStack.scale(0.65f, 0.65f, 0.65f);
-                pPoseStack.mulPose(Quaternion.fromXYZ(0, 3.1415f / 5f + 3.1415f / 2f, 0));
+                pPoseStack.mulPose(new Quaternionf().rotateXYZ(0, 3.1415f / 5f + 3.1415f / 2f, 0));
             } else if (direction == Direction.SOUTH) {
                 pPoseStack.translate(0.25, .25f, .75f);
                 pPoseStack.scale(0.65f, 0.65f, 0.65f);
-                pPoseStack.mulPose(Quaternion.fromXYZ(0, -3.1415f / 5f - 3.1415f / 2f, 0));
+                pPoseStack.mulPose(new Quaternionf().rotateXYZ(0, -3.1415f / 5f - 3.1415f / 2f, 0));
             } else if (direction == Direction.NORTH) {
                 pPoseStack.translate(0.75, .25f, .25f);
                 pPoseStack.scale(0.65f, 0.65f, 0.65f);
-                pPoseStack.mulPose(Quaternion.fromXYZ(0, -3.1415f / 5f + 3.1415f / 2f, 0));
+                pPoseStack.mulPose(new Quaternionf().rotateXYZ(0, -3.1415f / 5f + 3.1415f / 2f, 0));
             } else if (direction == Direction.EAST) {
                 pPoseStack.translate(0.75, .25f, .75f);
                 pPoseStack.scale(0.65f, 0.65f, 0.65f);
-                pPoseStack.mulPose(Quaternion.fromXYZ(0, 3.1415f / 5f - 3.1415f / 2f, 0));
+                pPoseStack.mulPose(new Quaternionf().rotateXYZ(0, 3.1415f / 5f - 3.1415f / 2f, 0));
             }
         }
 
