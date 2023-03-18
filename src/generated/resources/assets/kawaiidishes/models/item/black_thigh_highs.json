@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "kawaiidishes:item/black_thigh_highs"
+    "layer0": "kawaiidishes:item/thigh_highs/black_thigh_highs"
   }
 }

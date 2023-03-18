@@ -550,8 +550,23 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
         shoes(pFinishedRecipeConsumer, ItemRegister.blackThighHighsShoes.get(), Items.LEATHER, Items.BLACK_WOOL);
         shoes(pFinishedRecipeConsumer, ItemRegister.whiteThighHighsShoes.get(), Items.LEATHER, Items.GRAY_WOOL);
 
-        thighHighs(pFinishedRecipeConsumer, ItemRegister.blackThighHighs.get(), Items.BLACK_WOOL);
-        thighHighs(pFinishedRecipeConsumer, ItemRegister.whiteThighHighs.get(), Items.WHITE_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("black").get(), Items.BLACK_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("white").get(), Items.WHITE_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("gray").get(), Items.GRAY_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("light_gray").get(), Items.LIGHT_GRAY_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("light_blue").get(), Items.LIGHT_BLUE_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("red").get(), Items.RED_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("pink").get(), Items.PINK_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("magenta").get(), Items.MAGENTA_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("purple").get(), Items.PURPLE_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("green").get(), Items.GREEN_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("lime").get(), Items.LIME_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("blue").get(), Items.BLUE_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("orange").get(), Items.ORANGE_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("brown").get(), Items.BROWN_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("cyan").get(), Items.CYAN_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("yellow").get(), Items.YELLOW_WOOL);
+
 
         catEars(pFinishedRecipeConsumer, ItemRegister.blackCatEars.get(), Items.BLACK_WOOL);
         catEars(pFinishedRecipeConsumer, ItemRegister.whiteCatEars.get(), Items.WHITE_WOOL);

@@ -173,16 +173,10 @@ public class ItemRegister {
             () -> new GenericGeoArmorItem(ArmorMaterials.tail,EquipmentSlot.CHEST,new Item.Properties(),"red_devil_tail.png", "devil_tail.geo.json", "devil_tail_animations.json", AnimationsRegister.devilTail, NULL).setMakesPiglinsNeutral(true));
     public static final RegistryObject<Item> purpleDevilTail = ITEMS.register("purple_devil_tail",
             () -> new GenericGeoArmorItem(ArmorMaterials.tail,EquipmentSlot.CHEST,new Item.Properties(),"purple_devil_tail.png", "devil_tail.geo.json", "devil_tail_animations.json", AnimationsRegister.devilTail, NULL).setMakesPiglinsNeutral(true));
-
-    public static final RegistryObject<Item> whiteThighHighs = ITEMS.register("white_thigh_highs",
-            () -> new GenericGeoArmorItem(ArmorMaterials.maidDress, EquipmentSlot.LEGS, new Item.Properties(),"white_thigh_highs.png","thigh_highs.geo.json", "cat_tail_animation.json", AnimationsRegister.NULL, NULL));
-    public static final RegistryObject<Item> blackThighHighs = ITEMS.register("black_thigh_highs",
-            () -> new GenericGeoArmorItem(ArmorMaterials.maidDress, EquipmentSlot.LEGS, new Item.Properties(),"black_thigh_highs.png","thigh_highs.geo.json", "cat_tail_animation.json", AnimationsRegister.NULL, NULL));
-
     public static final RegistryObject<Item> whiteThighHighsShoes = ITEMS.register("brown_shoes",
-            () -> new GenericGeoArmorItem(ArmorMaterials.maidDress, EquipmentSlot.FEET, new Item.Properties(),"white_thigh_highs.png","thigh_highs.geo.json", "cat_tail_animation.json", AnimationsRegister.NULL, NULL).setCanStandOnPowderSnow(true));
+            () -> new GenericGeoArmorItem(ArmorMaterials.maidDress, EquipmentSlot.FEET, new Item.Properties(),"thigh_highs/white_thigh_highs.png","thigh_highs.geo.json", "cat_tail_animation.json", AnimationsRegister.NULL, NULL).setCanStandOnPowderSnow(true));
     public static final RegistryObject<Item> blackThighHighsShoes = ITEMS.register("dark_brown_shoes",
-            () -> new GenericGeoArmorItem(ArmorMaterials.maidDress, EquipmentSlot.FEET, new Item.Properties(),"black_thigh_highs.png","thigh_highs.geo.json", "cat_tail_animation.json", AnimationsRegister.NULL, NULL).setCanStandOnPowderSnow(true));
+            () -> new GenericGeoArmorItem(ArmorMaterials.maidDress, EquipmentSlot.FEET, new Item.Properties(),"thigh_highs/black_thigh_highs.png","thigh_highs.geo.json", "cat_tail_animation.json", AnimationsRegister.NULL, NULL).setCanStandOnPowderSnow(true));
 
     public static final RegistryObject<Item> coffeeFruit = ITEMS.register("coffee_fruit", () -> new BlockItem(
             BlockRegister.coffeePlant.get(), new Item.Properties().food(new FoodProperties.Builder().fast().nutrition(2).saturationMod(1.125f).build()
@@ -269,6 +263,7 @@ public class ItemRegister {
     public static final RegistryObject<Item> whiteStool = ITEMS.register("white_stool", () -> new BlockItem(BlockRegister.whiteStool.get(), new Item.Properties()));
     public static final RegistryObject<Item> yellowStool = ITEMS.register("yellow_stool", () -> new BlockItem(BlockRegister.yellowStool.get(), new Item.Properties()));
 
+    public static HashMap<String, RegistryObject<GenericGeoArmorItem>> dresses = new HashMap<>();
 
     public static RegistryObject<GenericGeoArmorItem> registerDresses(String color) {
         var toReturn = ITEMS.register(color + "_maid_dress", ()-> new GenericGeoArmorItem(
@@ -430,7 +425,18 @@ public class ItemRegister {
 
         return toReturn;
     }
-    public static HashMap<String, RegistryObject<GenericGeoArmorItem>> dresses = new HashMap<>();
+
+    public static HashMap<String, RegistryObject<GenericGeoArmorItem>> thighHighs = new HashMap<>();
+
+    public static RegistryObject<GenericGeoArmorItem> registerThighHighs(String color){
+        return ITEMS.register(color+"_thigh_highs", () -> new GenericGeoArmorItem(
+                ArmorMaterials.maidDress,EquipmentSlot.LEGS, new Item.Properties(),
+                "thigh_highs/"+color+"_thigh_highs.png",
+                "thigh_highs.geo.json",
+                "", AnimationsRegister.NULL,NULL)
+        );
+    }
+
     public static void preGen() {
         ArrayList<String> nameMap = new ArrayList<>();
 
@@ -451,6 +457,9 @@ public class ItemRegister {
         nameMap.add("yellow");
         nameMap.add("purple");
 
+        for (int i = 0; i < nameMap.size(); i++) {
+            thighHighs.put(nameMap.get(i),registerThighHighs(nameMap.get(i)));
+        }
         for (int i = 0; i < nameMap.size(); i++) {
             dresses.put(nameMap.get(i),registerDresses(nameMap.get(i)));
         }

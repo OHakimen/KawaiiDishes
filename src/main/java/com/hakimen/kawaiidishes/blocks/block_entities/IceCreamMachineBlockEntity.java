@@ -149,9 +149,10 @@ public class IceCreamMachineBlockEntity extends BlockEntity implements MenuProvi
                         progress = 0;
                         for (int i = 0; i < pBlockEntity.inventory.getSlots() - 1; i++) {
                             if (i == 1 || i == 2 || i == 3) {
-                                var stack = pBlockEntity.inventory.getStackInSlot(i).getItem().getCraftingRemainingItem();
-                                if (stack == null) {
-                                    pBlockEntity.inventory.extractItem(i,1,false);
+                                var stack = pBlockEntity.inventory.getStackInSlot(i).getCraftingRemainingItem();
+                                pBlockEntity.inventory.extractItem(i,1,false);
+                                if (!stack.equals(ItemStack.EMPTY)) {
+                                    pBlockEntity.inventory.setStackInSlot(i, stack);
                                 }
                             } else {
                                 pBlockEntity.inventory.getStackInSlot(i).shrink(1);

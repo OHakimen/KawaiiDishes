@@ -97,6 +97,9 @@ public class LangSupplier extends LanguageProvider {
                     add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
                 }
             }
+            if(itemPath.contains("thigh_highs")){
+                add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
+            }
         }
 
 
@@ -183,8 +186,6 @@ public class LangSupplier extends LanguageProvider {
         add(ItemRegister.caramelBunnyEars.get(),"Caramel Bunny Ears");
         add(ItemRegister.blackBunnyEars.get(),"Black Bunny Ears");
 
-        add(ItemRegister.blackThighHighs.get(),"Black Thigh Highs");
-        add(ItemRegister.whiteThighHighs.get(),"White Thigh Highs");
 
         add(ItemRegister.blackThighHighsShoes.get(),"Dark Brown Shoes");
         add(ItemRegister.whiteThighHighsShoes.get(),"Brown Shoes");
