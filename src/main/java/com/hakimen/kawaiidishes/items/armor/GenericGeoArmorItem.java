@@ -7,10 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.apache.logging.log4j.util.TriConsumer;
@@ -35,15 +32,10 @@ public class GenericGeoArmorItem extends ArmorItem implements GeoItem {
 
     public Function<AnimationState<GenericGeoArmorItem>,PlayState> animationControlling;
     public TriConsumer<ItemStack,Level,Player> armorTick;
-    public Item remainder;
 
     public boolean canStandOnPowderSnow;
     public boolean makesPiglinsNeutral;
 
-    public GenericGeoArmorItem setRemainder(Item remainder) {
-        this.remainder = remainder;
-        return this;
-    }
 
     public GenericGeoArmorItem setCanStandOnPowderSnow(boolean canStandOnPowderSnow) {
         this.canStandOnPowderSnow = canStandOnPowderSnow;
@@ -76,16 +68,6 @@ public class GenericGeoArmorItem extends ArmorItem implements GeoItem {
         return makesPiglinsNeutral;
     }
 
-    public GenericGeoArmorItem(ArmorMaterial pMaterial, EquipmentSlot pSlot, Properties pProperties, String textureLocation, String modelLocation, String animationLocation, Function<AnimationState<GenericGeoArmorItem>,PlayState> animationControlling, TriConsumer<ItemStack, Level, Player> armorTick, Item remainder) {
-        super(pMaterial, pSlot, pProperties);
-        this.textureLocation = new ResourceLocation(KawaiiDishes.modId,  "textures/models/armor/"+textureLocation);
-        this.modelLocation = new ResourceLocation(KawaiiDishes.modId,    "geo/"+modelLocation);
-        this.animationLocation = new ResourceLocation(KawaiiDishes.modId,"animations/"+animationLocation);
-        this.animationControlling = animationControlling;
-        this.armorTick = armorTick;
-        this.remainder = remainder;
-    }
-
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
@@ -103,11 +85,6 @@ public class GenericGeoArmorItem extends ArmorItem implements GeoItem {
                 return this.renderer;
             }
         });
-    }
-
-    @Override
-    public ItemStack getCraftingRemainingItem(ItemStack itemStack) {
-        return remainder.getDefaultInstance();
     }
 
     @Override

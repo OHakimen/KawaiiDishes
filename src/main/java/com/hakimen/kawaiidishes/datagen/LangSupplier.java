@@ -102,12 +102,10 @@ public class LangSupplier extends LanguageProvider {
             }
         }
 
-
         add(ItemRegister.cakePiece.get(),"Piece of Cake");
         add(ItemRegister.chocolateCheeseCakePiece.get(),"Piece of Chocolate Cheesecake");
         add(ItemRegister.cheeseCakePiece.get(),"Piece of Cheesecake");
         add(ItemRegister.honeyCheeseCakePiece.get(),"Piece of Honey Cheesecake");
-
 
         add(ItemRegister.cheeseCake.get(),"Cheesecake");
         add(ItemRegister.chocolateCheeseCake.get(),"Chocolate Cheesecake");
@@ -115,9 +113,9 @@ public class LangSupplier extends LanguageProvider {
 
         add(ItemRegister.creamCheese.get(),"Cream Cheese");
 
-        add(ItemRegister.beijinho.get(),"Beijinho");
         add(ItemRegister.condensedMilk.get(),"Condensed Milk");
         add(ItemRegister.brigadeiroMix.get(),"Brigadeiro Mix");
+        add(ItemRegister.beijinho.get(),"Beijinho");
         add(ItemRegister.brigadeiro.get(),"Brigadeiro");
 
         add(ItemRegister.honeyCookie.get(),"Honey Cookie");
