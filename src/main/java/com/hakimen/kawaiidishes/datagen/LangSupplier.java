@@ -88,12 +88,11 @@ public class LangSupplier extends LanguageProvider {
             if(itemPath.contains("_headband")){
                 if(itemPath.contains("_cat_ears")) {
                     add(items.get(), setFirstLetterUpperCase(itemPath.replace("_cat_ears", "_with_cat_ears").replaceAll("_", " ")));
-                }else if(itemPath.contains("_fox_ears")){
+                } else if(itemPath.contains("_fox_ears")){
                     add(items.get(),setFirstLetterUpperCase(itemPath.replace("_fox_ears","_with_fox_ears").replaceAll("_"," ")));
-                }else if(itemPath.contains("_bunny_ears")){
+                } else if(itemPath.contains("_bunny_ears")){
                     add(items.get(),setFirstLetterUpperCase(itemPath.replace("_bunny_ears","_with_bunny_ears").replaceAll("_"," ")));
-                }
-                else{
+                } else{
                     add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
                 }
             }
@@ -102,12 +101,10 @@ public class LangSupplier extends LanguageProvider {
             }
         }
 
-
         add(ItemRegister.cakePiece.get(),"Piece of Cake");
         add(ItemRegister.chocolateCheeseCakePiece.get(),"Piece of Chocolate Cheesecake");
         add(ItemRegister.cheeseCakePiece.get(),"Piece of Cheesecake");
         add(ItemRegister.honeyCheeseCakePiece.get(),"Piece of Honey Cheesecake");
-
 
         add(ItemRegister.cheeseCake.get(),"Cheesecake");
         add(ItemRegister.chocolateCheeseCake.get(),"Chocolate Cheesecake");
@@ -115,9 +112,9 @@ public class LangSupplier extends LanguageProvider {
 
         add(ItemRegister.creamCheese.get(),"Cream Cheese");
 
-        add(ItemRegister.beijinho.get(),"Beijinho");
         add(ItemRegister.condensedMilk.get(),"Condensed Milk");
         add(ItemRegister.brigadeiroMix.get(),"Brigadeiro Mix");
+        add(ItemRegister.beijinho.get(),"Beijinho");
         add(ItemRegister.brigadeiro.get(),"Brigadeiro");
 
         add(ItemRegister.honeyCookie.get(),"Honey Cookie");
