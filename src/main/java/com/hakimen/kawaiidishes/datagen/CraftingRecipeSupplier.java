@@ -494,8 +494,8 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
     public void cosmetics(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
         bunnySuit(pFinishedRecipeConsumer, ItemRegister.bunnySuitBlackTail.get(),Items.BLACK_WOOL, ItemRegister.blackBunnyTail.get());
-        bunnySuit(pFinishedRecipeConsumer, ItemRegister.bunnySuitCaramelTail.get(),Items.BLACK_WOOL, ItemRegister.caramelBunnyTail.get());
-        bunnySuit(pFinishedRecipeConsumer, ItemRegister.bunnySuitWhiteTail.get(),Items.BLACK_WOOL, ItemRegister.whiteBunnyTail.get());
+        bunnySuit(pFinishedRecipeConsumer, ItemRegister.bunnySuitCaramelTail.get(),Items.PURPLE_WOOL, ItemRegister.caramelBunnyTail.get());
+        bunnySuit(pFinishedRecipeConsumer, ItemRegister.bunnySuitWhiteTail.get(),Items.RED_WOOL, ItemRegister.whiteBunnyTail.get());
 
         bunnySuitSocks(pFinishedRecipeConsumer, ItemRegister.bunnySuitSocks.get());
 
