@@ -47,8 +47,6 @@ public class KawaiiDishes {
     public static final Random RANDOM = new Random();
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String modId = "kawaiidishes";
-
-
     public KawaiiDishes() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, KawaiiDishesClientConfig.clientSpec, "kawaii-dishes-client.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, KawaiiDishesCommonConfig.commonSpec, "kawaii-dishes-common.toml");
@@ -75,16 +73,19 @@ public class KawaiiDishes {
                             var key = x.get().toString();
                             if(key.contains("maid")){
                                 out.accept(x.get());
-                            }else if (key.contains("ears") || key.contains("horns")) {
+                            } else if (key.contains("ears") || key.contains("horns")) {
                                 out.accept(x.get());
-                            }
-                            else if (key.contains("tail")) {
+                            } else if (key.contains("tail")) {
                                 out.accept(x.get());
                             } else if (key.contains("headband")) {
                                 out.accept(x.get());
                             }else if (key.contains("thigh")) {
                                 out.accept(x.get());
                             }else if (key.contains("shoes")) {
+                                out.accept(x.get());
+                            }else if (key.contains("bunny_suit")) {
+                                out.accept(x.get());
+                            }else if (key.contains("socks")) {
                                 out.accept(x.get());
                             }
                         });

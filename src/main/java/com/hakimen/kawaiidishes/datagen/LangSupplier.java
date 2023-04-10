@@ -101,6 +101,13 @@ public class LangSupplier extends LanguageProvider {
             }
         }
 
+        add(ItemRegister.bunnySuitWhiteTail.get(),"White Bunny Suit ");
+        add(ItemRegister.bunnySuitBlackTail.get(),"Black Bunny Suit");
+        add(ItemRegister.bunnySuitCaramelTail.get(),"Caramel Bunny Suit");
+        add(ItemRegister.bunnySuitSocks.get(),"Bunny Suit Socks");
+
+
+
         add(ItemRegister.cakePiece.get(),"Piece of Cake");
         add(ItemRegister.chocolateCheeseCakePiece.get(),"Piece of Chocolate Cheesecake");
         add(ItemRegister.cheeseCakePiece.get(),"Piece of Cheesecake");

@@ -1,4 +1,4 @@
-// 1.19.3	2023-03-18T14:58:53.8759255	Item Models: kawaiidishes
+// 1.19.3	2023-04-09T21:49:08.2145728	Item Models: kawaiidishes
 0af50e289067fd52fc313acd8dff63d6555178a2 assets/kawaiidishes/models/item/american_coffee.json
 2a66015a70563855eb9e14da50053a238d668d0a assets/kawaiidishes/models/item/beijinho.json
 aa72e928949935595622c0acd2a2166f6ee08d09 assets/kawaiidishes/models/item/black_headband.json
@@ -104,6 +104,10 @@ f72b9127c43f81150e01fbdd58786f384cc0331d assets/kawaiidishes/models/item/brown_m
 5a4a9ebdd18492131e874b2a7d6b4ea0b6c1da52 assets/kawaiidishes/models/item/brown_shoes.json
 bc02fef6389b1b985a5984956e4f8bf84707b395 assets/kawaiidishes/models/item/brown_stool.json
 a62532b6c19a14e98b23fb7630b7eb097ac5b733 assets/kawaiidishes/models/item/brown_thigh_highs.json
+2fe89e29275ade548e98b0362f2c451acd15c983 assets/kawaiidishes/models/item/bunny_suit_black_tail.json
+bf4c1576ef9c57c53cb32d9c09a56de9ae6545e1 assets/kawaiidishes/models/item/bunny_suit_caramel_tail.json
+52ec1cea4e8b5a165d74dbb7d68ac1d0ca265597 assets/kawaiidishes/models/item/bunny_suit_socks.json
+8dfa2629f2645a85033e1c3b11235fd5a9bc5855 assets/kawaiidishes/models/item/bunny_suit_white_tail.json
 4032659259e4bbb6311a7853c16081c39c108697 assets/kawaiidishes/models/item/cafe_au_lait_coffee.json
 5801eeaa859e2f07d9b218e0b358a06ef63aece7 assets/kawaiidishes/models/item/cappuccino_coffee.json
 564a724f7511cd3d7c52408ca7e804eb042b4983 assets/kawaiidishes/models/item/cheese_cake.json

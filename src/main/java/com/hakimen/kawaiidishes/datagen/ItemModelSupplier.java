@@ -130,7 +130,10 @@ public class ItemModelSupplier extends ItemModelProvider {
         simpleItem(ItemRegister.blackThighHighsShoes.get());
         simpleItem(ItemRegister.whiteThighHighsShoes.get());
 
-
+        simpleItem(ItemRegister.bunnySuitBlackTail.get());
+        simpleItem(ItemRegister.bunnySuitWhiteTail.get());
+        simpleItem(ItemRegister.bunnySuitCaramelTail.get());
+        simpleItem(ItemRegister.bunnySuitSocks.get());
     }
 
     private ItemModelBuilder simpleItem(Item item) {

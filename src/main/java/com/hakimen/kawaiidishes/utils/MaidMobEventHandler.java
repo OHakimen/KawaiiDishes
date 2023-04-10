@@ -85,6 +85,22 @@ public class MaidMobEventHandler {
                 ItemStack.EMPTY,
                 ItemStack.EMPTY
         };
+        if(r.nextFloat(0,1) < (Date.from(Instant.now()).getMonth()+1 == Month.APRIL.getValue() ? 0.05f : 0.25f)){
+            typeColor = catColors[r.nextInt(catColors.length)];
+            if(typeColor.equals("caramel")){
+                stacks[0] = ItemRegister.caramelBunnyEars.get().getDefaultInstance();
+                stacks[1] = ItemRegister.bunnySuitCaramelTail.get().getDefaultInstance();
+            }else if(typeColor.equals("white")){
+                stacks[0] = ItemRegister.whiteBunnyEars.get().getDefaultInstance();
+                stacks[1] = ItemRegister.bunnySuitWhiteTail.get().getDefaultInstance();
+            }else if(typeColor.equals("black")){
+                stacks[0] = ItemRegister.blackBunnyEars.get().getDefaultInstance();
+                stacks[1] = ItemRegister.bunnySuitBlackTail.get().getDefaultInstance();
+            }
+            stacks[2] = ItemRegister.bunnySuitSocks.get().getDefaultInstance();
+            stacks[3] = r.nextInt(2) == 1 ? ItemRegister.whiteThighHighsShoes.get().getDefaultInstance() : ItemRegister.blackThighHighsShoes.get().getDefaultInstance();
+            return stacks;
+        }
         for (var item : ItemRegister.ITEMS.getEntries().stream().toList()) {
             var stack = item.get().getDescriptionId();
             if(!stacks[0].equals(ItemStack.EMPTY) && !stacks[1].equals(ItemStack.EMPTY) && !stacks[2].equals(ItemStack.EMPTY)){
@@ -115,7 +131,7 @@ public class MaidMobEventHandler {
         }
 
         stacks[3] = r.nextInt(2) == 1 ? ItemRegister.whiteThighHighsShoes.get().getDefaultInstance() : ItemRegister.blackThighHighsShoes.get().getDefaultInstance();
-        if(r.nextFloat(0,1) < (Date.from(Instant.now()).getMonth() == Month.OCTOBER.getValue() ? 0.75f :  0.05f)){
+        if(r.nextFloat(0,1) < (Date.from(Instant.now()).getMonth()+1 == Month.OCTOBER.getValue() ? 0.75f :  0.05f)){
             stacks[0] = Items.JACK_O_LANTERN.getDefaultInstance();
         }
         return stacks;

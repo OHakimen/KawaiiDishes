@@ -36,31 +36,6 @@ import static com.hakimen.kawaiidishes.KawaiiDishes.modId;
 
 public class ItemRegister {
 
-//    public static CreativeModeTab blocks = new CreativeModeTab("kawaiidishes.blocks") {
-//        @Override
-//        public ItemStack makeIcon() {
-//            return coffeeMachine.get().getDefaultInstance();
-//        }
-//    };
-//    public static CreativeModeTab foods = new CreativeModeTab("kawaiidishes.foods") {
-//        @Override
-//        public ItemStack makeIcon() {
-//            return cappuccinoCoffee.get().getDefaultInstance();
-//        }
-//    };
-//    public static CreativeModeTab cosmetics = new CreativeModeTab("kawaiidishes.cosmetics") {
-//        @Override
-//        public ItemStack makeIcon() {
-//            return dresses.get("black").get();
-//        }
-//    };
-//    public static CreativeModeTab decoration = new CreativeModeTab("kawaiidishes.decoration") {
-//        @Override
-//        public ItemStack makeIcon() {
-//            return whiteStool.get().getDefaultInstance();
-//        }
-//    };
-
 
     //Armor Tick Consumers
 
@@ -263,6 +238,45 @@ public class ItemRegister {
     public static final RegistryObject<Item> redStool = ITEMS.register("red_stool", () -> new BlockItem(BlockRegister.redStool.get(), new Item.Properties()));
     public static final RegistryObject<Item> whiteStool = ITEMS.register("white_stool", () -> new BlockItem(BlockRegister.whiteStool.get(), new Item.Properties()));
     public static final RegistryObject<Item> yellowStool = ITEMS.register("yellow_stool", () -> new BlockItem(BlockRegister.yellowStool.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> bunnySuitWhiteTail = ITEMS.register("bunny_suit_white_tail",
+            () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                    EquipmentSlot.CHEST,
+                    new Item.Properties(),
+                    "bunny_suit/bunny_suit_white_tail.png",
+                    "bunny_suit.geo.json",
+                    "maid_dress_animation.json",
+                    AnimationsRegister.NULL,
+                    bunnyArmorTick));
+    public static final RegistryObject<Item> bunnySuitBlackTail = ITEMS.register("bunny_suit_black_tail",
+            () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                    EquipmentSlot.CHEST,
+                    new Item.Properties(),
+                    "bunny_suit/bunny_suit_black_tail.png",
+                    "bunny_suit.geo.json",
+                    "maid_dress_animation.json",
+                    AnimationsRegister.NULL,
+                    bunnyArmorTick));
+
+    public static final RegistryObject<Item> bunnySuitCaramelTail = ITEMS.register("bunny_suit_caramel_tail",
+            () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                    EquipmentSlot.CHEST,
+                    new Item.Properties(),
+                    "bunny_suit/bunny_suit_caramel_tail.png",
+                    "bunny_suit.geo.json",
+                    "maid_dress_animation.json",
+                    AnimationsRegister.NULL,
+                    bunnyArmorTick));
+
+    public static final RegistryObject<Item> bunnySuitSocks = ITEMS.register("bunny_suit_socks",
+            () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                    EquipmentSlot.LEGS,
+                    new Item.Properties(),
+                    "bunny_suit/bunny_suit_white_tail.png",
+                    "bunny_suit.geo.json",
+                    "maid_dress_animation.json",
+                    AnimationsRegister.NULL,
+                    bunnyArmorTick));
 
     public static HashMap<String, RegistryObject<GenericGeoArmorItem>> dresses = new HashMap<>();
 

@@ -19,6 +19,8 @@ public class ItemTagSupplier extends ItemTagsProvider {
     public ItemTagSupplier(DataGenerator pGenerator, CompletableFuture<HolderLookup.Provider> lookup, BlockTagsProvider pBlockTagsProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(pGenerator.getPackOutput(), lookup, pBlockTagsProvider, KawaiiDishes.modId ,existingFileHelper);
     }
+    TagKey<Item> bunny_suits = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(),new ResourceLocation(KawaiiDishes.modId,"bunny_suits"));
+
     TagKey<Item> maid_dresses = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(),new ResourceLocation(KawaiiDishes.modId,"maid_dresses"));
     TagKey<Item> tailed_maid_dresses = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(),new ResourceLocation(KawaiiDishes.modId,"tailed_maid_dresses"));
     TagKey<Item> tails = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(),new ResourceLocation(KawaiiDishes.modId,"tails"));
@@ -29,29 +31,31 @@ public class ItemTagSupplier extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        for(var item: ItemRegister.ITEMS.getEntries()){
+        for(var item: ItemRegister.ITEMS.getEntries()) {
             String name = item.get().toString();
-            if(name.contains("maid_dress")){
-                if(name.contains("tail")){
+            if (name.contains("maid_dress")) {
+                if (name.contains("tail")) {
                     this.tag(tailed_maid_dresses).add(item.get());
-                }else{
+                } else {
                     this.tag(maid_dresses).add(item.get());
                 }
-            }else if(name.contains("headband")){
-                if(name.contains("ears") || name.contains("horns")) {
+            }else if (name.contains("bunny_suit")) {
+                this.tag(bunny_suits).add(item.get());
+            } else if (name.contains("headband")) {
+                if (name.contains("ears") || name.contains("horns")) {
                     this.tag(eared_headbands).add(item.get());
-                }else {
+                } else {
                     this.tag(headbands).add(item.get());
                 }
-            }
-            else if(name.contains("tail")){
+            } else if (name.contains("tail")) {
                 this.tag(tails).add(item.get());
-            }else if(name.contains("ears") || name.contains("horns")){
+            } else if (name.contains("ears") || name.contains("horns")) {
                 this.tag(ears).add(item.get());
             }
         }
         this.tag(maid_dresses).addTags(tailed_maid_dresses);
         this.tag(tails).addTags(tailed_maid_dresses);
+        this.tag(tails).addTags(bunny_suits);
         this.tag(headbands).addTags(eared_headbands);
     }
 }
