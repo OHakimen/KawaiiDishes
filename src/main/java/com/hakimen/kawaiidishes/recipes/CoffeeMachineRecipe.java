@@ -13,9 +13,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
-import javax.annotation.Nullable;
-import java.util.Arrays;
-
 public class CoffeeMachineRecipe implements Recipe<SimpleContainer> {
 
     private final ResourceLocation id;
@@ -59,23 +56,34 @@ public class CoffeeMachineRecipe implements Recipe<SimpleContainer> {
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
         boolean match = true;
-
-        for (int i = 0; i < recipeItems.get(0).getItems().length; i++) {
-
-            match &= recipeItems.get(0).getItems()[i].getItem().equals(pContainer.getItem(i+2).getItem());
-        }
         if(requireWater)
             match &= pContainer.getItem(0).getItem().equals(Items.WATER_BUCKET);
-        else if(!requireWater && pContainer.getItem(0).getItem().equals(Items.WATER_BUCKET)){
+        else if(pContainer.getItem(0).getItem().equals(Items.WATER_BUCKET)){
             return false;
         }
         if(requireMilk)
             match &= pContainer.getItem(1).getItem().equals(Items.MILK_BUCKET);
-        else if(!requireMilk && pContainer.getItem(1).getItem().equals(Items.MILK_BUCKET)){
+        else if(pContainer.getItem(1).getItem().equals(Items.MILK_BUCKET)){
             return false;
         }
         match &= pContainer.getItem(5).getItem().equals(itemOnOutput.getItem());
-
+        boolean submatches[] = new boolean[] {false,false,false};
+        if(recipeItems.get(0).getItems().length == 3){
+            submatches[0] = recipeItems.get(0).getItems()[0].getItem().equals(pContainer.getItem(2).getItem());
+            submatches[1] = recipeItems.get(0).getItems()[1].getItem().equals(pContainer.getItem(3).getItem());
+            submatches[2] = recipeItems.get(0).getItems()[2].getItem().equals(pContainer.getItem(4).getItem());
+        }else if(recipeItems.get(0).getItems().length == 2){
+            submatches[0] = recipeItems.get(0).getItems()[0].getItem().equals(pContainer.getItem(2).getItem());
+            submatches[1] = recipeItems.get(0).getItems()[1].getItem().equals(pContainer.getItem(3).getItem());
+            submatches[2] = pContainer.getItem(4).getItem().equals(Items.AIR);
+        }else if(recipeItems.get(0).getItems().length == 1){
+            submatches[0] = recipeItems.get(0).getItems()[0].getItem().equals(pContainer.getItem(2).getItem());
+            submatches[1] = pContainer.getItem(3).getItem().equals(Items.AIR);
+            submatches[2] = pContainer.getItem(4).getItem().equals(Items.AIR);
+        }
+        for (int i = 0; i < submatches.length; i++) {
+            match &= submatches[i];
+        }
         return match;
     }
 

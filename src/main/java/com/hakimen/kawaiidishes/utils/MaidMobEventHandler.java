@@ -85,7 +85,8 @@ public class MaidMobEventHandler {
                 ItemStack.EMPTY,
                 ItemStack.EMPTY
         };
-        if(r.nextFloat(0,1) < (Date.from(Instant.now()).getMonth()+1 == Month.APRIL.getValue() ? 0.05f : 0.25f)){
+
+        if(r.nextFloat(0,1) < (Date.from(Instant.now()).getMonth()+1 == Month.APRIL.getValue() ? 0.25f : 0.05f)){
             typeColor = catColors[r.nextInt(catColors.length)];
             if(typeColor.equals("caramel")){
                 stacks[0] = ItemRegister.caramelBunnyEars.get().getDefaultInstance();
