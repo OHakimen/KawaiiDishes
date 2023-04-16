@@ -33,6 +33,7 @@ public class CoffeeMachineBlock extends Block implements EntityBlock{
                 .sound(SoundType.METAL));
         registerDefaultState( getStateDefinition().any()
                 .setValue(FACING, Direction.NORTH));
+
     }
 
     @Nullable

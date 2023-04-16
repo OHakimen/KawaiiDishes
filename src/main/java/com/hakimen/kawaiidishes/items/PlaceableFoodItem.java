@@ -39,6 +39,18 @@ public class PlaceableFoodItem extends BlockItem {
         super.onUsingTick(stack, player, count);
     }
 
+
+    public ItemStack getStackWithEffects(MobEffectInstance effect1,MobEffectInstance effect2){
+        var stack = new ItemStack(this);
+        var mainEff = new CompoundTag();
+        var secondEff = new CompoundTag();
+        effect1.save(mainEff);
+        effect2.save(secondEff);
+        stack.getOrCreateTag().put("mainEffect", mainEff);
+        stack.getOrCreateTag().put("secondaryEffect", secondEff);
+        return stack;
+    }
+
     CompoundTag mainEffect;
     CompoundTag secondaryEffect;
 

@@ -21,11 +21,11 @@ public class FoxRendererMixin {
     @Shadow @Final private static ResourceLocation SNOW_FOX_TEXTURE;
 
 
-    private final static ResourceLocation BLACK_FOX_TEXTURE = new ResourceLocation(KawaiiDishes.modId,"textures/entities/fox/black_fox.png");
-    private final static ResourceLocation BLACK_FOX_SLEEP_TEXTURE = new ResourceLocation(KawaiiDishes.modId,"textures/entities/fox/black_fox_sleeping.png");
+    private final static ResourceLocation BLACK_FOX_TEXTURE = new ResourceLocation(KawaiiDishes.modId,"textures/entity/fox/black_fox.png");
+    private final static ResourceLocation BLACK_FOX_SLEEP_TEXTURE = new ResourceLocation(KawaiiDishes.modId,"textures/entity/fox/black_fox_sleeping.png");
 
-    private final static ResourceLocation BROWN_FOX_TEXTURE = new ResourceLocation(KawaiiDishes.modId,"textures/entities/fox/brown_fox.png");
-    private final static ResourceLocation BROWN_FOX_SLEEP_TEXTURE = new ResourceLocation(KawaiiDishes.modId,"textures/entities/fox/brown_fox_sleeping.png");
+    private final static ResourceLocation BROWN_FOX_TEXTURE = new ResourceLocation(KawaiiDishes.modId,"textures/entity/fox/brown_fox.png");
+    private final static ResourceLocation BROWN_FOX_SLEEP_TEXTURE = new ResourceLocation(KawaiiDishes.modId,"textures/entity/fox/brown_fox_sleeping.png");
 
     /**
      * @author Me

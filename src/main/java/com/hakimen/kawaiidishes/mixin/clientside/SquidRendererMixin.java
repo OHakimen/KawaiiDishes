@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Shadow;
 public class SquidRendererMixin {
 
     @Shadow @Final private static ResourceLocation SQUID_LOCATION;
-    private static final ResourceLocation MAID_SQUID_LOCATION = new ResourceLocation("kawaiidishes","textures/entities/squid/maid_squid.png");
+    private static final ResourceLocation MAID_SQUID_LOCATION = new ResourceLocation("kawaiidishes","textures/entity/squid/maid_squid.png");
 
     /**
      * @author

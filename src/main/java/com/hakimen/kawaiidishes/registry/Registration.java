@@ -14,7 +14,7 @@ public class Registration {
         RecipeRegister.register(bus);
         EffectRegister.register(bus);
         EntityRegister.register(bus);
-
+        VillagerWorkRegister.register(bus);
     }
 
 }

@@ -204,6 +204,8 @@ public class LangSupplier extends LanguageProvider {
         add("gui.kawaiidishes.ice_cream_machine", "Ice Cream Maker");
         add("gui.kawaiidishes.blender", "Blender");
 
+        add("entity.minecraft.villager.kawaiidishes.barista", "Barista");
+
         add(EffectRegister.kawaiiEffect.get(),"Kawaii");
         add(EffectRegister.nekoEffect.get(),"Neko-chan");
     }
