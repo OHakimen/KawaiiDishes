@@ -24,7 +24,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 group = 'com.hakimen'
-version = '1.7.3'
+version = '1.9'
 
 java {
     archivesBaseName = 'KawaiiDishes'

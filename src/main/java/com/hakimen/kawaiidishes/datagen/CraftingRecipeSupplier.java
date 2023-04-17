@@ -1071,8 +1071,8 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
     public void bunnyEars(Consumer<FinishedRecipe> consumer, Item result, Item item) {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC,result)
                 .pattern("# #")
-                .pattern("xsx")
-                .pattern("s s")
+                .pattern("x x")
+                .pattern("sss")
                 .define('#', Ingredient.of(item.getDefaultInstance()))
                 .define('x', Ingredient.of(Items.WHITE_WOOL))
                 .define('s', Ingredient.of(Tags.Items.STRING))
