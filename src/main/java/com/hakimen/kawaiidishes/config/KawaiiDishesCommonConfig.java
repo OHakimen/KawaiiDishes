@@ -17,7 +17,6 @@ public class KawaiiDishesCommonConfig {
 
     public static final ForgeConfigSpec.BooleanValue wanderingTraderTrades;
     public static final ForgeConfigSpec.BooleanValue villagerTrades;
-    public static final ForgeConfigSpec.BooleanValue newProfessions;
     public static final ForgeConfigSpec.DoubleValue chanceToDropArmorSet;
 
     public static final ForgeConfigSpec.ConfigValue<List<String>> messages;
@@ -46,9 +45,6 @@ public class KawaiiDishesCommonConfig {
 
         chanceToDropArmorSet = commonConfigBuilder.comment("Sets the chance for mobs that spawn with maid dresses to drop them")
                 .defineInRange("chanceToDrop", 0.25,0,1);
-
-        newProfessions = commonConfigBuilder.comment("Should the new professions for villagers")
-                .define("newProfessions", true);
 
         villagerTrades = commonConfigBuilder.comment("Should the add item trades for villagers")
                 .define("villagerTrades", true);

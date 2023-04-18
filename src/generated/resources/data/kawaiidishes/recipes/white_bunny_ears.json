@@ -14,8 +14,8 @@
   },
   "pattern": [
     "# #",
-    "xsx",
-    "s s"
+    "x x",
+    "sss"
   ],
   "result": {
     "item": "kawaiidishes:white_bunny_ears"

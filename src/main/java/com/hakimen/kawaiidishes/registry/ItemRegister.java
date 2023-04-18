@@ -16,72 +16,22 @@ import com.hakimen.kawaiidishes.items.headbands.HornHeadband;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.apache.logging.log4j.util.TriConsumer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.hakimen.kawaiidishes.KawaiiDishes.modId;
+import static com.hakimen.kawaiidishes.registry.ArmorTickRegister.*;
 
 public class ItemRegister {
-
-
-    //Armor Tick Consumers
-
-    static TriConsumer<ItemStack, Level, Player> NULL = (stack,level,player) -> {
-
-    };
-
-    static TriConsumer<ItemStack, Level, Player> maidArmorTick = (stack,level,player) -> {
-        player.forceAddEffect(new MobEffectInstance(EffectRegister.kawaiiEffect.get(),14*20,0,false,false),player);
-    };
-
-    static TriConsumer<ItemStack, Level, Player> foxArmorTick = (stack,level,player) -> {
-        var head = player.getItemBySlot(EquipmentSlot.HEAD);
-        if((head.getItem().toString().contains("fox")) &&
-                player.getItemBySlot(EquipmentSlot.CHEST).getItem().toString().contains("fox")){
-            player.forceAddEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED,14*20,0,false,false),player);
-            player.fallDistance = 0;
-        }
-        if(player.getItemBySlot(EquipmentSlot.CHEST).toString().contains("maid")){
-            maidArmorTick.accept(stack,level,player);
-        }
-    };
-    static TriConsumer<ItemStack, Level, Player> bunnyArmorTick = (stack,level,player) -> {
-        var head = player.getItemBySlot(EquipmentSlot.HEAD);
-        if((head.getItem() instanceof BunnyHeadband || head.getItem() instanceof BunnyEars) &&
-            player.getItemBySlot(EquipmentSlot.CHEST).getItem().toString().contains("bunny")){
-            player.forceAddEffect(new MobEffectInstance(MobEffects.JUMP,14*20,0,false,false),player);
-            player.fallDistance = 0;
-        }
-        if(player.getItemBySlot(EquipmentSlot.CHEST).toString().contains("maid")){
-            maidArmorTick.accept(stack,level,player);
-        }
-    };
-    static TriConsumer<ItemStack, Level, Player> catArmorTick = (stack, level, player) -> {
-        var head = player.getItemBySlot(EquipmentSlot.HEAD);
-        if((head.getItem() instanceof CatHeadband || head.getItem() instanceof CatEars) &&
-                player.getItemBySlot(EquipmentSlot.CHEST).getItem().toString().contains("cat")) {
-            player.forceAddEffect(new MobEffectInstance(EffectRegister.nekoEffect.get(),14*20,0,false,false),player);
-        }
-        if(player.getItemBySlot(EquipmentSlot.CHEST).toString().contains("maid")){
-            maidArmorTick.accept(stack,level,player);
-        }
-    };
-
-
-
 
     public static FoodProperties cake = new FoodProperties.Builder().nutrition(2).saturationMod(0.5f).build();
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, modId);
