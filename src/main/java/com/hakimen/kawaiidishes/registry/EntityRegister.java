@@ -1,14 +1,9 @@
 package com.hakimen.kawaiidishes.registry;
 
-import com.hakimen.kawaiidishes.KawaiiDishes;
-import com.hakimen.kawaiidishes.blocks.block_entities.CoffeeMachineBlockEntity;
-import com.hakimen.kawaiidishes.blocks.block_entities.CoffeePressBlockEntity;
-import com.hakimen.kawaiidishes.blocks.block_entities.StoolBlockEntity;
 import com.hakimen.kawaiidishes.entity.SittableEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

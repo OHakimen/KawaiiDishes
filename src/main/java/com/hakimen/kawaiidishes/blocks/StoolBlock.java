@@ -1,6 +1,6 @@
 package com.hakimen.kawaiidishes.blocks;
 
-import com.hakimen.kawaiidishes.blocks.block_entities.StoolBlockEntity;
+import com.hakimen.kawaiidishes.entity.SittableEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -8,8 +8,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
@@ -18,9 +16,8 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
 
-public class StoolBlock extends Block  implements EntityBlock {
+public class StoolBlock extends Block  {
     public StoolBlock() {
         super(BlockBehaviour.Properties.of(Material.WOOD).strength(1,1));
     }
@@ -37,28 +34,8 @@ public class StoolBlock extends Block  implements EntityBlock {
         return finalShape;
     }
 
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new StoolBlockEntity(pPos,pState);
-    }
-
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        final var stool = (StoolBlockEntity) pLevel.getBlockEntity(pPos);
-        if (!pLevel.isClientSide() && !pPlayer.isShiftKeyDown()) {
-            if(stool.seat == null){
-                stool.getOrCreateSeat();
-            }
-            final boolean success = pPlayer.startRiding(stool.seat);
-            if (success) {
-                stool.setChanged();
-            }
-            return success ? InteractionResult.SUCCESS : InteractionResult.PASS;
-        }
-        if (pPlayer.isShiftKeyDown()){
-            stool.seat.kill();
-        }
-        return InteractionResult.PASS;
+        return SittableEntity.sitDown(pPlayer, pLevel, pPos);
     }
 }
