@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:purple_wool"
+    },
+    "@": {
+      "item": "kawaiidishes:caramel_bunny_tail"
+    }
+  },
+  "pattern": [
+    "# #",
+    "#@#",
+    " # "
+  ],
+  "result": {
+    "item": "kawaiidishes:bunny_suit_caramel_tail"
+  }
+}

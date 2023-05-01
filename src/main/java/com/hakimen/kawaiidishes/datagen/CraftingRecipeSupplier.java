@@ -493,6 +493,14 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
 
     public void cosmetics(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
+
+        bunnySuit(pFinishedRecipeConsumer, ItemRegister.bunnySuitBlackTail.get(),Items.BLACK_WOOL, ItemRegister.blackBunnyTail.get());
+        bunnySuit(pFinishedRecipeConsumer, ItemRegister.bunnySuitCaramelTail.get(),Items.PURPLE_WOOL, ItemRegister.caramelBunnyTail.get());
+        bunnySuit(pFinishedRecipeConsumer, ItemRegister.bunnySuitWhiteTail.get(),Items.RED_WOOL, ItemRegister.whiteBunnyTail.get());
+
+        bunnySuitSocks(pFinishedRecipeConsumer, ItemRegister.bunnySuitSocks.get());
+
+
         maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("black").get(), Items.BLACK_WOOL, Items.WHITE_WOOL);
         maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("white").get(), Items.WHITE_WOOL, Items.BLACK_WOOL);
         maidOutfit(pFinishedRecipeConsumer, ItemRegister.dresses.get("gray").get(), Items.GRAY_WOOL, Items.WHITE_WOOL);
@@ -549,9 +557,6 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
 
         shoes(pFinishedRecipeConsumer, ItemRegister.blackThighHighsShoes.get(), Items.LEATHER, Items.BLACK_WOOL);
         shoes(pFinishedRecipeConsumer, ItemRegister.whiteThighHighsShoes.get(), Items.LEATHER, Items.GRAY_WOOL);
-
-        thighHighs(pFinishedRecipeConsumer, ItemRegister.blackThighHighs.get(), Items.BLACK_WOOL);
-        thighHighs(pFinishedRecipeConsumer, ItemRegister.whiteThighHighs.get(), Items.WHITE_WOOL);
 
         catEars(pFinishedRecipeConsumer, ItemRegister.blackCatEars.get(), Items.BLACK_WOOL);
         catEars(pFinishedRecipeConsumer, ItemRegister.whiteCatEars.get(), Items.WHITE_WOOL);
@@ -627,6 +632,23 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
         headBandsUncraft(pFinishedRecipeConsumer,"brown");
         headBandsUncraft(pFinishedRecipeConsumer,"cyan");
         headBandsUncraft(pFinishedRecipeConsumer,"yellow");
+
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("black").get(), Items.BLACK_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("white").get(), Items.WHITE_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("gray").get(), Items.GRAY_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("light_gray").get(), Items.LIGHT_GRAY_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("light_blue").get(), Items.LIGHT_BLUE_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("red").get(), Items.RED_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("pink").get(), Items.PINK_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("magenta").get(), Items.MAGENTA_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("purple").get(), Items.PURPLE_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("green").get(), Items.GREEN_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("lime").get(), Items.LIME_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("blue").get(), Items.BLUE_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("orange").get(), Items.ORANGE_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("brown").get(), Items.BROWN_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("cyan").get(), Items.CYAN_WOOL);
+        thighHighs(pFinishedRecipeConsumer, ItemRegister.thighHighs.get("yellow").get(), Items.YELLOW_WOOL);
     }
 
     public void coffees(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
@@ -1050,8 +1072,8 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
     public void bunnyEars(Consumer<FinishedRecipe> consumer, Item result, Item item) {
         ShapedRecipeBuilder.shaped(result)
                 .pattern("# #")
-                .pattern("xsx")
-                .pattern("s s")
+                .pattern("x x")
+                .pattern("sss")
                 .define('#', Ingredient.of(item.getDefaultInstance()))
                 .define('x', Ingredient.of(Items.WHITE_WOOL))
                 .define('s', Ingredient.of(Tags.Items.STRING))
@@ -1401,7 +1423,26 @@ public class CraftingRecipeSupplier extends RecipeProvider implements ICondition
 
         }
     }
-
+    public void bunnySuit(Consumer<FinishedRecipe> consumer, Item result, Item mainColor, Item secondaryColor) {
+        ShapedRecipeBuilder.shaped(result)
+                .pattern("# #")
+                .pattern("#@#")
+                .pattern(" # ")
+                .define('#', Ingredient.of(mainColor.getDefaultInstance()))
+                .define('@', Ingredient.of(secondaryColor.getDefaultInstance()))
+                .unlockedBy(getHasName(mainColor), has(mainColor))
+                .unlockedBy(getHasName(secondaryColor), has(secondaryColor))
+                .save(consumer);
+    }
+    public void bunnySuitSocks(Consumer<FinishedRecipe> consumer, Item result) {
+        ShapedRecipeBuilder.shaped(result)
+                .pattern("###")
+                .pattern("# #")
+                .pattern("# #")
+                .define('#', Ingredient.of(Items.YELLOW_WOOL.getDefaultInstance()))
+                .unlockedBy(getHasName(Items.YELLOW_WOOL), has(Items.YELLOW_WOOL))
+                .save(consumer);
+    }
     public void stool(Consumer<FinishedRecipe> consumer, Item result, Item mainColor) {
         ShapedRecipeBuilder.shaped(result)
                 .pattern("#s#")

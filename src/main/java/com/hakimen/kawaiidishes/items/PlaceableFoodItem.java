@@ -1,11 +1,9 @@
 package com.hakimen.kawaiidishes.items;
 
-import com.hakimen.kawaiidishes.blocks.MilkshakeBlock;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
@@ -36,6 +34,16 @@ public class PlaceableFoodItem extends BlockItem {
         this.remainder = remainder;
     }
 
+    public ItemStack getStackWithEffects(MobEffectInstance effect1,MobEffectInstance effect2){
+        var stack = new ItemStack(this);
+        var mainEff = new CompoundTag();
+        var secondEff = new CompoundTag();
+        effect1.save(mainEff);
+        effect2.save(secondEff);
+        stack.getOrCreateTag().put("mainEffect", mainEff);
+        stack.getOrCreateTag().put("secondaryEffect", secondEff);
+        return stack;
+    }
 
     @Override
     public void onUsingTick(ItemStack stack, LivingEntity player, int count) {

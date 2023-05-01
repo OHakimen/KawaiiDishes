@@ -8,6 +8,7 @@ public class Registration {
     public static void init(){
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         BlockRegister.register(bus);
+        VillagerWorkRegister.register(bus);
         BlockEntityRegister.register(bus);
         ItemRegister.register(bus);
         ContainerRegister.register(bus);

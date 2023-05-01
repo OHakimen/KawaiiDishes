@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_caramel_bunny_tail": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:caramel_bunny_tail"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_purple_wool": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:purple_wool"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "kawaiidishes:bunny_suit_caramel_tail"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_purple_wool",
+      "has_caramel_bunny_tail",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:bunny_suit_caramel_tail"
+    ]
+  }
+}

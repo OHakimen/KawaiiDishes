@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_red_wool": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:red_wool"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "kawaiidishes:bunny_suit_white_tail"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_bunny_tail": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:white_bunny_tail"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_red_wool",
+      "has_white_bunny_tail",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:bunny_suit_white_tail"
+    ]
+  }
+}

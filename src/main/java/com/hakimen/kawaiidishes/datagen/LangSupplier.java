@@ -97,7 +97,15 @@ public class LangSupplier extends LanguageProvider {
                     add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
                 }
             }
+            if(itemPath.contains("thigh_highs")){
+                add(items.get(),setFirstLetterUpperCase(itemPath.replaceAll("_"," ")));
+            }
         }
+
+        add(ItemRegister.bunnySuitWhiteTail.get(),"White Bunny Suit ");
+        add(ItemRegister.bunnySuitBlackTail.get(),"Black Bunny Suit");
+        add(ItemRegister.bunnySuitCaramelTail.get(),"Caramel Bunny Suit");
+        add(ItemRegister.bunnySuitSocks.get(),"Bunny Suit Socks");
 
 
         add(ItemRegister.cakePiece.get(),"Piece of Cake");
@@ -183,8 +191,8 @@ public class LangSupplier extends LanguageProvider {
         add(ItemRegister.caramelBunnyEars.get(),"Caramel Bunny Ears");
         add(ItemRegister.blackBunnyEars.get(),"Black Bunny Ears");
 
-        add(ItemRegister.blackThighHighs.get(),"Black Thigh Highs");
-        add(ItemRegister.whiteThighHighs.get(),"White Thigh Highs");
+
+        add("entity.minecraft.villager.kawaiidishes.barista", "Barista");
 
         add(ItemRegister.blackThighHighsShoes.get(),"Dark Brown Shoes");
         add(ItemRegister.whiteThighHighsShoes.get(),"Brown Shoes");

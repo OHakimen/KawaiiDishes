@@ -1,7 +1,10 @@
 package com.hakimen.kawaiidishes.registry;
 
-import com.hakimen.kawaiidishes.items.*;
-import com.hakimen.kawaiidishes.items.armor.*;
+import com.hakimen.kawaiidishes.items.Candy;
+import com.hakimen.kawaiidishes.items.PlaceableFoodItem;
+import com.hakimen.kawaiidishes.items.UnbindingCookie;
+import com.hakimen.kawaiidishes.items.armor.ArmorMaterials;
+import com.hakimen.kawaiidishes.items.armor.GenericGeoArmorItem;
 import com.hakimen.kawaiidishes.items.ears.BunnyEars;
 import com.hakimen.kawaiidishes.items.ears.CatEars;
 import com.hakimen.kawaiidishes.items.ears.FoxEars;
@@ -24,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.hakimen.kawaiidishes.KawaiiDishes.modId;
+import static com.hakimen.kawaiidishes.registry.ArmorTickRegister.*;
 
 public class ItemRegister {
 
@@ -88,44 +92,79 @@ public class ItemRegister {
     public static final RegistryObject<Horns> blackHorns = ITEMS.register("black_horns", Horns::new);
 
     public static final RegistryObject<Item> blackCatTail = ITEMS.register("black_cat_tail",
-            () -> new CatTailArmorItem("black_cat_tail.png"));
+            () -> new GenericGeoArmorItem(ArmorMaterials.tail,EquipmentSlot.CHEST,new Item.Properties(),"black_cat_tail.png","cat_tail.geo.json","cat_tail_animation.json", AnimationsRegister.catTail, catArmorTick));
     public static final RegistryObject<Item> caramelCatTail = ITEMS.register("caramel_cat_tail",
-            () -> new CatTailArmorItem("caramel_cat_tail.png"));
+            () -> new GenericGeoArmorItem(ArmorMaterials.tail,EquipmentSlot.CHEST,new Item.Properties(),"caramel_cat_tail.png","cat_tail.geo.json","cat_tail_animation.json", AnimationsRegister.catTail, catArmorTick));
+
     public static final RegistryObject<Item> whiteCatTail = ITEMS.register("white_cat_tail",
-            () -> new CatTailArmorItem("white_cat_tail.png"));
+            () -> new GenericGeoArmorItem(ArmorMaterials.tail,EquipmentSlot.CHEST,new Item.Properties(),"white_cat_tail.png","cat_tail.geo.json","cat_tail_animation.json", AnimationsRegister.catTail, catArmorTick));
 
     public static final RegistryObject<Item> blackBunnyTail = ITEMS.register("black_bunny_tail",
-            () -> new BunnyTailArmorItem("black_bunny_tail.png"));
+            () -> new GenericGeoArmorItem(ArmorMaterials.tail,EquipmentSlot.CHEST,new Item.Properties(),"black_bunny_tail.png","bunny_tail.geo.json","cat_tail_animation.json", AnimationsRegister.NULL, bunnyArmorTick));
     public static final RegistryObject<Item> caramelBunnyTail = ITEMS.register("caramel_bunny_tail",
-            () -> new BunnyTailArmorItem("caramel_bunny_tail.png"));
+            () -> new GenericGeoArmorItem(ArmorMaterials.tail,EquipmentSlot.CHEST,new Item.Properties(),"caramel_bunny_tail.png","bunny_tail.geo.json","cat_tail_animation.json", AnimationsRegister.NULL, bunnyArmorTick));
     public static final RegistryObject<Item> whiteBunnyTail = ITEMS.register("white_bunny_tail",
-            () -> new BunnyTailArmorItem("white_bunny_tail.png"));
+            () -> new GenericGeoArmorItem(ArmorMaterials.tail,EquipmentSlot.CHEST,new Item.Properties(),"white_bunny_tail.png","bunny_tail.geo.json","cat_tail_animation.json", AnimationsRegister.NULL, bunnyArmorTick));
 
     public static final RegistryObject<Item> blackFoxTail = ITEMS.register("black_fox_tail",
-            () -> new FoxTailArmorItem("black_fox_tail.png"));
+            () -> new GenericGeoArmorItem(ArmorMaterials.tail,EquipmentSlot.CHEST,new Item.Properties(),"black_fox_tail.png","fox_tail.geo.json", "fox_tail_animations.json", AnimationsRegister.foxTail, foxArmorTick));
     public static final RegistryObject<Item> redFoxTail = ITEMS.register("red_fox_tail",
-            () -> new FoxTailArmorItem("red_fox_tail.png"));
+            () -> new GenericGeoArmorItem(ArmorMaterials.tail,EquipmentSlot.CHEST,new Item.Properties(),"red_fox_tail.png","fox_tail.geo.json", "fox_tail_animations.json", AnimationsRegister.foxTail, foxArmorTick));
     public static final RegistryObject<Item> whiteFoxTail = ITEMS.register("white_fox_tail",
-            () -> new FoxTailArmorItem("white_fox_tail.png"));
+            () -> new GenericGeoArmorItem(ArmorMaterials.tail,EquipmentSlot.CHEST,new Item.Properties(),"white_fox_tail.png","fox_tail.geo.json", "fox_tail_animations.json", AnimationsRegister.foxTail, foxArmorTick));
 
     public static final RegistryObject<Item> brownFoxTail = ITEMS.register("brown_fox_tail",
-            () -> new FoxTailArmorItem("brown_fox_tail.png"));
+            () -> new GenericGeoArmorItem(ArmorMaterials.tail,EquipmentSlot.CHEST,new Item.Properties(),"brown_fox_tail.png","fox_tail.geo.json", "fox_tail_animations.json", AnimationsRegister.foxTail, foxArmorTick));
+
     public static final RegistryObject<Item> blackDevilTail = ITEMS.register("black_devil_tail",
-            () -> new DevilTailArmorItem("black_devil_tail.png"));
+            () -> new GenericGeoArmorItem(ArmorMaterials.tail,EquipmentSlot.CHEST,new Item.Properties(),"black_devil_tail.png", "devil_tail.geo.json", "devil_tail_animations.json", AnimationsRegister.devilTail, NULL).setMakesPiglinsNeutral(true));
     public static final RegistryObject<Item> redDevilTail = ITEMS.register("red_devil_tail",
-            () -> new DevilTailArmorItem("red_devil_tail.png"));
+            () -> new GenericGeoArmorItem(ArmorMaterials.tail,EquipmentSlot.CHEST,new Item.Properties(),"red_devil_tail.png", "devil_tail.geo.json", "devil_tail_animations.json", AnimationsRegister.devilTail, NULL).setMakesPiglinsNeutral(true));
     public static final RegistryObject<Item> purpleDevilTail = ITEMS.register("purple_devil_tail",
-            () -> new DevilTailArmorItem("purple_devil_tail.png"));
-
-    public static final RegistryObject<Item> whiteThighHighs = ITEMS.register("white_thigh_highs",
-            () -> new ThighHighsArmorItem("white_thigh_highs.png", EquipmentSlot.LEGS));
-    public static final RegistryObject<Item> blackThighHighs = ITEMS.register("black_thigh_highs",
-            () -> new ThighHighsArmorItem("black_thigh_highs.png", EquipmentSlot.LEGS));
-
+            () -> new GenericGeoArmorItem(ArmorMaterials.tail,EquipmentSlot.CHEST,new Item.Properties(),"purple_devil_tail.png", "devil_tail.geo.json", "devil_tail_animations.json", AnimationsRegister.devilTail, NULL).setMakesPiglinsNeutral(true));
     public static final RegistryObject<Item> whiteThighHighsShoes = ITEMS.register("brown_shoes",
-            () -> new ThighHighsArmorItem("white_thigh_highs.png", EquipmentSlot.FEET));
+            () -> new GenericGeoArmorItem(ArmorMaterials.maidDress, EquipmentSlot.FEET, new Item.Properties(),"thigh_highs/white_thigh_highs.png","thigh_highs.geo.json", "cat_tail_animation.json", AnimationsRegister.NULL, NULL).setCanStandOnPowderSnow(true));
     public static final RegistryObject<Item> blackThighHighsShoes = ITEMS.register("dark_brown_shoes",
-            () -> new ThighHighsArmorItem("black_thigh_highs.png", EquipmentSlot.FEET));
+            () -> new GenericGeoArmorItem(ArmorMaterials.maidDress, EquipmentSlot.FEET, new Item.Properties(),"thigh_highs/black_thigh_highs.png","thigh_highs.geo.json", "cat_tail_animation.json", AnimationsRegister.NULL, NULL).setCanStandOnPowderSnow(true));
+
+    public static final RegistryObject<Item> bunnySuitWhiteTail = ITEMS.register("bunny_suit_white_tail",
+            () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                    EquipmentSlot.CHEST,
+                    new Item.Properties(),
+                    "bunny_suit/bunny_suit_white_tail.png",
+                    "bunny_suit.geo.json",
+                    "maid_dress_animation.json",
+                    AnimationsRegister.NULL,
+                    bunnyArmorTick));
+    public static final RegistryObject<Item> bunnySuitBlackTail = ITEMS.register("bunny_suit_black_tail",
+            () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                    EquipmentSlot.CHEST,
+                    new Item.Properties(),
+                    "bunny_suit/bunny_suit_black_tail.png",
+                    "bunny_suit.geo.json",
+                    "maid_dress_animation.json",
+                    AnimationsRegister.NULL,
+                    bunnyArmorTick));
+
+    public static final RegistryObject<Item> bunnySuitCaramelTail = ITEMS.register("bunny_suit_caramel_tail",
+            () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                    EquipmentSlot.CHEST,
+                    new Item.Properties(),
+                    "bunny_suit/bunny_suit_caramel_tail.png",
+                    "bunny_suit.geo.json",
+                    "maid_dress_animation.json",
+                    AnimationsRegister.NULL,
+                    bunnyArmorTick));
+
+    public static final RegistryObject<Item> bunnySuitSocks = ITEMS.register("bunny_suit_socks",
+            () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                    EquipmentSlot.LEGS,
+                    new Item.Properties(),
+                    "bunny_suit/bunny_suit_white_tail.png",
+                    "bunny_suit.geo.json",
+                    "maid_dress_animation.json",
+                    AnimationsRegister.NULL,
+                    bunnyArmorTick));
 
     public static final RegistryObject<Item> coffeeFruit = ITEMS.register("coffee_fruit", () -> new BlockItem(
             BlockRegister.coffeePlant.get(), new Item.Properties().tab(foods).food(new FoodProperties.Builder().fast().nutrition(2).saturationMod(1.125f).build()
@@ -212,38 +251,7 @@ public class ItemRegister {
     public static final RegistryObject<Item> yellowStool = ITEMS.register("yellow_stool", () -> new BlockItem(BlockRegister.yellowStool.get(), new Item.Properties().tab(decoration)));
 
 
-    public static RegistryObject<MaidDressArmorItem> registerDresses(String color) {
-        var toReturn = ITEMS.register(color + "_maid_dress", ()-> new MaidDressArmorItem(color + "_maid_dress_cat_tail_black.png"));
 
-        ITEMS.register(color + "_maid_dress_cat_tail_black",
-                () -> new CatMaidArmorItem(color + "_maid_dress_cat_tail_black.png", toReturn.get()));
-        ITEMS.register(color + "_maid_dress_cat_tail_caramel",
-                () -> new CatMaidArmorItem(color + "_maid_dress_cat_tail_caramel.png", toReturn.get()));
-        ITEMS.register(color + "_maid_dress_cat_tail_white",
-                () -> new CatMaidArmorItem(color + "_maid_dress_cat_tail_white.png", toReturn.get()));
-        ITEMS.register(color + "_maid_dress_fox_tail_black",
-                () -> new FoxMaidArmorItem(color + "_maid_dress_fox_tail_black.png", toReturn.get()));
-        ITEMS.register(color + "_maid_dress_fox_tail_red",
-                () -> new FoxMaidArmorItem(color + "_maid_dress_fox_tail_red.png", toReturn.get()));
-        ITEMS.register(color + "_maid_dress_fox_tail_white",
-                () -> new FoxMaidArmorItem(color + "_maid_dress_fox_tail_white.png", toReturn.get()));
-        ITEMS.register(color + "_maid_dress_fox_tail_brown",
-                () -> new FoxMaidArmorItem(color + "_maid_dress_fox_tail_brown.png", toReturn.get()));
-        ITEMS.register(color + "_maid_dress_bunny_tail_black",
-                () -> new BunnyMaidArmorItem(color + "_maid_dress_bunny_tail_black.png", toReturn.get()));
-        ITEMS.register(color + "_maid_dress_bunny_tail_caramel",
-                () -> new BunnyMaidArmorItem(color + "_maid_dress_bunny_tail_caramel.png", toReturn.get()));
-        ITEMS.register(color + "_maid_dress_bunny_tail_white",
-                () -> new BunnyMaidArmorItem(color + "_maid_dress_bunny_tail_white.png", toReturn.get()));
-        ITEMS.register(color + "_maid_dress_devil_tail_black",
-                () -> new DevilMaidArmorItem(color + "_maid_dress_devil_tail_black.png", toReturn.get()));
-        ITEMS.register(color + "_maid_dress_devil_tail_purple",
-                () -> new DevilMaidArmorItem(color + "_maid_dress_devil_tail_purple.png", toReturn.get()));
-        ITEMS.register(color + "_maid_dress_devil_tail_red",
-                () -> new DevilMaidArmorItem(color + "_maid_dress_devil_tail_red.png", toReturn.get()));
-
-        return toReturn;
-    }
     public static HashMap<String, RegistryObject<Headband>> headbands = new HashMap<>();
 
     public static RegistryObject<Headband> registerHeadbands(String color){
@@ -267,7 +275,152 @@ public class ItemRegister {
 
         return toReturn;
     }
-    public static HashMap<String, RegistryObject<MaidDressArmorItem>> dresses = new HashMap<>();
+    public static HashMap<String, RegistryObject<GenericGeoArmorItem>> dresses = new HashMap<>();
+    public static RegistryObject<GenericGeoArmorItem> registerDresses(String color) {
+
+        final var toReturn = ITEMS.register(color + "_maid_dress", () -> new GenericGeoArmorItem(
+                ArmorMaterials.maidDress,
+                EquipmentSlot.CHEST,
+                new Item.Properties(),
+                "cat_tailed/"+color + "_maid_dress_cat_tail_black.png",
+                "maid_dress.geo.json",
+                "maid_dress_animation.json",
+                AnimationsRegister.NULL,
+                maidArmorTick));
+
+        ITEMS.register(color + "_maid_dress_cat_tail_black",
+                () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                        EquipmentSlot.CHEST,
+                        new Item.Properties().craftRemainder(toReturn.get()),
+                        "cat_tailed/"+color + "_maid_dress_cat_tail_black.png",
+                        "cat_tailed_maid_dress.geo.json",
+                        "cat_tail_animation.json",
+                        AnimationsRegister.catTail,
+                        catArmorTick));
+        ITEMS.register(color + "_maid_dress_cat_tail_caramel",
+                () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                        EquipmentSlot.CHEST,
+                        new Item.Properties().craftRemainder(toReturn.get()),
+                        "cat_tailed/"+color + "_maid_dress_cat_tail_caramel.png",
+                        "cat_tailed_maid_dress.geo.json",
+                        "cat_tail_animation.json",
+                        AnimationsRegister.catTail,
+                        catArmorTick));
+        ITEMS.register(color + "_maid_dress_cat_tail_white",
+                () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                        EquipmentSlot.CHEST,
+                        new Item.Properties().craftRemainder(toReturn.get()),
+                        "cat_tailed/"+color + "_maid_dress_cat_tail_white.png",
+                        "cat_tailed_maid_dress.geo.json",
+                        "cat_tail_animation.json",
+                        AnimationsRegister.catTail,
+                        catArmorTick));
+        ITEMS.register(color + "_maid_dress_fox_tail_black",
+                () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                        EquipmentSlot.CHEST,
+                        new Item.Properties().craftRemainder(toReturn.get()),
+                        "fox_tailed/"+color + "_maid_dress_fox_tail_black.png",
+                        "fox_maid_dress.geo.json",
+                        "fox_tail_animations.json",
+                        AnimationsRegister.foxTail,
+                        foxArmorTick));
+        ITEMS.register(color + "_maid_dress_fox_tail_red",
+                () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                        EquipmentSlot.CHEST,
+                        new Item.Properties().craftRemainder(toReturn.get()),
+                        "fox_tailed/"+color + "_maid_dress_fox_tail_red.png",
+                        "fox_maid_dress.geo.json",
+                        "fox_tail_animations.json",
+                        AnimationsRegister.foxTail,
+                        foxArmorTick));
+        ITEMS.register(color + "_maid_dress_fox_tail_white",
+                () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                        EquipmentSlot.CHEST,
+                        new Item.Properties().craftRemainder(toReturn.get()),
+                        "fox_tailed/"+color + "_maid_dress_fox_tail_white.png",
+                        "fox_maid_dress.geo.json",
+                        "fox_tail_animations.json",
+                        AnimationsRegister.foxTail,
+                        foxArmorTick));
+        ITEMS.register(color + "_maid_dress_fox_tail_brown",
+                () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                        EquipmentSlot.CHEST,
+                        new Item.Properties().craftRemainder(toReturn.get()),
+                        "fox_tailed/"+color + "_maid_dress_fox_tail_brown.png",
+                        "fox_maid_dress.geo.json",
+                        "fox_tail_animations.json",
+                        AnimationsRegister.foxTail,
+                        foxArmorTick));
+
+        ITEMS.register(color + "_maid_dress_bunny_tail_black",
+                () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                        EquipmentSlot.CHEST,
+                        new Item.Properties().craftRemainder(toReturn.get()),
+                        "bunny_tailed/"+color + "_maid_dress_bunny_tail_black.png",
+                        "bunny_tailed_maid_dress.geo.json",
+                        "",
+                        AnimationsRegister.NULL,
+                        bunnyArmorTick));
+        ITEMS.register(color + "_maid_dress_bunny_tail_caramel",
+                () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                        EquipmentSlot.CHEST,
+                        new Item.Properties().craftRemainder(toReturn.get()),
+                        "bunny_tailed/"+color + "_maid_dress_bunny_tail_caramel.png",
+                        "bunny_tailed_maid_dress.geo.json",
+                        "",
+                        AnimationsRegister.NULL,
+                        bunnyArmorTick));
+        ITEMS.register(color + "_maid_dress_bunny_tail_white",
+                () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                        EquipmentSlot.CHEST,
+                        new Item.Properties().craftRemainder(toReturn.get()),
+                        "bunny_tailed/"+color + "_maid_dress_bunny_tail_white.png",
+                        "bunny_tailed_maid_dress.geo.json",
+                        "",
+                        AnimationsRegister.NULL,
+                        bunnyArmorTick));
+        ITEMS.register(color + "_maid_dress_devil_tail_black",
+                () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                        EquipmentSlot.CHEST,
+                        new Item.Properties().craftRemainder(toReturn.get()),
+                        "devil_tailed/"+color + "_maid_dress_devil_tail_black.png",
+                        "devil_tailed_maid_dress.geo.json",
+                        "devil_tail_animations.json",
+                        AnimationsRegister.devilTail,
+                        NULL).setMakesPiglinsNeutral(true));
+        ITEMS.register(color + "_maid_dress_devil_tail_purple",
+                () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                        EquipmentSlot.CHEST,
+                        new Item.Properties().craftRemainder(toReturn.get()),
+                        "devil_tailed/"+color + "_maid_dress_devil_tail_purple.png",
+                        "devil_tailed_maid_dress.geo.json",
+                        "devil_tail_animations.json",
+                        AnimationsRegister.devilTail,
+                        NULL).setMakesPiglinsNeutral(true));
+        ITEMS.register(color + "_maid_dress_devil_tail_red",
+                () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+                        EquipmentSlot.CHEST,
+                        new Item.Properties().craftRemainder(toReturn.get()),
+                        "devil_tailed/"+color + "_maid_dress_devil_tail_red.png",
+                        "devil_tailed_maid_dress.geo.json",
+                        "devil_tail_animations.json",
+                        AnimationsRegister.devilTail,
+                        NULL).setMakesPiglinsNeutral(true));
+
+        return toReturn;
+    }
+
+
+    public static HashMap<String, RegistryObject<GenericGeoArmorItem>> thighHighs = new HashMap<>();
+
+    public static RegistryObject<GenericGeoArmorItem> registerThighHighs(String color){
+        return ITEMS.register(color+"_thigh_highs", () -> new GenericGeoArmorItem(
+                ArmorMaterials.maidDress,EquipmentSlot.LEGS, new Item.Properties(),
+                "thigh_highs/"+color+"_thigh_highs.png",
+                "thigh_highs.geo.json",
+                "", AnimationsRegister.NULL,NULL)
+        );
+    }
     public static void preGen() {
         ArrayList<String> nameMap = new ArrayList<>();
 
@@ -288,6 +441,10 @@ public class ItemRegister {
         nameMap.add("yellow");
         nameMap.add("purple");
 
+
+        for (int i = 0; i < nameMap.size(); i++) {
+            thighHighs.put(nameMap.get(i),registerThighHighs(nameMap.get(i)));
+        }
         for (int i = 0; i < nameMap.size(); i++) {
             dresses.put(nameMap.get(i),registerDresses(nameMap.get(i)));
         }

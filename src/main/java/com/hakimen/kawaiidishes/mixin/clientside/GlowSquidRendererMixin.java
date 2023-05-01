@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Shadow;
 public class GlowSquidRendererMixin {
 
     @Shadow @Final private static ResourceLocation GLOW_SQUID_LOCATION;
-    private static final ResourceLocation MAID_GLOWSQUID_LOCATION = new ResourceLocation("kawaiidishes","textures/entities/squid/maid_glowsquid.png");
+    private static final ResourceLocation MAID_GLOWSQUID_LOCATION = new ResourceLocation("kawaiidishes","textures/entity/squid/maid_glowsquid.png");
 
     /**
      * @author

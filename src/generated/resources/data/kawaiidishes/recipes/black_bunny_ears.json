@@ -13,8 +13,8 @@
   },
   "pattern": [
     "# #",
-    "xsx",
-    "s s"
+    "x x",
+    "sss"
   ],
   "result": {
     "item": "kawaiidishes:black_bunny_ears"

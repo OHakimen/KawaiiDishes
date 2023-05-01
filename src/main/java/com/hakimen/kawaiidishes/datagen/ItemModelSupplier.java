@@ -93,6 +93,8 @@ public class ItemModelSupplier extends ItemModelProvider {
                 }
             }else if(path.contains("_maid_dress")) {
                 maidDressItem(item.get());
+            }else if(path.contains("thigh_highs")){
+                thighHighItem(item.get());
             }
         }
 
@@ -125,12 +127,13 @@ public class ItemModelSupplier extends ItemModelProvider {
         simpleItem(ItemRegister.roastedCoffeeBeans.get());
         simpleItem(ItemRegister.coffeePowder.get());
 
-        simpleItem(ItemRegister.blackThighHighs.get());
-        simpleItem(ItemRegister.whiteThighHighs.get());
         simpleItem(ItemRegister.blackThighHighsShoes.get());
         simpleItem(ItemRegister.whiteThighHighsShoes.get());
 
-
+        simpleItem(ItemRegister.bunnySuitBlackTail.get());
+        simpleItem(ItemRegister.bunnySuitWhiteTail.get());
+        simpleItem(ItemRegister.bunnySuitCaramelTail.get());
+        simpleItem(ItemRegister.bunnySuitSocks.get());
     }
 
     private ItemModelBuilder simpleItem(Item item) {
@@ -143,7 +146,11 @@ public class ItemModelSupplier extends ItemModelProvider {
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(KawaiiDishes.modId,"item/maid_dresses/" + Registry.ITEM.getKey(item).toString().replaceAll(KawaiiDishes.modId+":","")));
     }
-
+    private ItemModelBuilder thighHighItem(Item item) {
+        return withExistingParent(Registry.ITEM.getKey(item).toString().replaceAll(KawaiiDishes.modId+":",""),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(KawaiiDishes.modId,"item/thigh_highs/" + Registry.ITEM.getKey(item).toString().replaceAll(KawaiiDishes.modId+":","")));
+    }
     private ItemModelBuilder cookieItem(Item item) {
         return withExistingParent(Registry.ITEM.getKey(item).toString().replaceAll(KawaiiDishes.modId+":",""),
                 new ResourceLocation("item/generated")).texture("layer0",
