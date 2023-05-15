@@ -1,6 +1,5 @@
 package com.hakimen.kawaiidishes.containers;
 
-import com.hakimen.kawaiidishes.blocks.block_entities.CoffeeMachineBlockEntity;
 import com.hakimen.kawaiidishes.blocks.block_entities.IceCreamMachineBlockEntity;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
 import com.hakimen.kawaiidishes.registry.ContainerRegister;
@@ -86,10 +85,10 @@ public class IceCreamMachineContainer extends AbstractContainerMenu {
         if (slot != null && slot.hasItem()) {
             ItemStack stack1 = slot.getItem();
             stack = stack1.copy();
-            if (index < 5 && !this.moveItemStackTo(stack1, 1, this.slots.size(), true)) {
+            if (index < 5 && !this.moveItemStackTo(stack1, 5, this.slots.size(), true)) {
                 return ItemStack.EMPTY;
             }
-            if (!this.moveItemStackTo(stack1, 0, 5, false)) {
+            if (!this.moveItemStackTo(stack1, 0,5, false)) {
                 return ItemStack.EMPTY;
             }
             if (stack1.isEmpty()) {

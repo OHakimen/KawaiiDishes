@@ -82,10 +82,11 @@ public class CoffeeMachineContainer extends AbstractContainerMenu {
     {
         ItemStack stack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
+
         if (slot != null && slot.hasItem()) {
             ItemStack stack1 = slot.getItem();
             stack = stack1.copy();
-            if (index < 6 && !this.moveItemStackTo(stack1, 1, this.slots.size(), true)) {
+            if (index < 6 && !this.moveItemStackTo(stack1, 6, this.slots.size(), true)) {
                 return ItemStack.EMPTY;
             }
             if (!this.moveItemStackTo(stack1, 0, 6, false)) {
