@@ -219,7 +219,7 @@ public class ItemRegister {
                     bunnyArmorTick));
 
     public static final RegistryObject<Item> bunnySuitSocks = ITEMS.register("bunny_suit_socks",
-            () -> new GenericGeoArmorItem(ArmorMaterials.tailedDress,
+            () -> new GenericGeoArmorItem(ArmorMaterials.maidDress,
                     EquipmentSlot.LEGS,
                     new Item.Properties(),
                     "bunny_suit/bunny_suit_white_tail.png",
