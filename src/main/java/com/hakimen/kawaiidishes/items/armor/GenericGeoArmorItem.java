@@ -49,8 +49,8 @@ public class GenericGeoArmorItem extends ArmorItem implements GeoItem {
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    public GenericGeoArmorItem(ArmorMaterial pMaterial, EquipmentSlot pSlot, Properties pProperties, String textureLocation, String modelLocation, String animationLocation, Function<AnimationState<GenericGeoArmorItem>,PlayState> animationControlling, TriConsumer<ItemStack, Level, Player> armorTick) {
-        super(pMaterial, pSlot, pProperties);
+    public GenericGeoArmorItem(ArmorMaterial pMaterial, Type pSlot, Properties pProperties, String textureLocation, String modelLocation, String animationLocation, Function<AnimationState<GenericGeoArmorItem>,PlayState> animationControlling, TriConsumer<ItemStack, Level, Player> armorTick) {
+        super(pMaterial, pSlot , pProperties);
         this.textureLocation = new ResourceLocation(KawaiiDishes.modId,  "textures/models/armor/"+textureLocation);
         this.modelLocation = new ResourceLocation(KawaiiDishes.modId,    "geo/"+modelLocation);
         this.animationLocation = new ResourceLocation(KawaiiDishes.modId,"animations/"+animationLocation);

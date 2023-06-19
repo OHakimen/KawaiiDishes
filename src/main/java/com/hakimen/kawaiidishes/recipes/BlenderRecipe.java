@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -43,12 +44,12 @@ public class BlenderRecipe implements Recipe<SimpleContainer> {
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
         boolean match = true;
 
-        if(!pContainer.getItem(pContainer.getContainerSize()-1).getItem().equals(getResultItem().getItem())
+        if(!pContainer.getItem(pContainer.getContainerSize()-1).getItem().equals(getResultItem(null).getItem())
                 && !pContainer.getItem(pContainer.getContainerSize()-1).is(ItemStack.EMPTY.getItem())) {
             match = false;
         }
         if(!onOutput.equals(ItemStack.EMPTY)) {
-            if(onOutput.sameItem(pContainer.getItem(pContainer.getContainerSize()-1))){
+            if(onOutput.getItem() == pContainer.getItem(pContainer.getContainerSize()-1).getItem()){
                 match = true;
             }else
                 return false;
@@ -70,10 +71,14 @@ public class BlenderRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public ItemStack assemble(SimpleContainer pContainer) {
+    public ItemStack assemble(SimpleContainer pContainer, RegistryAccess p_267165_) {
         return output;
     }
 
+    @Override
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
+        return output.copy();
+    }
     @Override
     public boolean canCraftInDimensions(int pWidth, int pHeight) {
         return true;
@@ -84,10 +89,6 @@ public class BlenderRecipe implements Recipe<SimpleContainer> {
         return recipeItems;
     }
 
-    @Override
-    public ItemStack getResultItem() {
-        return output.copy();
-    }
 
     @Override
     public ResourceLocation getId() {
@@ -155,7 +156,7 @@ public class BlenderRecipe implements Recipe<SimpleContainer> {
                 ing.toNetwork(buf);
             }
             buf.writeInt(recipe.ticks);
-            buf.writeItemStack(recipe.getResultItem(), false);
+            buf.writeItemStack(recipe.getResultItem(null), false);
             buf.writeItemStack(recipe.onOutput, false);
         }
 

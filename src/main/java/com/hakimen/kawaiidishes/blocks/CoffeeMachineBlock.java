@@ -4,7 +4,8 @@ import com.hakimen.kawaiidishes.blocks.block_entities.CoffeeMachineBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.*;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -18,9 +19,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.*;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,7 +32,7 @@ import javax.annotation.Nonnull;
 public class CoffeeMachineBlock extends Block implements EntityBlock{
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public CoffeeMachineBlock() {
-        super(Properties.of(Material.STONE).strength(2f,2f)
+        super(Properties.copy(Blocks.STONE).strength(2f,2f)
                 .sound(SoundType.METAL));
         registerDefaultState( getStateDefinition().any()
                 .setValue(FACING, Direction.NORTH));

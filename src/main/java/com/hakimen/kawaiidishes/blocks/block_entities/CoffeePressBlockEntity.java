@@ -94,7 +94,7 @@ public class CoffeePressBlockEntity extends BlockEntity {
                 }
 
             }
-            entity.coffeeMade = match.get().getResultItem();
+            entity.coffeeMade = match.get().getResultItem(null);
             entity.coffeeGotMade = true;
             level.setBlockAndUpdate(entity.getBlockPos(),entity.getBlockState().setValue(
                     CoffeePressBlock.PRESSED,true

@@ -1,18 +1,13 @@
 package com.hakimen.kawaiidishes.blocks;
 
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FlowerBlock;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.crafting.conditions.FalseCondition;
 
 public class MugBlock extends Block  {
 
@@ -21,7 +16,7 @@ public class MugBlock extends Block  {
     }
 
     public MugBlock(){
-        super(BlockBehaviour.Properties.of(Material.STONE)
+        super(BlockBehaviour.Properties.copy(Blocks.STONE)
                 .strength(1,1)
                 .isSuffocating((p_61036_, p_61037_, p_61038_) -> false));
     }

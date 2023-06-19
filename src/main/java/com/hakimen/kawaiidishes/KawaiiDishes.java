@@ -11,8 +11,6 @@ import com.hakimen.kawaiidishes.registry.Registration;
 import com.hakimen.kawaiidishes.utils.MaidMobEventHandler;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.monster.*;
@@ -21,8 +19,7 @@ import net.minecraft.world.entity.monster.piglin.PiglinBrute;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.CreativeModeTabEvent;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -60,95 +57,12 @@ public class KawaiiDishes {
         bus.addListener(this::setup);
 
         MinecraftForge.EVENT_BUS.addListener(this::onLivingSpecialSpawn);
-        bus.addListener(this::registerModTab);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    public void registerModTab(CreativeModeTabEvent.Register event){
-        event.registerCreativeModeTab(new ResourceLocation(KawaiiDishes.modId,"cosmetics"),builder -> {
-            builder.icon(()->new ItemStack(ItemRegister.dresses.get("black").get()))
-                    .title(Component.translatable("itemGroup.kawaiidishes.cosmetics"))
-                    .displayItems((flags,out,isOp)->{
-                        ItemRegister.ITEMS.getEntries().forEach(x -> {
-                            var key = x.get().toString();
-                            if(key.contains("maid")){
-                                out.accept(x.get());
-                            } else if (key.contains("ears") || key.contains("horns")) {
-                                out.accept(x.get());
-                            } else if (key.contains("tail")) {
-                                out.accept(x.get());
-                            } else if (key.contains("headband")) {
-                                out.accept(x.get());
-                            }else if (key.contains("thigh")) {
-                                out.accept(x.get());
-                            }else if (key.contains("shoes")) {
-                                out.accept(x.get());
-                            }else if (key.contains("bunny_suit")) {
-                                out.accept(x.get());
-                            }else if (key.contains("socks")) {
-                                out.accept(x.get());
-                            }
-                        });
-                    }).build();
-        });
-
-        event.registerCreativeModeTab(new ResourceLocation(KawaiiDishes.modId,"blocks"),builder -> {
-            builder.icon(()->new ItemStack(ItemRegister.coffeeMachine.get()))
-                    .title(Component.translatable("itemGroup.kawaiidishes.blocks"))
-                    .displayItems((flags,out,isOp)->{
-                        out.accept(ItemRegister.mug.get());
-                        out.accept(ItemRegister.glassCup.get());
-                        out.accept(ItemRegister.milkshakeCup.get());
-                        out.accept(ItemRegister.coffeeMachine.get());
-                        out.accept(ItemRegister.coffeePress.get());
-                        out.accept(ItemRegister.blender.get());
-                        out.accept(ItemRegister.iceCreamMachine.get());
-                    }).build();
-        });
-
-        event.registerCreativeModeTab(new ResourceLocation(KawaiiDishes.modId,"decoration"),builder -> {
-            builder.icon(()->new ItemStack(ItemRegister.whiteStool.get()))
-                    .title(Component.translatable("itemGroup.kawaiidishes.decoration"))
-                    .displayItems((flags,out,isOp)->{
-                        ItemRegister.ITEMS.getEntries().forEach(x -> {
-                            String item = x.get().toString();
-                            if(item.contains("stool")){
-                                out.accept(x.get());
-                            }
-
-                        });
-                    }).build();
-        });
-
-        event.registerCreativeModeTab(new ResourceLocation(KawaiiDishes.modId,"food"),builder -> {
-            builder.icon(()->new ItemStack(ItemRegister.coffeeFruit.get()))
-                    .title(Component.translatable("itemGroup.kawaiidishes.foods"))
-                    .displayItems((flags,out,isOp)->{
-                        out.accept(ItemRegister.brigadeiroMix.get());
-                        out.accept(ItemRegister.condensedMilk.get());
-                        out.accept(ItemRegister.creamCheese.get());
-
-                        out.accept(ItemRegister.coffeePowder.get());
-                        out.accept(ItemRegister.driedCoffeeBeans.get());
-                        out.accept(ItemRegister.roastedCoffeeBeans.get());
-
-                        out.accept(ItemRegister.cocoaPowder.get());
-                        out.accept(ItemRegister.driedCocoaBeans.get());
-                        out.accept(ItemRegister.roastedCocoaBeans.get());
-                        ItemRegister.ITEMS.getEntries().forEach(x -> {
-                            String item = x.get().toString();
-                            if(x.get().isEdible()){
-                                out.accept(x.get());
-                            }else if(item.contains("cake")){
-                                out.accept(x.get());
-                            }
-                        });
-                    }).build();
-        });
-    }
-    public void onLivingSpecialSpawn(LivingSpawnEvent.SpecialSpawn event) {
+    public void onLivingSpecialSpawn(MobSpawnEvent event) {
         Entity entity = event.getEntity();
-        if (entity instanceof Monster monster && !entity.serializeNBT().getBoolean("isBaby") && RANDOM.nextFloat(0,1) < KawaiiDishesCommonConfig.chanceToSpawnWithDress.get()) {
+        if (!entity.isAddedToWorld() && entity instanceof Monster monster && !entity.serializeNBT().getBoolean("isBaby") && RANDOM.nextFloat(0,1) < KawaiiDishesCommonConfig.chanceToSpawnWithDress.get()) {
             if((monster instanceof Skeleton
                     || monster instanceof WitherSkeleton
                     || monster instanceof Stray

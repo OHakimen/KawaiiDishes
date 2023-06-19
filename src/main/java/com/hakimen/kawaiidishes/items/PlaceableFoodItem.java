@@ -34,12 +34,6 @@ public class PlaceableFoodItem extends BlockItem {
     }
 
 
-    @Override
-    public void onUsingTick(ItemStack stack, LivingEntity player, int count) {
-        super.onUsingTick(stack, player, count);
-    }
-
-
     public ItemStack getStackWithEffects(MobEffectInstance effect1,MobEffectInstance effect2){
         var stack = new ItemStack(this);
         var mainEff = new CompoundTag();

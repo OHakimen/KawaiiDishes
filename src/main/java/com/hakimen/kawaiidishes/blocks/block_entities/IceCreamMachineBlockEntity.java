@@ -159,7 +159,7 @@ public class IceCreamMachineBlockEntity extends BlockEntity implements MenuProvi
                             }
 
                         }
-                        pBlockEntity.inventory.setStackInSlot(4, recipe.getResultItem());
+                        pBlockEntity.inventory.setStackInSlot(4, recipe.getResultItem(null));
                         setChanged();
                     }
                 }

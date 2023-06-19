@@ -1,7 +1,6 @@
 package com.hakimen.kawaiidishes.containers;
 
 import com.hakimen.kawaiidishes.blocks.block_entities.BlenderBlockEntity;
-import com.hakimen.kawaiidishes.blocks.block_entities.CoffeeMachineBlockEntity;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
 import com.hakimen.kawaiidishes.registry.ContainerRegister;
 import net.minecraft.network.FriendlyByteBuf;
@@ -11,11 +10,9 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 
@@ -26,7 +23,7 @@ public class BlenderContainer extends AbstractContainerMenu {
 
 
     public BlenderContainer(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
     public BlenderContainer(int windowId, Inventory inv, BlockEntity entity, ContainerData data) {
@@ -113,7 +110,7 @@ public class BlenderContainer extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player pPlayer) {
-        return stillValid(ContainerLevelAccess.create(pPlayer.level, blockEntity.getBlockPos()),
+        return stillValid(ContainerLevelAccess.create(pPlayer.level(), blockEntity.getBlockPos()),
                 pPlayer, BlockRegister.blender.get());
     }
 }

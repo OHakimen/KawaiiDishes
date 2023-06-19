@@ -14,14 +14,14 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class Hat extends Item {
+public class Hat extends Item implements Equipable {
     public Hat() {
         super(new Properties().stacksTo(1));
     }
@@ -48,17 +48,6 @@ public class Hat extends Item {
             return super.getAttributeModifiers(slot,stack);
     }
 
-    @Nullable
-    @Override
-    public SoundEvent getEquipSound() {
-        return SoundEvents.ARMOR_EQUIP_LEATHER;
-    }
-
-    @Nullable
-    @Override
-    public EquipmentSlot getEquipmentSlot(ItemStack stack) {
-        return EquipmentSlot.HEAD;
-    }
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         EquipmentSlot equipmentslot = Mob.getEquipmentSlotForItem(itemstack);
@@ -74,5 +63,15 @@ public class Hat extends Item {
         } else {
             return InteractionResultHolder.fail(itemstack);
         }
+    }
+
+    @Override
+    public EquipmentSlot getEquipmentSlot() {
+        return EquipmentSlot.HEAD;
+    }
+
+    @Override
+    public SoundEvent getEquipSound() {
+        return SoundEvents.ARMOR_EQUIP_LEATHER;
     }
 }

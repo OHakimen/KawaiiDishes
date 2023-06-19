@@ -17,7 +17,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class ItemTagSupplier extends ItemTagsProvider {
     public ItemTagSupplier(DataGenerator pGenerator, CompletableFuture<HolderLookup.Provider> lookup, BlockTagsProvider pBlockTagsProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(pGenerator.getPackOutput(), lookup, pBlockTagsProvider, KawaiiDishes.modId ,existingFileHelper);
+        super(pGenerator.getPackOutput(), lookup, pBlockTagsProvider.contentsGetter(), KawaiiDishes.modId ,existingFileHelper);
     }
     TagKey<Item> bunny_suits = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(),new ResourceLocation(KawaiiDishes.modId,"bunny_suits"));
 

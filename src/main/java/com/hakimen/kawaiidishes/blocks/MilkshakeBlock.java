@@ -13,11 +13,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 public class MilkshakeBlock extends Block implements EntityBlock {
 
     public MilkshakeBlock(){
-        super(Properties.of(Material.STONE)
+        super(Properties.copy(Blocks.STONE)
                 .strength(1,1)
                 .isSuffocating((p_61036_, p_61037_, p_61038_) -> false));
     }

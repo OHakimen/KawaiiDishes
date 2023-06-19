@@ -19,7 +19,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 
 import javax.annotation.Nonnull;
-import java.awt.*;
 
 public class CoffeeMachineRecipeCategory implements IRecipeCategory<CoffeeMachineRecipe> {
     public final static ResourceLocation UID = new ResourceLocation(KawaiiDishes.modId, "coffee_machining");
@@ -72,6 +71,6 @@ public class CoffeeMachineRecipeCategory implements IRecipeCategory<CoffeeMachin
 
         builder.addSlot(RecipeIngredientRole.INPUT,115,29).addItemStack(recipe.getItemOnOutput());
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 115, 54).addItemStack(recipe.getResultItem());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 115, 54).addItemStack(recipe.getResultItem(null));
     }
 }

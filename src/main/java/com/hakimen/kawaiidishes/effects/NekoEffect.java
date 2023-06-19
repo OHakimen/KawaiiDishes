@@ -19,7 +19,7 @@ public class NekoEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
-        var entities = pLivingEntity.getLevel().getEntities(pLivingEntity,
+        var entities = pLivingEntity.level().getEntities(pLivingEntity,
                 AABB.ofSize(new Vec3(
                         pLivingEntity.getX(),
                         pLivingEntity.getY(),

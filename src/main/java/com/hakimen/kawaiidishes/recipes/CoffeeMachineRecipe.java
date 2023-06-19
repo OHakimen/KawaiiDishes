@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -87,10 +88,6 @@ public class CoffeeMachineRecipe implements Recipe<SimpleContainer> {
         return match;
     }
 
-    @Override
-    public ItemStack assemble(SimpleContainer pContainer) {
-        return output;
-    }
 
     @Override
     public boolean canCraftInDimensions(int pWidth, int pHeight) {
@@ -103,10 +100,14 @@ public class CoffeeMachineRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public ItemStack getResultItem() {
-        return output.copy();
+    public ItemStack assemble(SimpleContainer pContainer, RegistryAccess p_267165_) {
+        return output;
     }
 
+    @Override
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
+        return output.copy();
+    }
     @Override
     public ResourceLocation getId() {
         return id;
@@ -179,7 +180,7 @@ public class CoffeeMachineRecipe implements Recipe<SimpleContainer> {
             buf.writeBoolean(recipe.requireWater);
             buf.writeBoolean(recipe.requireMilk);
             buf.writeItemStack(recipe.itemOnOutput, false);
-            buf.writeItemStack(recipe.getResultItem(), false);
+            buf.writeItemStack(recipe.getResultItem(null), false);
         }
 
 

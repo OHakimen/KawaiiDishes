@@ -2,7 +2,6 @@ package com.hakimen.kawaiidishes.integration.jei.categories;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.integration.jei.JEIIntegration;
-import com.hakimen.kawaiidishes.recipes.CoffeeMachineRecipe;
 import com.hakimen.kawaiidishes.recipes.IceCreamMachineRecipe;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
 import mezz.jei.api.constants.VanillaTypes;
@@ -16,8 +15,6 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 
 import javax.annotation.Nonnull;
 
@@ -69,6 +66,6 @@ public class IceCreamMachineRecipeCategory implements IRecipeCategory<IceCreamMa
 
         builder.addSlot(RecipeIngredientRole.INPUT,115,29).addItemStack(recipe.getItemOnOutput());
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 115, 54).addItemStack(recipe.getResultItem());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 115, 54).addItemStack(recipe.getResultItem(null));
     }
 }

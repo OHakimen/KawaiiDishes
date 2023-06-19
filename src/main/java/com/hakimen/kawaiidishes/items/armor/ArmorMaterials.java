@@ -2,19 +2,19 @@ package com.hakimen.kawaiidishes.items.armor;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
 
 public class ArmorMaterials {
     public static ArmorMaterial tail = new ArmorMaterial() {
         @Override
-        public int getDurabilityForSlot(EquipmentSlot pSlot) {
+        public int getDurabilityForType(ArmorItem.Type pSlot) {
             return -1;
         }
 
         @Override
-        public int getDefenseForSlot(EquipmentSlot pSlot) {
+        public int getDefenseForType(ArmorItem.Type pSlot) {
             return 2;
         }
 
@@ -49,18 +49,18 @@ public class ArmorMaterials {
         }};
     public static ArmorMaterial maidDress = new ArmorMaterial() {
         @Override
-        public int getDurabilityForSlot(EquipmentSlot pSlot) {
+        public int getDurabilityForType(ArmorItem.Type pSlot) {
             return -1;
         }
 
         @Override
-        public int getDefenseForSlot(EquipmentSlot pSlot) {
+        public int getDefenseForType(ArmorItem.Type pSlot) {
             switch (pSlot){
-                case CHEST:
+                case CHESTPLATE:
                     return 4;
-                case LEGS:
+                case LEGGINGS:
                     return 2;
-                case FEET:
+                case BOOTS:
                     return 1;
             }
             return 3;
@@ -97,12 +97,12 @@ public class ArmorMaterials {
         }};
     public static ArmorMaterial tailedDress = new ArmorMaterial() {
         @Override
-        public int getDurabilityForSlot(EquipmentSlot pSlot) {
+        public int getDurabilityForType(ArmorItem.Type pSlot) {
             return -1;
         }
 
         @Override
-        public int getDefenseForSlot(EquipmentSlot pSlot) {
+        public int getDefenseForType(ArmorItem.Type pSlot) {
             return 6;
         }
 

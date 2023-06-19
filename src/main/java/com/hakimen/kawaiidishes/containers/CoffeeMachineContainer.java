@@ -23,7 +23,7 @@ public class CoffeeMachineContainer extends AbstractContainerMenu {
 
 
     public CoffeeMachineContainer(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
     public CoffeeMachineContainer(int windowId, Inventory inv, BlockEntity entity, ContainerData data) {
@@ -113,7 +113,7 @@ public class CoffeeMachineContainer extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player pPlayer) {
-        return stillValid(ContainerLevelAccess.create(pPlayer.level, blockEntity.getBlockPos()),
+        return stillValid(ContainerLevelAccess.create(pPlayer.level(), blockEntity.getBlockPos()),
                 pPlayer, BlockRegister.coffeeMachine.get());
     }
 }

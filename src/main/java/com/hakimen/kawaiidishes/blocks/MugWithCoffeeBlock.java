@@ -11,18 +11,18 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class MugWithCoffeeBlock extends MugBlock implements EntityBlock {
     public MugWithCoffeeBlock(){
-        super(BlockBehaviour.Properties.of(Material.STONE).strength(1,1));
+        super(BlockBehaviour.Properties.copy(Blocks.STONE).strength(1,1));
     }
 
 

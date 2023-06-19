@@ -3,9 +3,7 @@ package com.hakimen.kawaiidishes.integration.jei.categories;
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.integration.jei.JEIIntegration;
 import com.hakimen.kawaiidishes.recipes.BlenderRecipe;
-import com.hakimen.kawaiidishes.recipes.CoffeeMachineRecipe;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
-import com.hakimen.kawaiidishes.registry.RecipeRegister;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -17,7 +15,6 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-
 
 import javax.annotation.Nonnull;
 
@@ -61,6 +58,6 @@ public class BlendingRecipeCategory implements IRecipeCategory<BlenderRecipe> {
 
         }
         builder.addSlot(RecipeIngredientRole.OUTPUT, 122, 36).addItemStack(recipe.getOnOutput());
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 122, 61).addItemStack(recipe.getResultItem());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 122, 61).addItemStack(recipe.getResultItem(null));
     }
 }

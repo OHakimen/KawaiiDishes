@@ -143,9 +143,9 @@ public class BlenderBlockEntity extends BlockEntity implements MenuProvider,Bloc
                             }
                         }
                         if(recipe.getOnOutput().equals(ItemStack.EMPTY)){
-                            pBlockEntity.inventory.insertItem(2,recipe.getResultItem().copy(),false);
+                            pBlockEntity.inventory.insertItem(2,recipe.getResultItem(null).copy(),false);
                         }else{
-                            pBlockEntity.inventory.setStackInSlot(2,recipe.getResultItem().copy());
+                            pBlockEntity.inventory.setStackInSlot(2,recipe.getResultItem(null).copy());
                         }
                         setChanged();
                     }

@@ -3,7 +3,6 @@ package com.hakimen.kawaiidishes.blocks.block_entities;
 import com.hakimen.kawaiidishes.containers.CoffeeMachineContainer;
 import com.hakimen.kawaiidishes.recipes.CoffeeMachineRecipe;
 import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
-import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -147,7 +146,7 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements MenuProvide
                             }
 
                         }
-                        pBlockEntity.inventory.setStackInSlot(5,recipe.getResultItem());
+                        pBlockEntity.inventory.setStackInSlot(5,recipe.getResultItem(null));
                         setChanged();
                     }
                 }

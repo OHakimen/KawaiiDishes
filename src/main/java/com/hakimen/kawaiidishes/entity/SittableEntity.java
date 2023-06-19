@@ -72,9 +72,10 @@ public class SittableEntity extends Entity {
 
     }
 
+
     @Override
-    public void positionRider(Entity passenger) {
-        super.positionRider(passenger);
+    protected void positionRider(Entity pPassenger, MoveFunction pCallback) {
+        super.positionRider(pPassenger, pCallback);
     }
 
     @Override
