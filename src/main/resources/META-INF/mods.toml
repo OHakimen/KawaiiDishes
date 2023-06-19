@@ -53,6 +53,12 @@ A mod about maids, food, and other stuff
    modId="minecraft"
    mandatory=true
    # This version range declares a minimum of the current minecraft version up to but not including the next major version
-   versionRange="[1.19.2,)"
+   versionRange="[1.20.1,)"
    ordering="NONE"
    side="BOTH"
+[[dependencies.kawaiidishes]]
+   modId="geckolib"
+   mandatory=true
+   versionRange="[4.2,)"
+   ordering="NONE"
+   side="CLIENT"
