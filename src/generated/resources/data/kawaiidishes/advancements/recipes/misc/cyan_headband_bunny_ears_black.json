@@ -30,5 +30,6 @@
     "recipes": [
       "kawaiidishes:cyan_headband_bunny_ears_black"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

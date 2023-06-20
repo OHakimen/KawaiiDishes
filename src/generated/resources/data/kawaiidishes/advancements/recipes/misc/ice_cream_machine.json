@@ -56,5 +56,6 @@
     "recipes": [
       "kawaiidishes:ice_cream_machine"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -30,5 +30,6 @@
     "recipes": [
       "kawaiidishes:purple_headband_horns_white"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

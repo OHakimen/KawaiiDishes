@@ -7,6 +7,7 @@ import com.hakimen.kawaiidishes.config.KawaiiDishesClientConfig;
 import com.hakimen.kawaiidishes.config.KawaiiDishesCommonConfig;
 import com.hakimen.kawaiidishes.registry.ContainerRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
+import com.hakimen.kawaiidishes.registry.PacketRegister;
 import com.hakimen.kawaiidishes.registry.Registration;
 import com.hakimen.kawaiidishes.utils.MaidMobEventHandler;
 import com.mojang.logging.LogUtils;
@@ -20,9 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -52,12 +51,16 @@ public class KawaiiDishes {
 
         Registration.init();
 
+        PacketRegister.register();
+
         bus.addListener(this::enqueueIMC);
         bus.addListener(this::clientStartup);
         bus.addListener(this::setup);
 
+
         MinecraftForge.EVENT_BUS.addListener(this::onLivingSpecialSpawn);
         MinecraftForge.EVENT_BUS.register(this);
+
     }
 
     public void onLivingSpecialSpawn(MobSpawnEvent event) {
@@ -106,12 +109,6 @@ public class KawaiiDishes {
     }
 
     private void processIMC(final InterModProcessEvent event) {
-
-    }
-
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
 
     }
     private void clientStartup(final FMLClientSetupEvent event){

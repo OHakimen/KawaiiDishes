@@ -30,5 +30,6 @@
     "recipes": [
       "kawaiidishes:black_maid_dress_cat_tail_white"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

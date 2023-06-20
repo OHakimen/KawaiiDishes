@@ -43,5 +43,6 @@
     "recipes": [
       "kawaiidishes:pink_maid_dress"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

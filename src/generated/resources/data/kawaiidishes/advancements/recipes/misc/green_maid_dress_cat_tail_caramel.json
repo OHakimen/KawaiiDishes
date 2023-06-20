@@ -30,5 +30,6 @@
     "recipes": [
       "kawaiidishes:green_maid_dress_cat_tail_caramel"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -15,5 +15,6 @@
   "result": {
     "count": 8,
     "item": "kawaiidishes:honey_cookie"
-  }
+  },
+  "show_notification": true
 }

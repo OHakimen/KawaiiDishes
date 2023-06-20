@@ -30,5 +30,6 @@
     "recipes": [
       "kawaiidishes:american_coffee"
     ]
-  }
+  },
+  "sends_telemetry_event": true
 }

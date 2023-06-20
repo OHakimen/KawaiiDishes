@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:cyan_headband_cat_ears_caramel_uncraft"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

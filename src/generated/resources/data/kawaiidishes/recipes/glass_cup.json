@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "kawaiidishes:glass_cup"
-  }
+  },
+  "show_notification": true
 }

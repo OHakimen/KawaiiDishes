@@ -474,7 +474,7 @@ public class ItemRegister {
     
     public static final RegistryObject<CreativeModeTab> DECORATION_TAB = TABS.register("decoration", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.kawaiidishes.decoration"))
-            .icon(() -> new ItemStack(coffeeMachine.get()))
+            .icon(() -> new ItemStack(whiteStool.get()))
             .displayItems((enabledFeatures, entries) -> {
                 ITEMS.getEntries().forEach(x -> {
                     String item = x.get().toString();
@@ -487,7 +487,7 @@ public class ItemRegister {
 
     public static final RegistryObject<CreativeModeTab> FOOD_TAB = TABS.register("foods", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.kawaiidishes.foods"))
-            .icon(() -> new ItemStack(coffeeMachine.get()))
+            .icon(() -> new ItemStack(roastedCoffeeBeans.get()))
             .displayItems((enabledFeatures, entries) -> {
                 entries.accept(ItemRegister.brigadeiroMix.get());
                 entries.accept(ItemRegister.condensedMilk.get());

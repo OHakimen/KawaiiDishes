@@ -43,5 +43,6 @@
     "recipes": [
       "kawaiidishes:magenta_headband"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

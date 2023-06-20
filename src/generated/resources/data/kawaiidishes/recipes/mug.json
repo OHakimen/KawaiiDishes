@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "kawaiidishes:mug"
-  }
+  },
+  "show_notification": true
 }

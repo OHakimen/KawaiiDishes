@@ -18,5 +18,6 @@
   ],
   "result": {
     "item": "kawaiidishes:chocolate_cheese_cake"
-  }
+  },
+  "show_notification": true
 }

@@ -43,5 +43,6 @@
     "recipes": [
       "kawaiidishes:bunny_suit_caramel_tail"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

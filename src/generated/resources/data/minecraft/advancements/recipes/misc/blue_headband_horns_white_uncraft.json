@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:blue_headband_horns_white_uncraft"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

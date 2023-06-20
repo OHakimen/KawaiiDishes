@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:white_maid_dress_devil_tail_purple_uncraft"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

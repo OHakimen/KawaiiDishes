@@ -4,6 +4,7 @@ import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
 import com.hakimen.kawaiidishes.registry.EffectRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
+import com.hakimen.kawaiidishes.registry.KeybindRegister;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
@@ -205,6 +206,9 @@ public class LangSupplier extends LanguageProvider {
         add("gui.kawaiidishes.blender", "Blender");
 
         add("entity.minecraft.villager.kawaiidishes.barista", "Barista");
+
+        add(KeybindRegister.keyCategory, "Kawaii Dishes");
+        add(KeybindRegister.keyTailWag, "Tail Wag");
 
         add(EffectRegister.kawaiiEffect.get(),"Kawaii");
         add(EffectRegister.nekoEffect.get(),"Neko-chan");

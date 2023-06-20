@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:green_maid_dress_cat_tail_caramel_uncraft"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

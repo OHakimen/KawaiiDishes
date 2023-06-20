@@ -19,5 +19,6 @@
   ],
   "result": {
     "item": "kawaiidishes:red_fox_tail"
-  }
+  },
+  "show_notification": true
 }

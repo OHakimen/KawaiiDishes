@@ -43,5 +43,6 @@
     "recipes": [
       "kawaiidishes:condensed_milk"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

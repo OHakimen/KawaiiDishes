@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "kawaiidishes:coffee_press"
-  }
+  },
+  "show_notification": true
 }

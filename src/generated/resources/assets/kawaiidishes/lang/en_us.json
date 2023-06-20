@@ -626,5 +626,7 @@
   "itemGroup.kawaiidishes.blocks": "Kawaii's Blocks",
   "itemGroup.kawaiidishes.cosmetics": "Kawaii's Cosmetics",
   "itemGroup.kawaiidishes.decoration": "Kawaii's Decorations",
-  "itemGroup.kawaiidishes.foods": "Kawaii's Foods"
+  "itemGroup.kawaiidishes.foods": "Kawaii's Foods",
+  "key.category.kawaiidishes.kawaiidishes": "Kawaii Dishes",
+  "key.kawaiidishes.tail_wag": "Tail Wag"
 }

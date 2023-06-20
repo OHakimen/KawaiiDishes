@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:white_headband_bunny_ears_white_uncraft"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

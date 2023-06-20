@@ -30,5 +30,6 @@
     "recipes": [
       "kawaiidishes:cream_cheese"
     ]
-  }
+  },
+  "sends_telemetry_event": true
 }

@@ -15,5 +15,6 @@
   ],
   "result": {
     "item": "kawaiidishes:milkshake_cup"
-  }
+  },
+  "show_notification": true
 }

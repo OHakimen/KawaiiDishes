@@ -56,5 +56,6 @@
     "recipes": [
       "kawaiidishes:coffee_machine"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

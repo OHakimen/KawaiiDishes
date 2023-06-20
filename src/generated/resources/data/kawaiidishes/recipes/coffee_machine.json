@@ -25,5 +25,6 @@
   ],
   "result": {
     "item": "kawaiidishes:coffee_machine"
-  }
+  },
+  "show_notification": true
 }

@@ -30,5 +30,6 @@
     "recipes": [
       "kawaiidishes:brown_headband_bunny_ears_white"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

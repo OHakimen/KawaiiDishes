@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:red_maid_dress_bunny_tail_white_uncraft"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

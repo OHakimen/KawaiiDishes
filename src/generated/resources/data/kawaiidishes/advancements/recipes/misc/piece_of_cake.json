@@ -30,5 +30,6 @@
     "recipes": [
       "kawaiidishes:piece_of_cake"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

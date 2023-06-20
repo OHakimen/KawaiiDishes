@@ -30,5 +30,6 @@
     "recipes": [
       "kawaiidishes:brown_stool"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

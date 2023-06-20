@@ -30,5 +30,6 @@
     "recipes": [
       "kawaiidishes:brigadeiro"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -30,5 +30,6 @@
     "recipes": [
       "kawaiidishes:coffee_press"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

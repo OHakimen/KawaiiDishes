@@ -30,5 +30,6 @@
     "recipes": [
       "kawaiidishes:piece_of_honey_cheesecake"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:blue_maid_dress_fox_tail_brown_uncraft"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

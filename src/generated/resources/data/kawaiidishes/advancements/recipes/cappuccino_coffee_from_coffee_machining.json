@@ -30,5 +30,6 @@
     "recipes": [
       "kawaiidishes:cappuccino_coffee"
     ]
-  }
+  },
+  "sends_telemetry_event": true
 }

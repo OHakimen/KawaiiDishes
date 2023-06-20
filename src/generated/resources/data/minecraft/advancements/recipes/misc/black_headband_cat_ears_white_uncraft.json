@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:black_headband_cat_ears_white_uncraft"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

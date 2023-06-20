@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "kawaiidishes:golden_cookie"
-  }
+  },
+  "show_notification": true
 }

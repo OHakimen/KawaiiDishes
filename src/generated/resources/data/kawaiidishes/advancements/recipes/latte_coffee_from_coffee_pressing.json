@@ -30,5 +30,6 @@
     "recipes": [
       "kawaiidishes:latte_coffee"
     ]
-  }
+  },
+  "sends_telemetry_event": true
 }

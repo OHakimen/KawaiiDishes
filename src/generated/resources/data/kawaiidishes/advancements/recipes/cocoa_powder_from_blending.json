@@ -30,5 +30,6 @@
     "recipes": [
       "kawaiidishes:cocoa_powder"
     ]
-  }
+  },
+  "sends_telemetry_event": true
 }

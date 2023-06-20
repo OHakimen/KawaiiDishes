@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:green_maid_dress_devil_tail_red_uncraft"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

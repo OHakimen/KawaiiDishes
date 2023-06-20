@@ -43,5 +43,6 @@
     "recipes": [
       "kawaiidishes:dark_brown_shoes"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -30,5 +30,6 @@
     "recipes": [
       "kawaiidishes:pink_headband_fox_ears_brown"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -19,5 +19,6 @@
   ],
   "result": {
     "item": "kawaiidishes:blender"
-  }
+  },
+  "show_notification": true
 }
