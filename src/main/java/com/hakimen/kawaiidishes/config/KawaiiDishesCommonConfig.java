@@ -14,7 +14,6 @@ public class KawaiiDishesCommonConfig {
     public static final ForgeConfigSpec.DoubleValue chanceToMessage;
     public static final ForgeConfigSpec.BooleanValue shouldSendMessage;
 
-
     public static final ForgeConfigSpec.BooleanValue wanderingTraderTrades;
     public static final ForgeConfigSpec.BooleanValue villagerTrades;
     public static final ForgeConfigSpec.DoubleValue chanceToDropArmorSet;

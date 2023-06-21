@@ -25,5 +25,4 @@ public class GlowSquidRendererMixin {
         return (pEntity.hasCustomName() && pEntity.getCustomName().toString().toLowerCase().contains("maid"))
                 ? MAID_GLOWSQUID_LOCATION : GLOW_SQUID_LOCATION;
     }
-
 }

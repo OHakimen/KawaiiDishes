@@ -12,7 +12,6 @@ public class ClientTailWagData {
     }
 
     public static boolean getState(UUID uuid){
-        System.out.println();
         return tailStates.getOrDefault(uuid, false);
     }
 }

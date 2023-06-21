@@ -30,10 +30,20 @@ import java.util.HashMap;
 import static com.hakimen.kawaiidishes.KawaiiDishes.modId;
 import static com.hakimen.kawaiidishes.registry.ArmorTickRegister.*;
 
-public class ItemRegister {
+public class ItemRegister
+{
+
+    //Food properties
+    public static FoodProperties cake = new FoodProperties.Builder().nutrition(2).saturationMod(0.5f).build();
+    public static FoodProperties chocolate = new FoodProperties.Builder().nutrition(2).saturationMod(0.5f).build();
+
+    public static FoodProperties iceCream = new FoodProperties.Builder().nutrition(2).saturationMod(0.5f).build();
+    public static FoodProperties milkShake = new FoodProperties.Builder().nutrition(2).saturationMod(0.5f).build();
+    public static FoodProperties candy = new FoodProperties.Builder().nutrition(2).saturationMod(0.5f).build();
+
+
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, modId);
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, modId);
-    public static FoodProperties cake = new FoodProperties.Builder().nutrition(2).saturationMod(0.5f).build();
 
     public static final RegistryObject<Item> mug = ITEMS.register("mug", () -> new BlockItem(BlockRegister.mug.get(), new Item.Properties()));
     public static final RegistryObject<Item> glassCup = ITEMS.register("glass_cup", () -> new BlockItem(BlockRegister.glassCup.get(), new Item.Properties()));
@@ -114,17 +124,17 @@ public class ItemRegister {
     public static final RegistryObject<Item> roastedCocoaBeans = ITEMS.register("roasted_cocoa_beans", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> cocoaPowder = ITEMS.register("cocoa_powder", () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> whiteChocolateBar = ITEMS.register("white_chocolate_bar", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationMod(1.5f).build())));
-    public static final RegistryObject<Item> darkChocolateBar = ITEMS.register("dark_chocolate_bar", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationMod(1.5f).build())));
-    public static final RegistryObject<Item> milkChocolateBar = ITEMS.register("milk_chocolate_bar", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationMod(1.5f).build())));
+    public static final RegistryObject<Item> whiteChocolateBar = ITEMS.register("white_chocolate_bar", () -> new Item(new Item.Properties().food(chocolate)));
+    public static final RegistryObject<Item> darkChocolateBar = ITEMS.register("dark_chocolate_bar", () -> new Item(new Item.Properties().food(chocolate)));
+    public static final RegistryObject<Item> milkChocolateBar = ITEMS.register("milk_chocolate_bar", () -> new Item(new Item.Properties().food(chocolate)));
 
 
-    public static final RegistryObject<PlaceableFoodItem> expressoCoffee = ITEMS.register("expresso_coffee", () -> new PlaceableFoodItem(BlockRegister.expressoMug.get(), 3, 1.2f, ItemRegister.mug.get()));
-    public static final RegistryObject<PlaceableFoodItem> americanCoffee = ITEMS.register("american_coffee", () -> new PlaceableFoodItem(BlockRegister.americanMug.get(), 4, 1.2f, ItemRegister.mug.get()));
-    public static final RegistryObject<PlaceableFoodItem> latteCoffee = ITEMS.register("latte_coffee", () -> new PlaceableFoodItem(BlockRegister.latteMug.get(), 5, 1.2f, ItemRegister.mug.get()));
+    public static final RegistryObject<PlaceableFoodItem> expressoCoffee = ITEMS.register("expresso_coffee", () -> new PlaceableFoodItem(BlockRegister.expressoMug.get(), 6, 1.2f, ItemRegister.mug.get()));
+    public static final RegistryObject<PlaceableFoodItem> americanCoffee = ITEMS.register("american_coffee", () -> new PlaceableFoodItem(BlockRegister.americanMug.get(), 6, 1.2f, ItemRegister.mug.get()));
+    public static final RegistryObject<PlaceableFoodItem> latteCoffee = ITEMS.register("latte_coffee", () -> new PlaceableFoodItem(BlockRegister.latteMug.get(), 6, 1.2f, ItemRegister.mug.get()));
     public static final RegistryObject<PlaceableFoodItem> mochaCoffee = ITEMS.register("mocha_coffee", () -> new PlaceableFoodItem(BlockRegister.mochaMug.get(), 6, 1.2f, ItemRegister.mug.get()));
-    public static final RegistryObject<PlaceableFoodItem> macchiatoCoffee = ITEMS.register("macchiato_coffee", () -> new PlaceableFoodItem(BlockRegister.macchiatoMug.get(), 3, 1.2f, ItemRegister.mug.get()));
-    public static final RegistryObject<PlaceableFoodItem> doppioCoffee = ITEMS.register("doppio_coffee", () -> new PlaceableFoodItem(BlockRegister.doppioMug.get(), 5, 1.2f, ItemRegister.mug.get()));
+    public static final RegistryObject<PlaceableFoodItem> macchiatoCoffee = ITEMS.register("macchiato_coffee", () -> new PlaceableFoodItem(BlockRegister.macchiatoMug.get(), 6, 1.2f, ItemRegister.mug.get()));
+    public static final RegistryObject<PlaceableFoodItem> doppioCoffee = ITEMS.register("doppio_coffee", () -> new PlaceableFoodItem(BlockRegister.doppioMug.get(), 6, 1.2f, ItemRegister.mug.get()));
     public static final RegistryObject<PlaceableFoodItem> cappuccinoCoffee = ITEMS.register("cappuccino_coffee", () -> new PlaceableFoodItem(BlockRegister.cappuccinoMug.get(), 6, 1.2f, ItemRegister.mug.get()));
 
     public static final RegistryObject<PlaceableFoodItem> sweetBerryIceCream = ITEMS.register("sweet_berry_ice_cream", () -> new PlaceableFoodItem(BlockRegister.sweetBerryIceCream.get(), 6, 1.2f, ItemRegister.glassCup.get()));
