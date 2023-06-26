@@ -1,18 +1,11 @@
 package com.hakimen.kawaiidishes.registry;
 
 import com.hakimen.kawaiidishes.items.Candy;
+import com.hakimen.kawaiidishes.items.Hat;
 import com.hakimen.kawaiidishes.items.PlaceableFoodItem;
 import com.hakimen.kawaiidishes.items.UnbindingCookie;
 import com.hakimen.kawaiidishes.items.armor.ArmorMaterials;
 import com.hakimen.kawaiidishes.items.armor.GenericGeoArmorItem;
-import com.hakimen.kawaiidishes.items.ears.BunnyEars;
-import com.hakimen.kawaiidishes.items.ears.CatEars;
-import com.hakimen.kawaiidishes.items.ears.FoxEars;
-import com.hakimen.kawaiidishes.items.ears.Horns;
-import com.hakimen.kawaiidishes.items.headbands.BunnyHeadband;
-import com.hakimen.kawaiidishes.items.headbands.CatHeadband;
-import com.hakimen.kawaiidishes.items.headbands.Headband;
-import com.hakimen.kawaiidishes.items.headbands.HornHeadband;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -55,27 +48,27 @@ public class ItemRegister
 
     public static final RegistryObject<Item> iceCreamMachine = ITEMS.register("ice_cream_machine", () -> new BlockItem(BlockRegister.iceCreamMachine.get(), new Item.Properties()));
 
-    public static final RegistryObject<CatEars> blackCatEars = ITEMS.register("black_cat_ears", CatEars::new);
-    public static final RegistryObject<CatEars> caramelCatEars = ITEMS.register("caramel_cat_ears", CatEars::new);
-    public static final RegistryObject<CatEars> whiteCatEars = ITEMS.register("white_cat_ears", CatEars::new);
+    public static final RegistryObject<Hat> blackCatEars = ITEMS.register("black_cat_ears", Hat::new);
+    public static final RegistryObject<Hat> caramelCatEars = ITEMS.register("caramel_cat_ears", Hat::new);
+    public static final RegistryObject<Hat> whiteCatEars = ITEMS.register("white_cat_ears", Hat::new);
 
-    public static final RegistryObject<BunnyEars> blackBunnyEars = ITEMS.register("black_bunny_ears", BunnyEars::new);
-    public static final RegistryObject<BunnyEars> caramelBunnyEars = ITEMS.register("caramel_bunny_ears", BunnyEars::new);
-    public static final RegistryObject<BunnyEars> whiteBunnyEars = ITEMS.register("white_bunny_ears", BunnyEars::new);
+    public static final RegistryObject<Hat> blackBunnyEars = ITEMS.register("black_bunny_ears", Hat::new);
+    public static final RegistryObject<Hat> caramelBunnyEars = ITEMS.register("caramel_bunny_ears", Hat::new);
+    public static final RegistryObject<Hat> whiteBunnyEars = ITEMS.register("white_bunny_ears", Hat::new);
 
-    public static final RegistryObject<FoxEars> blackFoxEars = ITEMS.register("black_fox_ears", FoxEars::new);
-    public static final RegistryObject<FoxEars> redFoxEars = ITEMS.register("red_fox_ears", FoxEars::new);
-    public static final RegistryObject<FoxEars> whiteFoxEars = ITEMS.register("white_fox_ears", FoxEars::new);
+    public static final RegistryObject<Hat> blackFoxEars = ITEMS.register("black_fox_ears", Hat::new);
+    public static final RegistryObject<Hat> redFoxEars = ITEMS.register("red_fox_ears", Hat::new);
+    public static final RegistryObject<Hat> whiteFoxEars = ITEMS.register("white_fox_ears", Hat::new);
 
-    public static final RegistryObject<FoxEars> brownFoxEars = ITEMS.register("brown_fox_ears", FoxEars::new);
+    public static final RegistryObject<Hat> brownFoxEars = ITEMS.register("brown_fox_ears", Hat::new);
 
-    public static final RegistryObject<Horns> lightGrayHorns = ITEMS.register("light_gray_horns", Horns::new);
-    public static final RegistryObject<Horns> grayHorns = ITEMS.register("gray_horns", Horns::new);
-    public static final RegistryObject<Horns> whiteHorns = ITEMS.register("white_horns", Horns::new);
+    public static final RegistryObject<Hat> lightGrayHorns = ITEMS.register("light_gray_horns", () -> new Hat().setMakesPiglinsNeutral(true));
+    public static final RegistryObject<Hat> grayHorns = ITEMS.register("gray_horns", () -> new Hat().setMakesPiglinsNeutral(true));
+    public static final RegistryObject<Hat> whiteHorns = ITEMS.register("white_horns", () -> new Hat().setMakesPiglinsNeutral(true));
 
-    public static final RegistryObject<Horns> redHorns = ITEMS.register("red_horns", Horns::new);
-    public static final RegistryObject<Horns> purpleHorns = ITEMS.register("purple_horns", Horns::new);
-    public static final RegistryObject<Horns> blackHorns = ITEMS.register("black_horns", Horns::new);
+    public static final RegistryObject<Hat> redHorns = ITEMS.register("red_horns", () -> new Hat().setMakesPiglinsNeutral(true));
+    public static final RegistryObject<Hat> purpleHorns = ITEMS.register("purple_horns", () -> new Hat().setMakesPiglinsNeutral(true));
+    public static final RegistryObject<Hat> blackHorns = ITEMS.register("black_horns", () -> new Hat().setMakesPiglinsNeutral(true));
 
     public static final RegistryObject<Item> blackCatTail = ITEMS.register("black_cat_tail",
             () -> new GenericGeoArmorItem(ArmorMaterials.tail, ArmorItem.Type.CHESTPLATE, new Item.Properties(), "black_cat_tail.png", "cat_tail.geo.json", "cat_tail_animation.json", AnimationsRegister.catTail, catArmorTick));
@@ -373,26 +366,26 @@ public class ItemRegister
         return toReturn;
     }
 
-    public static HashMap<String, RegistryObject<Headband>> headbands = new HashMap<>();
+    public static HashMap<String, RegistryObject<Hat>> headbands = new HashMap<>();
 
-    public static RegistryObject<Headband> registerHeadbands(String color) {
-        var toReturn = ITEMS.register(color + "_headband", () -> new Headband(Items.AIR));
-        ITEMS.register(color + "_headband_cat_ears_black", () -> new CatHeadband(toReturn.get()));
-        ITEMS.register(color + "_headband_cat_ears_white", () -> new CatHeadband(toReturn.get()));
-        ITEMS.register(color + "_headband_cat_ears_caramel", () -> new CatHeadband(toReturn.get()));
-        ITEMS.register(color + "_headband_fox_ears_black", () -> new Headband(toReturn.get()));
-        ITEMS.register(color + "_headband_fox_ears_white", () -> new Headband(toReturn.get()));
-        ITEMS.register(color + "_headband_fox_ears_red", () -> new Headband(toReturn.get()));
-        ITEMS.register(color + "_headband_fox_ears_brown", () -> new Headband(toReturn.get()));
-        ITEMS.register(color + "_headband_bunny_ears_black", () -> new BunnyHeadband(toReturn.get()));
-        ITEMS.register(color + "_headband_bunny_ears_white", () -> new BunnyHeadband(toReturn.get()));
-        ITEMS.register(color + "_headband_bunny_ears_caramel", () -> new BunnyHeadband(toReturn.get()));
-        ITEMS.register(color + "_headband_horns_light_gray", () -> new HornHeadband(toReturn.get()));
-        ITEMS.register(color + "_headband_horns_gray", () -> new HornHeadband(toReturn.get()));
-        ITEMS.register(color + "_headband_horns_white", () -> new HornHeadband(toReturn.get()));
-        ITEMS.register(color + "_headband_horns_red", () -> new HornHeadband(toReturn.get()));
-        ITEMS.register(color + "_headband_horns_purple", () -> new HornHeadband(toReturn.get()));
-        ITEMS.register(color + "_headband_horns_black", () -> new HornHeadband(toReturn.get()));
+    public static RegistryObject<Hat> registerHeadbands(String color) {
+        var toReturn = ITEMS.register(color + "_headband", () -> new Hat(Items.AIR));
+        ITEMS.register(color + "_headband_cat_ears_black", () -> new Hat(toReturn.get()));
+        ITEMS.register(color + "_headband_cat_ears_white", () -> new Hat(toReturn.get()));
+        ITEMS.register(color + "_headband_cat_ears_caramel", () -> new Hat(toReturn.get()));
+        ITEMS.register(color + "_headband_fox_ears_black", () -> new Hat(toReturn.get()));
+        ITEMS.register(color + "_headband_fox_ears_white", () -> new Hat(toReturn.get()));
+        ITEMS.register(color + "_headband_fox_ears_red", () -> new Hat(toReturn.get()));
+        ITEMS.register(color + "_headband_fox_ears_brown", () -> new Hat(toReturn.get()));
+        ITEMS.register(color + "_headband_bunny_ears_black", () -> new Hat(toReturn.get()));
+        ITEMS.register(color + "_headband_bunny_ears_white", () -> new Hat(toReturn.get()));
+        ITEMS.register(color + "_headband_bunny_ears_caramel", () -> new Hat(toReturn.get()));
+        ITEMS.register(color + "_headband_horns_light_gray", () -> new Hat(toReturn.get()).setMakesPiglinsNeutral(true));
+        ITEMS.register(color + "_headband_horns_gray", () -> new Hat(toReturn.get()).setMakesPiglinsNeutral(true));
+        ITEMS.register(color + "_headband_horns_white", () -> new Hat(toReturn.get()).setMakesPiglinsNeutral(true));
+        ITEMS.register(color + "_headband_horns_red", () -> new Hat(toReturn.get()).setMakesPiglinsNeutral(true));
+        ITEMS.register(color + "_headband_horns_purple", () -> new Hat(toReturn.get()).setMakesPiglinsNeutral(true));
+        ITEMS.register(color + "_headband_horns_black", () -> new Hat(toReturn.get()).setMakesPiglinsNeutral(true));
 
         return toReturn;
     }
@@ -450,8 +443,6 @@ public class ItemRegister
                     } else if (key.contains("ears") || key.contains("horns")) {
                         entries.accept(x.get());
                     } else if (key.contains("tail")) {
-                        entries.accept(x.get());
-                    } else if (key.contains("headband")) {
                         entries.accept(x.get());
                     } else if (key.contains("thigh")) {
                         entries.accept(x.get());

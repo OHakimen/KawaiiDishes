@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class ClientTailWagData {
 
-    private static HashMap<UUID, Boolean> tailStates = new HashMap<>();
+    private static final HashMap<UUID, Boolean> tailStates = new HashMap<>();
 
     public static void setState(UUID uuid, boolean state){
         tailStates.put(uuid,state);

@@ -9,6 +9,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -22,6 +23,8 @@ import net.minecraft.world.level.Level;
 import java.util.UUID;
 
 public class Hat extends Item implements Equipable {
+
+    public boolean makesPiglinsNeutral = false;
     public Hat() {
         super(new Properties().stacksTo(1));
     }
@@ -34,7 +37,15 @@ public class Hat extends Item implements Equipable {
     public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
         return armorType.equals(EquipmentSlot.HEAD);
     }
+    public Hat setMakesPiglinsNeutral(boolean makesPiglinsNeutral) {
+        this.makesPiglinsNeutral = makesPiglinsNeutral;
+        return this;
+    }
 
+    @Override
+    public boolean makesPiglinsNeutral(ItemStack stack, LivingEntity wearer) {
+        return this.makesPiglinsNeutral;
+    }
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
