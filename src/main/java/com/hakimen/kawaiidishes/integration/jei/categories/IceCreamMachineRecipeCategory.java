@@ -39,7 +39,7 @@ public class IceCreamMachineRecipeCategory implements IRecipeCategory<IceCreamMa
 
     @Override
     public Component getTitle() {
-        return Component.literal("Ice Cream Making");
+        return Component.translatable("jei.kawaiidishes.recipe.ice_cream_making");
     }
 
     @Override

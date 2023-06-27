@@ -40,7 +40,7 @@ public class CoffeeMachineRecipeCategory implements IRecipeCategory<CoffeeMachin
 
     @Override
     public Component getTitle() {
-        return Component.literal("Coffee Machining");
+        return Component.translatable("jei.kawaiidishes.recipe.coffee_machining");
     }
 
     @Override

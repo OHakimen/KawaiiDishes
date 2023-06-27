@@ -42,7 +42,7 @@ public class CoffeePressRecipeCategory implements IRecipeCategory<CoffeePressRec
 
     @Override
     public Component getTitle() {
-        return Component.literal("Coffee Pressing");
+        return Component.translatable("jei.kawaiidishes.recipe.coffee_pressing");
     }
 
     @Override

@@ -38,7 +38,7 @@ public class BlendingRecipeCategory implements IRecipeCategory<BlenderRecipe> {
 
     @Override
     public Component getTitle() {
-        return Component.literal("Blending");
+        return Component.translatable("jei.kawaiidishes.recipe.blending");
     }
 
     @Override
