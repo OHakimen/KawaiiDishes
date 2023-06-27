@@ -2,7 +2,6 @@ package com.hakimen.kawaiidishes.integration.jei.categories;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.integration.jei.JEIIntegration;
-import com.hakimen.kawaiidishes.recipes.CoffeeMachineRecipe;
 import com.hakimen.kawaiidishes.recipes.CoffeePressRecipe;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
@@ -15,11 +14,8 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 
 import javax.annotation.Nonnull;
 
@@ -46,7 +42,7 @@ public class CoffeePressRecipeCategory implements IRecipeCategory<CoffeePressRec
 
     @Override
     public Component getTitle() {
-        return Component.literal("Coffee Pressing");
+        return Component.translatable("jei.kawaiidishes.recipe.coffee_pressing");
     }
 
     @Override

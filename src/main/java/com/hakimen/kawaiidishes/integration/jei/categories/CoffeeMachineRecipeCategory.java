@@ -19,7 +19,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 
 import javax.annotation.Nonnull;
-import java.awt.*;
 
 public class CoffeeMachineRecipeCategory implements IRecipeCategory<CoffeeMachineRecipe> {
     public final static ResourceLocation UID = new ResourceLocation(KawaiiDishes.modId, "coffee_machining");
@@ -41,7 +40,7 @@ public class CoffeeMachineRecipeCategory implements IRecipeCategory<CoffeeMachin
 
     @Override
     public Component getTitle() {
-        return Component.literal("Coffee Machining");
+        return Component.translatable("jei.kawaiidishes.recipe.coffee_machining");
     }
 
     @Override

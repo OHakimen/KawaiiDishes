@@ -207,6 +207,11 @@ public class LangSupplier extends LanguageProvider {
         add("gui.kawaiidishes.ice_cream_machine", "Ice Cream Maker");
         add("gui.kawaiidishes.blender", "Blender");
 
+        add("jei.kawaiidishes.recipe.blending", "Blending");
+        add("jei.kawaiidishes.recipe.coffee_machining", "Coffee Machining");
+        add("jei.kawaiidishes.recipe.ice_cream_making", "Ice Cream Making");
+        add("jei.kawaiidishes.recipe.coffee_pressing", "Coffee Pressing");
+
         add(EffectRegister.kawaiiEffect.get(),"Kawaii");
         add(EffectRegister.nekoEffect.get(),"Neko-chan");
     }

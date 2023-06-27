@@ -626,5 +626,9 @@
   "itemGroup.kawaiidishes.blocks": "Kawaii's Blocks",
   "itemGroup.kawaiidishes.cosmetics": "Kawaii's Cosmetics",
   "itemGroup.kawaiidishes.decoration": "Kawaii's Decorations",
-  "itemGroup.kawaiidishes.foods": "Kawaii's Foods"
+  "itemGroup.kawaiidishes.foods": "Kawaii's Foods",
+  "jei.kawaiidishes.recipe.blending": "Blending",
+  "jei.kawaiidishes.recipe.coffee_machining": "Coffee Machining",
+  "jei.kawaiidishes.recipe.coffee_pressing": "Coffee Pressing",
+  "jei.kawaiidishes.recipe.ice_cream_making": "Ice Cream Making"
 }
