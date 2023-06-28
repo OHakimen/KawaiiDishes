@@ -3,8 +3,12 @@
     "icon": {
       "item": "kawaiidishes:coffee_fruit"
     },
-    "title": "Awesome fruits",
-    "description": "Adquire some coffee fruits"
+    "title": {
+      "translate": "advancement.kawaiidishes.coffee_fruit_got"
+    },
+    "description": {
+      "translate": "advancement.kawaiidishes.coffee_fruit_got.desc"
+    }
   },
   "parent": "kawaiidishes:kawaiidishes/root",
   "criteria": {

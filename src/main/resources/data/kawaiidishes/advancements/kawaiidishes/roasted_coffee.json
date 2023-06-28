@@ -3,8 +3,12 @@
     "icon": {
       "item": "kawaiidishes:roasted_coffee_beans"
     },
-    "title": "Coffee Processing",
-    "description": "Process the coffee fruit into roasted coffee beans",
+    "title": {
+      "translate": "advancement.kawaiidishes.roasted_coffee"
+    },
+    "description": {
+      "translate": "advancement.kawaiidishes.roasted_coffee.desc"
+    },
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,

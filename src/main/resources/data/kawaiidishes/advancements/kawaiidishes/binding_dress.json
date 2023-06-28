@@ -3,8 +3,12 @@
     "icon": {
       "item": "kawaiidishes:black_maid_dress"
     },
-    "title": "Maid'd",
-    "description": "Equip a maid dress with curse of binding",
+    "title": {
+      "translate": "advancement.kawaiidishes.binding_dress"
+    },
+    "description": {
+      "translate": "advancement.kawaiidishes.binding_dress.desc"
+    },
     "frame": "challenge",
     "show_toast": true,
     "announce_to_chat": true,

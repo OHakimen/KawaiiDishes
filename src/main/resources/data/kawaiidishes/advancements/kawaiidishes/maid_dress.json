@@ -3,8 +3,12 @@
     "icon": {
       "item": "kawaiidishes:black_maid_dress"
     },
-    "title": "Cosplaying !",
-    "description": "Obtain a Maid Dress",
+    "title": {
+      "translate": "advancement.kawaiidishes.maid_dress"
+    },
+    "description": {
+      "translate": "advancement.kawaiidishes.maid_dress.desc"
+    },
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,

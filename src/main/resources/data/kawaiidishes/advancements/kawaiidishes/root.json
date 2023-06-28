@@ -3,8 +3,12 @@
     "icon": {
       "item": "kawaiidishes:mug"
     },
-    "title": "Kawaii Dishes",
-    "description": "OuO",
+    "title": {
+      "translate": "advancement.kawaiidishes.root"
+    },
+    "description": {
+      "translate": "advancement.kawaiidishes.root.desc"
+    },
     "background": "kawaiidishes:textures/advancements/bg.png",
     "show_toast": false,
     "announce_to_chat": false,
