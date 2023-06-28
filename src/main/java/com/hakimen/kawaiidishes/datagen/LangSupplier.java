@@ -212,6 +212,10 @@ public class LangSupplier extends LanguageProvider {
 
         add("entity.minecraft.villager.kawaiidishes.barista", "Barista");
 
+        add("item.kawaiidishes.cookie_of_unbinding.active.desc", "The cookie is pulsing with curse removal powers");
+        add("item.kawaiidishes.cookie_of_unbinding.unactive.desc", "The cookie isn't pulsing with curse removal powers");
+        add("item.kawaiidishes.cookie_of_unbinding.unactive.subdesc", "Must be crafted while using a binded armor piece");
+
         add(KeybindRegister.keyCategory, "Kawaii Dishes");
         add(KeybindRegister.keyTailWag, "Tail Wag");
 
