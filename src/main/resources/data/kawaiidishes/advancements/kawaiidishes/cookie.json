@@ -3,8 +3,12 @@
     "icon": {
       "item": "minecraft:cookie"
     },
-    "title": "Take a cookie",
-    "description": "Obtain a cookie",
+    "title": {
+      "translate": "advancement.kawaiidishes.cookie"
+    },
+    "description": {
+      "translate": "advancement.kawaiidishes.cookie.desc"
+    },
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,

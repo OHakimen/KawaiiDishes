@@ -3,8 +3,12 @@
     "icon": {
       "item": "kawaiidishes:cappuccino_coffee"
     },
-    "title": "Nice and Warm",
-    "description": "Coffee !",
+    "title": {
+      "translate": "advancement.kawaiidishes.coffee"
+    },
+    "description": {
+      "translate": "advancement.kawaiidishes.coffee.desc"
+    },
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,

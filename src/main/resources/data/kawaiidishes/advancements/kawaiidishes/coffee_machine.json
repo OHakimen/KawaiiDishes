@@ -3,8 +3,12 @@
     "icon": {
       "item": "kawaiidishes:coffee_machine"
     },
-    "title": "An expresso please !!",
-    "description": "Get a Coffee Machine",
+    "title": {
+      "translate": "advancement.kawaiidishes.coffee_machine"
+    },
+    "description": {
+      "translate": "advancement.kawaiidishes.coffee_machine.desc"
+    },
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,
