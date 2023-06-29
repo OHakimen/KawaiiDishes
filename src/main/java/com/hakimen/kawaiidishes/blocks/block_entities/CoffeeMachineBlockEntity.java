@@ -111,8 +111,6 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements MenuProvide
 
     @Override
     public void tick(Level pLevel, BlockPos pPos, BlockState pState, CoffeeMachineBlockEntity pBlockEntity) {
-
-
         if(hasRecipe(pBlockEntity)){
             Level level = pBlockEntity.level;
             SimpleContainer inventory = new SimpleContainer(pBlockEntity.inventory.getSlots());
@@ -128,7 +126,6 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements MenuProvide
                     recipeTicks = recipe.getTicks();
                     setChanged();
                 }else {
-
                     this.progress++;
                     setChanged();
                     if(progress >= recipeTicks) {

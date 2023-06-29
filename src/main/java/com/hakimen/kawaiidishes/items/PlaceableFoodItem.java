@@ -84,7 +84,7 @@ public class PlaceableFoodItem extends BlockItem {
             var instance = MobEffectInstance.load(pStack.getOrCreateTag().getCompound("mainEffect"));
             var mainEffect = Component.translatable(instance.getDescriptionId());
             mainEffect.append(" ").append(Component.translatable("enchantment.level." + (instance.getAmplifier() + 1)));
-            mainEffect.append(" ("+ MobEffectUtil.formatDuration(instance,1f)+")");
+            mainEffect.append(" (").append(MobEffectUtil.formatDuration(instance,1f)).append(")");
             if(!instance.getEffect().isBeneficial())
                 mainEffect.setStyle(Style.EMPTY.withColor(0xDD4444));
             else
@@ -95,7 +95,7 @@ public class PlaceableFoodItem extends BlockItem {
             var instance = MobEffectInstance.load(pStack.getOrCreateTag().getCompound("secondaryEffect"));
             var mainEffect = Component.translatable(instance.getDescriptionId());
             mainEffect.append(" ").append(Component.translatable("enchantment.level." + (instance.getAmplifier() + 1)));
-            mainEffect.append(" ("+ MobEffectUtil.formatDuration(instance,1f)+")");
+            mainEffect.append(" (").append(MobEffectUtil.formatDuration(instance,1f)).append(")");
             if(!instance.getEffect().isBeneficial())
                 mainEffect.setStyle(Style.EMPTY.withColor(0xDD4444));
             else

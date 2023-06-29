@@ -2,6 +2,8 @@ package com.hakimen.kawaiidishes.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -85,6 +87,7 @@ public class CakeBlock extends Block {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         if (pLevel.isClientSide) {
             if (eat(pLevel, pPos, pState, pPlayer).consumesAction()) {
+                pLevel.playSound(pPlayer, pPos, SoundEvents.GENERIC_EAT, SoundSource.BLOCKS);
                 return InteractionResult.SUCCESS;
             }
 
@@ -110,7 +113,6 @@ public class CakeBlock extends Block {
                 pLevel.removeBlock(pPos, false);
                 pLevel.gameEvent(pPlayer, GameEvent.BLOCK_DESTROY, pPos);
             }
-
             return InteractionResult.SUCCESS;
         }
     }
