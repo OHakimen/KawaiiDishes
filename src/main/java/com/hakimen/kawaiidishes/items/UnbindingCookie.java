@@ -25,14 +25,11 @@ public class UnbindingCookie extends Item {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         if(pStack.getOrCreateTag().getBoolean("activated")){
-            pTooltipComponents.add(Component.literal("The Cookie is pulsing with curse removal powers..."));
+            pTooltipComponents.add(Component.translatable("item.kawaiidishes.cookie_of_unbinding.active.desc"));
 
         }else {
-            pTooltipComponents.add(Component.literal("The Cookie isn't pulsing with curse removal powers..."));
-            pTooltipComponents.add(Component.literal("Try crafting while wearing ").setStyle(
-                    Style.EMPTY.withColor(0x888888)
-            ))
-            ;pTooltipComponents.add(Component.literal("a binded armor piece").setStyle(
+            pTooltipComponents.add(Component.translatable("item.kawaiidishes.cookie_of_unbinding.unactive.desc"));
+            pTooltipComponents.add(Component.translatable("item.kawaiidishes.cookie_of_unbinding.unactive.subdesc").setStyle(
                     Style.EMPTY.withColor(0x888888)
             ));
         }

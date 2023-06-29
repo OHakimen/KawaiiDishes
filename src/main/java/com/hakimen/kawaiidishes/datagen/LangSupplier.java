@@ -191,7 +191,6 @@ public class LangSupplier extends LanguageProvider {
         add(ItemRegister.caramelBunnyEars.get(),"Caramel Bunny Ears");
         add(ItemRegister.blackBunnyEars.get(),"Black Bunny Ears");
 
-
         add("entity.minecraft.villager.kawaiidishes.barista", "Barista");
 
         add(ItemRegister.blackThighHighsShoes.get(),"Dark Brown Shoes");
@@ -211,6 +210,10 @@ public class LangSupplier extends LanguageProvider {
         add("jei.kawaiidishes.recipe.coffee_machining", "Coffee Machining");
         add("jei.kawaiidishes.recipe.ice_cream_making", "Ice Cream Making");
         add("jei.kawaiidishes.recipe.coffee_pressing", "Coffee Pressing");
+
+        add("item.kawaiidishes.cookie_of_unbinding.active.desc", "The cookie is pulsing with curse removal powers");
+        add("item.kawaiidishes.cookie_of_unbinding.unactive.desc", "The cookie isn't pulsing with curse removal powers");
+        add("item.kawaiidishes.cookie_of_unbinding.unactive.subdesc", "Must be crafted while using a binded armor piece");
 
         add(EffectRegister.kawaiiEffect.get(),"Kawaii");
         add(EffectRegister.nekoEffect.get(),"Neko-chan");

@@ -3,8 +3,12 @@
     "icon": {
       "item": "kawaiidishes:white_cat_ears"
     },
-    "title": "Cat Ears !",
-    "description": "Why wouldn't you use these !"
+    "title": {
+      "translate": "advancement.kawaiidishes.cat_ears"
+    },
+    "description": {
+      "translate": "advancement.kawaiidishes.cat_ears.desc"
+    }
   },
   "parent": "kawaiidishes:kawaiidishes/root",
   "criteria": {
