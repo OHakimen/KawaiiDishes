@@ -13,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,7 +23,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class MugWithCoffeeBlock extends MugBlock implements EntityBlock {
     public MugWithCoffeeBlock(){
-        super(BlockBehaviour.Properties.copy(Blocks.STONE).strength(1,1));
+        super(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL)
+                .sound(SoundType.STONE)
+                .strength(1,1));
     }
 
 

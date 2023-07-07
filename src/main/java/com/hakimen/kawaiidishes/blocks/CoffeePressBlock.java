@@ -31,7 +31,7 @@ public class CoffeePressBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty PRESSED = BooleanProperty.create("pressed");
     public CoffeePressBlock() {
-        super(Properties.copy(Blocks.STONE).strength(2f,2f)
+        super(Properties.copy(Blocks.WHITE_WOOL).strength(2f,2f)
                 .sound(SoundType.GLASS));
         registerDefaultState( getStateDefinition().any()
                 .setValue(FACING, Direction.NORTH )
