@@ -8,7 +8,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
@@ -45,22 +44,29 @@ public class BlenderRecipe implements Recipe<SimpleContainer> {
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
         boolean match = true;
-        for (int i = 0; i < recipeItems.get(0).getItems().length; i++) {
 
-            match &= recipeItems.get(0).getItems()[i].getItem().equals(pContainer.getItem(i).getItem());
-        }
-        if(recipeItems.get(0).getItems().length == 1 && !pContainer.getItem(1).getItem().equals(Items.AIR)){
-            match = false;
-        }
         if(!pContainer.getItem(pContainer.getContainerSize()-1).getItem().equals(getResultItem().getItem())
                 && !pContainer.getItem(pContainer.getContainerSize()-1).is(ItemStack.EMPTY.getItem())) {
             match = false;
         }
         if(!onOutput.equals(ItemStack.EMPTY)) {
-            if(onOutput.sameItem(pContainer.getItem(pContainer.getContainerSize()-1))){
+            if(onOutput.getItem() == pContainer.getItem(pContainer.getContainerSize()-1).getItem()){
                 match = true;
             }else
                 return false;
+        }
+
+        boolean submatches[] = new boolean[] {false,false};
+
+        if(recipeItems.get(0).getItems().length == 2) {
+            submatches[0] = recipeItems.get(0).getItems()[0].getItem().equals(pContainer.getItem(0).getItem());
+            submatches[1] = recipeItems.get(0).getItems()[1].getItem().equals(pContainer.getItem(1).getItem());
+        }else if(recipeItems.get(0).getItems().length == 1) {
+            submatches[0] = recipeItems.get(0).getItems()[0].getItem().equals(pContainer.getItem(0).getItem());
+            submatches[1] = pContainer.getItem(1).getItem().equals(Items.AIR);
+        }
+        for (int i = 0; i < submatches.length; i++) {
+            match &= submatches[i];
         }
         return match;
     }
