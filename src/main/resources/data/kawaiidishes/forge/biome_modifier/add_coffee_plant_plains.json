@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#forge:is_plains",
-  "features": "kawaiidishes:coffee_plant",
-  "step": "vegetal_decoration"
-}

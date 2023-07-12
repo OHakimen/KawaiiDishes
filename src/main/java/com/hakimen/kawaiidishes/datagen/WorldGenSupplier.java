@@ -1,25 +1,23 @@
 package com.hakimen.kawaiidishes.datagen;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
-import com.hakimen.kawaiidishes.world.ConfiguratedFeatures;
-import com.hakimen.kawaiidishes.world.PlacedFeatures;
+import com.hakimen.kawaiidishes.registry.ConfiguratedFeaturesRegister;
+import com.hakimen.kawaiidishes.registry.PlacedFeaturesRegister;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 
-import java.util.Set;
+import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 
 public class WorldGenSupplier extends DatapackBuiltinEntriesProvider {
-    public static final RegistrySetBuilder lookupProvider = new RegistrySetBuilder()
-            .add(Registries.CONFIGURED_FEATURE, ConfiguratedFeatures::bootstrap)
-            .add(Registries.PLACED_FEATURE, PlacedFeatures::bootstrap);
 
-
-
+    public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
+            .add(Registries.CONFIGURED_FEATURE, ConfiguratedFeaturesRegister::bootstrap)
+            .add(Registries.PLACED_FEATURE, PlacedFeaturesRegister::bootstrap);
     public WorldGenSupplier(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries,lookupProvider, Set.of(KawaiiDishes.modId));
+        super(output, registries, BUILDER, Collections.singleton(KawaiiDishes.modId));
     }
 }

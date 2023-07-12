@@ -24,7 +24,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 group = 'com.hakimen'
-version = '1.9.1'
+version = '1.9.3'
 
 java {
     archivesBaseName = 'KawaiiDishes'
@@ -131,7 +131,7 @@ minecraft {
 }
 
 mixin {
-    add sourceSets.main, "KawaiiDishes.refmap.json"
+    add sourceSets.main, "kawaiidishes.refmap.json"
 
     config "KawaiiDishes.mixins.json"
 }
@@ -186,6 +186,8 @@ dependencies {
     //GeckoLib
     implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.20.1:${geckolib_version_forge}")
 
+    implementation fg.deobf("curse.maven:biomes-o-plenty-220318:4617259")
+    implementation fg.deobf("curse.maven:terrablender-563928:4629880")
     //Jei
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
