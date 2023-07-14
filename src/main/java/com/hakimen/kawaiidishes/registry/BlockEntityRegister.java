@@ -50,28 +50,6 @@ public class BlockEntityRegister {
 
 
 
-
-    public static final RegistryObject<BlockEntityType<StoolBlockEntity>> stool = BLOCK_ENTITIES.register("stool_entity",
-            ()->BlockEntityType.Builder.of(StoolBlockEntity::new,
-                    BlockRegister.blackStool.get(),
-                    BlockRegister.blueStool.get(),
-                    BlockRegister.brownStool.get(),
-                    BlockRegister.cyanStool.get(),
-                    BlockRegister.grayStool.get(),
-                    BlockRegister.greenStool.get(),
-                    BlockRegister.lightBlueStool.get(),
-                    BlockRegister.lightGrayStool.get(),
-                    BlockRegister.limeStool.get(),
-                    BlockRegister.magentaStool.get(),
-                    BlockRegister.orangeStool.get(),
-                    BlockRegister.pinkStool.get(),
-                    BlockRegister.purpleStool.get(),
-                    BlockRegister.redStool.get(),
-                    BlockRegister.whiteStool.get(),
-                    BlockRegister.yellowStool.get()).build(null));
-
-
-
     public static void register(IEventBus bus){
         BLOCK_ENTITIES.register(bus);
     }
