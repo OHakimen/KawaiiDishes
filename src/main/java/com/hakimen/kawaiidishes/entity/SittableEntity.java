@@ -1,17 +1,22 @@
 package com.hakimen.kawaiidishes.entity;
 
 import com.hakimen.kawaiidishes.registry.EntityRegister;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
+
+import java.util.List;
 
 public class SittableEntity extends Entity {
 
@@ -21,20 +26,28 @@ public class SittableEntity extends Entity {
         super(entityTypeIn, worldIn);
     }
 
-    public SittableEntity(Level worldIn) {
+    public SittableEntity(Level worldIn, BlockPos position) {
         super(EntityRegister.SEAT.get(), worldIn);
+        this.setPos(position.getX() + 0.5D, position.getY()+0.125f, position.getZ() + 0.5D);
+    }
+
+    public static InteractionResult sitDown(Player player, Level level, BlockPos position) {
+        List<SittableEntity> seats = level.getEntitiesOfClass(SittableEntity.class,
+                new AABB(position.getX(), position.getY(), position.getZ(),
+                        position.getX() + 1.0, position.getY() + 1.0, position.getZ() + 1.0)
+        );
+        if(seats.isEmpty())
+        {
+            SittableEntity seat = new SittableEntity(level, position);
+            level.addFreshEntity(seat);
+            player.startRiding(seat, false);
+        }
+        return InteractionResult.SUCCESS;
     }
 
     @Override
     public boolean canCollideWith(Entity entity) {
         return false;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof SittableEntity))
-            return false;
-        return super.equals(object);
     }
 
     @Override
@@ -86,10 +99,12 @@ public class SittableEntity extends Entity {
     @Override
     public void tick() {
         super.tick();
-        if (this.seat == null) {
-            this.seat = getCommandSenderWorld().getBlockState(blockPosition());
-            if (this.seat.isAir()) {
-                kill();
+        if(!this.level().isClientSide)
+        {
+            if(this.getPassengers().isEmpty() || this.level().isEmptyBlock(this.blockPosition()))
+            {
+                this.remove(RemovalReason.DISCARDED);
+                this.level().updateNeighbourForOutputSignal(blockPosition(), this.level().getBlockState(blockPosition()).getBlock());
             }
         }
     }

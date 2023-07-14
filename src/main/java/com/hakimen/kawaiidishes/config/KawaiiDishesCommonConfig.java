@@ -18,6 +18,7 @@ public class KawaiiDishesCommonConfig {
     public static final ForgeConfigSpec.BooleanValue villagerTrades;
     public static final ForgeConfigSpec.DoubleValue chanceToDropArmorSet;
 
+    public static final ForgeConfigSpec.IntValue villageStructWeight;
     public static final ForgeConfigSpec.ConfigValue<List<String>> messages;
     static {
         commonConfigBuilder.push("Common Configs for Kawaii Dishes");
@@ -49,6 +50,9 @@ public class KawaiiDishesCommonConfig {
                 .define("villagerTrades", true);
         wanderingTraderTrades = commonConfigBuilder.comment("Should the add item trades for wandering traders")
                 .define("wanderingTraderTrades", true);
+
+        villageStructWeight = commonConfigBuilder.comment("Structure generation weights for the village houses")
+                .defineInRange("villageStructWeight", 125,0,450);
 
         commonConfigBuilder.pop();
         commonSpec = commonConfigBuilder.build();
