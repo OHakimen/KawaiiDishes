@@ -67,7 +67,7 @@ public class SittableEntity extends Entity {
 
     @Override
     public int hashCode() {
-        return super.hashCode() + this.seat.hashCode();
+        return super.hashCode();
     }
 
     @Override
