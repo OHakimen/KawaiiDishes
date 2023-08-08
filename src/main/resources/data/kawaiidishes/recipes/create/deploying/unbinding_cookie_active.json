@@ -1,0 +1,17 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:cookie_of_unbinding"
+    },
+    {
+      "item": "minecraft:ghast_tear"
+    }
+  ],
+  "results": [
+    {
+      "item": "kawaiidishes:cookie_of_unbinding",
+      "nbt": "{activated:1b}"
+    }
+  ]
+}

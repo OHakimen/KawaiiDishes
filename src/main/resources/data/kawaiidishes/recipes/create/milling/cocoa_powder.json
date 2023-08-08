@@ -1,0 +1,19 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:roasted_cocoa_beans"
+    }
+  ],
+  "results": [
+    {
+      "item": "kawaiidishes:cocoa_powder",
+      "count": 2
+    },
+    {
+      "item": "kawaiidishes:cocoa_powder",
+      "chance": 0.25
+    }
+  ],
+  "processingTime": 100
+}

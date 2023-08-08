@@ -1,0 +1,18 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:white_chocolate_bar"
+    },
+    {
+      "item": "kawaiidishes:cocoa_powder"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create:chocolate",
+      "amount": 250
+    }
+  ],
+  "heatRequirement": "heated"
+}

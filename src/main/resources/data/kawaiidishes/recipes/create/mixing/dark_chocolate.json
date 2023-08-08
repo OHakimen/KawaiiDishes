@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:dark_chocolate_bar"
+    },
+    {
+      "fluidTag": "forge:milk",
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create:chocolate",
+      "amount": 500
+    }
+  ],
+  "heatRequirement": "heated"
+}
