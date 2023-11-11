@@ -2,7 +2,6 @@ package com.hakimen.kawaiidishes.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class KawaiiDishesCommonConfig {
@@ -19,7 +18,7 @@ public class KawaiiDishesCommonConfig {
     public static final ForgeConfigSpec.DoubleValue chanceToDropArmorSet;
 
     public static final ForgeConfigSpec.IntValue villageStructWeight;
-    public static final ForgeConfigSpec.ConfigValue<List<String>> messages;
+    public static final ForgeConfigSpec.ConfigValue<List<? extends String>> messages;
     static {
         commonConfigBuilder.push("Common Configs for Kawaii Dishes");
 
@@ -30,12 +29,14 @@ public class KawaiiDishesCommonConfig {
                 .defineInRange("chanceToMessage",  0.00025,0,1);
 
         messages = commonConfigBuilder.comment("Sets the messages that are sent to the player")
-                .define("messages", Arrays.asList("You look so kawaii !!",
+                .defineList("messages", List.of("You look so kawaii !!",
                         "OuO",
                         "Cute <3",
                         "You look nice today",
                         "Hi Cutie !",
-                        "Hey sweetie!"));
+                        "Hey sweetie!"), value -> !((String)value).isBlank());
+
+
 
         shouldMobSpawnWithDress = commonConfigBuilder.comment("Should the mobs spawn with the maid dresses")
                         .define("shouldSpawn", true);

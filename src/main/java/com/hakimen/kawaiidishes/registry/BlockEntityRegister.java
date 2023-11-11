@@ -29,7 +29,6 @@ public class BlockEntityRegister {
             ()->BlockEntityType.Builder.of(
                     PlaceableFoodBlockEntity::new,
                     BlockRegister.mochaMug.get(),
-                    BlockRegister.cafeAuLaitMug.get(),
                     BlockRegister.doppioMug.get(),
                     BlockRegister.americanMug.get(),
                     BlockRegister.cappuccinoMug.get(),

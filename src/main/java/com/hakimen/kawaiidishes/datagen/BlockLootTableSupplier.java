@@ -31,7 +31,6 @@ public class BlockLootTableSupplier extends BlockLootSubProvider {
         this.dropOther(BlockRegister.latteMug.get(), Items.AIR);
         this.dropOther(BlockRegister.cappuccinoMug.get(), Items.AIR);
         this.dropOther(BlockRegister.doppioMug.get(), Items.AIR);
-        this.dropOther(BlockRegister.cafeAuLaitMug.get(), Items.AIR);
         this.dropOther(BlockRegister.coffeePlant.get(), Items.AIR);
 
         this.dropOther(BlockRegister.chocolateCheeseCake.get(), Items.AIR);

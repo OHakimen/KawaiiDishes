@@ -94,6 +94,15 @@ public class KawaiiDishes {
 
         ComposterBlock.COMPOSTABLES.put(ItemRegister.driedCocoaBeans.get(),0.50f);
         ComposterBlock.COMPOSTABLES.put(ItemRegister.roastedCocoaBeans.get(),0.75f);
+
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.cakePiece.get(),0.65f);
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.honeyCheeseCakePiece.get(),0.65f);
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.chocolateCheeseCakePiece.get(),0.65f);
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.cheeseCakePiece.get(),0.65f);
+
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.honeyCheeseCake.get(),1f);
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.chocolateCheeseCake.get(),1f);
+        ComposterBlock.COMPOSTABLES.put(ItemRegister.cheeseCake.get(),1f);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {

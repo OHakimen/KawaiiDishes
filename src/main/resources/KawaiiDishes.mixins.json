@@ -1,18 +1,18 @@
 {
-    "required": true,
-    "minVersion": "0.8",
-    "package": "com.hakimen.kawaiidishes.mixin",
-    "compatibilityLevel": "JAVA_8",
-    "refmap": "kawaiidishes.refmap.json",
-    "mixins": [
-    ],
-    "injectors": {
-        "defaultRequire": 1
-    },
-    "client": [
-        "clientside.AllayRendererMixin",
-        "clientside.FoxRendererMixin",
-        "clientside.GlowSquidRendererMixin",
-        "clientside.SquidRendererMixin"
-    ]
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.hakimen.kawaiidishes.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "kawaiidishes.refmap.json",
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "clientside.AllayRendererMixin",
+    "clientside.FoxRendererMixin",
+    "clientside.GlowSquidRendererMixin",
+    "clientside.SquidRendererMixin"
+  ]
 }

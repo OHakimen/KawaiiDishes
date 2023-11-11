@@ -16,13 +16,10 @@ public class BlockRegister {
     public static final RegistryObject<GlassCupBlock> glassCup = BLOCKS.register("glass_cup",GlassCupBlock::new);
     public static final RegistryObject<MilkshakeCupBlock> milkshakeCup = BLOCKS.register("milkshake_cup",MilkshakeCupBlock::new);
 
-
-
     public static final RegistryObject<MugWithCoffeeBlock> expressoMug = BLOCKS.register("expresso_coffee", MugWithCoffeeBlock::new);
     public static final RegistryObject<MugWithCoffeeBlock> americanMug = BLOCKS.register("american_coffee", MugWithCoffeeBlock::new);
     public static final RegistryObject<MugWithCoffeeBlock> latteMug = BLOCKS.register("latte_coffee", MugWithCoffeeBlock::new);
     public static final RegistryObject<MugWithCoffeeBlock> mochaMug = BLOCKS.register("mocha_coffee", MugWithCoffeeBlock::new);
-    public static final RegistryObject<MugWithCoffeeBlock> cafeAuLaitMug = BLOCKS.register("cafe_au_lait_coffee", MugWithCoffeeBlock::new);
     public static final RegistryObject<MugWithCoffeeBlock> cappuccinoMug = BLOCKS.register("cappuccino_coffee", MugWithCoffeeBlock::new);
     public static final RegistryObject<MugWithCoffeeBlock> doppioMug = BLOCKS.register("doppio_coffee", MugWithCoffeeBlock::new);
     public static final RegistryObject<MugWithCoffeeBlock> macchiatoMug = BLOCKS.register("macchiato_coffee", MugWithCoffeeBlock::new);

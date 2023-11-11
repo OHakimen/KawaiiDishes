@@ -1,6 +1,5 @@
 package com.hakimen.kawaiidishes.registry;
 
-import com.hakimen.kawaiidishes.items.Candy;
 import com.hakimen.kawaiidishes.items.Hat;
 import com.hakimen.kawaiidishes.items.PlaceableFoodItem;
 import com.hakimen.kawaiidishes.items.UnbindingCookie;
@@ -23,8 +22,7 @@ import java.util.HashMap;
 import static com.hakimen.kawaiidishes.KawaiiDishes.modId;
 import static com.hakimen.kawaiidishes.registry.ArmorTickRegister.*;
 
-public class ItemRegister
-{
+public class ItemRegister {
 
     //Food properties
     public static FoodProperties cake = new FoodProperties.Builder().nutrition(2).saturationMod(0.5f).build();
@@ -161,9 +159,8 @@ public class ItemRegister
     public static final RegistryObject<Item> chocolateCheeseCake = ITEMS.register("chocolate_cheese_cake", () -> new BlockItem(BlockRegister.chocolateCheeseCake.get(), new Item.Properties()));
     public static final RegistryObject<Item> honeyCheeseCake = ITEMS.register("honey_cheese_cake", () -> new BlockItem(BlockRegister.honeyCheeseCake.get(), new Item.Properties()));
 
-    public static final RegistryObject<Candy> beijinho = ITEMS.register("beijinho", () -> new Candy(BlockRegister.beijinho.get(), 3, 1.2f));
-    public static final RegistryObject<Candy> brigadeiro = ITEMS.register("brigadeiro", () -> new Candy(BlockRegister.brigadeiro.get(), 3, 1.2f));
-
+    public static final RegistryObject<PlaceableFoodItem> beijinho = ITEMS.register("beijinho", () -> new PlaceableFoodItem(BlockRegister.beijinho.get(), 3, 1.2f, Items.AIR));
+    public static final RegistryObject<PlaceableFoodItem> brigadeiro = ITEMS.register("brigadeiro", () -> new PlaceableFoodItem(BlockRegister.brigadeiro.get(), 3, 1.2f, Items.AIR));
 
     public static final RegistryObject<Item> sweetBerryCookie = ITEMS.register("sweet_berry_cookie", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().saturationMod(1).nutrition(3).build())));
     public static final RegistryObject<Item> honeyCookie = ITEMS.register("honey_cookie", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().saturationMod(1).nutrition(3).build())));
@@ -421,14 +418,14 @@ public class ItemRegister
         nameMap.add("yellow");
         nameMap.add("purple");
 
-        for (int i = 0; i < nameMap.size(); i++) {
-            thighHighs.put(nameMap.get(i), registerThighHighs(nameMap.get(i)));
+        for (String color : nameMap) {
+            thighHighs.put(color, registerThighHighs(color));
         }
-        for (int i = 0; i < nameMap.size(); i++) {
-            dresses.put(nameMap.get(i), registerDresses(nameMap.get(i)));
+        for (String color : nameMap) {
+            dresses.put(color, registerDresses(color));
         }
-        for (int i = 0; i < nameMap.size(); i++) {
-            headbands.put(nameMap.get(i), registerHeadbands(nameMap.get(i)));
+        for (String color : nameMap) {
+            headbands.put(color, registerHeadbands(color));
         }
     }
 
@@ -472,14 +469,14 @@ public class ItemRegister
                 });
             })
             .build());
-    
+
     public static final RegistryObject<CreativeModeTab> DECORATION_TAB = TABS.register("decoration", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.kawaiidishes.decoration"))
             .icon(() -> new ItemStack(whiteStool.get()))
             .displayItems((enabledFeatures, entries) -> {
                 ITEMS.getEntries().forEach(x -> {
                     String item = x.get().toString();
-                    if(item.contains("stool")){
+                    if (item.contains("stool")) {
                         entries.accept(x.get());
                     }
                 });
@@ -503,14 +500,15 @@ public class ItemRegister
                 entries.accept(ItemRegister.roastedCocoaBeans.get());
                 ItemRegister.ITEMS.getEntries().forEach(x -> {
                     String item = x.get().toString();
-                    if(x.get().isEdible()){
+                    if (x.get().isEdible()) {
                         entries.accept(x.get());
-                    }else if(item.contains("cake")){
+                    } else if (item.contains("cake")) {
                         entries.accept(x.get());
                     }
                 });
             })
             .build());
+
     public static void register(IEventBus bus) {
         preGen();
         TABS.register(bus);
