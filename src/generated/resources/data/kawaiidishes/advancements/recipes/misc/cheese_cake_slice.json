@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cheese_cake": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kawaiidishes:cheese_cake"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "kawaiidishes:cheese_cake_slice"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cheese_cake"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "kawaiidishes:cheese_cake_slice"
+    ]
+  }
+}

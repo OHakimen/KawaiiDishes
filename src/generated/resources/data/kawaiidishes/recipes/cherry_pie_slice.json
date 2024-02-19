@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:cherry_pie"
+    }
+  ],
+  "result": {
+    "count": 8,
+    "item": "kawaiidishes:cherry_pie_slice"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "kawaiidishes:blending",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:steamed_milk_bucket"
+    }
+  ],
+  "itemOnOutput": {
+    "item": "minecraft:bucket"
+  },
+  "output": {
+    "item": "kawaiidishes:milk_foam_bucket"
+  },
+  "ticks": 100
+}

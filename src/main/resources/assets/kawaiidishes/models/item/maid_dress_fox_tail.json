@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kawaiidishes:item/maid_dresses_with_tail/fox/dress_and_tail_no_overlay"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "kawaiidishes:state": 0
+      },
+      "model": "kawaiidishes:item/maid_dresses_with_tail/fox/dress_and_tail_no_overlay"
+    },
+    {
+      "predicate": {
+        "kawaiidishes:state":1
+      },
+      "model": "kawaiidishes:item/maid_dresses_with_tail/fox/dress_overlayed"
+    },
+    {
+      "predicate": {
+        "kawaiidishes:state": 2
+      },
+      "model": "kawaiidishes:item/maid_dresses_with_tail/fox/tail_overlayed"
+    },
+    {
+      "predicate": {
+        "kawaiidishes:state": 3
+      },
+      "model": "kawaiidishes:item/maid_dresses_with_tail/fox/both_overlayed"
+    }
+  ]
+}

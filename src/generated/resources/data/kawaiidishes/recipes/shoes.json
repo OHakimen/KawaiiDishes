@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "l": {
+      "item": "minecraft:leather"
+    },
+    "x": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "x x",
+    "l l"
+  ],
+  "result": {
+    "item": "kawaiidishes:shoes"
+  }
+}

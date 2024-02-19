@@ -1,0 +1,24 @@
+{
+  "type": "kawaiidishes:ice_cream_making",
+  "ingredients": [
+    [
+      {
+        "item": "kawaiidishes:chocolate_ice_cream"
+      },
+      {
+        "item": "kawaiidishes:sweet_berry_ice_cream"
+      },
+      {
+        "item": "kawaiidishes:cream_ice_cream"
+      }
+    ]
+  ],
+  "itemOnOutput": {
+    "item": "minecraft:bowl"
+  },
+  "output": {
+    "item": "kawaiidishes:neapolitan_ice_cream"
+  },
+  "snowballs": 0,
+  "ticks": 200
+}

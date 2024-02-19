@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "x": {
+      "item": "minecraft:white_concrete"
+    },
+    "y": {
+      "item": "minecraft:black_concrete"
+    }
+  },
+  "pattern": [
+    "xy",
+    "yx"
+  ],
+  "result": {
+    "count": 4,
+    "item": "kawaiidishes:kitchen_tiles"
+  }
+}

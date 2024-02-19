@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "-": {
+      "tag": "forge:ingots/iron"
+    },
+    "u": {
+      "item": "minecraft:bucket"
+    },
+    "x": {
+      "tag": "forge:nuggets/iron"
+    }
+  },
+  "pattern": [
+    "xxx",
+    "xux",
+    "---"
+  ],
+  "result": {
+    "item": "kawaiidishes:coffee_machine"
+  }
+}

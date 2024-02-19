@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kawaiidishes:item/thigh_highs",
+    "layer1": "kawaiidishes:item/thigh_highs/bow",
+    "layer2": "kawaiidishes:item/thigh_highs/bow_clip"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    ",": {
+      "tag": "forge:nuggets/iron"
+    },
+    "x": {
+      "tag": "forge:string"
+    }
+  },
+  "pattern": [
+    "x,x",
+    " x ",
+    "xxx"
+  ],
+  "result": {
+    "item": "kawaiidishes:leg_clip"
+  }
+}

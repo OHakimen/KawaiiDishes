@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "minecraft:milk_bucket"
+    },
+    {
+      "item": "kawaiidishes:cocoa_powder"
+    }
+  ],
+  "result": {
+    "count": 8,
+    "item": "kawaiidishes:chocolate_waffle"
+  }
+}

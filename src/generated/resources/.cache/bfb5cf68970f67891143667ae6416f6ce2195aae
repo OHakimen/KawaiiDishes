@@ -1,0 +1,4 @@
+// 1.20.4	2024-02-19T12:10:56.5073864	vanilla/Tags for minecraft:block mod id kawaiidishes
+29ece608a4e0f4c5ad2d835dd318855e7822aa0b data/minecraft/tags/blocks/mineable/axe.json
+5c9e7f9528dcbba80ccda85d8b3d69816543293d data/minecraft/tags/blocks/mineable/pickaxe.json
+694d0c4935057ec9cc82d497c5e14e993a6bbdd6 data/minecraft/tags/blocks/needs_stone_tool.json

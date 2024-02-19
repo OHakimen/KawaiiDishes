@@ -1,0 +1,21 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"idle": {
+			"loop": true
+		},
+		"wag": {
+			"loop": true,
+			"animation_length": 1,
+			"bones": {
+				"tail_base": {
+					"rotation": {
+						"0.0": [-5, 10, 0],
+						"0.5": [-5, 0, 0],
+						"1.0": [-5, 10, 0]
+					}
+				}
+			}
+		}
+	}
+}

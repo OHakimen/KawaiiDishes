@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kawaiidishes:item/head_bands_with_ears/fox/no_overlays"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "kawaiidishes:state": 0
+      },
+      "model": "kawaiidishes:item/head_bands_with_ears/fox/no_overlays"
+    },
+    {
+      "predicate": {
+        "kawaiidishes:state":1
+      },
+      "model": "kawaiidishes:item/head_bands_with_ears/fox/head_band_overlayed"
+    },
+    {
+      "predicate": {
+        "kawaiidishes:state": 2
+      },
+      "model": "kawaiidishes:item/head_bands_with_ears/fox/ears_overlayed"
+    },
+    {
+      "predicate": {
+        "kawaiidishes:state": 3
+      },
+      "model": "kawaiidishes:item/head_bands_with_ears/fox/both_overlayed"
+    }
+  ]
+}

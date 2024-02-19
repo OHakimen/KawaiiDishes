@@ -1,0 +1,34 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"tail_idle": {
+			"loop": true
+		},
+		"tail_wag": {
+			"loop": true,
+			"animation_length": 1,
+			"bones": {
+				"tail_base": {
+					"rotation": {
+						"0.0": [-5, 10, 0],
+						"0.5": [-5, 0, 0],
+						"1.0": [-5, 10, 0]
+					}
+				}
+			}
+		},
+		"dress_idle": {
+			"loop": true
+		},
+		"dress_on_shift": {
+			"loop": true,
+			"bones": {
+				"bone": {
+					"rotation": [-25, 0, 0],
+					"position": [0, 0.45, -0.3],
+					"scale": [1, 1, 1.2]
+				}
+			}
+		}
+	}
+}

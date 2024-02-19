@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kawaiidishes:item/thigh_highs"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "kawaiidishes:decoration": 0
+      },
+      "model": "kawaiidishes:item/thigh_highs/no_decoration"
+    },
+    {
+      "predicate": {
+        "kawaiidishes:decoration": 1
+      },
+      "model": "kawaiidishes:item/thigh_highs/double_band"
+    },
+    {
+      "predicate": {
+        "kawaiidishes:decoration": 2
+      },
+      "model": "kawaiidishes:item/thigh_highs/full_band"
+    },
+    {
+      "predicate": {
+        "kawaiidishes:decoration": 3
+      },
+      "model": "kawaiidishes:item/thigh_highs/leg_clip"
+    },
+    {
+      "predicate": {
+        "kawaiidishes:decoration": 4
+      },
+      "model": "kawaiidishes:item/thigh_highs/bow"
+    }
+  ]
+}

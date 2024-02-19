@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kawaiidishes:item/tail/fox_tail",
+    "layer1": "kawaiidishes:item/tail/fox_tail_overlay",
+    "layer2": "kawaiidishes:item/maid_dress_base",
+    "layer3": "kawaiidishes:item/maid_dress_overlay"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kawaiidishes:item/head_bands_with_ears/ears/fox_ears",
+    "layer1": "kawaiidishes:item/head_bands_with_ears/ears_skin/fox_ears",
+    "layer2": "kawaiidishes:item/head_band",
+    "layer3": "kawaiidishes:item/head_band_overlay"
+  }
+}

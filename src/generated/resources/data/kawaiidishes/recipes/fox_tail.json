@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "@": {
+      "tag": "forge:string"
+    },
+    "x": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    " xx",
+    " @x",
+    "@  "
+  ],
+  "result": {
+    "item": "kawaiidishes:fox_tail"
+  }
+}

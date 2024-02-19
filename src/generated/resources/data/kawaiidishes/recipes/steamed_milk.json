@@ -1,0 +1,16 @@
+{
+  "type": "kawaiidishes:coffee_machining",
+  "ingredients": [
+    {
+      "item": "minecraft:milk_bucket"
+    }
+  ],
+  "itemOnOutput": {
+    "item": "minecraft:bucket"
+  },
+  "output": {
+    "item": "kawaiidishes:steamed_milk_bucket"
+  },
+  "ticks": 200,
+  "waterNeeded": 0
+}

@@ -1,0 +1,23 @@
+{
+  "type": "kawaiidishes:extend_loot_table",
+  "conditions": [
+    {
+      "chance": 0.1,
+      "condition": "minecraft:random_chance"
+    },
+    {
+      "block": "minecraft:cherry_leaves",
+      "condition": "minecraft:block_state_property"
+    }
+  ],
+  "items": [
+    {
+      "Count": 1,
+      "id": "kawaiidishes:cherry"
+    },
+    {
+      "Count": 1,
+      "id": "kawaiidishes:cherry"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "slices=1": {
+      "model": "kawaiidishes:block/cake/chocolate_cheese_cake_slice_1"
+    },
+    "slices=2": {
+      "model": "kawaiidishes:block/cake/chocolate_cheese_cake_slice_2"
+    },
+    "slices=3": {
+      "model": "kawaiidishes:block/cake/chocolate_cheese_cake_slice_3"
+    },
+    "slices=4": {
+      "model": "kawaiidishes:block/cake/chocolate_cheese_cake_slice_4"
+    }
+  }
+}

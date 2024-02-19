@@ -1,0 +1,16 @@
+{
+  "type": "kawaiidishes:blending",
+  "ingredients": [
+    {
+      "item": "minecraft:milk_bucket"
+    }
+  ],
+  "itemOnOutput": {
+    "count": 0,
+    "item": "minecraft:air"
+  },
+  "output": {
+    "item": "kawaiidishes:cream_cheese_ball"
+  },
+  "ticks": 100
+}

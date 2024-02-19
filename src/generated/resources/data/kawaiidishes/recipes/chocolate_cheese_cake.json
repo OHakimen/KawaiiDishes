@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "-": {
+      "item": "kawaiidishes:cocoa_powder"
+    },
+    "e": {
+      "item": "minecraft:egg"
+    },
+    "g": {
+      "item": "minecraft:sugar"
+    },
+    "s": {
+      "item": "kawaiidishes:cream_cheese_ball"
+    },
+    "x": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "pattern": [
+    "x-x",
+    "gsg",
+    "ese"
+  ],
+  "result": {
+    "item": "kawaiidishes:chocolate_cheese_cake"
+  }
+}

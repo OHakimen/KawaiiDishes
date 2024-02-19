@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.hakimen.kawaiidishes.mixins",
+  "mixins": [
+    "ArmorItemAutoEquipMixin",
+    "PacifyEntityMixin",
+    "StructureTemplatePoolAccessor"
+  ],
+  "injectors": {
+    "maxShiftBy": 5,
+    "defaultRequire": 1
+  }
+}

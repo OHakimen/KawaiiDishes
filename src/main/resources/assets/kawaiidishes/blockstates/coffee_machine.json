@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "kawaiidishes:block/coffee_machine",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "kawaiidishes:block/coffee_machine"
+    },
+    "facing=south": {
+      "model": "kawaiidishes:block/coffee_machine",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "kawaiidishes:block/coffee_machine",
+      "y": 270
+    }
+  }
+}

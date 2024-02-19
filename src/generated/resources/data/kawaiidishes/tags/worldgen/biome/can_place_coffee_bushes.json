@@ -1,0 +1,12 @@
+{
+  "values": [
+    "#forge:is_plains",
+    "#forge:is_plateau",
+    "minecraft:jungle",
+    "minecraft:bamboo_jungle",
+    "minecraft:sparse_jungle",
+    "minecraft:cherry_grove",
+    "minecraft:forest",
+    "minecraft:birch_forest"
+  ]
+}

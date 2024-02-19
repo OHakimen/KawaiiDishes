@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "@": {
+      "item": "minecraft:string"
+    },
+    "x": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "xx",
+    "@x"
+  ],
+  "result": {
+    "item": "kawaiidishes:bunny_tail"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "kawaiidishes:block/cake/cake_slice_3",
+  "textures": {
+    "0": "kawaiidishes:block/cake/chocolate_cheese_cake",
+    "particle": "kawaiidishes:block/cake/chocolate_cheese_cake"
+  }
+}

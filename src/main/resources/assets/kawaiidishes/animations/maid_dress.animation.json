@@ -1,0 +1,18 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"on_shift": {
+			"loop": true,
+			"bones": {
+				"bone": {
+					"rotation": [-25, 0, 0],
+					"position": [0, 0.45, -0.3],
+					"scale": [1, 1, 1.2]
+				}
+			}
+		},
+		"idle": {
+			"loop": true
+		}
+	}
+}
