@@ -1,11 +1,15 @@
 package com.hakimen.kawaiidishes.client.events;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
+import com.hakimen.kawaiidishes.aromas.DecorativeAroma;
+import com.hakimen.kawaiidishes.aromas.PotionAroma;
 import com.hakimen.kawaiidishes.block_entities.IncenseBlockEntity;
 import com.hakimen.kawaiidishes.block_entities.SeatBlockEntity;
+import com.hakimen.kawaiidishes.custom.type.Aroma;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.neoforged.api.distmarker.Dist;
@@ -30,18 +34,14 @@ public class AddBlockColorsEvent {
 
                 ItemStack stack = incenseBlockEntity.getInventory().getStackInSlot(0);
 
-                IncenseBlockEntity.Aromas aroma = incenseBlockEntity.getAroma();
+                Aroma aroma = incenseBlockEntity.getAromaFromId();
 
-                switch (aroma) {
-                    case DecorativeAroma -> {
-                        color = DyeColor.getColor(stack).getFireworkColor();
-                    }
-                    case PotionAroma -> {
-                        color = PotionUtils.getColor(stack);
-                    }
-                    default -> {
-                        color = aroma.color;
-                    }
+                if (aroma instanceof DecorativeAroma) {
+                    color = stack.getItem() instanceof DyeItem dyeItem ? dyeItem.getDyeColor().getFireworkColor() : 0;
+                } else if (aroma instanceof PotionAroma) {
+                    color = PotionUtils.getColor(stack);
+                } else {
+                    color = aroma.getColor();
                 }
                 return color;
             }

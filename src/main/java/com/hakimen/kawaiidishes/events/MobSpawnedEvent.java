@@ -1,6 +1,7 @@
 package com.hakimen.kawaiidishes.events;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
+import com.hakimen.kawaiidishes.aromas.PacifyAroma;
 import com.hakimen.kawaiidishes.block.IncenseBlock;
 import com.hakimen.kawaiidishes.block_entities.IncenseBlockEntity;
 import com.hakimen.kawaiidishes.config.ServerConfig;
@@ -121,23 +122,6 @@ public class MobSpawnedEvent {
             monster.setDropChance(EquipmentSlot.LEGS, ServerConfig.dressedDropRate.get().floatValue());
             monster.setDropChance(EquipmentSlot.FEET, ServerConfig.dressedDropRate.get().floatValue());
         }
-    }
-
-    @SubscribeEvent
-    public static void canSpawn(MobSpawnEvent.SpawnPlacementCheck event) {
-        if (event.getEntityType().getCategory().equals(MobCategory.MONSTER)) {
-            List<BlockPos> incensesPos = BlockPos.betweenClosedStream(AABB.ofSize(event.getPos().getCenter(), 1, 1, 1).inflate(8)).filter(blockPos -> event.getLevel().getBlockEntity(blockPos) instanceof IncenseBlockEntity).toList();
-            for (BlockPos pos : incensesPos) {
-                IncenseBlockEntity entity = (IncenseBlockEntity) event.getLevel().getBlockEntity(pos);
-                if (entity != null) {
-                    if (entity.getAroma().equals(IncenseBlockEntity.Aromas.PacifyAroma) && event.getLevel().getBlockState(pos).getValue(IncenseBlock.LIT)) {
-                        event.setResult(Event.Result.DENY);
-                        break;
-                    }
-                }
-            }
-        }
-        event.setResult(event.getDefaultResult() ? Event.Result.ALLOW : Event.Result.DENY);
     }
 
     enum ArmorSets {

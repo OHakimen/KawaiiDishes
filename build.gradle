@@ -185,6 +185,7 @@ modrinth {
     token = System.getenv("MODRINTH_TOKEN") // Remember to have the MODRINTH_TOKEN environment variable set or else this will fail - just make sure it stays private!
     projectId = "kawaii-dishes" // This can be the project ID or the slug. Either will work!
     versionNumber = mod_version // You don't need to set this manually. Will fail if Modrinth has this version already
+    versionName = "[$minecraft_version-NeoForge] Kawaii Dishes $mod_version"
     versionType = "release" // This is the default -- can also be `beta` or `alpha`
     uploadFile = jar // With Loom, this MUST be set to `remapJar` instead of `jar`!
     gameVersions = [minecraft_version] // Must be an array, even with only one version

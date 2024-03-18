@@ -19,7 +19,11 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ItemRegister {
 
-
+    static final FoodProperties coffeeProperties = new FoodProperties.Builder()
+            .fast()
+            .nutrition(4)
+            .saturationMod(1.3f)
+            .build();
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, KawaiiDishes.MODID);
     public static final DeferredHolder<Item, ThighHighsArmorItem> THIGH_HIGHS = ITEMS.register("thigh_highs", () -> new ThighHighsArmorItem(ArmorMaterials.IRON, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final DeferredHolder<Item, MaidDressArmorItem> MAID_DRESS = ITEMS.register("maid_dress", () -> new MaidDressArmorItem(ArmorMaterials.IRON, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
@@ -58,6 +62,49 @@ public class ItemRegister {
     public static final DeferredHolder<Item, Item> GROUND_COFFEE = ITEMS.register("ground_coffee", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> COCOA_POWDER = ITEMS.register("cocoa_powder", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> CREAM_CHEESE_BALL = ITEMS.register("cream_cheese_ball", () -> new Item(new Item.Properties()));
+    // Food
+    public static final DeferredHolder<Item, Item> COFFEE_BERRIES = ITEMS.register("coffee_berries", () -> new BlockItem(BlockRegister.COFFEE_BUSH.get(), new Item.Properties().food(coffeeProperties)));
+    public static final DeferredHolder<Item, Item> CHERRY = ITEMS.register("cherry", () -> new Item(new Item.Properties().food(coffeeProperties)));
+    static final FoodProperties cookieProperties = new FoodProperties.Builder()
+            .nutrition(2)
+            .saturationMod(1f)
+            .build();
+    //Cookies
+    public static final DeferredHolder<Item, Item> CHOCOLATE_COOKIE = ITEMS.register("chocolate_cookie", () -> new Item(new Item.Properties().food(cookieProperties)));
+    public static final DeferredHolder<Item, Item> SWEET_BERRY_COOKIE = ITEMS.register("sweet_berry_cookie", () -> new Item(new Item.Properties().food(cookieProperties)));
+
+    public static final DeferredHolder<Item, Item> GLOW_BERRY_COOKIE = ITEMS.register("glow_berry_cookie", () ->
+            new Item(new Item.Properties().food(
+                    new FoodProperties.Builder()
+                            .nutrition(2)
+                            .saturationMod(1f)
+                            .effect(() -> new MobEffectInstance(MobEffects.GLOWING, 30 * 20), 1f)
+                            .build()
+            )
+            )
+    );
+    public static final DeferredHolder<Item, Item> GOLDEN_COOKIE = ITEMS.register("golden_cookie", () ->
+            new Item(new Item.Properties().food(
+                    new FoodProperties.Builder()
+                            .nutrition(2)
+                            .saturationMod(1f)
+                            .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 10 * 20), 1f)
+                            .effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 30 * 20, 1), 1f)
+                            .build()
+            )
+            )
+    );
+    public static final DeferredHolder<Item, Item> COOKIE_OF_UNBINDING = ITEMS.register("cookie_of_unbinding", () ->
+            new Item(new Item.Properties().food(
+                    new FoodProperties.Builder()
+                            .nutrition(2)
+                            .saturationMod(1f)
+                            .effect(() -> new MobEffectInstance(EffectRegister.BLESSING_OF_UNBINDING.get(), (2 * 60 + 30) * 20), 1f)
+                            .build()
+            )
+            )
+    );
+
     //Coffees
     public static final DeferredHolder<Item, BlockItem> MUG = ITEMS.register("mug", () -> new BlockItem(BlockRegister.MUG.get(), new Item.Properties()));
     public static final DeferredHolder<Item, CoffeeItem> ESPRESSO_COFFEE = ITEMS.register("espresso_coffee", () ->
@@ -128,7 +175,6 @@ public class ItemRegister {
     );
 
     // Cake Slices
-
     public static final FoodProperties CAKE_SLICE_PROPS = new FoodProperties.Builder()
             .fast()
             .nutrition(3)
@@ -231,46 +277,12 @@ public class ItemRegister {
     public static final DeferredHolder<Item, BlockItem> CHOCOLATE_CHEESE_CAKE = ITEMS.register("chocolate_cheese_cake", () -> new BlockItem(BlockRegister.CHOCOLATE_CHEESE_CAKE.get(), new Item.Properties()));
     public static final DeferredHolder<Item, BlockItem> HONEY_CHEESE_CAKE = ITEMS.register("honey_cheese_cake", () -> new BlockItem(BlockRegister.HONEY_CHEESE_CAKE.get(), new Item.Properties()));
 
-
     //Pie
-
     public static final DeferredHolder<Item, BlockItem> APPLE_PIE = ITEMS.register("apple_pie", () -> new BlockItem(BlockRegister.APPLE_PIE.get(), new Item.Properties()));
     public static final DeferredHolder<Item, BlockItem> SWEET_BERRY_PIE = ITEMS.register("sweet_berry_pie", () -> new BlockItem(BlockRegister.SWEET_BERRY_PIE.get(), new Item.Properties()));
     public static final DeferredHolder<Item, BlockItem> GLOW_BERRY_PIE = ITEMS.register("glow_berry_pie", () -> new BlockItem(BlockRegister.GLOW_BERRY_PIE.get(), new Item.Properties()));
     public static final DeferredHolder<Item, BlockItem> CHERRY_PIE = ITEMS.register("cherry_pie", () -> new BlockItem(BlockRegister.CHERRY_PIE.get(), new Item.Properties()));
 
-    //Cookies
-    public static final DeferredHolder<Item, Item> GLOW_BERRY_COOKIE = ITEMS.register("glow_berry_cookie", () ->
-            new Item(new Item.Properties().food(
-                    new FoodProperties.Builder()
-                            .nutrition(2)
-                            .saturationMod(1f)
-                            .effect(() -> new MobEffectInstance(MobEffects.GLOWING, 30 * 20), 1f)
-                            .build()
-            )
-            )
-    );
-    public static final DeferredHolder<Item, Item> GOLDEN_COOKIE = ITEMS.register("golden_cookie", () ->
-            new Item(new Item.Properties().food(
-                    new FoodProperties.Builder()
-                            .nutrition(2)
-                            .saturationMod(1f)
-                            .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 10 * 20), 1f)
-                            .effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 30 * 20, 1), 1f)
-                            .build()
-            )
-            )
-    );
-    public static final DeferredHolder<Item, Item> COOKIE_OF_UNBINDING = ITEMS.register("cookie_of_unbinding", () ->
-            new Item(new Item.Properties().food(
-                    new FoodProperties.Builder()
-                            .nutrition(2)
-                            .saturationMod(1f)
-                            .effect(() -> new MobEffectInstance(EffectRegister.BLESSING_OF_UNBINDING.get(), (2 * 60 + 30) * 20), 1f)
-                            .build()
-            )
-            )
-    );
     //Machinery
     public static final DeferredHolder<Item, BlockItem> COFFEE_MACHINE = ITEMS.register("coffee_machine", () -> new BlockItem(BlockRegister.COFFEE_MACHINE.get(), new Item.Properties()));
     public static final DeferredHolder<Item, BlockItem> BLENDER = ITEMS.register("blender", () -> new BlockItem(BlockRegister.BLENDER.get(), new Item.Properties()));
@@ -282,21 +294,6 @@ public class ItemRegister {
     public static final DeferredHolder<Item, BlockItem> DISPLAY_CASE = ITEMS.register("display_case", () -> new BlockItem(BlockRegister.DISPLAY_CASE.get(), new Item.Properties()));
     public static final DeferredHolder<Item, BlockItem> INCENSE_GLASS = ITEMS.register("incense_glass", () -> new BlockItem(BlockRegister.INCENSE_GLASS.get(), new Item.Properties()));
 
-    static final FoodProperties coffeeProperties = new FoodProperties.Builder()
-            .fast()
-            .nutrition(4)
-            .saturationMod(1.3f)
-            .build();
-    // Food
-    public static final DeferredHolder<Item, Item> COFFEE_BERRIES = ITEMS.register("coffee_berries", () -> new BlockItem(BlockRegister.COFFEE_BUSH.get(), new Item.Properties().food(coffeeProperties)));
-    public static final DeferredHolder<Item, Item> CHERRY = ITEMS.register("cherry", () -> new Item(new Item.Properties().food(coffeeProperties)));
-    static final FoodProperties cookieProperties = new FoodProperties.Builder()
-            .nutrition(2)
-            .saturationMod(1f)
-            .build();
-    //Cookies
-    public static final DeferredHolder<Item, Item> CHOCOLATE_COOKIE = ITEMS.register("chocolate_cookie", () -> new Item(new Item.Properties().food(cookieProperties)));
-    public static final DeferredHolder<Item, Item> SWEET_BERRY_COOKIE = ITEMS.register("sweet_berry_cookie", () -> new Item(new Item.Properties().food(cookieProperties)));
 
     public static void setupItems() {
         TailUtils.makeTailWithDefaultAnims(AnimalType.FOX);

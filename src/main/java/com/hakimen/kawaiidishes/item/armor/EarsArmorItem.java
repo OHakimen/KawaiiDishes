@@ -35,7 +35,6 @@ import static com.hakimen.kawaiidishes.utils.item.ArmorUtils.applyEnchantmentEff
 
 public class EarsArmorItem extends GeoArmorItem implements IDyeableItem {
 
-
     private static final String has_overlay = "HasOverlay";
     AnimalType earsType;
     boolean overlayable;

@@ -1,8 +1,9 @@
-// 1.20.4	2024-02-19T12:10:56.5073864	vanilla/Loot Tables
+// 1.20.4	2024-03-18T10:40:25.8792232	vanilla/Loot Tables
 75cd4989d0d6298cff994b0687a5faac5df4a1c0 data/kawaiidishes/loot_tables/blocks/blender.json
 8eb19ff8cb070eea246395664e4c2c9c979f4052 data/kawaiidishes/loot_tables/blocks/coffee_machine.json
 ecfe28f48de8d9023af1d96dbedfaf287a389362 data/kawaiidishes/loot_tables/blocks/display_case.json
 c1e5cfd443b8aebe08d2004882de5b8ad903678f data/kawaiidishes/loot_tables/blocks/ice_cream_maker.json
+6a89a7b2e1ed36841cfb2527a52e20d92b2ccfb0 data/kawaiidishes/loot_tables/blocks/incense_glass.json
 5736b6b9ff02d3d8998c3ef9882cc73fdbb93d88 data/kawaiidishes/loot_tables/blocks/kitchen_tiles.json
 165fd9ab8a13d720c946af7d307e738f1ce91031 data/kawaiidishes/loot_tables/blocks/mug.json
 8c587282f76879818f8a94ba4a24710b1383278b data/kawaiidishes/loot_tables/chests/maid_cafe.json

@@ -2,7 +2,6 @@ package com.hakimen.kawaiidishes.block_entities;
 
 import com.hakimen.kawaiidishes.block.IceCreamMakerBlock;
 import com.hakimen.kawaiidishes.containers.IceCreamMakerContainer;
-import com.hakimen.kawaiidishes.item.handlers.WrappedHandler;
 import com.hakimen.kawaiidishes.recipes.IceCreamMakerRecipe;
 import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
 import net.minecraft.core.BlockPos;

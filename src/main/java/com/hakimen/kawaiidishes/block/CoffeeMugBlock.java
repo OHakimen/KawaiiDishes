@@ -90,6 +90,4 @@ public class CoffeeMugBlock extends Block {
 
         return super.use(pState, pLevel, pPos, pPlayer, pInteractionHand, pBlockHitResult);
     }
-
-
 }

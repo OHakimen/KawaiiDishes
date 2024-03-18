@@ -10,6 +10,8 @@ public class Registration{
 
         //Do all registration here
 
+        AromaRegister.register(bus);
+
         BlockRegister.register(bus);
         ItemRegister.register(bus);
         ItemTabRegister.register(bus);

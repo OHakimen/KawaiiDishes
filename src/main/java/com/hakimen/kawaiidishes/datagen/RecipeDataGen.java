@@ -170,6 +170,24 @@ public class RecipeDataGen extends RecipeProvider {
                 .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRING))
                 .save(output, new ResourceLocation(KawaiiDishes.MODID, "bunny_tail"));
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.CAT_EARS.get())
+                .pattern("x x")
+                .pattern("sxs")
+                .define('x', ItemTags.WOOL)
+                .define('s', Items.PINK_WOOL)
+                .unlockedBy(getHasName(Items.WHITE_WOOL), has(ItemTags.WOOL))
+                .save(output, new ResourceLocation(KawaiiDishes.MODID, "cat_ears"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.CAT_TAIL.get())
+                .pattern(" xx")
+                .pattern(" @x")
+                .pattern("@x ")
+                .define('x', ItemTags.WOOL)
+                .define('@', Items.STRING)
+                .unlockedBy(getHasName(Items.WHITE_WOOL), has(ItemTags.WOOL))
+                .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRING))
+                .save(output, new ResourceLocation(KawaiiDishes.MODID, "cat_tail"));
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.SHOES.get())
                 .pattern("x x")
                 .pattern("l l")

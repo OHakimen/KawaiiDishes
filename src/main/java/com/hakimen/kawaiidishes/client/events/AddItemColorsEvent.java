@@ -7,6 +7,7 @@ import com.hakimen.kawaiidishes.item.SeatItem;
 import com.hakimen.kawaiidishes.item.armor.HeadBandWithEarsArmorItem;
 import com.hakimen.kawaiidishes.item.armor.MaidDressesWithTailArmorItem;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;

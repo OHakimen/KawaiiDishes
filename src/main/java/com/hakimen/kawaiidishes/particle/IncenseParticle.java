@@ -1,6 +1,9 @@
 package com.hakimen.kawaiidishes.particle;
 
+import com.hakimen.kawaiidishes.aromas.DecorativeAroma;
+import com.hakimen.kawaiidishes.aromas.PotionAroma;
 import com.hakimen.kawaiidishes.block_entities.IncenseBlockEntity;
+import com.hakimen.kawaiidishes.custom.type.Aroma;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
@@ -11,6 +14,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PotionItem;
 import net.minecraft.world.item.alchemy.PotionUtils;
@@ -81,19 +85,15 @@ public class IncenseParticle extends TextureSheetParticle {
 
                 int color = 0xffffff;
 
-
+                Aroma aroma = incenseBlockEntity.getAromaFromId();
                 ItemStack stack = incenseBlockEntity.getInventory().getStackInSlot(0);
-                switch (incenseBlockEntity.getAroma()) {
-                    case DecorativeAroma -> {
-                        color = DyeColor.getColor(stack).getFireworkColor();
-                    }
-                    case PotionAroma -> {
-                        color = PotionUtils.getColor(stack);
-                    }
-                    default -> {
-                        color = incenseBlockEntity.getAroma().color;
-                    }
 
+                if (aroma instanceof DecorativeAroma) {
+                    color = stack.getItem() instanceof DyeItem dyeItem ? dyeItem.getDyeColor().getFireworkColor() : 0;
+                } else if (aroma instanceof PotionAroma) {
+                    color = PotionUtils.getColor(stack);
+                } else {
+                    color = aroma.getColor();
                 }
 
 

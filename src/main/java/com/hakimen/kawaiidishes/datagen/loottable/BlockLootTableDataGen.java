@@ -20,7 +20,8 @@ public class BlockLootTableDataGen extends BlockLootSubProvider {
             BlockRegister.COFFEE_MACHINE.get(),
             BlockRegister.MUG.get(),
             BlockRegister.DISPLAY_CASE.get(),
-            BlockRegister.ICE_CREAM_MAKER.get()
+            BlockRegister.ICE_CREAM_MAKER.get(),
+            BlockRegister.INCENSE_GLASS.get()
     );
 
     @Override

@@ -69,7 +69,6 @@ public class BlockRegister {
     public static final DeferredHolder<Block, CakeBlock> CHERRY_PIE = BLOCKS.register("cherry_pie", ()-> new CakeBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE)));
 
     public static final DeferredHolder<Block, IncenseBlock> INCENSE_GLASS = BLOCKS.register("incense_glass", IncenseBlock::new);
-
     public static void register(IEventBus bus){
         BLOCKS.register(bus);
     }

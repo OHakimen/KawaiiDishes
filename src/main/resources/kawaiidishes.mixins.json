@@ -3,8 +3,7 @@
   "package": "com.hakimen.kawaiidishes.mixins",
   "mixins": [
     "ArmorItemAutoEquipMixin",
-    "PacifyEntityMixin",
-    "StructureTemplatePoolAccessor"
+    "PacifyEntityMixin"
   ],
   "injectors": {
     "maxShiftBy": 5,

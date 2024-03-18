@@ -1,4 +1,4 @@
-// 1.20.4	2024-02-19T16:54:04.4517297	vanilla/Recipes
+// 1.20.4	2024-02-29T10:09:31.1985801	vanilla/Recipes
 c038fe474d6dcc6155ef96c2f1a5ed6870b3ec65 data/kawaiidishes/advancements/recipes/capuccino.json
 abb4a8db843a7121e67c0025984a1259cbe05875 data/kawaiidishes/advancements/recipes/cherry_ice_cream.json
 6b9ff6fb43977a8932309d931364905f911a7901 data/kawaiidishes/advancements/recipes/chocolate_ice_cream.json
@@ -29,6 +29,8 @@ b8b0edf1056737c4a15c9ee5f61c0e44ced8e9e9 data/kawaiidishes/advancements/recipes/
 82eab49b5b2017f6628a58da6b9b9c1ca7900b69 data/kawaiidishes/advancements/recipes/misc/bunny_ears.json
 de29dc56f6a72984c929160ed70d6aaae59d5e6e data/kawaiidishes/advancements/recipes/misc/bunny_tail.json
 3ed46ff2305096c748fe76a556b144ab96a90345 data/kawaiidishes/advancements/recipes/misc/cake_slice.json
+740af08e97f6d46068ee94b9855973e2e863db59 data/kawaiidishes/advancements/recipes/misc/cat_ears.json
+04428884e0d0b98b98423c5e7b0943a40f94552e data/kawaiidishes/advancements/recipes/misc/cat_tail.json
 ee08b2936891ba480e6bb20765fe6718ad3cd8a7 data/kawaiidishes/advancements/recipes/misc/cheese_cake.json
 a47fa92f178056bbbc3b3f4d546a6a8363c8fc06 data/kawaiidishes/advancements/recipes/misc/cheese_cake_slice.json
 1ff88f0dfcfe51d78120b6a6c3952bf2d3a44e11 data/kawaiidishes/advancements/recipes/misc/cherry_pie.json
@@ -77,6 +79,8 @@ b564154e3b3467212921d60066dfd43cf84d85d2 data/kawaiidishes/recipes/bunny_ears.js
 11f5c2182c986b4c179ab21a766c776167d4fcb2 data/kawaiidishes/recipes/bunny_tail.json
 d8524b4407c43f8ee7b64194a46c6763421db1c1 data/kawaiidishes/recipes/cake_slice.json
 b0f6d603f70e1a5a6eb86ec1073d3e76db6367b8 data/kawaiidishes/recipes/capuccino.json
+3ffbbc8cd9506f6fc962420553a6b5bca0feb594 data/kawaiidishes/recipes/cat_ears.json
+033b74746e5746f7fff7ef125c223ae1458d2a6a data/kawaiidishes/recipes/cat_tail.json
 a6932b602721a8dabe963c5bfc9f1edc1bdd4f4e data/kawaiidishes/recipes/cheese_cake.json
 88976187de5eccfd0d79020fd9d63d6eb603e9c0 data/kawaiidishes/recipes/cheese_cake_slice.json
 b18b7462e90647e8605ebcbe9c46573207e32ddd data/kawaiidishes/recipes/cherry_ice_cream.json

@@ -2,6 +2,7 @@ package com.hakimen.kawaiidishes.datagen;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
+import net.minecraft.client.renderer.block.model.ItemModelGenerator;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -21,7 +22,6 @@ public class ItemModelDataGen extends ItemModelProvider {
     @Override
     protected void registerModels() {
         basicItem(ItemRegister.APRON.get());
-
 
         decorationItem(ItemRegister.BOW.get());
         decorationItem(ItemRegister.LEG_CLIP.get());
@@ -144,7 +144,4 @@ public class ItemModelDataGen extends ItemModelProvider {
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))
                 .texture("layer0", new ResourceLocation(item.getNamespace(), "item/food/" + item.getPath()));
     }
-
-
-
 }

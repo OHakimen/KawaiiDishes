@@ -2,6 +2,7 @@ package com.hakimen.kawaiidishes.block;
 
 import com.hakimen.kawaiidishes.block_entities.IceCreamMakerBlockEntity;
 import com.hakimen.kawaiidishes.block_entities.IncenseBlockEntity;
+import com.hakimen.kawaiidishes.registry.AromaRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -47,7 +48,6 @@ public class IncenseBlock extends DirectionalBlockWithEntity{
         super(Properties.ofFullCopy(Blocks.GLASS)
                 .isViewBlocking((blockState, blockGetter, blockPos) -> false)
                 .isSuffocating((blockState, blockGetter, blockPos) -> false)
-                .requiresCorrectToolForDrops()
                 .lightLevel(value -> value.getValue(LIT) ? 7 : 0)
         );
 
@@ -157,9 +157,9 @@ public class IncenseBlock extends DirectionalBlockWithEntity{
             pLevel.setBlock(pPos,state, Block.UPDATE_ALL);
             return InteractionResult.SUCCESS;
 
-        } else if(!pState.getValue(LIT) && IncenseBlockEntity.Aromas.isStackValid(holdStack) && entity.getInventory().getStackInSlot(0).isEmpty()){
+        } else if(!pState.getValue(LIT) && AromaRegister.isValidStack(holdStack) && entity.getInventory().getStackInSlot(0).isEmpty()){
             entity.getInventory().insertItem(0, holdStack.copy(), false);
-            entity.setAroma(IncenseBlockEntity.Aromas.getAromaId(holdStack));
+            entity.setAroma(AromaRegister.getAromaId(holdStack));
             entity.setChanged();
             holdStack.shrink(1);
             pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f ,0.75f + (pLevel.getRandom().nextFloat() / 2f) * pLevel.getRandom().nextInt(-1,2));
@@ -167,7 +167,7 @@ public class IncenseBlock extends DirectionalBlockWithEntity{
 
         } else if(!pState.getValue(LIT) && !entity.getInventory().getStackInSlot(0).isEmpty() && holdStack.isEmpty()){
             ItemStack stack = entity.getInventory().extractItem(0,1,false);
-            entity.setAroma(IncenseBlockEntity.Aromas.values().length-1);
+            entity.setAroma(0);
             if(pPlayer.getInventory().hasAnyMatching(item -> item.is(stack.getItem()) && item.getCount() < item.getMaxStackSize()) || pPlayer.getInventory().getFreeSlot() != -1){
                 pPlayer.addItem(stack);
             }else if (pPlayer.getInventory().getFreeSlot() == -1) {

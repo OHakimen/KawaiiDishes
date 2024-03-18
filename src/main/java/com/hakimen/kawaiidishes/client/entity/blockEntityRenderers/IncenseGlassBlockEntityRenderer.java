@@ -1,9 +1,12 @@
 package com.hakimen.kawaiidishes.client.entity.blockEntityRenderers;
 
+import com.hakimen.kawaiidishes.aromas.DecorativeAroma;
+import com.hakimen.kawaiidishes.aromas.PotionAroma;
 import com.hakimen.kawaiidishes.block.IncenseBlock;
 import com.hakimen.kawaiidishes.block_entities.DisplayCaseBlockEntity;
 import com.hakimen.kawaiidishes.block_entities.IncenseBlockEntity;
 import com.hakimen.kawaiidishes.client.screens.renderers.FluidTankRenderer;
+import com.hakimen.kawaiidishes.custom.type.Aroma;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -14,10 +17,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
@@ -43,9 +43,9 @@ public class IncenseGlassBlockEntityRenderer implements BlockEntityRenderer<Ince
 
         if(incenseBlockEntity != null) {
             BlockState selfState = incenseBlockEntity.getBlockState();
-            IncenseBlockEntity.Aromas aroma = incenseBlockEntity.getAroma();
+            Aroma aroma = incenseBlockEntity.getAromaFromId();
 
-            boolean shouldRender = aroma.equals(IncenseBlockEntity.Aromas.INVALID) ? selfState.getValue(IncenseBlock.LIT) : true;
+            boolean shouldRender = incenseBlockEntity.getAroma() == 0 ? selfState.getValue(IncenseBlock.LIT) : true;
 
             if (shouldRender) {
                 pPoseStack.pushPose();
@@ -54,21 +54,16 @@ public class IncenseGlassBlockEntityRenderer implements BlockEntityRenderer<Ince
 
                 var renderType = RenderType.cutout();
 
-                int color = 0xffffff;
-
-
                 ItemStack stack = incenseBlockEntity.getInventory().getStackInSlot(0);
 
-                switch (aroma) {
-                    case DecorativeAroma -> {
-                        color = DyeColor.getColor(stack).getFireworkColor();
-                    }
-                    case PotionAroma -> {
-                        color = PotionUtils.getColor(stack);
-                    }
-                    default -> {
-                        color = aroma.color;
-                    }
+                int color = 0xffffff;
+
+                if (aroma instanceof DecorativeAroma) {
+                    color = stack.getItem() instanceof DyeItem dyeItem ? dyeItem.getDyeColor().getFireworkColor() : 0;
+                } else if (aroma instanceof PotionAroma) {
+                    color = PotionUtils.getColor(stack);
+                } else {
+                    color = aroma.getColor();
                 }
 
                 var renderColors = ColorUtils.getColorsFromHex(color);

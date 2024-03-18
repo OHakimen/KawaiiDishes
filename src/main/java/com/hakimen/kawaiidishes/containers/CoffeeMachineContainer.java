@@ -18,7 +18,7 @@ import net.neoforged.neoforge.items.wrapper.InvWrapper;
 
 import javax.annotation.Nonnull;
 
-public class CoffeeMachineContainer extends AbstractContainerMenu implements Container {
+public class CoffeeMachineContainer extends AbstractContainerMenu {
     public final CoffeeMachineBlockEntity blockEntity;
     private final IItemHandler playerInventory;
     private final ContainerData data;
@@ -116,47 +116,6 @@ public class CoffeeMachineContainer extends AbstractContainerMenu implements Con
     }
 
     @Override
-    public int getContainerSize() {
-        return blockEntity.getInventory().getSlots();
-    }
-
-    @Override
-    public boolean isEmpty() {
-
-        for (int i = 0; i < blockEntity.getInventory().getSlots(); i++) {
-            if(blockEntity.getInventory().getStackInSlot(i) != ItemStack.EMPTY){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public ItemStack getItem(int idx) {
-        return blockEntity.getInventory().getStackInSlot(idx);
-    }
-
-    @Override
-    public ItemStack removeItem(int idx, int count) {
-        return blockEntity.getInventory().extractItem(idx, count, false);
-    }
-
-    @Override
-    public ItemStack removeItemNoUpdate(int idx) {
-        return blockEntity.getInventory().extractItem(idx, 64, false);
-    }
-
-    @Override
-    public void setItem(int idx, ItemStack stack) {
-        blockEntity.getInventory().setStackInSlot(idx,stack);
-    }
-
-    @Override
-    public void setChanged() {
-        blockEntity.setChanged();
-    }
-
-    @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(pPlayer.level(), blockEntity.getBlockPos()),
                 pPlayer, BlockRegister.COFFEE_MACHINE.get());
@@ -182,8 +141,4 @@ public class CoffeeMachineContainer extends AbstractContainerMenu implements Con
         this.fluidStack = fluidStack;
     }
 
-    @Override
-    public void clearContent() {
-
-    }
 }

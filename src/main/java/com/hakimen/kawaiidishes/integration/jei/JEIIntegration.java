@@ -6,15 +6,22 @@ import com.hakimen.kawaiidishes.containers.CoffeeMachineContainer;
 import com.hakimen.kawaiidishes.integration.jei.categories.BlenderRecipeCategory;
 import com.hakimen.kawaiidishes.integration.jei.categories.CoffeeMachineRecipeCategory;
 import com.hakimen.kawaiidishes.integration.jei.categories.IceCreamMakerRecipeCategory;
+import com.hakimen.kawaiidishes.item.IDyeableItem;
 import com.hakimen.kawaiidishes.recipes.BlenderRecipe;
 import com.hakimen.kawaiidishes.recipes.CoffeeMachineRecipe;
 import com.hakimen.kawaiidishes.recipes.IceCreamMakerRecipe;
+import com.hakimen.kawaiidishes.recipes.crafting.DyeIDyeableRecipe;
 import com.hakimen.kawaiidishes.registry.ContainerRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.RecipeTypes;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.ingredient.ICraftingGridHelper;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
+import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.recipe.category.extensions.vanilla.crafting.ICraftingCategoryExtension;
 import mezz.jei.api.recipe.transfer.IRecipeTransferError;
 import mezz.jei.api.recipe.transfer.IRecipeTransferHandler;
 import mezz.jei.api.registration.*;
@@ -42,8 +49,9 @@ public class JEIIntegration implements IModPlugin {
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         registration.addRecipeClickArea(CoffeeMachineScreen.class,139,37,6,14, coffeeMachineRecipeRecipeType);
+        registration.addRecipeClickArea(CoffeeMachineScreen.class,110,35,6,14, blenderRecipeRecipeType);
+        registration.addRecipeClickArea(CoffeeMachineScreen.class,119,37,6,14, iceCreamMakerRecipeRecipeType);
     }
-
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {

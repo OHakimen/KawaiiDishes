@@ -1,6 +1,8 @@
 package com.hakimen.kawaiidishes.block_entities;
 
 import com.hakimen.kawaiidishes.block.IncenseBlock;
+import com.hakimen.kawaiidishes.custom.Registries;
+import com.hakimen.kawaiidishes.custom.type.Aroma;
 import com.hakimen.kawaiidishes.datagen.ItemTagDataGen;
 import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
 import com.hakimen.kawaiidishes.registry.ParticleRegister;
@@ -42,18 +44,22 @@ import java.util.List;
 public class IncenseBlockEntity extends BlockEntity {
 
     private final ItemStackHandler inventory = createHandler();
-    private int aroma = Aromas.values().length - 1;
     public IncenseBlockEntity(BlockPos pPos, BlockState pState) {
         super(BlockEntityRegister.INCENSE.get(), pPos, pState);
     }
 
-    public Aromas getAroma() {
-        return aroma != -1 ? Aromas.values()[aroma] : Aromas.INVALID;
+    int aroma;
+
+    public int getAroma() {
+        return aroma;
     }
 
-    public IncenseBlockEntity setAroma(int aroma) {
+    public Aroma getAromaFromId(){
+        return Registries.AROMA_REGISTRY.getHolder(getAroma()).get().value();
+    }
+
+    public void setAroma(int aroma) {
         this.aroma = aroma;
-        return this;
     }
 
     @Override
@@ -86,66 +92,12 @@ public class IncenseBlockEntity extends BlockEntity {
             }
         }else {
             // On server
-            AABB actuationRange =  AABB.ofSize(pPos.getCenter(), 1,1,1).inflate(8);
-
             if(!this.getBlockState().getValue(IncenseBlock.LIT)){
                 return;
             }
 
-            switch (entity.getAroma()){
-                case PacifyAroma -> {
-                    List<Entity> entities = level.getEntities(null, actuationRange);
-                    for (Entity mob:entities) {
-                        if(mob instanceof Monster){
-                            mob.remove(Entity.RemovalReason.DISCARDED);
-                        }
-                    }
-                }
-                case HastyAroma -> {
-                    List<Player> entities = level.getEntities(EntityType.PLAYER, actuationRange, player -> true);
-                    for (Player player:entities) {
-                        player.forceAddEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 15 * 20, 1, false ,false, false), player);
-                        player.forceAddEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 15 * 20, 0, false ,false, false), player);
-                    }
-                }
-
-                case PowerfulAroma -> {
-                    List<Player> entities = level.getEntities(EntityType.PLAYER, actuationRange, player -> true);
-                    for (Player player:entities) {
-                        player.forceAddEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 15 * 20, 1, false ,false, false), player);
-                    }
-                }
-
-                case StimulatingAroma -> {
-                    List<Player> entities = level.getEntities(EntityType.PLAYER, actuationRange, player -> true);
-                    for (Player player:entities) {
-                        player.forceAddEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 15 * 20, 0, false ,false, false), player);
-                        player.forceAddEffect(new MobEffectInstance(MobEffects.LUCK, 15 * 20, 0, false ,false, false), player);
-                    }
-                }
-
-                case CursedAroma -> {
-                    List<Entity> entities = level.getEntities(null, actuationRange);
-                    for (Entity mob:entities) {
-                        if(mob instanceof Pig || (mob instanceof Creeper creeper && !creeper.isPowered())|| mob instanceof Villager || (mob instanceof MushroomCow cow  && cow.getVariant().equals(MushroomCow.MushroomType.RED))){
-                            mob.thunderHit((ServerLevel) pLevel, new LightningBolt(EntityType.LIGHTNING_BOLT, pLevel));
-                        }
-                    }
-                }
-
-                case PotionAroma -> {
-                    List<Entity> entities = level.getEntities(null, actuationRange);
-                    ItemStack stack = entity.getInventory().getStackInSlot(0);
-                    for (Entity mob:entities) {
-                        if(stack.getItem() instanceof PotionItem && mob instanceof LivingEntity livingEntity){
-                            List<MobEffectInstance> effects = PotionUtils.getMobEffects(stack);
-                            for (MobEffectInstance i:effects) {
-                                MobEffectInstance cloned = new MobEffectInstance(i.getEffect(), 15 * 20, i.getAmplifier());
-                                livingEntity.addEffect(cloned);
-                            }
-                        }
-                    }
-                }
+            if(getAroma() > 0){
+                getAromaFromId().aromaTick(pLevel,pPos,pState,entity);
             }
         }
     }
@@ -197,72 +149,4 @@ public class IncenseBlockEntity extends BlockEntity {
         return inventory;
     }
 
-    public enum Aromas {
-        CalmingAroma(
-                ItemTagDataGen.CALMING_AROMA_INCENSE,
-                0x6f96d9
-        ),
-        PacifyAroma(
-                ItemTagDataGen.PACIFY_AROMA_INCENSE,
-                0xb775f0
-        ),
-        HastyAroma(
-                ItemTagDataGen.HASTY_AROMA_INCENSE,
-                0xff974d
-        ),
-
-        PowerfulAroma(
-                ItemTagDataGen.POWERFUL_AROMA_INCENSE,
-                0xf75145
-        ),
-        StimulatingAroma(
-                ItemTagDataGen.STIMULATING_AROMA_INCENSE,
-                0xe85f96
-        ),
-
-        CursedAroma(
-                ItemTagDataGen.CURSED_AROMA_INCENSE,
-                0x303030
-        ),
-
-        PotionAroma(
-                ItemTagDataGen.POTION_AROMA_INCENSE,
-                0
-        ),
-        DecorativeAroma(
-                Tags.Items.DYES,
-                0
-        ),
-
-
-        INVALID(ItemTagDataGen.INVALID_INCENSE, 0xffffff);
-
-        public TagKey<Item> items;
-        public int color;
-
-        Aromas(TagKey<Item> items, int color) {
-            this.items = items;
-            this.color = color;
-        }
-
-        public static boolean isStackValid(ItemStack stack) {
-
-            for (Aromas aroma : values()) {
-                if (stack.is(aroma.items)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public static int getAromaId(ItemStack stack) {
-            for (Aromas aroma : values()) {
-                if (stack.is(aroma.items)) {
-                    return Arrays.stream(values()).toList().indexOf(aroma);
-                }
-            }
-            return -1;
-        }
-
-    }
 }
