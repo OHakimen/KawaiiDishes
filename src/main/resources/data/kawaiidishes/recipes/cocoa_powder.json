@@ -1,0 +1,16 @@
+{
+  "type": "kawaiidishes:blending",
+  "ingredients": [
+    {
+      "item": "minecraft:cocoa_beans"
+    }
+  ],
+  "itemOnOutput": {
+    "count": 0,
+    "item": "minecraft:air"
+  },
+  "output": {
+    "item": "kawaiidishes:cocoa_powder"
+  },
+  "ticks": 100
+}

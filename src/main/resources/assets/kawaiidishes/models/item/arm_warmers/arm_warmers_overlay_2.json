@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kawaiidishes:item/arm_warmers",
+    "layer1": "kawaiidishes:item/arm_warmers/overlay_2"
+  }
+}

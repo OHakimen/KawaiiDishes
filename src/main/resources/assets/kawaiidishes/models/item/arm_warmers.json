@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kawaiidishes:item/arm_warmers"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "kawaiidishes:overlay": 0
+      },
+      "model": "kawaiidishes:item/arm_warmers/arm_warmers"
+    },
+    {
+      "predicate": {
+        "kawaiidishes:overlay": 0.5
+      },
+      "model": "kawaiidishes:item/arm_warmers/arm_warmers_overlay_1"
+    },
+    {
+      "predicate": {
+        "kawaiidishes:overlay": 1
+      },
+      "model": "kawaiidishes:item/arm_warmers/arm_warmers_overlay_2"
+    }
+  ]
+}

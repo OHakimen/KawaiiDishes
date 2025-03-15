@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "tag": "kawaiidishes:cookies"
+    },
+    "w": {
+      "item": "minecraft:wither_skeleton_skull"
+    },
+    "x": {
+      "item": "minecraft:ghast_tear"
+    },
+    "y": {
+      "item": "minecraft:fermented_spider_eye"
+    },
+    "z": {
+      "item": "minecraft:experience_bottle"
+    }
+  },
+  "pattern": [
+    " x ",
+    "wcy",
+    " z "
+  ],
+  "result": {
+    "item": "kawaiidishes:cookie_of_unbinding"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "kawaiidishes:coffee_machining",
+  "ingredients": [
+    [
+      {
+        "item": "kawaiidishes:ground_coffee"
+      },
+      {
+        "item": "minecraft:sugar"
+      }
+    ]
+  ],
+  "itemOnOutput": {
+    "item": "kawaiidishes:mug"
+  },
+  "output": {
+    "item": "kawaiidishes:espresso_coffee"
+  },
+  "ticks": 200,
+  "waterNeeded": 250
+}

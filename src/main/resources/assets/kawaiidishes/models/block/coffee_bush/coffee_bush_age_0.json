@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "kawaiidishes:block/coffee_bush/coffee_bush_age_0"
+  },
+  "render_type": "cutout"
+}

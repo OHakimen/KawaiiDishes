@@ -1,0 +1,7 @@
+{
+  "parent": "kawaiidishes:block/drinks/espresso_coffee",
+  "textures": {
+    "1": "kawaiidishes:block/drinks/dark_coffee",
+    "particle": "kawaiidishes:block/drinks/dark_coffee"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "-": {
+      "tag": "c:iron_ingots"
+    },
+    "c": {
+      "item": "minecraft:chest"
+    },
+    "x": {
+      "tag": "c:glass_panes"
+    }
+  },
+  "pattern": [
+    "xxx",
+    "xcx",
+    "---"
+  ],
+  "result": {
+    "item": "kawaiidishes:display_case"
+  }
+}

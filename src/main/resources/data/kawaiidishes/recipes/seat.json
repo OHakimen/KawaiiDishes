@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "o": {
+      "tag": "minecraft:wool"
+    },
+    "x": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "xox",
+    " x ",
+    "xxx"
+  ],
+  "result": {
+    "item": "kawaiidishes:seat"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "kawaiidishes:coffee_machining",
+  "ingredients": [
+    [
+      {
+        "item": "kawaiidishes:ground_coffee"
+      },
+      {
+        "item": "kawaiidishes:cocoa_powder"
+      },
+      {
+        "item": "kawaiidishes:steamed_milk_bucket"
+      }
+    ]
+  ],
+  "itemOnOutput": {
+    "item": "kawaiidishes:mug"
+  },
+  "output": {
+    "item": "kawaiidishes:mocha_coffee"
+  },
+  "ticks": 200,
+  "waterNeeded": 250
+}

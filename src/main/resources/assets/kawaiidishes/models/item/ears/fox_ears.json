@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kawaiidishes:item/ears/fox_ears_base",
+    "layer1": "kawaiidishes:item/ears/fox_ears_skin"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "kawaiidishes:blending",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:roast_coffee_beans"
+    }
+  ],
+  "itemOnOutput": {
+    "count": 0,
+    "item": "minecraft:air"
+  },
+  "output": {
+    "item": "kawaiidishes:ground_coffee"
+  },
+  "ticks": 100
+}

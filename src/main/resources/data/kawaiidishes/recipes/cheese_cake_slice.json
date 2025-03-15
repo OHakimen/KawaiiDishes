@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:cheese_cake"
+    }
+  ],
+  "result": {
+    "count": 8,
+    "item": "kawaiidishes:cheese_cake_slice"
+  }
+}

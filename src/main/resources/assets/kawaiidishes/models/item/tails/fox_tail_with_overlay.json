@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kawaiidishes:item/tail/fox_tail",
+    "layer1": "kawaiidishes:item/tail/fox_tail_overlay"
+  }
+}

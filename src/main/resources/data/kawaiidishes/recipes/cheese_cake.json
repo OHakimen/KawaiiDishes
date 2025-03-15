@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "e": {
+      "item": "minecraft:egg"
+    },
+    "g": {
+      "item": "minecraft:sugar"
+    },
+    "s": {
+      "item": "kawaiidishes:cream_cheese_ball"
+    },
+    "x": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "pattern": [
+    "xsx",
+    "gsg",
+    "ese"
+  ],
+  "result": {
+    "item": "kawaiidishes:cheese_cake"
+  }
+}

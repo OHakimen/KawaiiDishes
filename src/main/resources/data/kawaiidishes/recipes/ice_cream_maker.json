@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "-": {
+      "tag": "c:iron_ingots"
+    },
+    "l": {
+      "item": "minecraft:lever"
+    },
+    "s": {
+      "item": "minecraft:snow_block"
+    },
+    "x": {
+      "tag": "c:glass_panes"
+    }
+  },
+  "pattern": [
+    "l-x",
+    "-sx",
+    "---"
+  ],
+  "result": {
+    "item": "kawaiidishes:ice_cream_maker"
+  }
+}

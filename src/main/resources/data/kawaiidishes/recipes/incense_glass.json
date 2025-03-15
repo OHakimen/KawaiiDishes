@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "x": {
+      "tag": "c:glass_panes"
+    }
+  },
+  "pattern": [
+    "  s",
+    "xsx",
+    "xxx"
+  ],
+  "result": {
+    "item": "kawaiidishes:incense_glass"
+  }
+}
