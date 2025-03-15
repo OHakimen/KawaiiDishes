@@ -10,10 +10,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import software.bernie.geckolib.animation.Animation;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.constant.DataTickets;
-import software.bernie.geckolib.core.animation.Animation;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.model.GeoModel;
 
 import java.util.HashMap;
@@ -66,13 +66,13 @@ public class MaidDressesWithTailUtils {
 
         String typeName = type.name().toLowerCase();
         tailedDressesModels.put(type, new MaidDressesWithTailArmorModel(
-                new ResourceLocation(KawaiiDishes.MODID, "geo/maid_dresses_with_tail/maid_dress_%s_tail.geo.json".formatted(typeName)),
-                new ResourceLocation(KawaiiDishes.MODID, "textures/models/armor/maid_dresses_with_tail/dress/%s/maid_dress.png".formatted(typeName)),
-                new ResourceLocation(KawaiiDishes.MODID, "animations/maid_dresses_with_tail/maid_dress_%s_tail.animation.json".formatted(typeName))
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "geo/maid_dresses_with_tail/maid_dress_%s_tail.geo.json".formatted(typeName)),
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/maid_dresses_with_tail/dress/%s/maid_dress.png".formatted(typeName)),
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "animations/maid_dresses_with_tail/maid_dress_%s_tail.animation.json".formatted(typeName))
         ));
 
-        tailedDressesTailOverlay.put(type, new ResourceLocation(KawaiiDishes.MODID,"textures/models/armor/maid_dresses_with_tail/tail_overlays/%s_tail.png".formatted(typeName)));
-        tailedDressesTailBase.put(type,  new ResourceLocation(KawaiiDishes.MODID,"textures/models/armor/maid_dresses_with_tail/tail_base/%s_tail.png".formatted(typeName)));
+        tailedDressesTailOverlay.put(type, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"textures/models/armor/maid_dresses_with_tail/tail_overlays/%s_tail.png".formatted(typeName)));
+        tailedDressesTailBase.put(type,  ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"textures/models/armor/maid_dresses_with_tail/tail_base/%s_tail.png".formatted(typeName)));
 
         tailedDressesAnimation.put(type, state);
     }

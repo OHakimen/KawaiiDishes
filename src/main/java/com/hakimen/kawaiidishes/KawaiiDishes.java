@@ -5,6 +5,7 @@ import com.hakimen.kawaiidishes.config.ServerConfig;
 import com.hakimen.kawaiidishes.registry.Registration;
 import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
@@ -19,11 +20,10 @@ public class KawaiiDishes {
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public KawaiiDishes(IEventBus bus) {
+    public KawaiiDishes(ModContainer container) {
+        container.registerConfig(ModConfig.Type.COMMON, CommonConfig.COMMON_CONFIG);
+        container.registerConfig(ModConfig.Type.SERVER, ServerConfig.SERVER_CONFIG);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfig.COMMON_CONFIG);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ServerConfig.SERVER_CONFIG);
-
-        Registration.init(bus);
+        Registration.init(container.getEventBus());
     }
 }

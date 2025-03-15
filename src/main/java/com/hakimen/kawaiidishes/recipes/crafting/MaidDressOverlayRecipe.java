@@ -1,12 +1,16 @@
 package com.hakimen.kawaiidishes.recipes.crafting;
 
 import com.hakimen.kawaiidishes.item.armor.MaidDressArmorItem;
+import com.hakimen.kawaiidishes.item.component.KawaiiDyeableComponent;
+import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import com.hakimen.kawaiidishes.registry.RecipeRegister;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
+import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -20,12 +24,12 @@ public class MaidDressOverlayRecipe extends CustomRecipe {
     }
 
     @Override
-    public boolean matches(CraftingContainer pContainer, Level pLevel) {
+    public boolean matches(CraftingInput pContainer, Level pLevel) {
         ItemStack dress = ItemStack.EMPTY;
         List<ItemStack> apron = new ArrayList<>();
 
 
-        for(int i = 0; i < pContainer.getContainerSize(); ++i) {
+        for(int i = 0; i < pContainer.size(); ++i) {
             ItemStack containerItem = pContainer.getItem(i);
             if (!containerItem.isEmpty()) {
                 if (containerItem.getItem() instanceof MaidDressArmorItem) {
@@ -47,16 +51,17 @@ public class MaidDressOverlayRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer pContainer, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(CraftingInput pContainer, HolderLookup.Provider pRegistryAccess) {
         ItemStack dress = ItemStack.EMPTY;
         List<ItemStack> apron = new ArrayList<>();
 
 
-        for(int i = 0; i < pContainer.getContainerSize(); ++i) {
+        for(int i = 0; i < pContainer.size(); ++i) {
             ItemStack containerItem = pContainer.getItem(i);
             if (!containerItem.isEmpty()) {
                 if (containerItem.getItem() instanceof MaidDressArmorItem) {
-                    if(containerItem.getOrCreateTag().contains("HasOverlay") && containerItem.getOrCreateTag().getBoolean("HasOverlay")){
+                    KawaiiDyeableComponent.KawaiiDyeable dyeable = containerItem.get(DataComponentRegister.DYEABLE);
+                    if(dyeable.isHasOverlay()){
                         return ItemStack.EMPTY;
                     }
                     if (!dress.isEmpty()) {
@@ -75,7 +80,7 @@ public class MaidDressOverlayRecipe extends CustomRecipe {
         }
 
         ItemStack stack = dress.copy();
-        stack.getOrCreateTag().putBoolean("HasOverlay",true);
+        stack.update(DataComponentRegister.DYEABLE, KawaiiDyeableComponent.DEFAULT, dyeable -> new KawaiiDyeableComponent.KawaiiDyeableBuilder(dyeable).setHasOverlay(true).build());
         return !dress.isEmpty() && apron.size() == 1 ? stack : ItemStack.EMPTY;
     }
 
@@ -86,6 +91,6 @@ public class MaidDressOverlayRecipe extends CustomRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeRegister.MAID_DRESS_APRON.get();
+        return RecipeRegister.MAID_DRESS_APRON.value();
     }
 }

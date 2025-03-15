@@ -1,16 +1,18 @@
 package com.hakimen.kawaiidishes.block_entities;
 
-import com.hakimen.kawaiidishes.item.IDyeableItem;
+import com.hakimen.kawaiidishes.item.IFourColorDyeableItem;
 import com.hakimen.kawaiidishes.item.SeatItem;
+import com.hakimen.kawaiidishes.item.component.KawaiiDyeableComponent;
 import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
+import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,33 +24,32 @@ public class SeatBlockEntity extends BlockEntity {
     }
 
     public int getColor(){
-        return serializeNBT().getInt("Color");
+        return color;
     }
 
+
     @Override
-    protected void saveAdditional(CompoundTag pTag) {
+    protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         pTag.putInt("Color", color);
-        super.saveAdditional(pTag);
+        super.saveAdditional(pTag, pRegistries);
     }
 
     @Override
-    public void load(CompoundTag pTag) {
-        super.load(pTag);
+    protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
+        super.loadAdditional(pTag, pRegistries);
         color = pTag.getInt("Color");
     }
 
     public void saveToItem(SeatBlockEntity blockEntity, ItemStack pStack){
-        SeatItem item = (SeatItem) pStack.getItem();
-        if(blockEntity.getColor() == IDyeableItem.defaultColor){
+        if(blockEntity.getColor() == IFourColorDyeableItem.defaultColor){
             return;
         }
-        item.setBaseColor(pStack, color);
+        pStack.update(DataComponentRegister.DYEABLE, KawaiiDyeableComponent.DEFAULT, dyeable -> new KawaiiDyeableComponent.KawaiiDyeableBuilder(dyeable).setBase(color).build());
     }
 
     public SeatBlockEntity fromItem(ItemStack pStack){
-        SeatItem item = (SeatItem) pStack.getItem();
-
-        this.color = item.getBaseColor(pStack);
+        KawaiiDyeableComponent.KawaiiDyeable data = pStack.get(DataComponentRegister.DYEABLE);
+        this.color = data.getBase();
         return this;
     }
 
@@ -59,7 +60,7 @@ public class SeatBlockEntity extends BlockEntity {
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
-        return this.saveWithFullMetadata();
+    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
+        return this.saveWithFullMetadata(pRegistries);
     }
 }

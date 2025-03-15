@@ -2,6 +2,7 @@ package com.hakimen.kawaiidishes.client.entity.models.layers;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.item.armor.TailArmorItem;
+import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.utils.AnimalType;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
 import com.hakimen.kawaiidishes.utils.TailUtils;
@@ -21,7 +22,7 @@ public class TailLayer extends GeoArmorLayer<TailArmorItem> {
     AnimalType tail;
 
     public TailLayer(GeoRenderer<TailArmorItem> entityRendererIn) {
-        super(entityRendererIn, new ResourceLocation(KawaiiDishes.MODID, "textures/models/armor/none.png"));
+        super(entityRendererIn, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/none.png"));
     }
 
     public void updateStack(ItemStack stack) {
@@ -31,17 +32,24 @@ public class TailLayer extends GeoArmorLayer<TailArmorItem> {
     @Override
     public ResourceLocation getTexture() {
         return new ResourceLocation[]{
-                TailUtils.getTailOverlayTextures().get(((TailArmorItem)stackData.getItem()).getTailType()),
-                new ResourceLocation(KawaiiDishes.MODID, "textures/models/armor/none.png")
-        }[((TailArmorItem)stackData.getItem()).hasOverlay(stackData) ? 0 : 1];
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/none.png"),
+                TailUtils.getTailOverlayTextures().get(((TailArmorItem)stackData.getItem()).getTailType())
+        }[stackData.get(DataComponentRegister.DYEABLE).isHasOverlay() ? 1 : 0];
     }
 
     @Override
     public void render(PoseStack poseStack, TailArmorItem animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         RenderType armorRenderType = RenderType.armorCutoutNoCull(getTexture());
 
-        float[] rgb = ColorUtils.getColorsFromHex(animatable.getOverlayColor(stackData));
-
-        getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, armorRenderType, bufferSource.getBuffer(armorRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY, rgb[0], rgb[1], rgb[2], 1);
+        getRenderer().reRender(
+                getDefaultBakedModel(animatable),
+                poseStack,
+                bufferSource,
+                animatable,armorRenderType,
+                bufferSource.getBuffer(armorRenderType),
+                partialTick,
+                packedLight,
+                OverlayTexture.NO_OVERLAY,
+                stackData.get(DataComponentRegister.DYEABLE).getOverlay());
     }
 }

@@ -3,6 +3,8 @@ package com.hakimen.kawaiidishes.block_entities;
 import com.hakimen.kawaiidishes.containers.DisplayCaseContainer;
 import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
@@ -34,9 +36,10 @@ public class DisplayCaseBlockEntity extends BlockEntity implements MenuProvider,
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
-        return this.saveWithFullMetadata();
+    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
+        return this.saveWithFullMetadata(pRegistries);
     }
+
     @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {
         // Will get tag from #getUpdateTag
@@ -44,8 +47,8 @@ public class DisplayCaseBlockEntity extends BlockEntity implements MenuProvider,
     }
 
     @Override
-    public void handleUpdateTag(CompoundTag tag) {
-        super.handleUpdateTag(tag);
+    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider lookupProvider) {
+        super.handleUpdateTag(tag, lookupProvider);
         level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Block.UPDATE_ALL);
     }
 
@@ -65,17 +68,16 @@ public class DisplayCaseBlockEntity extends BlockEntity implements MenuProvider,
     }
 
     @Override
-    protected void saveAdditional(CompoundTag pTag) {
-        pTag.merge(this.inventory.serializeNBT());
-        super.saveAdditional(pTag);
+    protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
+        pTag.merge(this.inventory.serializeNBT(pRegistries));
+        super.saveAdditional(pTag,pRegistries);
     }
 
     @Override
-    public void load(CompoundTag pTag) {
-        super.load(pTag);
-        inventory.deserializeNBT(pTag);
+    protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
+        inventory.deserializeNBT(pRegistries,pTag);
+        super.loadAdditional(pTag, pRegistries);
     }
-
 
     private ItemStackHandler createHandler() {
         return new ItemStackHandler(8) {
@@ -87,7 +89,7 @@ public class DisplayCaseBlockEntity extends BlockEntity implements MenuProvider,
 
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-                return stack.isEdible() || stack.getItem() instanceof PotionItem;
+                return stack.has(DataComponents.FOOD) || stack.getItem() instanceof PotionItem;
             }
 
 

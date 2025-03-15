@@ -3,6 +3,7 @@ package com.hakimen.kawaiidishes.client.entity.models.layers.head_bands_with_ear
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.client.entity.models.layers.GeoArmorLayer;
 import com.hakimen.kawaiidishes.item.armor.HeadBandWithEarsArmorItem;
+import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
 import com.hakimen.kawaiidishes.utils.HeadBandsWithEarsUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -22,7 +23,7 @@ public class EarsOverlayLayer extends GeoArmorLayer<HeadBandWithEarsArmorItem> {
         this.stackData = stack;
     }
     public EarsOverlayLayer(GeoRenderer<HeadBandWithEarsArmorItem> entityRendererIn) {
-        super(entityRendererIn, new ResourceLocation(KawaiiDishes.MODID, "textures/models/armor/none.png"));
+        super(entityRendererIn, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/none.png"));
     }
 
     @Override
@@ -34,8 +35,15 @@ public class EarsOverlayLayer extends GeoArmorLayer<HeadBandWithEarsArmorItem> {
     public void render(PoseStack poseStack, HeadBandWithEarsArmorItem animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         RenderType armorRenderType = RenderType.armorCutoutNoCull(getTexture());
 
-        float[] rgb = ColorUtils.getColorsFromHex(animatable.getSecondaryOverlayColor(stackData));
-
-        getRenderer().reRender(getDefaultBakedModel(animatable),poseStack,bufferSource,animatable,armorRenderType,bufferSource.getBuffer(armorRenderType),partialTick,packedLight, OverlayTexture.NO_OVERLAY,rgb[0],rgb[1],rgb[2],1);
+        getRenderer().reRender(
+                getDefaultBakedModel(animatable),
+                poseStack,
+                bufferSource,
+                animatable,armorRenderType,
+                bufferSource.getBuffer(armorRenderType),
+                partialTick,
+                packedLight,
+                OverlayTexture.NO_OVERLAY,
+                stackData.get(DataComponentRegister.DYEABLE).getSecondaryOverlay());
     }
 }

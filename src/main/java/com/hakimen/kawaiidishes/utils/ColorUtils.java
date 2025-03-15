@@ -2,7 +2,7 @@ package com.hakimen.kawaiidishes.utils;
 
 public class ColorUtils {
     public static float[] getColorsFromHex(int hexvalue){
-        String hex = Integer.toHexString(hexvalue );
+        String hex = Integer.toHexString(hexvalue);
         hex += "0".repeat(6 - (hex.length()-1));
         int resultRed = Integer.valueOf(hex.substring(0, 2), 16);
         int resultGreen = Integer.valueOf(hex.substring(2, 4), 16);

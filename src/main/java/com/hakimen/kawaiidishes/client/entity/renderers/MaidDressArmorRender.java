@@ -3,6 +3,7 @@ package com.hakimen.kawaiidishes.client.entity.renderers;
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.client.entity.models.layers.maid_dress_layers.MaidDressOverlayLayer;
 import com.hakimen.kawaiidishes.item.armor.MaidDressArmorItem;
+import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.resources.ResourceLocation;
@@ -10,8 +11,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.core.object.Color;
 import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.util.Color;
 
 public class MaidDressArmorRender extends GeoArmorItemRenderer<MaidDressArmorItem>{
 
@@ -30,9 +31,9 @@ public class MaidDressArmorRender extends GeoArmorItemRenderer<MaidDressArmorIte
     @Override
     public ResourceLocation getTextureLocation(MaidDressArmorItem animatable) {
         return new ResourceLocation[]{
-                new ResourceLocation(KawaiiDishes.MODID,"textures/models/armor/maid_dress/dress.png"),
-                new ResourceLocation(KawaiiDishes.MODID,"textures/models/armor/maid_dress/maid_dress.png")
-        }[animatable.hasOverlay(stackData) ? 1 : 0];
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"textures/models/armor/maid_dress/dress.png"),
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"textures/models/armor/maid_dress/maid_dress.png")
+        }[stackData.get(DataComponentRegister.DYEABLE).isHasOverlay() ? 1 : 0];
     }
 
     @Override
@@ -46,7 +47,6 @@ public class MaidDressArmorRender extends GeoArmorItemRenderer<MaidDressArmorIte
 
     @Override
     public Color getRenderColor(MaidDressArmorItem animatable, float partialTick, int packedLight) {
-        float[] rgb = ColorUtils.getColorsFromHex(animatable.getBaseColor(stackData));
-        return Color.ofRGB(rgb[0],rgb[1],rgb[2]);
+        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE).getBase());
     }
 }

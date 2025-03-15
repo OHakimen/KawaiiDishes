@@ -1,6 +1,7 @@
 package com.hakimen.kawaiidishes.datagen.loottable;
 
 import com.hakimen.kawaiidishes.registry.BlockRegister;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
@@ -10,8 +11,8 @@ import java.util.List;
 import java.util.Set;
 
 public class BlockLootTableDataGen extends BlockLootSubProvider {
-    public BlockLootTableDataGen() {
-        super(Set.of(), FeatureFlags.REGISTRY.allFlags());
+    public BlockLootTableDataGen(HolderLookup.Provider provider) {
+        super(Set.of(), FeatureFlags.REGISTRY.allFlags(),provider);
     }
 
     static List<Block> blocks = List.of(

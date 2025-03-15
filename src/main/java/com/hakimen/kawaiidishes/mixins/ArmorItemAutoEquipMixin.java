@@ -18,12 +18,12 @@ public class ArmorItemAutoEquipMixin {
     @Inject(at = @At("HEAD"), method = "inventoryTick")
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pPartialTicks, boolean someBoolean, CallbackInfo ci){
         if(pStack.getItem() instanceof Equipable equipable && pEntity instanceof Player player) {
-            boolean hasAutoEquip = EnchantUtils.hasEnchant(pStack, EnchantmentRegister.AUTO_EQUIP_CURSE.get());
-            EquipmentSlot targetSlot = equipable.getEquipmentSlot();
-            if(player.getItemBySlot(targetSlot).equals(ItemStack.EMPTY) && hasAutoEquip && !player.getCooldowns().isOnCooldown(pStack.getItem())){
-                player.setItemSlot(targetSlot, pStack.copy());
-                pStack.setCount(0);
-            }
+//            boolean hasAutoEquip = EnchantUtils.hasEnchant(pStack, EnchantmentRegister.AUTO_EQUIP_CURSE.get());
+//            EquipmentSlot targetSlot = equipable.getEquipmentSlot();
+//            if(player.getItemBySlot(targetSlot).equals(ItemStack.EMPTY) && hasAutoEquip && !player.getCooldowns().isOnCooldown(pStack.getItem())){
+//                player.setItemSlot(targetSlot, pStack.copy());
+//                pStack.setCount(0);
+//            }
         }
     }
 }

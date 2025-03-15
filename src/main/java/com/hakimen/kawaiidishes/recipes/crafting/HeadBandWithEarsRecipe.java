@@ -1,14 +1,19 @@
 package com.hakimen.kawaiidishes.recipes.crafting;
 
+import com.hakimen.kawaiidishes.item.IFourColorDyeableItem;
 import com.hakimen.kawaiidishes.item.armor.EarsArmorItem;
 import com.hakimen.kawaiidishes.item.armor.HeadBandArmorItem;
 import com.hakimen.kawaiidishes.item.armor.HeadBandWithEarsArmorItem;
+import com.hakimen.kawaiidishes.item.component.KawaiiDyeableComponent;
+import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.registry.RecipeRegister;
 import com.hakimen.kawaiidishes.utils.HeadBandsWithEarsUtils;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
+import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -22,12 +27,12 @@ public class HeadBandWithEarsRecipe extends CustomRecipe {
     }
 
     @Override
-    public boolean matches(CraftingContainer pContainer, Level pLevel) {
+    public boolean matches(CraftingInput pContainer, Level pLevel) {
         ItemStack headBand = ItemStack.EMPTY;
         List<ItemStack> ears = new ArrayList<>();
 
 
-        for(int i = 0; i < pContainer.getContainerSize(); ++i) {
+        for(int i = 0; i < pContainer.size(); ++i) {
             ItemStack containerItem = pContainer.getItem(i);
             if (!containerItem.isEmpty()) {
                 if (containerItem.getItem() instanceof HeadBandArmorItem) {
@@ -49,12 +54,11 @@ public class HeadBandWithEarsRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer pContainer, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(CraftingInput pContainer, HolderLookup.Provider pRegistryAccess) {
         ItemStack headBand = ItemStack.EMPTY;
         List<ItemStack> ears = new ArrayList<>();
 
-
-        for(int i = 0; i < pContainer.getContainerSize(); ++i) {
+        for(int i = 0; i < pContainer.size(); ++i) {
             ItemStack containerItem = pContainer.getItem(i);
             if (!containerItem.isEmpty()) {
                 if (containerItem.getItem() instanceof HeadBandArmorItem) {
@@ -74,27 +78,29 @@ public class HeadBandWithEarsRecipe extends CustomRecipe {
         }
 
         var earsData = (EarsArmorItem) ears.get(0).getItem();
+        var earsComponents = ears.get(0).get(DataComponentRegister.DYEABLE);
         var headBandData = (HeadBandArmorItem) headBand.getItem();
+        var headBandComponents = headBand.get(DataComponentRegister.DYEABLE);
         ItemStack stack = HeadBandsWithEarsUtils.getEaredHeadBandsItems().get(earsData.getEarsType()).get().getDefaultInstance();
 
-        HeadBandWithEarsArmorItem headBandWithEarsArmorItem = (HeadBandWithEarsArmorItem) stack.getItem();
+        KawaiiDyeableComponent.KawaiiDyeableBuilder builder = new KawaiiDyeableComponent.KawaiiDyeableBuilder();
 
-        headBandWithEarsArmorItem.setPrimaryBaseColor(stack,headBandData.getBaseColor(headBand));
 
-        if(headBandData.hasOverlay(headBand)){
-            stack.getOrCreateTag().putBoolean("HasPrimaryOverlay",true);
+        builder.setBase(headBandComponents.getBase());
 
-            headBandWithEarsArmorItem.setPrimaryOverlayColor(stack,headBandData.getOverlayColor(headBand));
+        if(headBandComponents.isHasOverlay()){
+            builder.setOverlay(headBandComponents.getOverlay());
+            builder.setHasOverlay(true);
         }
 
-        headBandWithEarsArmorItem.setSecondaryBaseColor(stack,earsData.getBaseColor(ears.get(0)));
+        builder.setSecondaryBase(earsComponents.getBase());
 
-        if(earsData.hasOverlay(ears.get(0))){
-            stack.getOrCreateTag().putBoolean("HasSecondaryOverlay",true);
-
-            headBandWithEarsArmorItem.setSecondaryOverlayColor(stack,earsData.getOverlayColor(ears.get(0)));
+        if(earsComponents.isHasOverlay()){
+            builder.setSecondaryOverlay(earsComponents.getOverlay());
+            builder.setHasSecondaryOverlay(true);
         }
 
+        stack.set(DataComponentRegister.DYEABLE,builder.build());
 
         return !headBand.isEmpty() && ears.size() == 1 ? stack : ItemStack.EMPTY;
     }
@@ -106,6 +112,6 @@ public class HeadBandWithEarsRecipe extends CustomRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeRegister.HEAD_BAND_EARS.get();
+        return RecipeRegister.HEAD_BAND_EARS.value();
     }
 }

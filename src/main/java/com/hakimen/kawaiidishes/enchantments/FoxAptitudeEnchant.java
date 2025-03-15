@@ -1,3 +1,4 @@
+/*
 package com.hakimen.kawaiidishes.enchantments;
 
 import com.hakimen.kawaiidishes.config.CommonConfig;
@@ -100,3 +101,4 @@ public class FoxAptitudeEnchant extends Enchantment {
         return 2;
     }
 }
+*/

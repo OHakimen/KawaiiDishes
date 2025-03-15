@@ -2,7 +2,10 @@ package com.hakimen.kawaiidishes.datagen.loottable;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.LootTableSubProvider;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -14,10 +17,14 @@ import java.util.function.BiConsumer;
 
 public class ChestLootDataGen implements LootTableSubProvider {
 
-    ResourceLocation MAID_CAFE = new ResourceLocation(KawaiiDishes.MODID, "chests/maid_cafe");
+    ResourceKey<LootTable> MAID_CAFE = ResourceKey.create(Registries.LOOT_TABLE,ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "chests/maid_cafe"));
+
+    public ChestLootDataGen(HolderLookup.Provider provider) {
+    }
+
 
     @Override
-    public void generate(BiConsumer<ResourceLocation, LootTable.Builder> registry) {
+    public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> registry) {
         registry.accept(MAID_CAFE, LootTable
                 .lootTable()
                 .withPool(

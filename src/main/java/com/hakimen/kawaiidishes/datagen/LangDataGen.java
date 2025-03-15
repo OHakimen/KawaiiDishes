@@ -11,22 +11,14 @@ public class LangDataGen extends LanguageProvider {
     @Override
     protected void addTranslations() {
         add("item.kawaiidishes.base_dye","Base %s");
-        add("item.kawaiidishes.overlay_dye","Decoration %s");
+        add("item.kawaiidishes.overlay_dye","Overlay %s");
+        add("item.kawaiidishes.base_secondary_dye","Secondary Base %s");
+        add("item.kawaiidishes.overlay_secondary_dye","Secondary Overlay %s");
 
 
         add("kawaiidishes.tooltip.liquid.amount_with_capacity","%dmB/%dmB");
         add("kawaiidishes.tooltip.liquid.amount","%dmB");
 
-
-        add("item.kawaiidishes.dress_color","Dress Color %s");
-        add("item.kawaiidishes.dress_decoration_color","Dress Decoration Color %s");
-        add("item.kawaiidishes.tail_color","Tail Color %s");
-        add("item.kawaiidishes.tail_decoration_color","Tail Decoration Color %s");
-
-        add("item.kawaiidishes.head_band_color","Head Band Color %s");
-        add("item.kawaiidishes.head_band_decoration_color","Head Band Decoration Color %s");
-        add("item.kawaiidishes.ears_color","Ears Color %s");
-        add("item.kawaiidishes.ears_decoration_color","Ears Decoration Color %s");
 
         add("item.kawaiidishes.dyeable", "Dyeable");
 
@@ -166,10 +158,10 @@ public class LangDataGen extends LanguageProvider {
     }
 
     private void enchants(){
-        add(EnchantmentRegister.CAT_AURA.get(), "Cat's Aura");
-        add(EnchantmentRegister.FOX_APTITUDE.get(), "Fox's Aptitude");
-        add(EnchantmentRegister.BUNNY_HASTE.get(), "Bunny's Haste");
-        add(EnchantmentRegister.AUTO_EQUIP_CURSE.get(), "Curse of Automatic Equipment");
+//        add(EnchantmentRegister.CAT_AURA.get(), "Cat's Aura");
+//        add(EnchantmentRegister.FOX_APTITUDE.get(), "Fox's Aptitude");
+//        add(EnchantmentRegister.BUNNY_HASTE.get(), "Bunny's Haste");
+//        add(EnchantmentRegister.AUTO_EQUIP_CURSE.get(), "Curse of Automatic Equipment");
     }
 
     private void jeiNames(){

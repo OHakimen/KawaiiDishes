@@ -22,30 +22,30 @@ public class ItemRegister {
     static final FoodProperties coffeeProperties = new FoodProperties.Builder()
             .fast()
             .nutrition(4)
-            .saturationMod(1.3f)
+            .saturationModifier(1.3f)
             .build();
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, KawaiiDishes.MODID);
-    public static final DeferredHolder<Item, ThighHighsArmorItem> THIGH_HIGHS = ITEMS.register("thigh_highs", () -> new ThighHighsArmorItem(ArmorMaterials.IRON, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-    public static final DeferredHolder<Item, MaidDressArmorItem> MAID_DRESS = ITEMS.register("maid_dress", () -> new MaidDressArmorItem(ArmorMaterials.IRON, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-    public static final DeferredHolder<Item, HeadBandArmorItem> HEAD_BAND = ITEMS.register("head_band", () -> new HeadBandArmorItem(ArmorMaterials.IRON, ArmorItem.Type.HELMET, new Item.Properties()));
-    public static final DeferredHolder<Item, ShoesArmorItem> SHOES = ITEMS.register("shoes", () -> new ShoesArmorItem(ArmorMaterials.IRON, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static final DeferredHolder<Item, ThighHighsArmorItem> THIGH_HIGHS = ITEMS.register("thigh_highs", () -> new ThighHighsArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final DeferredHolder<Item, MaidDressArmorItem> MAID_DRESS = ITEMS.register("maid_dress", () -> new MaidDressArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final DeferredHolder<Item, HeadBandArmorItem> HEAD_BAND = ITEMS.register("head_band", () -> new HeadBandArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final DeferredHolder<Item, ShoesArmorItem> SHOES = ITEMS.register("shoes", () -> new ShoesArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.BOOTS, new Item.Properties()));
     //Fox
-    public static final DeferredHolder<Item, TailArmorItem> FOX_TAIL = ITEMS.register("fox_tail", () -> new TailArmorItem(ArmorMaterials.IRON, ArmorItem.Type.CHESTPLATE, new Item.Properties(), AnimalType.FOX, true));
-    public static final DeferredHolder<Item, MaidDressesWithTailArmorItem> MAID_DRESS_FOX_TAIL = ITEMS.register("maid_dress_fox_tail", () -> new MaidDressesWithTailArmorItem(ArmorMaterials.IRON, ArmorItem.Type.CHESTPLATE, new Item.Properties(), AnimalType.FOX));
-    public static final DeferredHolder<Item, EarsArmorItem> FOX_EARS = ITEMS.register("fox_ears", () -> new EarsArmorItem(ArmorMaterials.IRON, ArmorItem.Type.HELMET, new Item.Properties(), AnimalType.FOX, true));
-    public static final DeferredHolder<Item, HeadBandWithEarsArmorItem> HEAD_BAND_FOX_EARS = ITEMS.register("head_band_fox_ears", () -> new HeadBandWithEarsArmorItem(ArmorMaterials.IRON, ArmorItem.Type.HELMET, new Item.Properties(), AnimalType.FOX));
+    public static final DeferredHolder<Item, TailArmorItem> FOX_TAIL = ITEMS.register("fox_tail", () -> new TailArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.CHESTPLATE, new Item.Properties(), AnimalType.FOX, true));
+    public static final DeferredHolder<Item, MaidDressesWithTailArmorItem> MAID_DRESS_FOX_TAIL = ITEMS.register("maid_dress_fox_tail", () -> new MaidDressesWithTailArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.CHESTPLATE, new Item.Properties(), AnimalType.FOX));
+    public static final DeferredHolder<Item, EarsArmorItem> FOX_EARS = ITEMS.register("fox_ears", () -> new EarsArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.HELMET, new Item.Properties(), AnimalType.FOX, true));
+    public static final DeferredHolder<Item, HeadBandWithEarsArmorItem> HEAD_BAND_FOX_EARS = ITEMS.register("head_band_fox_ears", () -> new HeadBandWithEarsArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.HELMET, new Item.Properties(), AnimalType.FOX));
 
     //Bunny
-    public static final DeferredHolder<Item, TailArmorItem> BUNNY_TAIL = ITEMS.register("bunny_tail", () -> new TailArmorItem(ArmorMaterials.IRON, ArmorItem.Type.CHESTPLATE, new Item.Properties(), AnimalType.BUNNY, true));
-    public static final DeferredHolder<Item, MaidDressesWithTailArmorItem> MAID_DRESS_BUNNY_TAIL = ITEMS.register("maid_dress_bunny_tail", () -> new MaidDressesWithTailArmorItem(ArmorMaterials.IRON, ArmorItem.Type.CHESTPLATE, new Item.Properties(), AnimalType.BUNNY));
-    public static final DeferredHolder<Item, EarsArmorItem> BUNNY_EARS = ITEMS.register("bunny_ears", () -> new EarsArmorItem(ArmorMaterials.IRON, ArmorItem.Type.HELMET, new Item.Properties(), AnimalType.BUNNY, true));
-    public static final DeferredHolder<Item, HeadBandWithEarsArmorItem> HEAD_BAND_BUNNY_EARS = ITEMS.register("head_band_bunny_ears", () -> new HeadBandWithEarsArmorItem(ArmorMaterials.IRON, ArmorItem.Type.HELMET, new Item.Properties(), AnimalType.BUNNY));
+    public static final DeferredHolder<Item, TailArmorItem> BUNNY_TAIL = ITEMS.register("bunny_tail", () -> new TailArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.CHESTPLATE, new Item.Properties(), AnimalType.BUNNY, true));
+    public static final DeferredHolder<Item, MaidDressesWithTailArmorItem> MAID_DRESS_BUNNY_TAIL = ITEMS.register("maid_dress_bunny_tail", () -> new MaidDressesWithTailArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.CHESTPLATE, new Item.Properties(), AnimalType.BUNNY));
+    public static final DeferredHolder<Item, EarsArmorItem> BUNNY_EARS = ITEMS.register("bunny_ears", () -> new EarsArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.HELMET, new Item.Properties(), AnimalType.BUNNY, true));
+    public static final DeferredHolder<Item, HeadBandWithEarsArmorItem> HEAD_BAND_BUNNY_EARS = ITEMS.register("head_band_bunny_ears", () -> new HeadBandWithEarsArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.HELMET, new Item.Properties(), AnimalType.BUNNY));
 
     //Cat
-    public static final DeferredHolder<Item, TailArmorItem> CAT_TAIL = ITEMS.register("cat_tail", () -> new TailArmorItem(ArmorMaterials.IRON, ArmorItem.Type.CHESTPLATE, new Item.Properties(), AnimalType.CAT, true));
-    public static final DeferredHolder<Item, MaidDressesWithTailArmorItem> MAID_DRESS_CAT_TAIL = ITEMS.register("maid_dress_cat_tail", () -> new MaidDressesWithTailArmorItem(ArmorMaterials.IRON, ArmorItem.Type.CHESTPLATE, new Item.Properties(), AnimalType.CAT));
-    public static final DeferredHolder<Item, EarsArmorItem> CAT_EARS = ITEMS.register("cat_ears", () -> new EarsArmorItem(ArmorMaterials.IRON, ArmorItem.Type.HELMET, new Item.Properties(), AnimalType.CAT, true));
-    public static final DeferredHolder<Item, HeadBandWithEarsArmorItem> HEAD_BAND_CAT_EARS = ITEMS.register("head_band_cat_ears", () -> new HeadBandWithEarsArmorItem(ArmorMaterials.IRON, ArmorItem.Type.HELMET, new Item.Properties(), AnimalType.CAT));
+    public static final DeferredHolder<Item, TailArmorItem> CAT_TAIL = ITEMS.register("cat_tail", () -> new TailArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.CHESTPLATE, new Item.Properties(), AnimalType.CAT, true));
+    public static final DeferredHolder<Item, MaidDressesWithTailArmorItem> MAID_DRESS_CAT_TAIL = ITEMS.register("maid_dress_cat_tail", () -> new MaidDressesWithTailArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.CHESTPLATE, new Item.Properties(), AnimalType.CAT));
+    public static final DeferredHolder<Item, EarsArmorItem> CAT_EARS = ITEMS.register("cat_ears", () -> new EarsArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.HELMET, new Item.Properties(), AnimalType.CAT, true));
+    public static final DeferredHolder<Item, HeadBandWithEarsArmorItem> HEAD_BAND_CAT_EARS = ITEMS.register("head_band_cat_ears", () -> new HeadBandWithEarsArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.HELMET, new Item.Properties(), AnimalType.CAT));
 
     //Overlay Items
     public static final DeferredHolder<Item, Item> APRON = ITEMS.register("apron", () -> new Item(new Item.Properties().stacksTo(16)));
@@ -67,7 +67,7 @@ public class ItemRegister {
     public static final DeferredHolder<Item, Item> CHERRY = ITEMS.register("cherry", () -> new Item(new Item.Properties().food(coffeeProperties)));
     static final FoodProperties cookieProperties = new FoodProperties.Builder()
             .nutrition(2)
-            .saturationMod(1f)
+            .saturationModifier(1f)
             .build();
     //Cookies
     public static final DeferredHolder<Item, Item> CHOCOLATE_COOKIE = ITEMS.register("chocolate_cookie", () -> new Item(new Item.Properties().food(cookieProperties)));
@@ -77,7 +77,7 @@ public class ItemRegister {
             new Item(new Item.Properties().food(
                     new FoodProperties.Builder()
                             .nutrition(2)
-                            .saturationMod(1f)
+                            .saturationModifier(1f)
                             .effect(() -> new MobEffectInstance(MobEffects.GLOWING, 30 * 20), 1f)
                             .build()
             )
@@ -87,7 +87,7 @@ public class ItemRegister {
             new Item(new Item.Properties().food(
                     new FoodProperties.Builder()
                             .nutrition(2)
-                            .saturationMod(1f)
+                            .saturationModifier(1f)
                             .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 10 * 20), 1f)
                             .effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 30 * 20, 1), 1f)
                             .build()
@@ -98,8 +98,8 @@ public class ItemRegister {
             new Item(new Item.Properties().food(
                     new FoodProperties.Builder()
                             .nutrition(2)
-                            .saturationMod(1f)
-                            .effect(() -> new MobEffectInstance(EffectRegister.BLESSING_OF_UNBINDING.get(), (2 * 60 + 30) * 20), 1f)
+                            .saturationModifier(1f)
+                            .effect(() -> new MobEffectInstance(EffectRegister.BLESSING_OF_UNBINDING, (2 * 60 + 30) * 20), 1f)
                             .build()
             )
             )
@@ -178,7 +178,7 @@ public class ItemRegister {
     public static final FoodProperties CAKE_SLICE_PROPS = new FoodProperties.Builder()
             .fast()
             .nutrition(3)
-            .saturationMod(1f)
+            .saturationModifier(1f)
             .build();
     public static final DeferredHolder<Item, Item> CAKE_SLICE = ITEMS.register("cake_slice", () ->
             new Item(new Item.Properties().food(CAKE_SLICE_PROPS))
@@ -214,7 +214,7 @@ public class ItemRegister {
             new Item(new Item.Properties().food(
                     new FoodProperties.Builder()
                             .nutrition(5)
-                            .saturationMod(1.25f)
+                            .saturationModifier(1.25f)
                             .build()
             ))
     );
@@ -223,7 +223,7 @@ public class ItemRegister {
             new Item(new Item.Properties().food(
                     new FoodProperties.Builder()
                             .nutrition(6)
-                            .saturationMod(1.25f)
+                            .saturationModifier(1.25f)
                             .build()
             ))
     );
@@ -231,7 +231,7 @@ public class ItemRegister {
     //Ice Creams
     public static final FoodProperties ICE_CREAM_PROPS = new FoodProperties.Builder()
             .nutrition(6)
-            .saturationMod(1.5f)
+            .saturationModifier(1.5f)
             .build();
 
     public static final DeferredHolder<Item, OnConsumeDropItem> CREAM_ICE_CREAM = ITEMS.register("cream_ice_cream", () ->
@@ -250,7 +250,7 @@ public class ItemRegister {
             new OnConsumeDropItem(new Item.Properties().food(
                     new FoodProperties.Builder()
                             .nutrition(6)
-                            .saturationMod(1.5f)
+                            .saturationModifier(1.5f)
                             .effect(() -> new MobEffectInstance(MobEffects.GLOWING, 30 * 20), 1f)
                             .build()
             ), Items.BOWL.getDefaultInstance())
@@ -259,7 +259,7 @@ public class ItemRegister {
     public static final DeferredHolder<Item, OnConsumeDropItem> NEAPOLITAN_ICE_CREAM = ITEMS.register("neapolitan_ice_cream", () ->
             new OnConsumeDropItem(new Item.Properties().food(new FoodProperties.Builder()
                     .nutrition(10)
-                    .saturationMod(1.5f)
+                    .saturationModifier(1.5f)
                     .build()
             ), Items.BOWL.getDefaultInstance())
     );

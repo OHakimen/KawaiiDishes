@@ -1,14 +1,16 @@
 package com.hakimen.kawaiidishes.recipes.crafting;
 
 import com.google.common.collect.Lists;
-import com.hakimen.kawaiidishes.item.IDyeableItem;
+import com.hakimen.kawaiidishes.item.IFourColorDyeableItem;
+import com.hakimen.kawaiidishes.item.component.KawaiiDyeableComponent;
+import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.registry.RecipeRegister;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
+import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -21,13 +23,13 @@ public class DyeIDyeableRecipe extends CustomRecipe {
     }
 
     @Override
-    public boolean matches(CraftingContainer pContainer, Level pLevel) {
+    public boolean matches(CraftingInput pContainer, Level pLevel) {
         ItemStack itemstack = ItemStack.EMPTY;
         List<ItemStack> list = Lists.newArrayList();
-        for(int i = 0; i < pContainer.getContainerSize(); ++i) {
+        for (int i = 0; i < pContainer.size(); ++i) {
             ItemStack itemstack1 = pContainer.getItem(i);
             if (!itemstack1.isEmpty()) {
-                if (itemstack1.getItem() instanceof IDyeableItem) {
+                if (itemstack1.has(DataComponentRegister.DYEABLE)) {
                     if (!itemstack.isEmpty()) {
                         return false;
                     }
@@ -47,15 +49,15 @@ public class DyeIDyeableRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer pContainer, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(CraftingInput pContainer, HolderLookup.Provider p_346030_) {
         List<DyeItem> list = Lists.newArrayList();
         ItemStack itemstack = ItemStack.EMPTY;
 
-        for(int i = 0; i < pContainer.getContainerSize(); ++i) {
+        for (int i = 0; i < pContainer.size(); ++i) {
             ItemStack itemstack1 = pContainer.getItem(i);
             if (!itemstack1.isEmpty()) {
                 Item item = itemstack1.getItem();
-                if (item instanceof IDyeableItem) {
+                if (itemstack1.has(DataComponentRegister.DYEABLE)) {
                     if (!itemstack.isEmpty()) {
                         return ItemStack.EMPTY;
                     }
@@ -66,11 +68,12 @@ public class DyeIDyeableRecipe extends CustomRecipe {
                         return ItemStack.EMPTY;
                     }
 
-                    list.add((DyeItem)item);
+                    list.add((DyeItem) item);
                 }
             }
         }
-        ItemStack stack = itemstack.getItem() instanceof IDyeableItem item ? item.hasOverlay(itemstack) ? IDyeableItem.dyeOverlay(itemstack, list) : IDyeableItem.dyeBase(itemstack, list) : ItemStack.EMPTY;
+        KawaiiDyeableComponent.KawaiiDyeable data = itemstack.get(DataComponentRegister.DYEABLE);
+        ItemStack stack = data != null ? data.isHasOverlay() ? IFourColorDyeableItem.dyePrimaryOverlay(itemstack, list) : IFourColorDyeableItem.dyePrimaryBase(itemstack, list) : ItemStack.EMPTY;
         return !itemstack.isEmpty() && !list.isEmpty() ? stack : ItemStack.EMPTY;
     }
 
@@ -81,6 +84,6 @@ public class DyeIDyeableRecipe extends CustomRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeRegister.DYE_IDYEABLE.get();
+        return RecipeRegister.DYE_IDYEABLE.value();
     }
 }

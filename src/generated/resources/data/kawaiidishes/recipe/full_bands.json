@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "x": {
+      "tag": "c:strings"
+    }
+  },
+  "pattern": [
+    "xxx",
+    "   ",
+    "xxx"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kawaiidishes:full_bands"
+  }
+}

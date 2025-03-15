@@ -1,18 +1,16 @@
 package com.hakimen.kawaiidishes.events;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
-import com.hakimen.kawaiidishes.aromas.PacifyAroma;
-import com.hakimen.kawaiidishes.block.IncenseBlock;
-import com.hakimen.kawaiidishes.block_entities.IncenseBlockEntity;
 import com.hakimen.kawaiidishes.config.ServerConfig;
-import com.hakimen.kawaiidishes.item.IDyeableItem;
 import com.hakimen.kawaiidishes.item.IFourColorDyeableItem;
+import com.hakimen.kawaiidishes.item.component.KawaiiDyeableComponent;
+import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
-import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.monster.piglin.PiglinBrute;
@@ -20,15 +18,15 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.AABB;
-import net.neoforged.bus.api.Event;
+import net.minecraft.world.item.component.CustomData;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.EntityEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = KawaiiDishes.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@EventBusSubscriber(modid = KawaiiDishes.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class MobSpawnedEvent {
     public static List<ItemStack> makeSet(RandomSource source, ArmorSets set) {
 
@@ -36,7 +34,6 @@ public class MobSpawnedEvent {
         ItemStack chestSlot = new ItemStack(set.chest);
         ItemStack legSlot = new ItemStack(ItemRegister.THIGH_HIGHS.get());
         ItemStack feetSlot = ItemStack.EMPTY;
-
 
         //Pick a base color
         int base = source.nextInt(1, 15);
@@ -49,31 +46,29 @@ public class MobSpawnedEvent {
             int base2 = source.nextInt(0, 15);
             int overlay2 = source.nextFloat() < 0.25f ? source.nextInt(0, 15) : -1;
 
+
             headSlot = dyePiece(headSlot, base, overlay, base2, overlay2);
-            headSlot.getOrCreateTag().putBoolean("HasPrimaryOverlay", true);
-            headSlot.getOrCreateTag().putBoolean("HasSecondaryOverlay", overlay2 != -1);
+
 
             chestSlot = dyePiece(chestSlot, base, overlay, base2, overlay2);
-            chestSlot.getOrCreateTag().putBoolean("HasPrimaryOverlay", true);
-            chestSlot.getOrCreateTag().putBoolean("HasSecondaryOverlay", true);
 
             feetSlot = new ItemStack(ItemRegister.SHOES.get());
+
             feetSlot = dyePiece(feetSlot, base, overlay);
-            feetSlot.getOrCreateTag().putBoolean("HasOverlay", true);
         } else {
             headSlot = dyePiece(headSlot, base, overlay);
-            headSlot.getOrCreateTag().putBoolean("HasOverlay", true);
 
             chestSlot = dyePiece(chestSlot, base, overlay);
-            chestSlot.getOrCreateTag().putBoolean("HasOverlay", true);
+
             if (set.equals(ArmorSets.Maid)) {
                 feetSlot = new ItemStack(ItemRegister.SHOES.get());
                 feetSlot = dyePiece(feetSlot, base, overlay);
-                feetSlot.getOrCreateTag().putBoolean("HasOverlay", true);
             }
         }
         legSlot = dyePiece(legSlot, base, overlay);
-        legSlot.getOrCreateTag().putInt("Decoration", source.nextInt(0, 5));
+        CompoundTag tag = new CompoundTag();
+        tag.putInt("Decoration", source.nextInt(0, 5));
+        legSlot.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
 
         return List.of(headSlot, chestSlot, legSlot, feetSlot);
     }
@@ -91,16 +86,16 @@ public class MobSpawnedEvent {
 
     public static ItemStack dyePiece(ItemStack stacc, int base, int overlay) {
         ItemStack stack = stacc.copy();
-        stack = IDyeableItem.dyeBase(stack, List.of(DyeItem.byColor(DyeColor.byId(base))));
-        stack = IDyeableItem.dyeOverlay(stack, List.of(DyeItem.byColor(DyeColor.byId(overlay))));
+        stack = IFourColorDyeableItem.dyePrimaryBase(stack, List.of(DyeItem.byColor(DyeColor.byId(base))));
+        stack = IFourColorDyeableItem.dyePrimaryOverlay(stack, List.of(DyeItem.byColor(DyeColor.byId(overlay))));
         return stack;
     }
 
     @SubscribeEvent
-    public static void finalizeSpawnEvent(MobSpawnEvent.FinalizeSpawn event) {
+    public static void finalizeSpawnEvent(EntityJoinLevelEvent event) {
         Entity entity = event.getEntity();
         RandomSource source = event.getLevel().getRandom();
-        if (!entity.isAddedToWorld() && entity instanceof Monster monster &&
+        if (!entity.isAddedToLevel() && entity instanceof Monster monster &&
                 (monster instanceof Skeleton
                         || monster instanceof WitherSkeleton
                         || monster instanceof Stray
@@ -111,6 +106,7 @@ public class MobSpawnedEvent {
             int set = source.nextInt(0, ArmorSets.values().length);
 
             List<ItemStack> armor = makeSet(source, ArmorSets.values()[set]);
+
 
             monster.setItemSlot(EquipmentSlot.HEAD, armor.get(0));
             monster.setItemSlot(EquipmentSlot.CHEST, armor.get(1));

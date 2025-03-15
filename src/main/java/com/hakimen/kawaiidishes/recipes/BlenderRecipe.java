@@ -1,28 +1,25 @@
 package com.hakimen.kawaiidishes.recipes;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
-import com.hakimen.kawaiidishes.containers.BlenderContainer;
-import com.hakimen.kawaiidishes.containers.CoffeeMachineDataContainer;
 import com.hakimen.kawaiidishes.item.codecs.CraftableCodecs;
-import com.hakimen.kawaiidishes.registry.RecipeRegister;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.items.IItemHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class BlenderRecipe implements Recipe<SimpleContainer> {
+public class BlenderRecipe implements Recipe<SimpleContainerRecipeInput> {
 
     private final ResourceLocation id;
     private final ItemStack output;
@@ -36,6 +33,14 @@ public class BlenderRecipe implements Recipe<SimpleContainer> {
         this.recipeItems = recipeItems;
         this.ticks = ticks;
         this.itemOnOutput = itemOnOutput;
+    }
+
+    public BlenderRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems, int ticks, Optional<ItemStack> itemOnOutput) {
+        this.id = id;
+        this.output = output;
+        this.recipeItems = recipeItems;
+        this.ticks = ticks;
+        this.itemOnOutput = itemOnOutput.orElse(ItemStack.EMPTY);
     }
 
     public ItemStack getOutput() {
@@ -60,7 +65,7 @@ public class BlenderRecipe implements Recipe<SimpleContainer> {
 
 
     @Override
-    public boolean matches(SimpleContainer container, Level pLevel) {
+    public boolean matches(SimpleContainerRecipeInput container, Level pLevel) {
         List<Integer> slots = new ArrayList<Integer>();
 
 
@@ -91,7 +96,7 @@ public class BlenderRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public ItemStack assemble(SimpleContainer container, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(SimpleContainerRecipeInput container, HolderLookup.Provider pRegistryAccess) {
         return output;
     }
 
@@ -101,7 +106,7 @@ public class BlenderRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
+    public ItemStack getResultItem(HolderLookup.Provider pRegistries) {
         return output.copy();
     }
 
@@ -125,12 +130,12 @@ public class BlenderRecipe implements Recipe<SimpleContainer> {
     public static class Serializer implements RecipeSerializer<BlenderRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
-                new ResourceLocation(KawaiiDishes.MODID, "blending");
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "blending");
 
-        private static final Codec<BlenderRecipe> CODEC = RecordCodecBuilder.create(
+        private static final MapCodec<BlenderRecipe> CODEC = RecordCodecBuilder.mapCodec(
                 instance -> instance.group(
                                 ResourceLocation.CODEC.fieldOf("type").forGetter(recipe -> ID),
-                                CraftableCodecs.ITEM_STACK_CODEC.fieldOf("output").forGetter(recipe -> recipe.output),
+                                ItemStack.OPTIONAL_CODEC.fieldOf("output").forGetter(recipe -> recipe.output),
                                 Ingredient.CODEC_NONEMPTY
                                         .listOf()
                                         .fieldOf("ingredients")
@@ -154,40 +159,45 @@ public class BlenderRecipe implements Recipe<SimpleContainer> {
                         .apply(instance, BlenderRecipe::new)
         );
         @Override
-        public Codec<BlenderRecipe> codec() {
+        public MapCodec<BlenderRecipe> codec() {
             return CODEC;
         }
 
         @Override
-        public BlenderRecipe fromNetwork(FriendlyByteBuf buf) {
+        public StreamCodec<RegistryFriendlyByteBuf, BlenderRecipe> streamCodec() {
+            return new StreamCodec<RegistryFriendlyByteBuf, BlenderRecipe>() {
+                @Override
+                public BlenderRecipe decode(RegistryFriendlyByteBuf pBuffer) {
+                    ResourceLocation id = pBuffer.readResourceLocation();
 
-            ResourceLocation id = buf.readResourceLocation();
+                    NonNullList<Ingredient> inputs = NonNullList.withSize(pBuffer.readInt(), Ingredient.EMPTY);
 
-            NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
+                    for (int i = 0; i < inputs.size(); i++) {
+                        inputs.set(i, Ingredient.CONTENTS_STREAM_CODEC.decode(pBuffer));
+                    }
 
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromNetwork(buf));
-            }
+                    int ticks = pBuffer.readInt();
+                    ItemStack onOutput = ItemStack.OPTIONAL_STREAM_CODEC.decode(pBuffer);
+                    ItemStack output = ItemStack.STREAM_CODEC.decode(pBuffer);
 
-            int ticks = buf.readInt();
-            ItemStack onOutput = buf.readItem();
-            ItemStack output = buf.readItem();
+                    return new BlenderRecipe(id,output, inputs, ticks, onOutput);
+                }
 
-            return new BlenderRecipe(id,output, inputs, ticks, onOutput);
+                @Override
+                public void encode(RegistryFriendlyByteBuf pBuffer, BlenderRecipe pValue) {
+                    pBuffer.writeResourceLocation(pValue.id);
+
+                    pBuffer.writeInt(pValue.recipeItems.size());
+                    for (Ingredient ing : pValue.recipeItems) {
+                        Ingredient.CONTENTS_STREAM_CODEC.encode(pBuffer,ing);
+                    }
+
+                    pBuffer.writeInt(pValue.ticks);
+                    ItemStack.OPTIONAL_STREAM_CODEC.encode(pBuffer, pValue.itemOnOutput);
+                    ItemStack.STREAM_CODEC.encode(pBuffer, pValue.getResultItem(null));
+                }
+            };
         }
 
-        @Override
-        public void toNetwork(FriendlyByteBuf buf, BlenderRecipe recipe) {
-            buf.writeResourceLocation(recipe.id);
-
-            buf.writeInt(recipe.getIngredients().size());
-            for (Ingredient ing : recipe.getIngredients()) {
-                ing.toNetwork(buf);
-            }
-
-            buf.writeInt(recipe.ticks);
-            buf.writeItem(recipe.itemOnOutput);
-            buf.writeItem(recipe.getResultItem(null));
-        }
     }
 }

@@ -134,7 +134,7 @@ public class ItemModelDataGen extends ItemModelProvider {
         ResourceLocation item = BuiltInRegistries.ITEM.getKey(toRegister);
         return getBuilder(item.toString())
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", new ResourceLocation(item.getNamespace(), "item/thigh_highs/decorations/" + item.getPath()));
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), "item/thigh_highs/decorations/" + item.getPath()));
     }
 
     public ItemModelBuilder foodItem(Item toRegister)
@@ -142,6 +142,6 @@ public class ItemModelDataGen extends ItemModelProvider {
         ResourceLocation item = BuiltInRegistries.ITEM.getKey(toRegister);
         return getBuilder(item.toString())
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", new ResourceLocation(item.getNamespace(), "item/food/" + item.getPath()));
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), "item/food/" + item.getPath()));
     }
 }

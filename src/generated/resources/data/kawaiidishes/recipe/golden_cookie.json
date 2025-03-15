@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "tag": "kawaiidishes:cookies"
+    },
+    "x": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    " x ",
+    "xcx",
+    " x "
+  ],
+  "result": {
+    "count": 1,
+    "id": "kawaiidishes:golden_cookie"
+  }
+}

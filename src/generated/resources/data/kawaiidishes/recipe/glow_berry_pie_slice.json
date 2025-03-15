@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "kawaiidishes:glow_berry_pie"
+    }
+  ],
+  "result": {
+    "count": 8,
+    "id": "kawaiidishes:glow_berry_pie_slice"
+  }
+}

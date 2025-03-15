@@ -1,33 +1,33 @@
 package com.hakimen.kawaiidishes.client.events;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
-import com.hakimen.kawaiidishes.item.IDyeableItem;
 import com.hakimen.kawaiidishes.item.IFourColorDyeableItem;
 import com.hakimen.kawaiidishes.item.SeatItem;
-import com.hakimen.kawaiidishes.item.armor.HeadBandWithEarsArmorItem;
-import com.hakimen.kawaiidishes.item.armor.MaidDressesWithTailArmorItem;
+import com.hakimen.kawaiidishes.item.component.KawaiiDyeableComponent;
+import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.core.component.DataComponents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
-@Mod.EventBusSubscriber(modid = KawaiiDishes.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = KawaiiDishes.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class AddItemColorsEvent {
 
     @SubscribeEvent
     public static void registerColors(RegisterColorHandlersEvent.Item event) {
         event.register((stack, layer) -> {
+                    KawaiiDyeableComponent.KawaiiDyeable dyeable = stack.get(DataComponentRegister.DYEABLE);
                     switch (layer) {
                         case 0 -> {
-                            return ItemRegister.THIGH_HIGHS.get().getBaseColor(stack);
+                            return dyeable.getBase();
                         }
                         case 1 -> {
-                            return ItemRegister.THIGH_HIGHS.get().getOverlayColor(stack);
+                            return dyeable.getOverlay();
                         }
                     }
-                    return IDyeableItem.defaultColor;
+                    return IFourColorDyeableItem.defaultColor;
                 }, ItemRegister.MAID_DRESS.get(),
                 ItemRegister.HEAD_BAND.get(),
                 ItemRegister.THIGH_HIGHS.get(),
@@ -45,70 +45,69 @@ public class AddItemColorsEvent {
 
 
         event.register(((pStack, pTintIndex) -> {
-            int compoundValue = 0;
+                    int compoundValue = 0;
 
-            MaidDressesWithTailArmorItem tailDressItem = (MaidDressesWithTailArmorItem) pStack.getItem();
+                    KawaiiDyeableComponent.KawaiiDyeable dyeable = pStack.get(DataComponentRegister.DYEABLE);
+                    compoundValue += dyeable.isHasOverlay() ? 1 : 0;
+                    compoundValue += dyeable.isHasSecondaryOverlay() ? 2 : 0;
 
-            compoundValue += tailDressItem.hasPrimaryOverlay(pStack) ? 1 : 0;
-            compoundValue += tailDressItem.hasSecondaryOverlay(pStack) ? 2 : 0;
 
-
-            switch (compoundValue) {
-                case 0 -> {
-                    switch (pTintIndex) {
+                    switch (compoundValue) {
                         case 0 -> {
-                            return tailDressItem.getSecondaryBaseColor(pStack);
+                            switch (pTintIndex) {
+                                case 0 -> {
+                                    return dyeable.getSecondaryBase();
+                                }
+                                case 1 -> {
+                                    return dyeable.getBase();
+                                }
+                            }
                         }
                         case 1 -> {
-                            return tailDressItem.getPrimaryBaseColor(pStack);
-                        }
-                    }
-                }
-                case 1 -> {
-                    switch (pTintIndex) {
-                        case 0 -> {
-                            return tailDressItem.getSecondaryBaseColor(pStack);
-                        }
-                        case 1 -> {
-                            return tailDressItem.getPrimaryBaseColor(pStack);
+                            switch (pTintIndex) {
+                                case 0 -> {
+                                    return dyeable.getSecondaryBase();
+                                }
+                                case 1 -> {
+                                    return dyeable.getBase();
+                                }
+                                case 2 -> {
+                                    return dyeable.getOverlay();
+                                }
+                            }
                         }
                         case 2 -> {
-                            return tailDressItem.getPrimaryOverlayColor(pStack);
-                        }
-                    }
-                }
-                case 2 -> {
-                    switch (pTintIndex) {
-                        case 0 -> {
-                            return tailDressItem.getSecondaryBaseColor(pStack);
-                        }
-                        case 1 -> {
-                            return tailDressItem.getSecondaryOverlayColor(pStack);
-                        }
-                        case 2 -> {
-                            return tailDressItem.getPrimaryBaseColor(pStack);
-                        }
-                    }
-                }
-                case 3 -> {
-                    switch (pTintIndex) {
-                        case 0 -> {
-                            return tailDressItem.getSecondaryBaseColor(pStack);
-                        }
-                        case 1 -> {
-                            return tailDressItem.getSecondaryOverlayColor(pStack);
-                        }
-                        case 2 -> {
-                            return tailDressItem.getPrimaryBaseColor(pStack);
+                            switch (pTintIndex) {
+                                case 0 -> {
+                                    return dyeable.getSecondaryBase();
+                                }
+                                case 1 -> {
+                                    return dyeable.getSecondaryOverlay();
+                                }
+                                case 2 -> {
+                                    return dyeable.getBase();
+                                }
+                            }
                         }
                         case 3 -> {
-                            return tailDressItem.getPrimaryOverlayColor(pStack);
+                            switch (pTintIndex) {
+                                case 0 -> {
+                                    return dyeable.getSecondaryBase();
+                                }
+                                case 1 -> {
+                                    return dyeable.getSecondaryOverlay();
+                                }
+                                case 2 -> {
+                                    return dyeable.getBase();
+                                }
+                                case 3 -> {
+                                    return dyeable.getOverlay();
+                                }
+                            }
                         }
                     }
-                }
-            }
-            return IFourColorDyeableItem.defaultColor;
-        }),
+                    return IFourColorDyeableItem.defaultColor;
+                }),
                 ItemRegister.MAID_DRESS_FOX_TAIL.get(),
                 ItemRegister.MAID_DRESS_BUNNY_TAIL.get(),
                 ItemRegister.MAID_DRESS_CAT_TAIL.get());
@@ -117,10 +116,9 @@ public class AddItemColorsEvent {
         event.register(((pStack, pTintIndex) -> {
             int compoundValue = 0;
 
-            HeadBandWithEarsArmorItem headBandWithEarsArmorItem = (HeadBandWithEarsArmorItem) pStack.getItem();
-
-            compoundValue += headBandWithEarsArmorItem.hasPrimaryOverlay(pStack) ? 1 : 0;
-            compoundValue += headBandWithEarsArmorItem.hasSecondaryOverlay(pStack) ? 2 : 0;
+            KawaiiDyeableComponent.KawaiiDyeable dyeable = pStack.get(DataComponentRegister.DYEABLE);
+            compoundValue += dyeable.isHasOverlay() ? 1 : 0;
+            compoundValue += dyeable.isHasSecondaryOverlay() ? 2 : 0;
 
 
             // 0 sem nada
@@ -128,28 +126,28 @@ public class AddItemColorsEvent {
             // 2 overlay na cauda
             // 3 overlay em ambos
 
+
             switch (compoundValue) {
                 case 0 -> {
                     switch (pTintIndex) {
                         case 0 -> {
-                            return headBandWithEarsArmorItem.getPrimaryBaseColor(pStack);
+                            return dyeable.getBase();
                         }
-                        case 2 -> {
-                            return headBandWithEarsArmorItem.getSecondaryBaseColor(pStack);
+                        case 1 -> {
+                            return dyeable.getSecondaryBase();
                         }
-
                     }
                 }
                 case 1 -> {
                     switch (pTintIndex) {
                         case 0 -> {
-                            return headBandWithEarsArmorItem.getPrimaryBaseColor(pStack);
+                            return dyeable.getBase();
                         }
                         case 1 -> {
-                            return headBandWithEarsArmorItem.getSecondaryBaseColor(pStack);
+                            return dyeable.getSecondaryBase();
                         }
                         case 2 -> {
-                            return headBandWithEarsArmorItem.getPrimaryOverlayColor(pStack);
+                            return dyeable.getOverlay();
                         }
 
                     }
@@ -157,29 +155,29 @@ public class AddItemColorsEvent {
                 case 2 -> {
                     switch (pTintIndex) {
                         case 0 -> {
-                            return headBandWithEarsArmorItem.getPrimaryBaseColor(pStack);
+                            return dyeable.getBase();
                         }
                         case 1 -> {
-                            return headBandWithEarsArmorItem.getSecondaryOverlayColor(pStack);
+                            return dyeable.getSecondaryOverlay();
                         }
                         case 2 -> {
-                            return headBandWithEarsArmorItem.getSecondaryBaseColor(pStack);
+                            return dyeable.getSecondaryBase();
                         }
                     }
                 }
                 case 3 -> {
                     switch (pTintIndex) {
                         case 0 -> {
-                            return headBandWithEarsArmorItem.getPrimaryBaseColor(pStack);
+                            return dyeable.getBase();
                         }
                         case 1 -> {
-                            return headBandWithEarsArmorItem.getPrimaryOverlayColor(pStack);
+                            return dyeable.getOverlay();
                         }
                         case 2 -> {
-                            return headBandWithEarsArmorItem.getSecondaryBaseColor(pStack);
+                            return dyeable.getSecondaryBase();
                         }
                         case 3 -> {
-                            return headBandWithEarsArmorItem.getSecondaryOverlayColor(pStack);
+                            return dyeable.getSecondaryOverlay();
                         }
 
                     }
@@ -189,83 +187,83 @@ public class AddItemColorsEvent {
         }), ItemRegister.HEAD_BAND_BUNNY_EARS.get());
 
         event.register(((pStack, pTintIndex) -> {
-            int compoundValue = 0;
+                    int compoundValue = 0;
 
-            HeadBandWithEarsArmorItem headBandWithEarsArmorItem = (HeadBandWithEarsArmorItem) pStack.getItem();
+                    KawaiiDyeableComponent.KawaiiDyeable dyeable = pStack.get(DataComponentRegister.DYEABLE);
+                    compoundValue += dyeable.isHasOverlay() ? 1 : 0;
+                    compoundValue += dyeable.isHasSecondaryOverlay() ? 2 : 0;
 
-            compoundValue += headBandWithEarsArmorItem.hasPrimaryOverlay(pStack) ? 1 : 0;
-            compoundValue += headBandWithEarsArmorItem.hasSecondaryOverlay(pStack) ? 2 : 0;
 
-
-            switch (compoundValue) {
-                case 0 -> {
-                    switch (pTintIndex) {
-
+                    switch (compoundValue) {
                         case 0 -> {
-                            return headBandWithEarsArmorItem.getSecondaryBaseColor(pStack);
-                        }
+                            switch (pTintIndex) {
 
-                        case 2-> {
-                            return headBandWithEarsArmorItem.getPrimaryBaseColor(pStack);
-                        }
+                                case 0 -> {
+                                    return dyeable.getSecondaryBase();
+                                }
 
-                    }
-                }
-                case 1 -> {
-                    switch (pTintIndex) {
-                        case 0 -> {
-                            return headBandWithEarsArmorItem.getSecondaryBaseColor(pStack);
+                                case 2 -> {
+                                    return dyeable.getBase();
+                                }
+
+                            }
+                        }
+                        case 1 -> {
+                            switch (pTintIndex) {
+                                case 0 -> {
+                                    return dyeable.getSecondaryBase();
+                                }
+                                case 2 -> {
+                                    return dyeable.getBase();
+                                }
+                                case 3 -> {
+                                    return dyeable.getOverlay();
+                                }
+                            }
                         }
                         case 2 -> {
-                            return headBandWithEarsArmorItem.getPrimaryBaseColor(pStack);
+                            switch (pTintIndex) {
+                                case 0 -> {
+                                    return dyeable.getSecondaryBase();
+                                }
+                                case 1 -> {
+                                    return dyeable.getSecondaryOverlay();
+                                }
+                                case 3 -> {
+                                    return dyeable.getBase();
+                                }
+                            }
                         }
                         case 3 -> {
-                            return headBandWithEarsArmorItem.getPrimaryOverlayColor(pStack);
+                            switch (pTintIndex) {
+                                case 0 -> {
+                                    return dyeable.getSecondaryBase();
+                                }
+                                case 1 -> {
+                                    return dyeable.getSecondaryOverlay();
+                                }
+                                case 3 -> {
+                                    return dyeable.getBase();
+                                }
+                                case 4 -> {
+                                    return dyeable.getOverlay();
+                                }
+                            }
                         }
                     }
-                }
-                case 2 -> {
-                    switch (pTintIndex) {
-                        case 0 -> {
-                            return headBandWithEarsArmorItem.getSecondaryBaseColor(pStack);
-                        }
-                        case 1 -> {
-                            return headBandWithEarsArmorItem.getSecondaryOverlayColor(pStack);
-                        }
-                        case 3 -> {
-                            return headBandWithEarsArmorItem.getPrimaryBaseColor(pStack);
-                        }
-                    }
-                }
-                case 3 -> {
-                    switch (pTintIndex) {
-                        case 0 -> {
-                            return headBandWithEarsArmorItem.getSecondaryBaseColor(pStack);
-                        }
-                        case 1 -> {
-                            return headBandWithEarsArmorItem.getSecondaryOverlayColor(pStack);
-                        }
-                        case 3 -> {
-                            return headBandWithEarsArmorItem.getPrimaryBaseColor(pStack);
-                        }
-                        case 4 -> {
-                            return headBandWithEarsArmorItem.getPrimaryOverlayColor(pStack);
-                        }
-                    }
-                }
-            }
-            return IFourColorDyeableItem.defaultColor;
-        }), ItemRegister.HEAD_BAND_FOX_EARS.get(),
+                    return IFourColorDyeableItem.defaultColor;
+                }), ItemRegister.HEAD_BAND_FOX_EARS.get(),
                 ItemRegister.HEAD_BAND_CAT_EARS.get());
 
         event.register(((stack, layer) -> {
+            KawaiiDyeableComponent.KawaiiDyeable dyeable = stack.get(DataComponentRegister.DYEABLE);
             switch (layer) {
                 case 0 -> {
-                    return ((SeatItem) stack.getItem()).getBaseColor(stack);
+                    return dyeable.getBase();
                 }
             }
 
-            return IDyeableItem.defaultColor;
-        }),ItemRegister.SEAT.get());
+            return IFourColorDyeableItem.defaultColor;
+        }), ItemRegister.SEAT.get());
     }
 }

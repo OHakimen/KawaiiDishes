@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "@": {
+      "tag": "c:strings"
+    },
+    "x": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    " @ ",
+    "@x@",
+    "xxx"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kawaiidishes:apron"
+  }
+}

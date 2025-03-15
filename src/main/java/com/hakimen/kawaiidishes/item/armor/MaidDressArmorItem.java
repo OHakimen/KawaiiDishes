@@ -3,12 +3,9 @@ package com.hakimen.kawaiidishes.item.armor;
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.client.entity.models.MaidDressArmorModel;
 import com.hakimen.kawaiidishes.client.entity.renderers.MaidDressArmorRender;
-import com.hakimen.kawaiidishes.item.IDyeableItem;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,10 +17,9 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.constant.DataTickets;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.*;
-import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -32,7 +28,7 @@ import java.util.function.Consumer;
 
 import static com.hakimen.kawaiidishes.utils.item.ArmorUtils.applyEnchantmentEffects;
 
-public class MaidDressArmorItem extends GeoArmorItem implements IAnimationPredicate<MaidDressArmorItem>, IDyeableItem {
+public class MaidDressArmorItem extends GeoArmorItem implements IAnimationPredicate<MaidDressArmorItem> {
 
     private static final String has_overlay = "HasOverlay";
 
@@ -55,26 +51,6 @@ public class MaidDressArmorItem extends GeoArmorItem implements IAnimationPredic
         super.onArmorTick(stack,level,player);
     }
 
-    @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        if((hasBaseColor(pStack) || hasOverlayColor(pStack)) && !pIsAdvanced.isAdvanced() ){
-            pTooltipComponents.add(Component.translatable("item.dyed").withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
-        }else if((hasBaseColor(pStack) || hasOverlayColor(pStack)) && !pIsAdvanced.isCreative()){
-            if(hasBaseColor(pStack)){
-                pTooltipComponents.add(Component.translatable("item.kawaiidishes.base_dye", "0x"+Integer.toString(getBaseColor(pStack),16).toUpperCase()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
-            }
-            if(hasOverlayColor(pStack)){
-                pTooltipComponents.add(Component.translatable("item.kawaiidishes.overlay_dye", "0x"+Integer.toString(getOverlayColor(pStack),16).toUpperCase()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
-            }
-        }else{
-            pTooltipComponents.add(Component.translatable("item.kawaiidishes.dyeable").withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
-        }
-    }
-
-    public boolean hasOverlay(ItemStack stack){
-        CompoundTag decorData = stack.getOrCreateTag();
-        return decorData.contains(has_overlay) && decorData.getBoolean(has_overlay);
-    }
 
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
@@ -85,9 +61,9 @@ public class MaidDressArmorItem extends GeoArmorItem implements IAnimationPredic
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
                 if (this.renderer == null)
                     this.renderer = new MaidDressArmorRender(new MaidDressArmorModel(
-                            new ResourceLocation(KawaiiDishes.MODID,"geo/maid_dress.geo.json"),   //
-                            new ResourceLocation(KawaiiDishes.MODID,"textures/models/armor/maid_dress/maid_dress_overlay.png"),   //  Set resource locations
-                            new ResourceLocation(KawaiiDishes.MODID,"animations/maid_dress.animation.json")    //
+                            ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"geo/maid_dress.geo.json"),   //
+                            ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"textures/models/armor/maid_dress/maid_dress_overlay.png"),   //  Set resource locations
+                            ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"animations/maid_dress.animation.json")    //
                     ), livingEntity.getItemBySlot(EquipmentSlot.CHEST));
 
 
@@ -99,7 +75,7 @@ public class MaidDressArmorItem extends GeoArmorItem implements IAnimationPredic
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "maid_dress_controller", 0, this::animator));
+        controllers.add(new AnimationController < > (this, "maid_dress_controller", 0, this::animator));
     }
 
     @Override

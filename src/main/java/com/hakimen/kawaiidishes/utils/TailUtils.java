@@ -8,10 +8,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import software.bernie.geckolib.animation.Animation;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.constant.DataTickets;
-import software.bernie.geckolib.core.animation.Animation;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.model.GeoModel;
 
 import java.util.HashMap;
@@ -40,12 +40,12 @@ public class TailUtils {
         String typeName = type.name().toLowerCase();
 
         tailModels.put(type, new TailArmorModel(
-                new ResourceLocation(KawaiiDishes.MODID, "geo/tails/%s_tail.geo.json".formatted(typeName)),
-                new ResourceLocation(KawaiiDishes.MODID, "textures/models/armor/tails/%s_tail.png".formatted(typeName)),
-                new ResourceLocation(KawaiiDishes.MODID, "animations/tails/%s_tail.animation.json".formatted(typeName))));
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "geo/tails/%s_tail.geo.json".formatted(typeName)),
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/tails/%s_tail.png".formatted(typeName)),
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "animations/tails/%s_tail.animation.json".formatted(typeName))));
 
         tailOverlayTextures.put(type,
-                new ResourceLocation(KawaiiDishes.MODID, "textures/models/armor/tails/overlays/%s_tail.png".formatted(typeName)));
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/tails/overlays/%s_tail.png".formatted(typeName)));
 
         tailAnimations.put(type, state);
     }

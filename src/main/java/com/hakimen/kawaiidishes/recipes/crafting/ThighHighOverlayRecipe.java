@@ -1,13 +1,20 @@
 package com.hakimen.kawaiidishes.recipes.crafting;
 
 import com.hakimen.kawaiidishes.item.armor.ThighHighsArmorItem;
+import com.hakimen.kawaiidishes.item.component.KawaiiDyeableComponent;
+import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import com.hakimen.kawaiidishes.registry.RecipeRegister;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
+import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -26,12 +33,12 @@ public class ThighHighOverlayRecipe extends CustomRecipe {
             ItemRegister.BOW.get()
     );
     @Override
-    public boolean matches(CraftingContainer pContainer, Level pLevel) {
+    public boolean matches(CraftingInput pContainer, Level pLevel) {
         ItemStack thighHighs = ItemStack.EMPTY;
         List<ItemStack> decorations = new ArrayList<>();
 
 
-        for(int i = 0; i < pContainer.getContainerSize(); ++i) {
+        for(int i = 0; i < pContainer.size(); ++i) {
             ItemStack containerItem = pContainer.getItem(i);
             if (!containerItem.isEmpty()) {
                 if (containerItem.getItem() instanceof ThighHighsArmorItem) {
@@ -53,16 +60,17 @@ public class ThighHighOverlayRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer pContainer, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(CraftingInput pContainer, HolderLookup.Provider pRegistryAccess) {
         ItemStack thighHighs = ItemStack.EMPTY;
         List<ItemStack> decorations = new ArrayList<>();
 
 
-        for(int i = 0; i < pContainer.getContainerSize(); ++i) {
+        for(int i = 0; i < pContainer.size(); ++i) {
             ItemStack containerItem = pContainer.getItem(i);
             if (!containerItem.isEmpty()) {
                 if (containerItem.getItem() instanceof ThighHighsArmorItem) {
-                    if(containerItem.getOrCreateTag().contains("Decoration") && containerItem.getOrCreateTag().getInt("Decoration") > 1){
+                    CompoundTag data = containerItem.get(DataComponents.CUSTOM_DATA).copyTag();
+                    if(data.contains("Decoration") && data.getInt("Decoration") > 1){
                         return ItemStack.EMPTY;
                     }
                     if (!thighHighs.isEmpty()) {
@@ -81,11 +89,14 @@ public class ThighHighOverlayRecipe extends CustomRecipe {
         }
 
         ItemStack stack = thighHighs.copy();
+        CompoundTag data = stack.get(DataComponents.CUSTOM_DATA).copyTag();
         for (Item deco:allDeco) {
             if(decorations.get(0).getItem().equals(deco)){
-                stack.getOrCreateTag().putInt("Decoration", allDeco.indexOf(deco)+1);
+                data.putInt("Decoration", allDeco.indexOf(deco)+1);
             }
         }
+        stack.update(DataComponentRegister.DYEABLE, KawaiiDyeableComponent.DEFAULT, dyeable -> new KawaiiDyeableComponent.KawaiiDyeableBuilder(dyeable).setHasOverlay(true).build());
+        stack.set(DataComponents.CUSTOM_DATA, CustomData.of(data));
         return !thighHighs.isEmpty() && decorations.size() == 1 ? stack : ItemStack.EMPTY;
     }
 
@@ -96,6 +107,6 @@ public class ThighHighOverlayRecipe extends CustomRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeRegister.THIGH_HIGH_DECORATION.get();
+        return RecipeRegister.THIGH_HIGH_DECORATION.value();
     }
 }

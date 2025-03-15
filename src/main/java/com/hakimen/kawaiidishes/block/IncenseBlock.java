@@ -100,9 +100,8 @@ public class IncenseBlock extends DirectionalBlockWithEntity{
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pBlockHitResult) {
-
-        ItemStack holdStack = pPlayer.getItemInHand(pHand);
+    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
+        ItemStack holdStack = pPlayer.getItemInHand( InteractionHand.MAIN_HAND );
 
         IncenseBlockEntity entity = (IncenseBlockEntity) pLevel.getBlockEntity(pPos);
 
@@ -117,19 +116,19 @@ public class IncenseBlock extends DirectionalBlockWithEntity{
             }
 
             if(holdStack.isDamageableItem()){
-               if(holdStack.is(CAN_IGNITE_INCENSE) && !pState.getValue(LIT)){
-                   holdStack.setDamageValue(holdStack.getDamageValue() + 1);
-                   if(holdStack.getDamageValue() == holdStack.getMaxDamage()){
-                       pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1f,1f);
-                       holdStack.shrink(1);
-                   }
-               }else if(holdStack.is(CAN_EXTINGUISH_INCENSE) && pState.getValue(LIT)){
-                   holdStack.setDamageValue(holdStack.getDamageValue() + 1);
-                   if(holdStack.getDamageValue() == holdStack.getMaxDamage()){
-                       pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1f,1f);
-                       holdStack.shrink(1);
-                   }
-               }
+                if(holdStack.is(CAN_IGNITE_INCENSE) && !pState.getValue(LIT)){
+                    holdStack.setDamageValue(holdStack.getDamageValue() + 1);
+                    if(holdStack.getDamageValue() == holdStack.getMaxDamage()){
+                        pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1f,1f);
+                        holdStack.shrink(1);
+                    }
+                }else if(holdStack.is(CAN_EXTINGUISH_INCENSE) && pState.getValue(LIT)){
+                    holdStack.setDamageValue(holdStack.getDamageValue() + 1);
+                    if(holdStack.getDamageValue() == holdStack.getMaxDamage()){
+                        pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1f,1f);
+                        holdStack.shrink(1);
+                    }
+                }
             }else if(!holdStack.getCraftingRemainingItem().equals(ItemStack.EMPTY)){
                 if(holdStack.is(CAN_IGNITE_INCENSE) && !pState.getValue(LIT)) {
                     var stack = holdStack.getCraftingRemainingItem();

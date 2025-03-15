@@ -71,7 +71,7 @@ public class SeatBlock extends BlockWithEntity {
 
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
+    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         return SeatEntity.sitDown(pPlayer, pLevel, pPos);
     }
 }

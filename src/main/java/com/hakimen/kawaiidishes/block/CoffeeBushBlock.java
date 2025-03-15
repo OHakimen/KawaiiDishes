@@ -87,9 +87,10 @@ public class CoffeeBushBlock extends BushBlock implements BonemealableBlock {
         }
     }
 
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+    @Override
+    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         int currentAge = pState.getValue(AGE);
-        if ((currentAge != 3) && pPlayer.getItemInHand(pHand).is(Items.BONE_MEAL)) {
+        if ((currentAge != 3) && pPlayer.getItemInHand(pPlayer.getUsedItemHand()).is(Items.BONE_MEAL)) {
             return InteractionResult.PASS;
         } else if (currentAge == 3) {
             int itemCount = 1 + pLevel.random.nextInt(4);
@@ -100,7 +101,7 @@ public class CoffeeBushBlock extends BushBlock implements BonemealableBlock {
             pLevel.gameEvent(GameEvent.BLOCK_CHANGE, pPos, GameEvent.Context.of(pPlayer, blockstate));
             return InteractionResult.sidedSuccess(pLevel.isClientSide);
         } else {
-            return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+            return super.useWithoutItem(pState, pLevel, pPos, pPlayer, pHitResult);
         }
     }
 

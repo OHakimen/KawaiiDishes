@@ -43,9 +43,9 @@ public class BlockStateDataGen extends BlockStateProvider {
            models[i-1] = models()
                    .withExistingParent(
                            BuiltInRegistries.BLOCK.getKey(block).toString().replaceAll(":", ":block/cake/") + "_slice_%d".formatted(i),
-                           new ResourceLocation(KawaiiDishes.MODID, "block/cake/cake_slice_%d".formatted(i)))
-                   .texture("0", new ResourceLocation(KawaiiDishes.MODID, "block/cake/%s".formatted(BuiltInRegistries.BLOCK.getKey(block).getPath())))
-                   .texture("particle", new ResourceLocation(KawaiiDishes.MODID, "block/cake/%s".formatted(BuiltInRegistries.BLOCK.getKey(block).getPath())));
+                           ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "block/cake/cake_slice_%d".formatted(i)))
+                   .texture("0", ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "block/cake/%s".formatted(BuiltInRegistries.BLOCK.getKey(block).getPath())))
+                   .texture("particle", ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "block/cake/%s".formatted(BuiltInRegistries.BLOCK.getKey(block).getPath())));
         }
 
         getVariantBuilder(block).forAllStates(pState -> ConfiguredModel.builder().modelFile(models[pState.getValue(CakeBlock.SLICES)-1]).build());
@@ -57,9 +57,9 @@ public class BlockStateDataGen extends BlockStateProvider {
             models[i-1] = models()
                     .withExistingParent(
                             BuiltInRegistries.BLOCK.getKey(block).toString().replaceAll(":", ":block/pie/") + "_slice_%d".formatted(i),
-                            new ResourceLocation(KawaiiDishes.MODID, "block/cake/cake_slice_%d".formatted(i)))
-                    .texture("0", new ResourceLocation(KawaiiDishes.MODID, "block/pie/%s".formatted(BuiltInRegistries.BLOCK.getKey(block).getPath())))
-                    .texture("particle", new ResourceLocation(KawaiiDishes.MODID, "block/pie/%s".formatted(BuiltInRegistries.BLOCK.getKey(block).getPath())));
+                            ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "block/cake/cake_slice_%d".formatted(i)))
+                    .texture("0", ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "block/pie/%s".formatted(BuiltInRegistries.BLOCK.getKey(block).getPath())))
+                    .texture("particle", ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "block/pie/%s".formatted(BuiltInRegistries.BLOCK.getKey(block).getPath())));
         }
 
         getVariantBuilder(block).forAllStates(pState -> ConfiguredModel.builder().modelFile(models[pState.getValue(CakeBlock.SLICES)-1]).build());

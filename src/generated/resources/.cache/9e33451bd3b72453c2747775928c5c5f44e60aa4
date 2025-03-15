@@ -1,5 +1,5 @@
-// 1.20.4	2024-02-19T12:10:56.5033828	vanilla/Global Loot Modifiers : kawaiidishes
-1d6848e26a2d95f865d34d705908cad6d0afa4f8 data/kawaiidishes/loot_modifiers/cherry_to_cherry_blossoms.json
-ef2e707616feb319b9ce5b2562ef32cc7dab59d7 data/kawaiidishes/loot_modifiers/double_cherry_to_cherry_blossoms.json
-5e77f383a16f04945bae4609f21d75b481855630 data/kawaiidishes/loot_modifiers/triple_cherry_to_cherry_blossoms.json
+// 1.21.1	2025-01-20T16:55:40.4163814	vanilla/Global Loot Modifiers : kawaiidishes
+d1e620ea2173a9a22b8cd9ddc7515e0dc7765896 data/kawaiidishes/loot_modifiers/cherry_to_cherry_blossoms.json
+3cef2707e4bf822e4a5e8d4c049a941aefdc668f data/kawaiidishes/loot_modifiers/double_cherry_to_cherry_blossoms.json
+ee436a80dc09cf8f3afe0a2e25e25aaaecbc6c52 data/kawaiidishes/loot_modifiers/triple_cherry_to_cherry_blossoms.json
 824ed95ebc11a919ecd08095d3630a0af988be46 data/neoforge/loot_modifiers/global_loot_modifiers.json

@@ -96,8 +96,8 @@ public class DisplayCaseBlock extends DirectionalBlockWithEntity {
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide() && pHit.getDirection().equals(pState.getValue(DirectionalBlockWithEntity.FACING).getOpposite())) {
+    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
+        if (!pLevel.isClientSide() && pHitResult.getDirection().equals(pState.getValue(DirectionalBlockWithEntity.FACING).getOpposite())) {
 
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if (entity instanceof DisplayCaseBlockEntity) {

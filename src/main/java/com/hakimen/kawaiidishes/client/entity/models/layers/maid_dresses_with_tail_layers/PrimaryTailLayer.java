@@ -2,6 +2,7 @@ package com.hakimen.kawaiidishes.client.entity.models.layers.maid_dresses_with_t
 
 import com.hakimen.kawaiidishes.client.entity.models.layers.GeoArmorLayer;
 import com.hakimen.kawaiidishes.item.armor.MaidDressesWithTailArmorItem;
+import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.utils.AnimalType;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
 import com.hakimen.kawaiidishes.utils.MaidDressesWithTailUtils;
@@ -31,9 +32,15 @@ public class PrimaryTailLayer extends GeoArmorLayer<MaidDressesWithTailArmorItem
     @Override
     public void render(PoseStack poseStack, MaidDressesWithTailArmorItem animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         RenderType armorRenderType = RenderType.armorCutoutNoCull(getTexture());
-
-        float[] rgb = ColorUtils.getColorsFromHex(animatable.getSecondaryBaseColor(stackData));
-
-        getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, armorRenderType, bufferSource.getBuffer(armorRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY, rgb[0], rgb[1], rgb[2], 1);
+        getRenderer().reRender(
+                getDefaultBakedModel(animatable),
+                poseStack,
+                bufferSource,
+                animatable,armorRenderType,
+                bufferSource.getBuffer(armorRenderType),
+                partialTick,
+                packedLight,
+                OverlayTexture.NO_OVERLAY,
+                stackData.get(DataComponentRegister.DYEABLE).getSecondaryBase());
     }
 }

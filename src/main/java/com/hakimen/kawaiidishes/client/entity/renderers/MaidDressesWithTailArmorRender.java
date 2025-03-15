@@ -5,6 +5,7 @@ import com.hakimen.kawaiidishes.client.entity.models.layers.maid_dresses_with_ta
 import com.hakimen.kawaiidishes.client.entity.models.layers.maid_dresses_with_tail_layers.PrimaryTailLayer;
 import com.hakimen.kawaiidishes.client.entity.models.layers.maid_dresses_with_tail_layers.SecondaryTailLayer;
 import com.hakimen.kawaiidishes.item.armor.MaidDressesWithTailArmorItem;
+import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.resources.ResourceLocation;
@@ -12,8 +13,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.core.object.Color;
 import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.util.Color;
 
 public class MaidDressesWithTailArmorRender extends GeoArmorItemRenderer<MaidDressesWithTailArmorItem>{
 
@@ -37,9 +38,9 @@ public class MaidDressesWithTailArmorRender extends GeoArmorItemRenderer<MaidDre
     @Override
     public ResourceLocation getTextureLocation(MaidDressesWithTailArmorItem animatable) {
         return new ResourceLocation[]{
-                new ResourceLocation(KawaiiDishes.MODID,"textures/models/armor/maid_dresses_with_tail/dress/%s/maid_dress.png".formatted(animatable.getTailType().name().toLowerCase())),
-                new ResourceLocation(KawaiiDishes.MODID,"textures/models/armor/maid_dresses_with_tail/dress/%s/dress.png".formatted(animatable.getTailType().name().toLowerCase()))
-        }[animatable.hasPrimaryOverlay(stackData) ? 0 : 1];
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"textures/models/armor/maid_dresses_with_tail/dress/%s/dress.png".formatted(animatable.getTailType().name().toLowerCase())),
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"textures/models/armor/maid_dresses_with_tail/dress/%s/maid_dress.png".formatted(animatable.getTailType().name().toLowerCase()))
+        }[stackData.get(DataComponentRegister.DYEABLE).isHasOverlay() ? 1 : 0];
     }
 
     @Override
@@ -55,7 +56,6 @@ public class MaidDressesWithTailArmorRender extends GeoArmorItemRenderer<MaidDre
 
     @Override
     public Color getRenderColor(MaidDressesWithTailArmorItem animatable, float partialTick, int packedLight) {
-        float[] rgb = ColorUtils.getColorsFromHex(animatable.getPrimaryBaseColor(stackData));
-        return Color.ofRGB(rgb[0],rgb[1],rgb[2]);
+        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE).getBase());
     }
 }

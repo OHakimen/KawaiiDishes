@@ -2,24 +2,26 @@ package com.hakimen.kawaiidishes.recipes;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.item.codecs.CraftableCodecs;
-import com.hakimen.kawaiidishes.registry.RecipeRegister;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class IceCreamMakerRecipe implements Recipe<SimpleContainer> {
+public class IceCreamMakerRecipe implements Recipe<SimpleContainerRecipeInput> {
 
     private final ResourceLocation id;
     private final ItemStack output;
@@ -36,6 +38,7 @@ public class IceCreamMakerRecipe implements Recipe<SimpleContainer> {
         this.snowballs = snowballs;
         this.itemOnOutput = itemOnOutput;
     }
+
 
     public ItemStack getOutput() {
         return output;
@@ -63,7 +66,7 @@ public class IceCreamMakerRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public boolean matches(SimpleContainer container, Level pLevel) {
+    public boolean matches(SimpleContainerRecipeInput container, Level pLevel) {
         List<Integer> slots = new ArrayList<Integer>();
 
 
@@ -98,7 +101,7 @@ public class IceCreamMakerRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public ItemStack assemble(SimpleContainer container, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(SimpleContainerRecipeInput container, HolderLookup.Provider pRegistryAccess) {
         return output;
     }
 
@@ -108,7 +111,7 @@ public class IceCreamMakerRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
+    public ItemStack getResultItem(HolderLookup.Provider pRegistryAccess) {
         return output.copy();
     }
 
@@ -131,13 +134,12 @@ public class IceCreamMakerRecipe implements Recipe<SimpleContainer> {
 
     public static class Serializer implements RecipeSerializer<IceCreamMakerRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID =
-                new ResourceLocation(KawaiiDishes.MODID, "ice_cream_making");
+        public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "ice_cream_making");
 
-        private static final Codec<IceCreamMakerRecipe> CODEC = RecordCodecBuilder.create(
+        private static final MapCodec<IceCreamMakerRecipe> CODEC = RecordCodecBuilder.mapCodec(
                 instance -> instance.group(
                                 ResourceLocation.CODEC.fieldOf("type").forGetter(recipe -> ID),
-                                CraftableCodecs.ITEM_STACK_CODEC.fieldOf("output").forGetter(recipe -> recipe.output),
+                                ItemStack.OPTIONAL_CODEC.fieldOf("output").forGetter(recipe -> recipe.output),
                                 Ingredient.CODEC_NONEMPTY
                                         .listOf()
                                         .fieldOf("ingredients")
@@ -158,46 +160,53 @@ public class IceCreamMakerRecipe implements Recipe<SimpleContainer> {
                                         .forGetter(IceCreamMakerRecipe::getRecipeItems),
                                 ExtraCodecs.POSITIVE_INT.fieldOf("ticks").forGetter(IceCreamMakerRecipe::getTicks),
                                 ExtraCodecs.NON_NEGATIVE_INT.fieldOf("snowballs").forGetter(IceCreamMakerRecipe::getSnowballs),
-                                CraftableCodecs.ITEM_STACK_CODEC.fieldOf("itemOnOutput").forGetter(recipe -> recipe.itemOnOutput))
+                                CraftableCodecs.ITEM_STACK_CODEC.optionalFieldOf("itemOnOutput",ItemStack.EMPTY).forGetter(recipe -> recipe.itemOnOutput))
                         .apply(instance, IceCreamMakerRecipe::new)
         );
         @Override
-        public Codec<IceCreamMakerRecipe> codec() {
+        public MapCodec<IceCreamMakerRecipe> codec() {
             return CODEC;
         }
 
         @Override
-        public IceCreamMakerRecipe fromNetwork(FriendlyByteBuf buf) {
+        public StreamCodec<RegistryFriendlyByteBuf, IceCreamMakerRecipe> streamCodec() {
+            return new StreamCodec<RegistryFriendlyByteBuf, IceCreamMakerRecipe>() {
+                @Override
+                public IceCreamMakerRecipe decode(RegistryFriendlyByteBuf pBuffer) {
 
-            ResourceLocation id = buf.readResourceLocation();
+                    ResourceLocation id = pBuffer.readResourceLocation();
 
-            NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
+                    NonNullList<Ingredient> inputs = NonNullList.withSize(pBuffer.readInt(), Ingredient.EMPTY);
 
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromNetwork(buf));
-            }
+                    for (int i = 0; i < inputs.size(); i++) {
+                        inputs.set(i, Ingredient.CONTENTS_STREAM_CODEC.decode(pBuffer));
+                    }
 
-            int ticks = buf.readInt();
-            ItemStack onOutput = buf.readItem();
-            ItemStack output = buf.readItem();
-            int snowballs = buf.readInt();
+                    int ticks = pBuffer.readInt();
+                    ItemStack onOutput = ItemStack.OPTIONAL_STREAM_CODEC.decode(pBuffer);
+                    ItemStack output = ItemStack.STREAM_CODEC.decode(pBuffer);
+                    int snowballs = pBuffer.readInt();
 
-            return new IceCreamMakerRecipe(id,output, inputs, ticks, snowballs, onOutput);
+                    return new IceCreamMakerRecipe(id,output, inputs, ticks, snowballs, onOutput);
+                }
+
+                @Override
+                public void encode(RegistryFriendlyByteBuf pBuffer, IceCreamMakerRecipe pValue) {
+                    pBuffer.writeResourceLocation(pValue.id);
+
+
+                    pBuffer.writeInt(pValue.recipeItems.size());
+                    for (Ingredient ing : pValue.recipeItems) {
+                        Ingredient.CONTENTS_STREAM_CODEC.encode(pBuffer,ing);
+                    }
+
+                    pBuffer.writeInt(pValue.ticks);
+                     ItemStack.OPTIONAL_STREAM_CODEC.encode(pBuffer,pValue.itemOnOutput);
+                     ItemStack.STREAM_CODEC.encode(pBuffer,pValue.getResultItem(null));
+                    pBuffer.writeInt(pValue.snowballs);
+                }
+            };
         }
 
-        @Override
-        public void toNetwork(FriendlyByteBuf buf, IceCreamMakerRecipe recipe) {
-            buf.writeResourceLocation(recipe.id);
-
-            buf.writeInt(recipe.getIngredients().size());
-            for (Ingredient ing : recipe.getIngredients()) {
-                ing.toNetwork(buf);
-            }
-
-            buf.writeInt(recipe.ticks);
-            buf.writeItem(recipe.itemOnOutput);
-            buf.writeItem(recipe.getResultItem(null));
-            buf.writeInt(recipe.snowballs);
-        }
     }
 }

@@ -1,0 +1,25 @@
+{
+  "type": "kawaiidishes:ice_cream_making",
+  "ingredients": [
+    [
+      {
+        "item": "kawaiidishes:cocoa_powder"
+      },
+      {
+        "item": "kawaiidishes:steamed_milk_bucket"
+      },
+      {
+        "item": "minecraft:sugar"
+      }
+    ]
+  ],
+  "itemOnOutput": {
+    "item": "minecraft:bowl"
+  },
+  "output": {
+    "count": 1,
+    "id": "kawaiidishes:chocolate_ice_cream"
+  },
+  "snowballs": 1,
+  "ticks": 200
+}

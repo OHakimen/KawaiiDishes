@@ -3,22 +3,26 @@ package com.hakimen.kawaiidishes.recipes;
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.containers.CoffeeMachineDataContainer;
 import com.hakimen.kawaiidishes.item.codecs.CraftableCodecs;
-import com.hakimen.kawaiidishes.registry.RecipeRegister;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.items.IItemHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class CoffeeMachineRecipe implements Recipe<CoffeeMachineDataContainer> {
 
@@ -37,6 +41,15 @@ public class CoffeeMachineRecipe implements Recipe<CoffeeMachineDataContainer> {
         this.ticks = ticks;
         this.waterNeeded = waterNeeded;
         this.itemOnOutput = itemOnOutput;
+    }
+
+    public CoffeeMachineRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems, int ticks, int waterNeeded, Optional<ItemStack> itemOnOutput) {
+        this.id = id;
+        this.output = output;
+        this.recipeItems = recipeItems;
+        this.ticks = ticks;
+        this.waterNeeded = waterNeeded;
+        this.itemOnOutput = itemOnOutput.orElse(ItemStack.EMPTY);
     }
 
     public ItemStack getOutput() {
@@ -99,7 +112,7 @@ public class CoffeeMachineRecipe implements Recipe<CoffeeMachineDataContainer> {
     }
 
     @Override
-    public ItemStack assemble(CoffeeMachineDataContainer coffeeMachineContainer, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(CoffeeMachineDataContainer coffeeMachineContainer, HolderLookup.Provider pRegistryAccess) {
         return output;
     }
 
@@ -109,7 +122,7 @@ public class CoffeeMachineRecipe implements Recipe<CoffeeMachineDataContainer> {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
+    public ItemStack getResultItem( HolderLookup.Provider pRegistryAccess) {
         return output.copy();
     }
 
@@ -133,12 +146,12 @@ public class CoffeeMachineRecipe implements Recipe<CoffeeMachineDataContainer> {
     public static class Serializer implements RecipeSerializer<CoffeeMachineRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
-                new ResourceLocation(KawaiiDishes.MODID, "coffee_machining");
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "coffee_machining");
 
-        private static final Codec<CoffeeMachineRecipe> CODEC = RecordCodecBuilder.create(
+        private static final MapCodec<CoffeeMachineRecipe> CODEC = RecordCodecBuilder.mapCodec(
                 instance -> instance.group(
                                 ResourceLocation.CODEC.fieldOf("type").forGetter(recipe -> ID),
-                                CraftableCodecs.ITEM_STACK_CODEC.fieldOf("output").forGetter(recipe -> recipe.output),
+                                ItemStack.OPTIONAL_CODEC.fieldOf("output").forGetter(recipe -> recipe.output),
                                 Ingredient.CODEC_NONEMPTY
                                         .listOf()
                                         .fieldOf("ingredients")
@@ -163,42 +176,48 @@ public class CoffeeMachineRecipe implements Recipe<CoffeeMachineDataContainer> {
                         .apply(instance, CoffeeMachineRecipe::new)
         );
         @Override
-        public Codec<CoffeeMachineRecipe> codec() {
+        public MapCodec<CoffeeMachineRecipe> codec() {
             return CODEC;
         }
 
-        @Override
-        public CoffeeMachineRecipe fromNetwork(FriendlyByteBuf buf) {
-
-            ResourceLocation id = buf.readResourceLocation();
-
-            NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
-
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromNetwork(buf));
-            }
-
-            int waterAmount = buf.readInt();
-            int ticks = buf.readInt();
-            ItemStack onOutput = buf.readItem();
-            ItemStack output = buf.readItem();
-
-            return new CoffeeMachineRecipe(id,output, inputs, ticks, waterAmount, onOutput);
-        }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buf, CoffeeMachineRecipe recipe) {
-            buf.writeResourceLocation(recipe.id);
+        public StreamCodec<RegistryFriendlyByteBuf, CoffeeMachineRecipe> streamCodec() {
+            return new StreamCodec<RegistryFriendlyByteBuf, CoffeeMachineRecipe>() {
+                @Override
+                public CoffeeMachineRecipe decode(RegistryFriendlyByteBuf pBuffer) {
 
-            buf.writeInt(recipe.getIngredients().size());
-            for (Ingredient ing : recipe.getIngredients()) {
-                ing.toNetwork(buf);
-            }
+                    ResourceLocation id = pBuffer.readResourceLocation();
 
-            buf.writeInt(recipe.waterNeeded);
-            buf.writeInt(recipe.ticks);
-            buf.writeItem(recipe.itemOnOutput);
-            buf.writeItem(recipe.getResultItem(null));
+                    NonNullList<Ingredient> inputs = NonNullList.withSize(pBuffer.readInt(), Ingredient.EMPTY);
+
+                    for (int i = 0; i < inputs.size(); i++) {
+                        inputs.set(i, Ingredient.CONTENTS_STREAM_CODEC.decode(pBuffer));
+                    }
+
+                    int waterAmount = pBuffer.readInt();
+                    int ticks = pBuffer.readInt();
+                    ItemStack onOutput = ItemStack.OPTIONAL_STREAM_CODEC.decode(pBuffer);
+                    ItemStack output = ItemStack.STREAM_CODEC.decode(pBuffer);
+
+                    return new CoffeeMachineRecipe(id,output, inputs, ticks, waterAmount, onOutput);
+                }
+
+                @Override
+                public void encode(RegistryFriendlyByteBuf pBuffer, CoffeeMachineRecipe pValue) {
+                    pBuffer.writeResourceLocation(pValue.id);
+
+                    pBuffer.writeInt(pValue.recipeItems.size());
+                    for (Ingredient ing : pValue.recipeItems) {
+                        Ingredient.CONTENTS_STREAM_CODEC.encode(pBuffer,ing);
+                    }
+
+                    pBuffer.writeInt(pValue.waterNeeded);
+                    pBuffer.writeInt(pValue.ticks);
+                    ItemStack.OPTIONAL_STREAM_CODEC.encode(pBuffer, pValue.itemOnOutput);
+                    ItemStack.STREAM_CODEC.encode(pBuffer, pValue.getResultItem(null));
+                }
+            };
         }
     }
 }

@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class IceCreamMakerScreen extends AbstractContainerScreen<IceCreamMakerContainer> {
-    private final ResourceLocation GUI = new ResourceLocation(KawaiiDishes.MODID, "textures/gui/ice_cream_maker_gui.png");
+    private final ResourceLocation GUI = ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/gui/ice_cream_maker_gui.png");
 
 
     public IceCreamMakerScreen(IceCreamMakerContainer container, Inventory inv, Component name) {

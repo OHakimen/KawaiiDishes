@@ -5,6 +5,7 @@ import com.hakimen.kawaiidishes.datagen.loottable.modifiers.GlobalLootModifiersD
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -12,7 +13,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.concurrent.CompletableFuture;
 
-@Mod.EventBusSubscriber(modid = KawaiiDishes.MODID,bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = KawaiiDishes.MODID,bus = EventBusSubscriber.Bus.MOD)
 public class DataGeneration {
 
     @SubscribeEvent
@@ -34,9 +35,9 @@ public class DataGeneration {
         pack.addProvider(output -> new BiomeTagDataGen(generator, lookupProvider, helper));
         pack.addProvider(output -> new WorldGenDataGen(generator, lookupProvider));
 
-        pack.addProvider(output -> new GlobalLootModifiersDataGen(generator));
+        pack.addProvider(output -> new GlobalLootModifiersDataGen(generator, lookupProvider));
 
-        pack.addProvider(LootTableDataGen::create);
+        pack.addProvider(pOutput -> LootTableDataGen.create(pOutput, lookupProvider));
         pack.addProvider(output -> new LangDataGen(generator));
     }
 }

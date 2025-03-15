@@ -8,28 +8,15 @@ import com.hakimen.kawaiidishes.utils.ColorUtils;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.core.particles.ParticleType;
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PotionItem;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.level.ColorResolver;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
-import org.jline.utils.Colors;
 import org.joml.Math;
-import org.joml.Vector3f;
-import org.lwjgl.system.MathUtil;
-
-import java.awt.*;
-import java.awt.color.ColorSpace;
 
 public class IncenseParticle extends TextureSheetParticle {
 
@@ -91,7 +78,7 @@ public class IncenseParticle extends TextureSheetParticle {
                 if (aroma instanceof DecorativeAroma) {
                     color = stack.getItem() instanceof DyeItem dyeItem ? dyeItem.getDyeColor().getFireworkColor() : 0;
                 } else if (aroma instanceof PotionAroma) {
-                    color = PotionUtils.getColor(stack);
+                    color = stack.get(DataComponents.POTION_CONTENTS).getColor();
                 } else {
                     color = aroma.getColor();
                 }

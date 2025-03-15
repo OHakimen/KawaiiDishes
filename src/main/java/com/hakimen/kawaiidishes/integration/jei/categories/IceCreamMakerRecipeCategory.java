@@ -21,9 +21,9 @@ import net.minecraft.world.item.Items;
 import javax.annotation.Nonnull;
 
 public class IceCreamMakerRecipeCategory implements IRecipeCategory<IceCreamMakerRecipe> {
-    public final static ResourceLocation UID = new ResourceLocation(KawaiiDishes.MODID, "coffee_machining");
+    public final static ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "coffee_machining");
     public final static ResourceLocation TEXTURE =
-            new ResourceLocation(KawaiiDishes.MODID, "textures/integration/jei/ice_cream_maker_gui.png");
+            ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/integration/jei/ice_cream_maker_gui.png");
 
     private final IDrawable background;
     private final IDrawable icon;

@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class DisplayCaseScreen extends AbstractContainerScreen<DisplayCaseContainer> {
-    private final ResourceLocation GUI = new ResourceLocation(KawaiiDishes.MODID, "textures/gui/display_case_gui.png");
+    private final ResourceLocation GUI = ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/gui/display_case_gui.png");
 
 
     public DisplayCaseScreen(DisplayCaseContainer container, Inventory inv, Component name) {

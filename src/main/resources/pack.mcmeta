@@ -1,8 +1,6 @@
 {
   "pack": {
-    "description": {
-      "text": "${mod_id} resources"
-    },
-    "pack_format": 18
+    "description": "kawaiidishes resources",
+    "pack_format": 26
   }
 }

@@ -3,12 +3,16 @@ package com.hakimen.kawaiidishes.recipes.crafting;
 import com.hakimen.kawaiidishes.item.armor.MaidDressArmorItem;
 import com.hakimen.kawaiidishes.item.armor.MaidDressesWithTailArmorItem;
 import com.hakimen.kawaiidishes.item.armor.TailArmorItem;
+import com.hakimen.kawaiidishes.item.component.KawaiiDyeableComponent;
+import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.registry.RecipeRegister;
 import com.hakimen.kawaiidishes.utils.MaidDressesWithTailUtils;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
+import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -22,12 +26,12 @@ public class MaidDressWithTailRecipe extends CustomRecipe {
     }
 
     @Override
-    public boolean matches(CraftingContainer pContainer, Level pLevel) {
+    public boolean matches(CraftingInput pContainer, Level pLevel) {
         ItemStack dress = ItemStack.EMPTY;
         List<ItemStack> tail = new ArrayList<>();
 
 
-        for(int i = 0; i < pContainer.getContainerSize(); ++i) {
+        for(int i = 0; i < pContainer.size(); ++i) {
             ItemStack containerItem = pContainer.getItem(i);
             if (!containerItem.isEmpty()) {
                 if (containerItem.getItem() instanceof MaidDressArmorItem) {
@@ -49,12 +53,12 @@ public class MaidDressWithTailRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer pContainer, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(CraftingInput pContainer, HolderLookup.Provider pRegistryAccess) {
         ItemStack dress = ItemStack.EMPTY;
         List<ItemStack> tail = new ArrayList<>();
 
 
-        for(int i = 0; i < pContainer.getContainerSize(); ++i) {
+        for(int i = 0; i < pContainer.size(); ++i) {
             ItemStack containerItem = pContainer.getItem(i);
             if (!containerItem.isEmpty()) {
                 if (containerItem.getItem() instanceof MaidDressArmorItem maidDress) {
@@ -74,26 +78,29 @@ public class MaidDressWithTailRecipe extends CustomRecipe {
         }
 
         var tailData = (TailArmorItem) tail.get(0).getItem();
+        var tailComponents = tail.get(0).get(DataComponentRegister.DYEABLE);
         var dressData = (MaidDressArmorItem) dress.getItem();
+        var dressComponents = dress.get(DataComponentRegister.DYEABLE);
         ItemStack stack = MaidDressesWithTailUtils.getTailedDressItems().get(tailData.getTailType()).get().getDefaultInstance();
         MaidDressesWithTailArmorItem tailDressArmorItem = (MaidDressesWithTailArmorItem) stack.getItem();
 
-        tailDressArmorItem.setPrimaryBaseColor(stack,dressData.getBaseColor(dress));
+        KawaiiDyeableComponent.KawaiiDyeableBuilder builder = new KawaiiDyeableComponent.KawaiiDyeableBuilder();
 
-        if(dressData.hasOverlay(dress)){
-            stack.getOrCreateTag().putBoolean("HasPrimaryOverlay",true);
+        builder.setBase(dressComponents.getBase());
 
-            tailDressArmorItem.setPrimaryOverlayColor(stack,dressData.getOverlayColor(dress));
+        if(dressComponents.isHasOverlay()){
+            builder.setOverlay(dressComponents.getOverlay());
+            builder.setHasOverlay(true);
         }
 
-        tailDressArmorItem.setSecondaryBaseColor(stack,tailData.getBaseColor(tail.get(0)));
+        builder.setSecondaryBase(tailComponents.getBase());
 
-        if(tailData.hasOverlay(tail.get(0))){
-            stack.getOrCreateTag().putBoolean("HasSecondaryOverlay",true);
-
-            tailDressArmorItem.setSecondaryOverlayColor(stack,tailData.getOverlayColor(tail.get(0)));
+        if(tailComponents.isHasOverlay()){
+            builder.setSecondaryOverlay(tailComponents.getOverlay());
+            builder.setHasSecondaryOverlay(true);
         }
 
+        stack.set(DataComponentRegister.DYEABLE,builder.build());
 
         return !dress.isEmpty() && tail.size() == 1 ? stack : ItemStack.EMPTY;
     }
@@ -105,6 +112,6 @@ public class MaidDressWithTailRecipe extends CustomRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeRegister.MAID_DRESS_TAIL.get();
+        return RecipeRegister.MAID_DRESS_TAIL.value();
     }
 }

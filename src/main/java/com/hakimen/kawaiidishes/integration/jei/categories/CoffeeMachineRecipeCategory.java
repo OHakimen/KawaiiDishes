@@ -25,9 +25,9 @@ import net.neoforged.neoforge.fluids.FluidUtil;
 import javax.annotation.Nonnull;
 
 public class CoffeeMachineRecipeCategory  implements IRecipeCategory<CoffeeMachineRecipe> {
-    public final static ResourceLocation UID = new ResourceLocation(KawaiiDishes.MODID, "coffee_machining");
+    public final static ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "coffee_machining");
     public final static ResourceLocation TEXTURE =
-            new ResourceLocation(KawaiiDishes.MODID, "textures/integration/jei/coffee_machine_gui.png");
+            ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/integration/jei/coffee_machine_gui.png");
 
     private final IDrawable background;
     private final IDrawable icon;

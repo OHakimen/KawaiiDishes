@@ -40,27 +40,27 @@ public class RecipeDataGen extends RecipeProvider {
     public void furnaceRecipes(RecipeOutput output) {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ItemRegister.COFFEE_BERRIES.get()), RecipeCategory.FOOD, ItemRegister.COFFEE_BEANS.get(), 1.4f, 200)
                 .unlockedBy(getHasName(ItemRegister.COFFEE_BERRIES.get()), has(ItemRegister.COFFEE_BERRIES.get()))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "coffee_beans_from_furnaces"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "coffee_beans_from_furnaces"));
 
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ItemRegister.COFFEE_BEANS.get()), RecipeCategory.FOOD, ItemRegister.ROAST_COFFEE_BEANS.get(), 1.4f, 200)
                 .unlockedBy(getHasName(ItemRegister.COFFEE_BEANS.get()), has(ItemRegister.COFFEE_BEANS.get()))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "roast_coffee_beans_from_furnaces"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "roast_coffee_beans_from_furnaces"));
 
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(ItemRegister.COFFEE_BERRIES.get()), RecipeCategory.FOOD, ItemRegister.COFFEE_BEANS.get(), 1.4f, 100)
                 .unlockedBy(getHasName(ItemRegister.COFFEE_BERRIES.get()), has(ItemRegister.COFFEE_BERRIES.get()))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "coffee_beans_from_smoking"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "coffee_beans_from_smoking"));
 
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(ItemRegister.COFFEE_BEANS.get()), RecipeCategory.FOOD, ItemRegister.ROAST_COFFEE_BEANS.get(), 1.4f, 100)
                 .unlockedBy(getHasName(ItemRegister.COFFEE_BEANS.get()), has(ItemRegister.COFFEE_BEANS.get()))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "roast_coffee_beans_from_smoking"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "roast_coffee_beans_from_smoking"));
 
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ItemRegister.COFFEE_BERRIES.get()), RecipeCategory.FOOD, ItemRegister.COFFEE_BEANS.get(), 1.4f, 200)
                 .unlockedBy(getHasName(ItemRegister.COFFEE_BERRIES.get()), has(ItemRegister.COFFEE_BERRIES.get()))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "coffee_beans_from_campfires"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "coffee_beans_from_campfires"));
 
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ItemRegister.COFFEE_BEANS.get()), RecipeCategory.FOOD, ItemRegister.ROAST_COFFEE_BEANS.get(), 1.4f, 200)
                 .unlockedBy(getHasName(ItemRegister.COFFEE_BEANS.get()), has(ItemRegister.COFFEE_BEANS.get()))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "roast_coffee_beans_from_campfires"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "roast_coffee_beans_from_campfires"));
     }
 
 
@@ -69,11 +69,11 @@ public class RecipeDataGen extends RecipeProvider {
                 .pattern(" @ ")
                 .pattern("@x@")
                 .pattern("xxx")
-                .define('@', Tags.Items.STRING)
+                .define('@', Tags.Items.STRINGS)
                 .define('x', ItemTags.WOOL)
-                .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRING))
+                .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRINGS))
                 .unlockedBy(getHasName(Items.WHITE_WOOL), has(ItemTags.WOOL))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "apron"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "apron"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.MAID_DRESS.get())
                 .pattern("x x")
@@ -81,7 +81,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .pattern("xxx")
                 .define('x', ItemTags.WOOL)
                 .unlockedBy(getHasName(Items.WHITE_WOOL), has(ItemTags.WOOL))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "maid_dress"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "maid_dress"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.THIGH_HIGHS.get())
                 .pattern("x x")
@@ -89,41 +89,41 @@ public class RecipeDataGen extends RecipeProvider {
                 .pattern("x x")
                 .define('x', ItemTags.WOOL)
                 .unlockedBy(getHasName(Items.WHITE_WOOL), has(ItemTags.WOOL))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "thigh_highs"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "thigh_highs"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.DOUBLE_BANDS.get())
                 .pattern("xxx")
-                .define('x', Tags.Items.STRING)
-                .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRING))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "double_bands"));
+                .define('x', Tags.Items.STRINGS)
+                .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRINGS))
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "double_bands"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.FULL_BANDS.get())
                 .pattern("xxx")
                 .pattern("   ")
                 .pattern("xxx")
-                .define('x', Tags.Items.STRING)
-                .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRING))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "full_bands"));
+                .define('x', Tags.Items.STRINGS)
+                .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRINGS))
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "full_bands"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.LEG_CLIP.get())
                 .pattern("x,x")
                 .pattern(" x ")
                 .pattern("xxx")
-                .define('x', Tags.Items.STRING)
+                .define('x', Tags.Items.STRINGS)
                 .define(',', Tags.Items.NUGGETS_IRON)
-                .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRING))
+                .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRINGS))
                 .unlockedBy(getHasName(Items.IRON_NUGGET), has(Tags.Items.NUGGETS_IRON))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "leg_clip"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "leg_clip"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.BOW.get())
                 .pattern(" xx")
                 .pattern("xsx")
                 .pattern("xx ")
                 .define('x', ItemTags.WOOL)
-                .define('s', Tags.Items.STRING)
-                .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRING))
+                .define('s', Tags.Items.STRINGS)
+                .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRINGS))
                 .unlockedBy(getHasName(Items.WHITE_WOOL), has(ItemTags.WOOL))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "bow"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "bow"));
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.HEAD_BAND.get())
@@ -131,7 +131,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .pattern("x x")
                 .define('x', ItemTags.WOOL)
                 .unlockedBy(getHasName(Items.WHITE_WOOL), has(ItemTags.WOOL))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "head_band"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "head_band"));
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.FOX_EARS.get())
@@ -140,17 +140,17 @@ public class RecipeDataGen extends RecipeProvider {
                 .define('x', ItemTags.WOOL)
                 .define('s', Items.PINK_WOOL)
                 .unlockedBy(getHasName(Items.WHITE_WOOL), has(ItemTags.WOOL))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "fox_ears"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "fox_ears"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.FOX_TAIL.get())
                 .pattern(" xx")
                 .pattern(" @x")
                 .pattern("@  ")
                 .define('x', ItemTags.WOOL)
-                .define('@', Tags.Items.STRING)
+                .define('@', Tags.Items.STRINGS)
                 .unlockedBy(getHasName(Items.WHITE_WOOL), has(ItemTags.WOOL))
-                .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRING))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "fox_tail"));
+                .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRINGS))
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "fox_tail"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.BUNNY_EARS.get())
                 .pattern("x x")
@@ -159,7 +159,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .define('x', ItemTags.WOOL)
                 .define('s', Items.PINK_WOOL)
                 .unlockedBy(getHasName(Items.WHITE_WOOL), has(ItemTags.WOOL))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "bunny_ears"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "bunny_ears"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.BUNNY_TAIL.get())
                 .pattern("xx")
@@ -167,8 +167,8 @@ public class RecipeDataGen extends RecipeProvider {
                 .define('x', ItemTags.WOOL)
                 .define('@', Items.STRING)
                 .unlockedBy(getHasName(Items.WHITE_WOOL), has(ItemTags.WOOL))
-                .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRING))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "bunny_tail"));
+                .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRINGS))
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "bunny_tail"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.CAT_EARS.get())
                 .pattern("x x")
@@ -176,7 +176,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .define('x', ItemTags.WOOL)
                 .define('s', Items.PINK_WOOL)
                 .unlockedBy(getHasName(Items.WHITE_WOOL), has(ItemTags.WOOL))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "cat_ears"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "cat_ears"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.CAT_TAIL.get())
                 .pattern(" xx")
@@ -185,8 +185,8 @@ public class RecipeDataGen extends RecipeProvider {
                 .define('x', ItemTags.WOOL)
                 .define('@', Items.STRING)
                 .unlockedBy(getHasName(Items.WHITE_WOOL), has(ItemTags.WOOL))
-                .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRING))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "cat_tail"));
+                .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRINGS))
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "cat_tail"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.SHOES.get())
                 .pattern("x x")
@@ -194,7 +194,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .define('x', ItemTags.WOOL)
                 .define('l', Items.LEATHER)
                 .unlockedBy(getHasName(Items.WHITE_WOOL), has(ItemTags.WOOL))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "shoes"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "shoes"));
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.KITCHEN_TILES.get(), 4)
@@ -204,7 +204,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .define('y', Items.BLACK_CONCRETE)
                 .unlockedBy(getHasName(Items.WHITE_CONCRETE), has(Items.WHITE_CONCRETE))
                 .unlockedBy(getHasName(Items.BLACK_CONCRETE), has(Items.BLACK_CONCRETE))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "kitchen_tiles"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "kitchen_tiles"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.DISPLAY_CASE.get())
                 .pattern("xxx")
@@ -216,7 +216,16 @@ public class RecipeDataGen extends RecipeProvider {
                 .unlockedBy(getHasName(Items.GLASS_PANE), has(Tags.Items.GLASS_PANES))
                 .unlockedBy(getHasName(Items.CHEST), has(Items.CHEST))
                 .unlockedBy(getHasName(Items.IRON_INGOT), has(Tags.Items.INGOTS_IRON))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "display_case"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "display_case"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.INCENSE_GLASS.get())
+                .pattern("xix")
+                .pattern("xxx")
+                .define('x', Tags.Items.GLASS_PANES)
+                .define('i', Items.STICK)
+                .unlockedBy(getHasName(Items.GLASS_PANE), has(Tags.Items.GLASS_PANES))
+                .unlockedBy(getHasName(Items.STICK), has(Items.STICK))
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "incense_glass"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.COFFEE_MACHINE.get())
                 .pattern("xxx")
@@ -228,7 +237,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .unlockedBy(getHasName(Items.IRON_NUGGET), has(Tags.Items.NUGGETS_IRON))
                 .unlockedBy(getHasName(Items.BUCKET), has(Items.BUCKET))
                 .unlockedBy(getHasName(Items.IRON_INGOT), has(Tags.Items.INGOTS_IRON))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "coffee_machine"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "coffee_machine"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.BLENDER.get())
                 .pattern("xxx")
@@ -240,7 +249,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .unlockedBy(getHasName(Items.IRON_NUGGET), has(Tags.Items.NUGGETS_IRON))
                 .unlockedBy(getHasName(Items.GLASS_PANE), has(Tags.Items.GLASS_PANES))
                 .unlockedBy(getHasName(Items.IRON_INGOT), has(Tags.Items.INGOTS_IRON))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "blender"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "blender"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.ICE_CREAM_MAKER.get())
                 .pattern("l-x")
@@ -254,7 +263,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .unlockedBy(getHasName(Items.LEVER), has(Items.LEVER))
                 .unlockedBy(getHasName(Items.SNOW_BLOCK), has(Items.SNOW_BLOCK))
                 .unlockedBy(getHasName(Items.IRON_INGOT), has(Tags.Items.INGOTS_IRON))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "ice_cream_maker"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "ice_cream_maker"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.SEAT.get())
                 .pattern("xox")
@@ -264,7 +273,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .define('o', ItemTags.WOOL)
                 .unlockedBy(getHasName(Items.OAK_PLANKS), has(ItemTags.PLANKS))
                 .unlockedBy(getHasName(Items.WHITE_WOOL), has(ItemTags.WOOL))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "seat"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "seat"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.MUG.get())
                 .pattern("x x")
@@ -272,7 +281,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .pattern(" x ")
                 .define('x', Items.BRICK)
                 .unlockedBy(getHasName(Items.BRICK), has(Items.BRICK))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "mug"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "mug"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.APPLE_PIE.get())
                 .requires(Items.EGG)
@@ -283,7 +292,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .unlockedBy(getHasName(Items.SUGAR), has(Items.SUGAR))
                 .unlockedBy(getHasName(Items.APPLE), has(Items.APPLE))
                 .unlockedBy(getHasName(Items.WHEAT), has(Items.WHEAT))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "apple_pie"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "apple_pie"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.GLOW_BERRY_PIE.get())
                 .requires(Items.EGG)
@@ -294,7 +303,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .unlockedBy(getHasName(Items.SUGAR), has(Items.SUGAR))
                 .unlockedBy(getHasName(Items.GLOW_BERRIES), has(Items.GLOW_BERRIES))
                 .unlockedBy(getHasName(Items.WHEAT), has(Items.WHEAT))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "glow_berry_pie"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "glow_berry_pie"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.SWEET_BERRY_PIE.get())
                 .requires(Items.EGG)
@@ -305,7 +314,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .unlockedBy(getHasName(Items.SUGAR), has(Items.SUGAR))
                 .unlockedBy(getHasName(Items.APPLE), has(Items.APPLE))
                 .unlockedBy(getHasName(Items.WHEAT), has(Items.WHEAT))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "sweet_berry_pie"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "sweet_berry_pie"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.CHERRY_PIE.get())
                 .requires(Items.EGG)
@@ -316,7 +325,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .unlockedBy(getHasName(Items.SUGAR), has(Items.SUGAR))
                 .unlockedBy(getHasName(ItemRegister.CHERRY.get()), has(ItemRegister.CHERRY.get()))
                 .unlockedBy(getHasName(Items.WHEAT), has(Items.WHEAT))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "cherry_pie"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "cherry_pie"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.CHEESE_CAKE.get())
                 .pattern("xsx")
@@ -330,7 +339,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .unlockedBy(getHasName(Items.SUGAR), has(Items.SUGAR))
                 .unlockedBy(getHasName(ItemRegister.CREAM_CHEESE_BALL.get()), has(ItemRegister.CREAM_CHEESE_BALL.get()))
                 .unlockedBy(getHasName(Items.WHEAT), has(Items.WHEAT))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "cheese_cake"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "cheese_cake"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.CHOCOLATE_CHEESE_CAKE.get())
                 .pattern("x-x")
@@ -346,7 +355,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .unlockedBy(getHasName(ItemRegister.COCOA_POWDER.get()), has(ItemRegister.COCOA_POWDER.get()))
                 .unlockedBy(getHasName(ItemRegister.CREAM_CHEESE_BALL.get()), has(ItemRegister.CREAM_CHEESE_BALL.get()))
                 .unlockedBy(getHasName(Items.WHEAT), has(Items.WHEAT))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "chocolate_cheese_cake"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "chocolate_cheese_cake"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.HONEY_CHEESE_CAKE.get())
                 .pattern("x-x")
@@ -362,47 +371,47 @@ public class RecipeDataGen extends RecipeProvider {
                 .unlockedBy(getHasName(Items.HONEY_BOTTLE), has(Items.HONEY_BOTTLE))
                 .unlockedBy(getHasName(ItemRegister.CREAM_CHEESE_BALL.get()), has(ItemRegister.CREAM_CHEESE_BALL.get()))
                 .unlockedBy(getHasName(Items.WHEAT), has(Items.WHEAT))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "honey_cheese_cake"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "honey_cheese_cake"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.CAKE_SLICE.get(), 8)
                 .requires(Items.CAKE)
                 .unlockedBy(getHasName(Items.CAKE), has(Items.CAKE))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "cake_slice"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "cake_slice"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.CHEESE_CAKE_SLICE.get(), 8)
                 .requires(ItemRegister.CHEESE_CAKE.get())
                 .unlockedBy(getHasName(ItemRegister.CHEESE_CAKE.get()), has(ItemRegister.CHEESE_CAKE.get()))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "cheese_cake_slice"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "cheese_cake_slice"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.CHOCOLATE_CHEESE_CAKE_SLICE.get(), 8)
                 .requires(ItemRegister.CHOCOLATE_CHEESE_CAKE.get())
                 .unlockedBy(getHasName(ItemRegister.CHOCOLATE_CHEESE_CAKE.get()), has(ItemRegister.CHOCOLATE_CHEESE_CAKE.get()))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "chocolate_cheese_cake_slice"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "chocolate_cheese_cake_slice"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.HONEY_CHEESE_CAKE_SLICE.get(), 8)
                 .requires(ItemRegister.HONEY_CHEESE_CAKE.get())
                 .unlockedBy(getHasName(ItemRegister.HONEY_CHEESE_CAKE.get()), has(ItemRegister.HONEY_CHEESE_CAKE.get()))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "honey_cheese_cake_slice"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "honey_cheese_cake_slice"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.SWEET_BERRY_PIE_SLICE.get(), 8)
                 .requires(ItemRegister.SWEET_BERRY_PIE.get())
                 .unlockedBy(getHasName(ItemRegister.SWEET_BERRY_PIE.get()), has(ItemRegister.SWEET_BERRY_PIE.get()))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "sweet_berry_pie_slice"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "sweet_berry_pie_slice"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.GLOW_BERRY_PIE_SLICE.get(), 8)
                 .requires(ItemRegister.GLOW_BERRY_PIE.get())
                 .unlockedBy(getHasName(ItemRegister.GLOW_BERRY_PIE.get()), has(ItemRegister.GLOW_BERRY_PIE.get()))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "glow_berry_pie_slice"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "glow_berry_pie_slice"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.CHERRY_PIE_SLICE.get(), 8)
                 .requires(ItemRegister.CHERRY_PIE.get())
                 .unlockedBy(getHasName(ItemRegister.CHERRY_PIE.get()), has(ItemRegister.CHERRY_PIE.get()))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "cherry_pie_slice"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "cherry_pie_slice"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.APPLE_PIE_SLICE.get(), 8)
                 .requires(ItemRegister.APPLE_PIE.get())
                 .unlockedBy(getHasName(ItemRegister.APPLE_PIE.get()), has(ItemRegister.APPLE_PIE.get()))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "apple_pie_slice"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "apple_pie_slice"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.WAFFLE.get(), 8)
                 .requires(Items.EGG)
@@ -413,7 +422,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .unlockedBy(getHasName(Items.SUGAR), has(Items.SUGAR))
                 .unlockedBy(getHasName(Items.WHEAT), has(Items.WHEAT))
                 .unlockedBy(getHasName(Items.MILK_BUCKET), has(Items.MILK_BUCKET))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "waffle"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "waffle"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.CHOCOLATE_WAFFLE.get(), 8)
                 .requires(Items.EGG)
@@ -426,7 +435,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .unlockedBy(getHasName(Items.WHEAT), has(Items.WHEAT))
                 .unlockedBy(getHasName(Items.MILK_BUCKET), has(Items.MILK_BUCKET))
                 .unlockedBy(getHasName(ItemRegister.COCOA_POWDER.get()), has(ItemRegister.COCOA_POWDER.get()))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "chocolate_waffle"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "chocolate_waffle"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.CHOCOLATE_COOKIE.get(), 8)
                 .requires(ItemRegister.COCOA_POWDER.get())
@@ -434,7 +443,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .requires(Items.WHEAT)
                 .unlockedBy(getHasName(ItemRegister.COCOA_POWDER.get()), has(ItemRegister.COCOA_POWDER.get()))
                 .unlockedBy(getHasName(Items.WHEAT), has(Items.WHEAT))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "chocolate_cookie"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "chocolate_cookie"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.SWEET_BERRY_COOKIE.get(), 8)
                 .requires(Items.SWEET_BERRIES)
@@ -442,7 +451,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .requires(Items.WHEAT)
                 .unlockedBy(getHasName(Items.SWEET_BERRIES), has(Items.SWEET_BERRIES))
                 .unlockedBy(getHasName(Items.WHEAT), has(Items.WHEAT))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "sweet_berry_cookie"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "sweet_berry_cookie"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.GLOW_BERRY_COOKIE.get(), 8)
                 .requires(Items.GLOW_BERRIES)
@@ -450,7 +459,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .requires(Items.WHEAT)
                 .unlockedBy(getHasName(Items.GLOW_BERRIES), has(Items.GLOW_BERRIES))
                 .unlockedBy(getHasName(Items.WHEAT), has(Items.WHEAT))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "glow_berry_cookie"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "glow_berry_cookie"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.GOLDEN_COOKIE.get())
                 .pattern(" x ")
@@ -459,7 +468,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .define('x', Items.GOLD_INGOT)
                 .define('c', ItemTagDataGen.COOKIES)
                 .unlockedBy(getHasName(Items.GOLD_INGOT), has(Items.GOLD_INGOT))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "golden_cookie"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "golden_cookie"));
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegister.COOKIE_OF_UNBINDING.get())
@@ -475,7 +484,7 @@ public class RecipeDataGen extends RecipeProvider {
                 .unlockedBy(getHasName(Items.GHAST_TEAR), has(Items.GHAST_TEAR))
                 .unlockedBy(getHasName(Items.FERMENTED_SPIDER_EYE), has(Items.FERMENTED_SPIDER_EYE))
                 .unlockedBy(getHasName(Items.EXPERIENCE_BOTTLE), has(Items.EXPERIENCE_BOTTLE))
-                .save(output, new ResourceLocation(KawaiiDishes.MODID, "cookie_of_unbinding"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "cookie_of_unbinding"));
 
     }
 
@@ -591,7 +600,7 @@ public class RecipeDataGen extends RecipeProvider {
                 waterNeeded,
                 itemOnOutput
         );
-        builder.save(pOutput, new ResourceLocation(KawaiiDishes.MODID, name));
+        builder.save(pOutput, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, name));
     }
 
     public void blender(RecipeOutput pOutput) {
@@ -645,7 +654,7 @@ public class RecipeDataGen extends RecipeProvider {
                 itemOnOutput
         );
 
-        builder.save(pOutput, new ResourceLocation(KawaiiDishes.MODID, name));
+        builder.save(pOutput, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, name));
     }
 
     public void iceCreamMaker(RecipeOutput pOutput) {
@@ -762,6 +771,6 @@ public class RecipeDataGen extends RecipeProvider {
                 snowballs,
                 itemOnOutput
         );
-        builder.save(pOutput, new ResourceLocation(KawaiiDishes.MODID, name));
+        builder.save(pOutput, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, name));
     }
 }

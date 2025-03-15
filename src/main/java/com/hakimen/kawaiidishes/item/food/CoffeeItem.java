@@ -33,8 +33,8 @@ public class CoffeeItem extends BlockItem {
                 ((Supplier<FoodProperties>) () -> {
                     FoodProperties.Builder builder = new FoodProperties.Builder()
                             .nutrition(nutrition)
-                            .saturationMod(saturationMod)
-                            .alwaysEat();
+                            .saturationModifier(saturationMod)
+                            .alwaysEdible();
 
                     for (MobEffectInstance effect : effects) {
                         builder.effect(() -> effect, 1f);
@@ -47,13 +47,12 @@ public class CoffeeItem extends BlockItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pComponents, TooltipFlag pTooltipFlag) {
-
+    public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
         if (!Arrays.asList(mobEffects).isEmpty()) {
             {
                 for (MobEffectInstance mobeffectinstance : mobEffects) {
                     MutableComponent mutablecomponent = Component.translatable(mobeffectinstance.getDescriptionId());
-                    MobEffect mobeffect = mobeffectinstance.getEffect();
+                    MobEffect mobeffect = mobeffectinstance.getEffect().value();
 
                     if (mobeffectinstance.getAmplifier() > 0) {
                         mutablecomponent = Component.translatable(
@@ -62,14 +61,14 @@ public class CoffeeItem extends BlockItem {
                     }
 
                     if (!mobeffectinstance.endsWithin(20)) {
-                        mutablecomponent = Component.translatable("potion.withDuration", mutablecomponent, MobEffectUtil.formatDuration(mobeffectinstance, 1f,1f));
+                        mutablecomponent = Component.translatable("potion.withDuration", mutablecomponent, MobEffectUtil.formatDuration(mobeffectinstance, 1f,20));
                     }
 
-                    pComponents.add(mutablecomponent.withStyle(mobeffect.getCategory().getTooltipFormatting()));
+                    pTooltipComponents.add(mutablecomponent.withStyle(mobeffect.getCategory().getTooltipFormatting()));
                 }
             }
         }
-        super.appendHoverText(pStack, pLevel, pComponents, pTooltipFlag);
+        super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
     }
 
     @Override

@@ -1,3 +1,4 @@
+/*
 package com.hakimen.kawaiidishes.enchantments;
 
 import com.hakimen.kawaiidishes.item.armor.EarsArmorItem;
@@ -72,3 +73,4 @@ public class BunnyHasteEnchantment extends Enchantment {
         return 3;
     }
 }
+*/

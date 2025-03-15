@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "@": {
+      "item": "minecraft:string"
+    },
+    "x": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    " xx",
+    " @x",
+    "@x "
+  ],
+  "result": {
+    "count": 1,
+    "id": "kawaiidishes:cat_tail"
+  }
+}

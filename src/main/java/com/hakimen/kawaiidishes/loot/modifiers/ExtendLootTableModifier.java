@@ -2,9 +2,9 @@ package com.hakimen.kawaiidishes.loot.modifiers;
 
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class ExtendLootTableModifier extends LootModifier {
-    public static final Supplier<Codec<ExtendLootTableModifier>> CODEC = Suppliers.memoize(
-            () -> RecordCodecBuilder.create(inst -> codecStart(inst).and(
+    public static final Supplier<MapCodec<ExtendLootTableModifier>> CODEC = Suppliers.memoize(
+            () -> RecordCodecBuilder.mapCodec(inst -> codecStart(inst).and(
                             ItemStack.CODEC.listOf()
                                     .fieldOf("items")
                                     .forGetter(ExtendLootTableModifier::getStackList)
@@ -50,7 +50,7 @@ public class ExtendLootTableModifier extends LootModifier {
     }
 
     @Override
-    public Codec<? extends IGlobalLootModifier> codec() {
+    public MapCodec<? extends IGlobalLootModifier> codec() {
         return CODEC.get();
     }
 }

@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -23,6 +24,12 @@ public class SeatEntity extends Entity {
     public SeatEntity(EntityType<?> entityTypeIn, Level worldIn) {
         super(entityTypeIn, worldIn);
     }
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {
+
+    }
+
     public SeatEntity(Level worldIn, BlockPos position) {
         super(EntityRegister.SEAT.get(), worldIn);
         this.setPos(position.getX() + 0.5D, position.getY() + 0.5D, position.getZ() + 0.5D);
@@ -52,11 +59,6 @@ public class SeatEntity extends Entity {
     @Override
     public Vec3 getPassengerRidingPosition(Entity p_294938_) {
         return this.blockPosition().getCenter().add(0,0.15,0);
-    }
-
-    @Override
-    protected float ridingOffset(Entity p_294652_) {
-        return 0.25f;
     }
 
     @Override
@@ -123,10 +125,6 @@ public class SeatEntity extends Entity {
 
     }
 
-    @Override
-    protected void defineSynchedData() {
-
-    }
 
     @Override
     protected void readAdditionalSaveData(CompoundTag compound) {

@@ -1,7 +1,6 @@
 package com.hakimen.kawaiidishes.registry;
 
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 
 
 public class Registration{
@@ -22,6 +21,8 @@ public class Registration{
         EntityRegister.register(bus);
         LootModifierRegistry.register(bus);
         EnchantmentRegister.register(bus);
+
+        DataComponentRegister.register(bus);
 
         ParticleRegister.register(bus);
 

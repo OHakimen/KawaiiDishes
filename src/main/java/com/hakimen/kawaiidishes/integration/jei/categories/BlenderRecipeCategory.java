@@ -23,9 +23,9 @@ import net.neoforged.neoforge.fluids.FluidType;
 import javax.annotation.Nonnull;
 
 public class BlenderRecipeCategory implements IRecipeCategory<BlenderRecipe> {
-    public final static ResourceLocation UID = new ResourceLocation(KawaiiDishes.MODID, "coffee_machining");
+    public final static ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "coffee_machining");
     public final static ResourceLocation TEXTURE =
-            new ResourceLocation(KawaiiDishes.MODID, "textures/integration/jei/blender_gui.png");
+            ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/integration/jei/blender_gui.png");
 
     private final IDrawable background;
     private final IDrawable icon;

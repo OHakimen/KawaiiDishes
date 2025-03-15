@@ -14,7 +14,7 @@ import net.minecraft.world.item.TooltipFlag;
 import java.util.Optional;
 
 public class CoffeeMachineScreen extends AbstractContainerScreen<CoffeeMachineContainer> {
-    private final ResourceLocation GUI = new ResourceLocation(KawaiiDishes.MODID, "textures/gui/coffee_machine_gui.png");
+    private final ResourceLocation GUI = ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/gui/coffee_machine_gui.png");
 
     private FluidTankRenderer renderer;
 
@@ -57,7 +57,7 @@ public class CoffeeMachineScreen extends AbstractContainerScreen<CoffeeMachineCo
         int relY = (this.height - this.imageHeight) / 2;
         guiGraphics.blit(GUI, relX, relY, 0, 0, this.imageWidth, this.imageHeight + 2);
 
-        renderer.render(guiGraphics.pose(), relX + 49, relY + 18, menu.getFluidStack());
+        renderer.render(guiGraphics, relX + 49, relY + 18, menu.getFluidStack());
 
         guiGraphics.blit(GUI, relX+64, relY+22, 0, 168, menu.getScaledProgress(),44);
     }

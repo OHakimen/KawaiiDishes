@@ -3,9 +3,7 @@ package com.hakimen.kawaiidishes.client.entity.blockEntityRenderers;
 import com.hakimen.kawaiidishes.aromas.DecorativeAroma;
 import com.hakimen.kawaiidishes.aromas.PotionAroma;
 import com.hakimen.kawaiidishes.block.IncenseBlock;
-import com.hakimen.kawaiidishes.block_entities.DisplayCaseBlockEntity;
 import com.hakimen.kawaiidishes.block_entities.IncenseBlockEntity;
-import com.hakimen.kawaiidishes.client.screens.renderers.FluidTankRenderer;
 import com.hakimen.kawaiidishes.custom.type.Aroma;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -16,16 +14,12 @@ import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.data.ModelData;
-import net.neoforged.neoforge.client.model.data.ModelProperty;
-
-import java.util.Arrays;
 
 public class IncenseGlassBlockEntityRenderer implements BlockEntityRenderer<IncenseBlockEntity> {
 
@@ -61,7 +55,7 @@ public class IncenseGlassBlockEntityRenderer implements BlockEntityRenderer<Ince
                 if (aroma instanceof DecorativeAroma) {
                     color = stack.getItem() instanceof DyeItem dyeItem ? dyeItem.getDyeColor().getFireworkColor() : 0;
                 } else if (aroma instanceof PotionAroma) {
-                    color = PotionUtils.getColor(stack);
+                    color = stack.get(DataComponents.POTION_CONTENTS).getColor() & 0xFFFFFF;
                 } else {
                     color = aroma.getColor();
                 }

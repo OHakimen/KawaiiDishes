@@ -16,7 +16,7 @@ public class EntityRegister {
 
     public static final DeferredHolder<EntityType<?>,EntityType<SeatEntity>> SEAT = ENTITIES.register("seat",
             () -> EntityType.Builder.<SeatEntity>of(SeatEntity::new, MobCategory.MISC).sized(1f, 1f)
-                    .build(new ResourceLocation( KawaiiDishes.MODID, "seat").toString()));
+                    .build(ResourceLocation.fromNamespaceAndPath( KawaiiDishes.MODID, "seat").toString()));
 
     public static void register(IEventBus bus){
         ENTITIES.register(bus);

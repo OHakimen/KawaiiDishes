@@ -1,5 +1,7 @@
 package com.hakimen.kawaiidishes.item;
 
+import com.hakimen.kawaiidishes.item.component.KawaiiDyeableComponent;
+import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -12,24 +14,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class SeatItem extends BlockItem implements IDyeableItem{
+public class SeatItem extends BlockItem {
     public SeatItem(Block pBlock, Properties pProperties) {
-        super(pBlock, pProperties);
-    }
-    @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        if((hasBaseColor(pStack) || hasOverlayColor(pStack)) && !pIsAdvanced.isAdvanced() ){
-            pTooltipComponents.add(Component.translatable("item.dyed").withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
-        }else if((hasBaseColor(pStack) && !pIsAdvanced.isCreative())){
-            pTooltipComponents.add(Component.translatable("item.kawaiidishes.base_dye", "0x"+Integer.toString(getBaseColor(pStack),16).toUpperCase()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
-        }else{
-            pTooltipComponents.add(Component.translatable("item.kawaiidishes.dyeable").withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
-        }
-    }
-
-    @Override
-    public boolean hasOverlay(ItemStack stack) {
-        return false;
+        super(pBlock, pProperties.component(DataComponentRegister.DYEABLE, KawaiiDyeableComponent.DEFAULT));
     }
 
 }

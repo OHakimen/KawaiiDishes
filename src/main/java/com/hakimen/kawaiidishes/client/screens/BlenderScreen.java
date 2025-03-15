@@ -15,7 +15,7 @@ import net.minecraft.world.item.TooltipFlag;
 import java.util.Optional;
 
 public class BlenderScreen extends AbstractContainerScreen<BlenderContainer> {
-    private final ResourceLocation GUI = new ResourceLocation(KawaiiDishes.MODID, "textures/gui/blender_gui.png");
+    private final ResourceLocation GUI = ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/gui/blender_gui.png");
 
 
     public BlenderScreen(BlenderContainer container, Inventory inv, Component name) {

@@ -4,8 +4,9 @@ import com.hakimen.kawaiidishes.block_entities.CoffeeMachineBlockEntity;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeInput;
 
-public record CoffeeMachineDataContainer(CoffeeMachineBlockEntity blockEntity) implements Container {
+public record CoffeeMachineDataContainer(CoffeeMachineBlockEntity blockEntity) implements Container, RecipeInput {
 
     @Override
     public int getContainerSize() {
@@ -26,6 +27,11 @@ public record CoffeeMachineDataContainer(CoffeeMachineBlockEntity blockEntity) i
     @Override
     public ItemStack getItem(int idx) {
         return blockEntity.getInventory().getStackInSlot(idx);
+    }
+
+    @Override
+    public int size() {
+        return 0;
     }
 
     @Override

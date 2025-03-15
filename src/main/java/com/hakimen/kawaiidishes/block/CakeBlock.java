@@ -82,8 +82,8 @@ public class CakeBlock extends Block {
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pBlockHitResult) {
-        ItemStack itemstack = pPlayer.getItemInHand(pHand);
+    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
+        ItemStack itemstack = pPlayer.getItemInHand(pPlayer.getUsedItemHand());
 
         if (pLevel.isClientSide) {
             if (eat(pLevel, pPos, pState, pPlayer).consumesAction()) {

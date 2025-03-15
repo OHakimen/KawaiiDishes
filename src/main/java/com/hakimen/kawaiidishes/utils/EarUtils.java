@@ -6,9 +6,9 @@ import com.hakimen.kawaiidishes.client.entity.models.TailArmorModel;
 import com.hakimen.kawaiidishes.item.armor.EarsArmorItem;
 import com.hakimen.kawaiidishes.item.armor.IAnimationPredicate;
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.core.animation.Animation;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animation.Animation;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.model.GeoModel;
 
 import java.util.HashMap;
@@ -21,9 +21,7 @@ public class EarUtils {
 
     static HashMap<AnimalType, ResourceLocation> earSkinTexture = new HashMap<>();
     static HashMap<AnimalType, IAnimationPredicate<EarsArmorItem>> earAnimations = new HashMap<>();
-
-    static {
-    }
+    
 
     public static HashMap<AnimalType, ResourceLocation> getEarSkinTexture() {
         return earSkinTexture;
@@ -45,15 +43,15 @@ public class EarUtils {
         String typeName = type.name().toLowerCase();
 
         earModels.put(type, new EarsArmorModel(
-                new ResourceLocation(KawaiiDishes.MODID, "geo/ears/%s_ears.geo.json".formatted(typeName)),
-                new ResourceLocation(KawaiiDishes.MODID, "textures/models/armor/ears/%s_ears.png".formatted(typeName)),
-                new ResourceLocation(KawaiiDishes.MODID, "animations/ears/%s_ears.animation.json".formatted(typeName))));
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "geo/ears/%s_ears.geo.json".formatted(typeName)),
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/ears/%s_ears.png".formatted(typeName)),
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "animations/ears/%s_ears.animation.json".formatted(typeName))));
 
         earOverlayTextures.put(type,
-                new ResourceLocation(KawaiiDishes.MODID, "textures/models/armor/ears/overlays/%s_ears.png".formatted(typeName)));
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/ears/overlays/%s_ears.png".formatted(typeName)));
 
         earSkinTexture.put(type,
-                new ResourceLocation(KawaiiDishes.MODID, "textures/models/armor/ears/skin/%s_ears_skin.png".formatted(typeName)));
+                ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/ears/skin/%s_ears_skin.png".formatted(typeName)));
 
         earAnimations.put(type, state);
     }

@@ -78,16 +78,15 @@ public class CoffeeMugBlock extends Block {
                 : super.updateShape(pState, pDirection, pOtherState, pLevel, pPrimaryPos, pSecondaryPos);
     }
 
-    @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pInteractionHand, BlockHitResult pBlockHitResult) {
 
+    @Override
+    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if(pPlayer.isCrouching()){
-            pPlayer.addItem(getCloneItemStack(pState, pBlockHitResult, pLevel, pPos, pPlayer));
+            pPlayer.addItem(getCloneItemStack(pState, pHitResult, pLevel, pPos, pPlayer));
             pLevel.setBlockAndUpdate(pPos,Blocks.AIR.defaultBlockState());
             pPlayer.playSound(SoundEvents.ITEM_PICKUP, 1f, 0.75f + pLevel.getRandom().nextFloat()/2f);
             return InteractionResult.SUCCESS;
         }
-
-        return super.use(pState, pLevel, pPos, pPlayer, pInteractionHand, pBlockHitResult);
+        return super.useWithoutItem(pState, pLevel, pPos, pPlayer, pHitResult);
     }
 }

@@ -21,7 +21,7 @@ public class EarSkinLayer extends GeoArmorLayer<EarsArmorItem> {
         this.stackData = stack;
     }
     public EarSkinLayer(GeoRenderer<EarsArmorItem> entityRendererIn) {
-        super(entityRendererIn, new ResourceLocation(KawaiiDishes.MODID, "textures/models/armor/none.png"));
+        super(entityRendererIn, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/none.png"));
     }
 
     @Override
@@ -33,6 +33,6 @@ public class EarSkinLayer extends GeoArmorLayer<EarsArmorItem> {
     public void render(PoseStack poseStack, EarsArmorItem animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         RenderType armorRenderType = RenderType.armorCutoutNoCull(getTexture());
 
-        getRenderer().reRender(getDefaultBakedModel(animatable),poseStack,bufferSource,animatable,armorRenderType,bufferSource.getBuffer(armorRenderType),partialTick,packedLight, OverlayTexture.NO_OVERLAY,1,1,1,1);
+        getRenderer().reRender(getDefaultBakedModel(animatable),poseStack,bufferSource,animatable,armorRenderType,bufferSource.getBuffer(armorRenderType),partialTick,packedLight, OverlayTexture.NO_OVERLAY, 0xffffffff);
     }
 }

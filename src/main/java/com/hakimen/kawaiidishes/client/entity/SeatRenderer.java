@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class SeatRenderer extends EntityRenderer<SeatEntity> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(KawaiiDishes.MODID, "");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "");
 
     public SeatRenderer(EntityRendererProvider.Context context) {
         super(context);

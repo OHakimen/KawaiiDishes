@@ -8,6 +8,7 @@ import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
 import com.hakimen.kawaiidishes.registry.PacketRegister;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
@@ -49,7 +50,9 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements MenuProvide
         protected void onContentsChanged() {
             super.onContentsChanged();
             if (!level.isClientSide()) {
-                PacketDistributor.ALL.noArg().send(new FluidSyncS2CPacket(this.fluid, worldPosition));
+                if(!this.fluid.isEmpty()){
+                    PacketDistributor.sendToAllPlayers(new FluidSyncS2CPacket(this.fluid, worldPosition));
+                }
             }
         }
 
@@ -171,25 +174,24 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements MenuProvide
     }
 
     @Override
-    protected void saveAdditional(CompoundTag pTag) {
-        pTag.merge(this.inventory.serializeNBT());
-        waterTank.writeToNBT(pTag);
+    protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
+        pTag.merge(this.inventory.serializeNBT(pRegistries));
+        waterTank.writeToNBT(pRegistries,pTag);
         pTag.putInt("Progress", progress);
         pTag.putInt("RecipeTicks", recipeTicks);
         pTag.putBoolean("IsCrafting", isCrafting);
-        super.saveAdditional(pTag);
+        super.saveAdditional(pTag, pRegistries);
     }
 
     @Override
-    public void load(CompoundTag pTag) {
-        super.load(pTag);
+    protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         progress = pTag.getInt("Progress");
         recipeTicks = pTag.getInt("RecipeTicks");
         isCrafting = pTag.getBoolean("IsCrafting");
-        inventory.deserializeNBT(pTag);
-        waterTank.readFromNBT(pTag);
+        inventory.deserializeNBT(pRegistries,pTag);
+        waterTank.readFromNBT(pRegistries,pTag);
+        super.loadAdditional(pTag, pRegistries);
     }
-
 
     @Nullable
     @Override
@@ -198,8 +200,8 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements MenuProvide
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
-        return this.saveWithFullMetadata();
+    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
+        return this.saveWithFullMetadata(pRegistries);
     }
 
     @Override

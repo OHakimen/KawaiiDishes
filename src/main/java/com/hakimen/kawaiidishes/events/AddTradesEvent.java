@@ -13,6 +13,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.BasicItemListing;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
@@ -22,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = KawaiiDishes.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@EventBusSubscriber(modid = KawaiiDishes.MODID, bus = EventBusSubscriber.Bus.GAME)
 @ParametersAreNonnullByDefault
 public class AddTradesEvent {
 
@@ -30,7 +31,7 @@ public class AddTradesEvent {
     public static void villagerTrades(VillagerTradesEvent event){
         Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
         VillagerProfession profession = event.getType();
-        if(ServerConfig.shouldAddVillagerTrades.get()) {
+        //if(ServerConfig.shouldAddVillagerTrades.get()) {
             if (profession.toString().equals("farmer")) {
                 trades.get(1).add(buyTrade(ItemRegister.COFFEE_BERRIES.get(), 22, 16, 5));
                 trades.get(3).add(sellTrade(2, ItemRegister.HONEY_CHEESE_CAKE_SLICE.get(), 4, 16, 5));
@@ -40,11 +41,11 @@ public class AddTradesEvent {
                 trades.get(4).add(sellTrade(4, ItemRegister.CHOCOLATE_WAFFLE.get(), 1, 16, 5));
                 trades.get(4).add(sellTrade(4, ItemRegister.CHEESE_CAKE.get(), 1, 16, 5));
             }
-        }
+       // }
     }
     @SubscribeEvent
     public static void wandererTrades(WandererTradesEvent event) {
-        if(!ServerConfig.shouldAddVillagerTrades.get()) return;
+        //if(!ServerConfig.shouldAddVillagerTrades.get()) return;
         List<VillagerTrades.ItemListing> trades = event.getGenericTrades();
         trades.add(sellTrade(ItemRegister.COFFEE_BERRIES.get(), 4,1, 12));
     }

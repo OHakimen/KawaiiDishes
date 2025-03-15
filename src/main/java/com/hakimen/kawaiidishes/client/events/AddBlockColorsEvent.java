@@ -7,17 +7,16 @@ import com.hakimen.kawaiidishes.block_entities.IncenseBlockEntity;
 import com.hakimen.kawaiidishes.block_entities.SeatBlockEntity;
 import com.hakimen.kawaiidishes.custom.type.Aroma;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
-import net.minecraft.client.color.block.BlockColor;
-import net.minecraft.world.item.DyeColor;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.alchemy.PotionUtils;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
-@Mod.EventBusSubscriber(modid = KawaiiDishes.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = KawaiiDishes.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class AddBlockColorsEvent {
 
     @SubscribeEvent
@@ -28,7 +27,7 @@ public class AddBlockColorsEvent {
 
         event.register((state, view, pos, tintIndex) -> {
             if (view.getBlockEntity(pos) != null && tintIndex == 0) {
-                int color = 0xffffff;
+                int color;
 
                 IncenseBlockEntity incenseBlockEntity = (IncenseBlockEntity) view.getBlockEntity(pos);
 
@@ -39,7 +38,7 @@ public class AddBlockColorsEvent {
                 if (aroma instanceof DecorativeAroma) {
                     color = stack.getItem() instanceof DyeItem dyeItem ? dyeItem.getDyeColor().getFireworkColor() : 0;
                 } else if (aroma instanceof PotionAroma) {
-                    color = PotionUtils.getColor(stack);
+                    color = stack.has(DataComponents.POTION_CONTENTS) ? stack.get(DataComponents.POTION_CONTENTS).getColor() : 0;
                 } else {
                     color = aroma.getColor();
                 }

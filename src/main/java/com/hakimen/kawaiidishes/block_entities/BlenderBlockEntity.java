@@ -2,8 +2,10 @@ package com.hakimen.kawaiidishes.block_entities;
 
 import com.hakimen.kawaiidishes.containers.BlenderContainer;
 import com.hakimen.kawaiidishes.recipes.BlenderRecipe;
+import com.hakimen.kawaiidishes.recipes.SimpleContainerRecipeInput;
 import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
@@ -68,26 +70,26 @@ public class BlenderBlockEntity extends BlockEntity implements MenuProvider, Blo
         }
 
         Optional<RecipeHolder<BlenderRecipe>> match = level.getRecipeManager()
-                .getRecipeFor(BlenderRecipe.Type.INSTANCE, inventory, level);
+                .getRecipeFor(BlenderRecipe.Type.INSTANCE, new SimpleContainerRecipeInput(inventory), level);
         return match.isPresent();
     }
 
     @Override
-    protected void saveAdditional(CompoundTag pTag) {
-        pTag.merge(this.inventory.serializeNBT());
+    protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
+        pTag.merge(this.inventory.serializeNBT(pRegistries));
         pTag.putInt("Progress", progress);
         pTag.putInt("RecipeTicks", recipeTicks);
         pTag.putBoolean("IsCrafting", isCrafting);
-        super.saveAdditional(pTag);
+        super.saveAdditional(pTag, pRegistries);
     }
 
     @Override
-    public void load(CompoundTag pTag) {
-        super.load(pTag);
+    protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         progress = pTag.getInt("Progress");
         recipeTicks = pTag.getInt("RecipeTicks");
         isCrafting = pTag.getBoolean("IsCrafting");
-        inventory.deserializeNBT(pTag);
+        inventory.deserializeNBT(pRegistries,pTag);
+        super.loadAdditional(pTag, pRegistries);
     }
 
     @Override
@@ -109,7 +111,7 @@ public class BlenderBlockEntity extends BlockEntity implements MenuProvider, Blo
                 inventory.setItem(i, entity.inventory.getStackInSlot(i));
             }
             Optional<RecipeHolder<BlenderRecipe>> match = level.getRecipeManager()
-                    .getRecipeFor(BlenderRecipe.Type.INSTANCE, inventory, level);
+                    .getRecipeFor(BlenderRecipe.Type.INSTANCE, new SimpleContainerRecipeInput(inventory), level);
             if (match.isPresent()) {
                 BlenderRecipe recipe = match.get().value();
                 if (!isCrafting) {

@@ -3,14 +3,15 @@ package com.hakimen.kawaiidishes.client.entity.renderers;
 import com.hakimen.kawaiidishes.client.entity.models.layers.shoe_layers.ShoesOverlayLayer;
 import com.hakimen.kawaiidishes.client.entity.models.layers.shoe_layers.ShoesSolesLayer;
 import com.hakimen.kawaiidishes.item.armor.ShoesArmorItem;
+import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.core.object.Color;
 import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.util.Color;
 
 public class ShoesArmorRender extends GeoArmorItemRenderer<ShoesArmorItem> {
     ItemStack stackData;
@@ -34,7 +35,6 @@ public class ShoesArmorRender extends GeoArmorItemRenderer<ShoesArmorItem> {
 
     @Override
     public Color getRenderColor(ShoesArmorItem animatable, float partialTick, int packedLight) {
-        float[] rgb = ColorUtils.getColorsFromHex(animatable.getBaseColor(stackData));
-        return Color.ofRGB(rgb[0],rgb[1],rgb[2]);
+        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE).getBase());
     }
 }

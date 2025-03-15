@@ -1,23 +1,22 @@
 package com.hakimen.kawaiidishes.client.events;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
-import com.hakimen.kawaiidishes.item.IDyeableItem;
 import com.hakimen.kawaiidishes.item.IFourColorDyeableItem;
-import com.hakimen.kawaiidishes.item.armor.HeadBandWithEarsArmorItem;
-import com.hakimen.kawaiidishes.item.armor.MaidDressesWithTailArmorItem;
+import com.hakimen.kawaiidishes.item.component.KawaiiDyeableComponent;
+import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.ItemLike;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = KawaiiDishes.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = KawaiiDishes.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class AddItemPropertiesEvent {
 
     @SubscribeEvent
@@ -43,15 +42,15 @@ public class AddItemPropertiesEvent {
                 ItemRegister.CAT_EARS.get());
 
 
-        ItemProperties.register(ItemRegister.THIGH_HIGHS.get(), new ResourceLocation(KawaiiDishes.MODID, "decoration"), ((pStack, pLevel, pEntity, pSeed) -> pStack.getOrCreateTag().getInt("Decoration")));
+        ItemProperties.register(ItemRegister.THIGH_HIGHS.get(), ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "decoration"), ((pStack, pLevel, pEntity, pSeed) -> pStack.get(DataComponents.CUSTOM_DATA).copyTag().getInt("Decoration")));
         itemsWithState.forEach(item -> {
-            ItemProperties.register(item,new ResourceLocation(KawaiiDishes.MODID, "state"), (pStack, pLevel, pEntity, pSeed) -> {
+            ItemProperties.register(item,ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "state"), (pStack, pLevel, pEntity, pSeed) -> {
                 float compoundValue = 0;
 
-                IFourColorDyeableItem fourColoredItem = (IFourColorDyeableItem) pStack.getItem();
+                KawaiiDyeableComponent.KawaiiDyeable dyeable = pStack.get(DataComponentRegister.DYEABLE);
+                compoundValue += dyeable.isHasOverlay() ? 1 : 0;
+                compoundValue += dyeable.isHasSecondaryOverlay() ? 2 : 0;
 
-                compoundValue += fourColoredItem.hasPrimaryOverlay(pStack) ? 1 : 0;
-                compoundValue += fourColoredItem.hasSecondaryOverlay(pStack) ? 2 : 0;
 
                 // 0 sem nada
                 // 1 overlay no vestido
@@ -63,7 +62,7 @@ public class AddItemPropertiesEvent {
         });
 
         itemsWithOverlay.forEach(item -> {
-            ItemProperties.register(item,new ResourceLocation(KawaiiDishes.MODID, "has_overlay"), ((pStack, pLevel, pEntity, pSeed) -> ((IDyeableItem)pStack.getItem()).hasOverlay(pStack) ? 1 : 0));
+            ItemProperties.register(item,ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "has_overlay"), ((pStack, pLevel, pEntity, pSeed) -> pStack.get(DataComponentRegister.DYEABLE).isHasOverlay() ? 1 : 0));
         });
     }
 }

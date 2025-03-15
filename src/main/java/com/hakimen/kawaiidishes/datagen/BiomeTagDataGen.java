@@ -18,7 +18,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class BiomeTagDataGen extends BiomeTagsProvider {
 
-    public static TagKey<Biome> BIOME_TAGS = new TagKey<>(Registries.BIOME, new ResourceLocation(KawaiiDishes.MODID, "can_place_coffee_bushes"));
+    public static TagKey<Biome> BIOME_TAGS = new TagKey<>(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "can_place_coffee_bushes"));
     public BiomeTagDataGen(DataGenerator generator, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(generator.getPackOutput(), lookupProvider, KawaiiDishes.MODID, existingFileHelper);
     }
