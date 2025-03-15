@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "kawaiidishes:block/drinks/latte_coffee",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "kawaiidishes:block/drinks/latte_coffee"
+    },
+    "facing=south": {
+      "model": "kawaiidishes:block/drinks/latte_coffee",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "kawaiidishes:block/drinks/latte_coffee",
+      "y": 270
+    }
+  }
+}

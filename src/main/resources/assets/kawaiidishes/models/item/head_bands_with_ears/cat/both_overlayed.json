@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kawaiidishes:item/head_bands_with_ears/ears/cat_ears",
+    "layer1": "kawaiidishes:item/head_bands_with_ears/ears_overlay/cat_ears",
+    "layer2": "kawaiidishes:item/head_bands_with_ears/ears_skin/cat_ears",
+    "layer3": "kawaiidishes:item/head_band",
+    "layer4": "kawaiidishes:item/head_band_overlay"
+
+  }
+}

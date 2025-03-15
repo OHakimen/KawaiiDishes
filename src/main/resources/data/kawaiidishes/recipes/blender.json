@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    ",": {
+      "item": "minecraft:iron_nugget"
+    },
+    "-": {
+      "tag": "c:iron_ingots"
+    },
+    "x": {
+      "tag": "c:glass_panes"
+    }
+  },
+  "pattern": [
+    "xxx",
+    "x x",
+    "-,-"
+  ],
+  "result": {
+    "item": "kawaiidishes:blender"
+  }
+}

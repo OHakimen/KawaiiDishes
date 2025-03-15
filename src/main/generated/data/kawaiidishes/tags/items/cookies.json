@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:cookie",
+    "kawaiidishes:glow_berry_cookie",
+    "kawaiidishes:chocolate_cookie",
+    "kawaiidishes:sweet_berry_cookie"
+  ]
+}

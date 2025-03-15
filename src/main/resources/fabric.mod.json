@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "kawaiidishes",
+  "version": "${version}",
+  "name": "Kawaii Dishes",
+  "description": "A mod about coffee, food and maids",
+  "authors": [
+    "Hakimen"
+  ],
+  "contact": {
+
+  },
+  "license": "MIT",
+  "icon": "assets/kawaiidishes/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "emi": [
+      "com.hakimen.kawaiidishes.integration.emi.EMIPlugin"
+    ],
+    "fabric-datagen": [
+      "com.hakimen.kawaiidishes.datagen.DataGeneration"
+    ],
+    "client": [
+      "com.hakimen.kawaiidishes.client.KawaiiDishesClient"
+    ],
+    "main": [
+      "com.hakimen.kawaiidishes.KawaiiDishes"
+    ]
+  },
+  "mixins": [
+    "kawaiidishes.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}",
+    "forgeconfigapiport": ">=8.0.0"
+  }
+}

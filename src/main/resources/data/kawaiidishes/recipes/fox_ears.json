@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "s": {
+      "item": "minecraft:pink_wool"
+    },
+    "x": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "x x",
+    "s s"
+  ],
+  "result": {
+    "item": "kawaiidishes:fox_ears"
+  }
+}
