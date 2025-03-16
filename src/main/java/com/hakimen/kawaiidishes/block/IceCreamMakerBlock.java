@@ -1,6 +1,5 @@
 package com.hakimen.kawaiidishes.block;
 
-import com.hakimen.kawaiidishes.block_entities.IceCreamMakerBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -60,25 +59,24 @@ public class IceCreamMakerBlock extends DirectionalBlockWithEntity {
     }
 
 
-    @javax.annotation.Nullable
     @Override
     public BlockState getStateForPlacement( BlockPlaceContext placement )
     {
         return defaultBlockState().setValue( FACING, placement.getHorizontalDirection().getOpposite() );
     }
 
-    @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (!pState.is(pNewState.getBlock())) {
-            BlockEntity blockentity = pLevel.getBlockEntity(pPos);
-            if (blockentity instanceof IceCreamMakerBlockEntity iceCreamMachine) {
-                for (int i = 0; i < iceCreamMachine.getInventory().getSlots(); i++) {
-                    popResource(pLevel,pPos,iceCreamMachine.getInventory().getStackInSlot(i));
-                }
-            }
-            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
-        }
-    }
+//    @Override
+//    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+//        if (!pState.is(pNewState.getBlock())) {
+//            BlockEntity blockentity = pLevel.getBlockEntity(pPos);
+//            if (blockentity instanceof IceCreamMakerBlockEntity iceCreamMachine) {
+//                for (int i = 0; i < iceCreamMachine.getInventory().getSlots(); i++) {
+//                    popResource(pLevel,pPos,iceCreamMachine.getInventory().getStackInSlot(i));
+//                }
+//            }
+//            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+//        }
+//    }
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pBlockGetter, BlockPos pPos, CollisionContext pCollisionContext) {
@@ -102,29 +100,29 @@ public class IceCreamMakerBlock extends DirectionalBlockWithEntity {
         return box;
     }
 
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide ? null
-                : (level, pos, state, blockEntity) -> ((IceCreamMakerBlockEntity) blockEntity).tick(level,pos,state,(IceCreamMakerBlockEntity)blockEntity);
-    }
-
-    @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new IceCreamMakerBlockEntity(pPos,pState);
-    }
-
-
-    @Override
-    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
-        if (!pLevel.isClientSide()) {
-            BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if(entity instanceof IceCreamMakerBlockEntity) {
-                pPlayer.openMenu((IceCreamMakerBlockEntity)entity, pPos);
-            } else {
-                throw new IllegalStateException("Our Container provider is missing!");
-            }
-        }
-        return InteractionResult.SUCCESS;
-    }
+//    @Nullable
+//    @Override
+//    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+//        return pLevel.isClientSide ? null
+//                : (level, pos, state, blockEntity) -> ((IceCreamMakerBlockEntity) blockEntity).tick(level,pos,state,(IceCreamMakerBlockEntity)blockEntity);
+//    }
+//
+//    @Override
+//    public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+//        return new IceCreamMakerBlockEntity(pPos,pState);
+//    }
+//
+//
+//    @Override
+//    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
+//        if (!pLevel.isClientSide()) {
+//            BlockEntity entity = pLevel.getBlockEntity(pPos);
+//            if(entity instanceof IceCreamMakerBlockEntity) {
+//                pPlayer.openMenu((IceCreamMakerBlockEntity)entity, pPos);
+//            } else {
+//                throw new IllegalStateException("Our Container provider is missing!");
+//            }
+//        }
+//        return InteractionResult.SUCCESS;
+//    }
 }

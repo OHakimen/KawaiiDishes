@@ -78,9 +78,9 @@ public class MaidDressWithTailRecipe extends CustomRecipe {
         }
 
         var tailData = (TailArmorItem) tail.get(0).getItem();
-        var tailComponents = tail.get(0).get(DataComponentRegister.DYEABLE);
+        var tailComponents = tail.get(0).get(DataComponentRegister.DYEABLE.get());
         var dressData = (MaidDressArmorItem) dress.getItem();
-        var dressComponents = dress.get(DataComponentRegister.DYEABLE);
+        var dressComponents = dress.get(DataComponentRegister.DYEABLE.get());
         ItemStack stack = MaidDressesWithTailUtils.getTailedDressItems().get(tailData.getTailType()).get().getDefaultInstance();
         MaidDressesWithTailArmorItem tailDressArmorItem = (MaidDressesWithTailArmorItem) stack.getItem();
 
@@ -100,7 +100,7 @@ public class MaidDressWithTailRecipe extends CustomRecipe {
             builder.setHasSecondaryOverlay(true);
         }
 
-        stack.set(DataComponentRegister.DYEABLE,builder.build());
+        stack.set(DataComponentRegister.DYEABLE.get(),builder.build());
 
         return !dress.isEmpty() && tail.size() == 1 ? stack : ItemStack.EMPTY;
     }

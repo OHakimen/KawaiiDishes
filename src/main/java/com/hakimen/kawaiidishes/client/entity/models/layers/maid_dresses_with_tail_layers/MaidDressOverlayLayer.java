@@ -31,7 +31,7 @@ public class MaidDressOverlayLayer extends GeoArmorLayer<MaidDressesWithTailArmo
         return new ResourceLocation[]{
                 ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"textures/models/armor/none.png"),
                 ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"textures/models/armor/maid_dresses_with_tail/dress/%s/maid_dress_overlay.png".formatted(((MaidDressesWithTailArmorItem)stackData.getItem()).getTailType().name().toLowerCase()))
-        }[stackData.get(DataComponentRegister.DYEABLE).isHasOverlay() ? 1 : 0];
+        }[stackData.get(DataComponentRegister.DYEABLE.get()).isHasOverlay() ? 1 : 0];
     }
 
     @Override
@@ -46,6 +46,6 @@ public class MaidDressOverlayLayer extends GeoArmorLayer<MaidDressesWithTailArmo
                 partialTick,
                 packedLight,
                 OverlayTexture.NO_OVERLAY,
-                stackData.get(DataComponentRegister.DYEABLE).getOverlay());
+                stackData.get(DataComponentRegister.DYEABLE.get()).getOverlay());
     }
 }

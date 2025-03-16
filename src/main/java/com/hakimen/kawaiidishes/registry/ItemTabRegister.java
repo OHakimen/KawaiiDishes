@@ -1,19 +1,21 @@
 package com.hakimen.kawaiidishes.registry;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
 import static com.hakimen.kawaiidishes.registry.ItemRegister.*;
 
 public class ItemTabRegister {
-    public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, KawaiiDishes.MODID);
+    public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, KawaiiDishes.MODID);
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CLOTHING_TAB = TABS.register("clothing", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CLOTHING_TAB = TABS.register("clothing", () -> FabricItemGroup.builder()
             .title(Component.translatable("itemGroup.kawaiidishes.clothing"))
             .icon(() -> new ItemStack(APRON.get()))
             .displayItems((enabledFeatures, entries) -> {
@@ -45,17 +47,17 @@ public class ItemTabRegister {
                 entries.accept(FULL_BANDS.get());
             }).build());
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DECORATION_TABS = TABS.register("decoration", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DECORATION_TABS = TABS.register("decoration", () -> FabricItemGroup.builder()
             .title(Component.translatable("itemGroup.kawaiidishes.decoration"))
-            .icon(() -> SEAT.get().getDefaultInstance())
+            .icon(() -> ItemRegister.SEAT.get().getDefaultInstance())
             .displayItems((enabledFeatures, entries) -> {
                 entries.accept(SEAT.get());
                 entries.accept(KITCHEN_TILES.get());
-                entries.accept(DISPLAY_CASE.get());
-                entries.accept(INCENSE_GLASS.get());
+//                entries.accept(DISPLAY_CASE.get());
+//                entries.accept(INCENSE_GLASS.get());
             }).build());
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> FOOD_TAB = TABS.register("food", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> FOOD_TAB = TABS.register("food", () -> FabricItemGroup.builder()
             .title(Component.translatable("itemGroup.kawaiidishes.food"))
             .icon(() -> new ItemStack(COFFEE_BERRIES.get()))
             .displayItems((enabledFeatures, entries) -> {
@@ -85,7 +87,7 @@ public class ItemTabRegister {
                 entries.accept(MOCHA_COFFEE.get());
                 entries.accept(HOT_COCOA.get());
 
-                //Cakes
+//                //Cakes
                 entries.accept(CHEESE_CAKE.get());
                 entries.accept(CHOCOLATE_CHEESE_CAKE.get());
                 entries.accept(HONEY_CHEESE_CAKE.get());
@@ -126,7 +128,7 @@ public class ItemTabRegister {
                 entries.accept(SWEET_BERRY_COOKIE.get());
                 entries.accept(GLOW_BERRY_COOKIE.get());
                 entries.accept(GOLDEN_COOKIE.get());
-                entries.accept(COOKIE_OF_UNBINDING.get());
+//                entries.accept(COOKIE_OF_UNBINDING.get());
 
                 //Machinery
                 entries.accept(COFFEE_MACHINE.get());
@@ -134,8 +136,8 @@ public class ItemTabRegister {
                 entries.accept(ICE_CREAM_MAKER.get());
             }).build());
 
-    public static void register(IEventBus bus){
-        TABS.register(bus);
+    public static void register() {
+
     }
 }
 

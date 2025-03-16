@@ -78,9 +78,9 @@ public class HeadBandWithEarsRecipe extends CustomRecipe {
         }
 
         var earsData = (EarsArmorItem) ears.get(0).getItem();
-        var earsComponents = ears.get(0).get(DataComponentRegister.DYEABLE);
+        var earsComponents = ears.get(0).get(DataComponentRegister.DYEABLE.get());
         var headBandData = (HeadBandArmorItem) headBand.getItem();
-        var headBandComponents = headBand.get(DataComponentRegister.DYEABLE);
+        var headBandComponents = headBand.get(DataComponentRegister.DYEABLE.get());
         ItemStack stack = HeadBandsWithEarsUtils.getEaredHeadBandsItems().get(earsData.getEarsType()).get().getDefaultInstance();
 
         KawaiiDyeableComponent.KawaiiDyeableBuilder builder = new KawaiiDyeableComponent.KawaiiDyeableBuilder();
@@ -100,7 +100,7 @@ public class HeadBandWithEarsRecipe extends CustomRecipe {
             builder.setHasSecondaryOverlay(true);
         }
 
-        stack.set(DataComponentRegister.DYEABLE,builder.build());
+        stack.set(DataComponentRegister.DYEABLE.get(),builder.build());
 
         return !headBand.isEmpty() && ears.size() == 1 ? stack : ItemStack.EMPTY;
     }
@@ -112,6 +112,6 @@ public class HeadBandWithEarsRecipe extends CustomRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeRegister.HEAD_BAND_EARS.value();
+        return RecipeRegister.HEAD_BAND_EARS.get();
     }
 }

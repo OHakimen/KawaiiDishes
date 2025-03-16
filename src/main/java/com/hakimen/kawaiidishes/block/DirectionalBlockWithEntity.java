@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class DirectionalBlockWithEntity extends HorizontalDirectionalBlock implements EntityBlock {
+public class DirectionalBlockWithEntity extends HorizontalDirectionalBlock {
     public DirectionalBlockWithEntity(Properties pProperties) {
         super(pProperties);
     }
@@ -20,11 +20,4 @@ public class DirectionalBlockWithEntity extends HorizontalDirectionalBlock imple
     protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
         return RecordCodecBuilder.mapCodec(blockInstance -> blockInstance.group(propertiesCodec()).apply(blockInstance, properties1 -> this));
     }
-
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return null;
-    }
-
 }

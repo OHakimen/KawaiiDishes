@@ -37,7 +37,7 @@ public class CoffeeItem extends BlockItem {
                             .alwaysEdible();
 
                     for (MobEffectInstance effect : effects) {
-                        builder.effect(() -> effect, 1f);
+                        builder.effect(effect, 1f);
                     }
 
                     return builder.build();

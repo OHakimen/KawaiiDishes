@@ -33,6 +33,6 @@ public class TailArmorRender extends GeoArmorItemRenderer<TailArmorItem> {
 
     @Override
     public Color getRenderColor(TailArmorItem animatable, float partialTick, int packedLight) {
-        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE).getBase());
+        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE.get()).getBase());
     }
 }

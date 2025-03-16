@@ -31,7 +31,7 @@ public class ShoesOverlayLayer extends GeoArmorLayer<ShoesArmorItem> {
         return new ResourceLocation[]{
                 ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/none.png"),
                 ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/shoes/shoes_overlay.png")
-        }[stackData.get(DataComponentRegister.DYEABLE).isHasOverlay() ? 1 : 0];
+        }[stackData.get(DataComponentRegister.DYEABLE.get()).isHasOverlay() ? 1 : 0];
     }
 
     @Override
@@ -47,6 +47,6 @@ public class ShoesOverlayLayer extends GeoArmorLayer<ShoesArmorItem> {
                 partialTick,
                 packedLight,
                 OverlayTexture.NO_OVERLAY,
-                stackData.get(DataComponentRegister.DYEABLE).getOverlay());
+                stackData.get(DataComponentRegister.DYEABLE.get()).getOverlay());
     }
 }

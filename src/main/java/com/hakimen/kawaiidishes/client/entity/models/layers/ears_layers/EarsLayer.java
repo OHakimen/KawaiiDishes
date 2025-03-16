@@ -31,7 +31,7 @@ public class EarsLayer extends GeoArmorLayer<EarsArmorItem> {
         return new ResourceLocation[]{
                 ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/none.png"),
                 EarUtils.getEarOverlayTextures().get(((EarsArmorItem)stackData.getItem()).getEarsType())
-        }[stackData.get(DataComponentRegister.DYEABLE).isHasOverlay() ? 1 : 0];
+        }[stackData.get(DataComponentRegister.DYEABLE.get()).isHasOverlay() ? 1 : 0];
     }
 
     @Override
@@ -46,6 +46,6 @@ public class EarsLayer extends GeoArmorLayer<EarsArmorItem> {
                 partialTick,
                 packedLight,
                 OverlayTexture.NO_OVERLAY,
-                stackData.get(DataComponentRegister.DYEABLE).getOverlay());
+                stackData.get(DataComponentRegister.DYEABLE.get()).getOverlay());
     }
 }

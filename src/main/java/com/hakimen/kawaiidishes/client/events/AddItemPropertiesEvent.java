@@ -9,19 +9,12 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
 import java.util.List;
 
-@EventBusSubscriber(modid = KawaiiDishes.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class AddItemPropertiesEvent {
 
-    @SubscribeEvent
-    public static void onClientSetup(FMLClientSetupEvent event) {
-
+    public static void onClientSetup() {
         List<Item> itemsWithState = List.of(
                 ItemRegister.MAID_DRESS_FOX_TAIL.get(),
                 ItemRegister.HEAD_BAND_FOX_EARS.get(),
@@ -47,7 +40,7 @@ public class AddItemPropertiesEvent {
             ItemProperties.register(item,ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "state"), (pStack, pLevel, pEntity, pSeed) -> {
                 float compoundValue = 0;
 
-                KawaiiDyeableComponent.KawaiiDyeable dyeable = pStack.get(DataComponentRegister.DYEABLE);
+                KawaiiDyeableComponent.KawaiiDyeable dyeable = pStack.get(DataComponentRegister.DYEABLE.get());
                 compoundValue += dyeable.isHasOverlay() ? 1 : 0;
                 compoundValue += dyeable.isHasSecondaryOverlay() ? 2 : 0;
 
@@ -62,7 +55,7 @@ public class AddItemPropertiesEvent {
         });
 
         itemsWithOverlay.forEach(item -> {
-            ItemProperties.register(item,ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "has_overlay"), ((pStack, pLevel, pEntity, pSeed) -> pStack.get(DataComponentRegister.DYEABLE).isHasOverlay() ? 1 : 0));
+            ItemProperties.register(item,ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "has_overlay"), ((pStack, pLevel, pEntity, pSeed) -> pStack.get(DataComponentRegister.DYEABLE.get()).isHasOverlay() ? 1 : 0));
         });
     }
 }

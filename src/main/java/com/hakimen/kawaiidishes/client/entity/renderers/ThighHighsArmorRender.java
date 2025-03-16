@@ -33,6 +33,6 @@ public class ThighHighsArmorRender extends GeoArmorItemRenderer<ThighHighsArmorI
 
     @Override
     public Color getRenderColor(ThighHighsArmorItem animatable, float partialTick, int packedLight) {
-        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE).getBase());
+        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE.get()).getBase());
     }
 }

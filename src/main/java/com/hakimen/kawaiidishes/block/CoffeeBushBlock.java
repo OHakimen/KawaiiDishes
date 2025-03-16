@@ -105,13 +105,13 @@ public class CoffeeBushBlock extends BushBlock implements BonemealableBlock {
         }
     }
 
-    @Override
-    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
-        int age = state.getValue(AGE);
-        if(age == 3){
-            int itemCount = 1 + level.random.nextInt(4);
-            popResource(level, pos, new ItemStack(ItemRegister.COFFEE_BERRIES.get(), itemCount));
-        }
-        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
-    }
+//    @Override
+//    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
+//        int age = state.getValue(AGE);
+//        if(age == 3){
+//            int itemCount = 1 + level.random.nextInt(4);
+//            popResource(level, pos, new ItemStack(ItemRegister.COFFEE_BERRIES.get(), itemCount));
+//        }
+//        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
+//    }
 }

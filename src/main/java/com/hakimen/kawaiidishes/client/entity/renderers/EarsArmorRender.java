@@ -38,6 +38,6 @@ public class EarsArmorRender extends GeoArmorItemRenderer<EarsArmorItem> {
 
     @Override
     public Color getRenderColor(EarsArmorItem animatable, float partialTick, int packedLight) {
-        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE).getBase());
+        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE.get()).getBase());
     }
 }

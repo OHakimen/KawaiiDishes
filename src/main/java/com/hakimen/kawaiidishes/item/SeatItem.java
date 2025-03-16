@@ -16,7 +16,7 @@ import java.util.List;
 
 public class SeatItem extends BlockItem {
     public SeatItem(Block pBlock, Properties pProperties) {
-        super(pBlock, pProperties.component(DataComponentRegister.DYEABLE, KawaiiDyeableComponent.DEFAULT));
+        super(pBlock, pProperties.component(DataComponentRegister.DYEABLE.get(), KawaiiDyeableComponent.DEFAULT));
     }
 
 }

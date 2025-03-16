@@ -29,7 +29,7 @@ public class DyeIDyeableRecipe extends CustomRecipe {
         for (int i = 0; i < pContainer.size(); ++i) {
             ItemStack itemstack1 = pContainer.getItem(i);
             if (!itemstack1.isEmpty()) {
-                if (itemstack1.has(DataComponentRegister.DYEABLE)) {
+                if (itemstack1.has(DataComponentRegister.DYEABLE.get())) {
                     if (!itemstack.isEmpty()) {
                         return false;
                     }
@@ -57,7 +57,7 @@ public class DyeIDyeableRecipe extends CustomRecipe {
             ItemStack itemstack1 = pContainer.getItem(i);
             if (!itemstack1.isEmpty()) {
                 Item item = itemstack1.getItem();
-                if (itemstack1.has(DataComponentRegister.DYEABLE)) {
+                if (itemstack1.has(DataComponentRegister.DYEABLE.get())) {
                     if (!itemstack.isEmpty()) {
                         return ItemStack.EMPTY;
                     }
@@ -72,7 +72,7 @@ public class DyeIDyeableRecipe extends CustomRecipe {
                 }
             }
         }
-        KawaiiDyeableComponent.KawaiiDyeable data = itemstack.get(DataComponentRegister.DYEABLE);
+        KawaiiDyeableComponent.KawaiiDyeable data = itemstack.get(DataComponentRegister.DYEABLE.get());
         ItemStack stack = data != null ? data.isHasOverlay() ? IFourColorDyeableItem.dyePrimaryOverlay(itemstack, list) : IFourColorDyeableItem.dyePrimaryBase(itemstack, list) : ItemStack.EMPTY;
         return !itemstack.isEmpty() && !list.isEmpty() ? stack : ItemStack.EMPTY;
     }

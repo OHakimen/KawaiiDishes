@@ -36,7 +36,7 @@ public class SecondaryTailLayer extends GeoArmorLayer<MaidDressesWithTailArmorIt
         return new ResourceLocation[]{
                 ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/none.png"),
                 MaidDressesWithTailUtils.getTailedDressesTailOverlay().get(tail)
-        }[stackData.get(DataComponentRegister.DYEABLE).isHasSecondaryOverlay() ? 1 : 0];
+        }[stackData.get(DataComponentRegister.DYEABLE.get()).isHasSecondaryOverlay() ? 1 : 0];
     }
 
     @Override
@@ -52,5 +52,5 @@ public class SecondaryTailLayer extends GeoArmorLayer<MaidDressesWithTailArmorIt
                 partialTick,
                 packedLight,
                 OverlayTexture.NO_OVERLAY,
-                stackData.get(DataComponentRegister.DYEABLE).getSecondaryOverlay()) ;}
+                stackData.get(DataComponentRegister.DYEABLE.get()).getSecondaryOverlay()) ;}
 }

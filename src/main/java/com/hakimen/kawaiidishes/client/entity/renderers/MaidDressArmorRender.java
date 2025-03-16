@@ -33,7 +33,7 @@ public class MaidDressArmorRender extends GeoArmorItemRenderer<MaidDressArmorIte
         return new ResourceLocation[]{
                 ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"textures/models/armor/maid_dress/dress.png"),
                 ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"textures/models/armor/maid_dress/maid_dress.png")
-        }[stackData.get(DataComponentRegister.DYEABLE).isHasOverlay() ? 1 : 0];
+        }[stackData.get(DataComponentRegister.DYEABLE.get()).isHasOverlay() ? 1 : 0];
     }
 
     @Override
@@ -47,6 +47,6 @@ public class MaidDressArmorRender extends GeoArmorItemRenderer<MaidDressArmorIte
 
     @Override
     public Color getRenderColor(MaidDressArmorItem animatable, float partialTick, int packedLight) {
-        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE).getBase());
+        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE.get()).getBase());
     }
 }

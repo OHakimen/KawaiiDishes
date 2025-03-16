@@ -42,17 +42,17 @@ public class SeatBlock extends BlockWithEntity {
         super.setPlacedBy(pLevel, pPos, pState, pEntity, pStack);
     }
 
-    @Override
-    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
-
-        if(willHarvest){
-            ItemStack stack = ItemRegister.SEAT.get().getDefaultInstance();
-            SeatBlockEntity blockEntity = level.getBlockEntity(pos,BlockEntityRegister.SEAT.get()).get();
-            blockEntity.saveToItem(blockEntity,stack);
-            popResource(level,pos,stack);
-        }
-        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
-    }
+//    @Override
+//    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
+//
+//        if(willHarvest){
+//            ItemStack stack = ItemRegister.SEAT.get().getDefaultInstance();
+//            SeatBlockEntity blockEntity = level.getBlockEntity(pos,BlockEntityRegister.SEAT.get()).get();
+//            blockEntity.saveToItem(blockEntity,stack);
+//            popResource(level,pos,stack);
+//        }
+//        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
+//    }
 
     @Override
     public VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
@@ -62,12 +62,12 @@ public class SeatBlock extends BlockWithEntity {
         return shape;
     }
 
-    @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
-        ItemStack stack = ItemRegister.SEAT.get().getDefaultInstance();
-        level.getBlockEntity(pos,BlockEntityRegister.SEAT.get()).get().saveToItem(level.getBlockEntity(pos,BlockEntityRegister.SEAT.get()).get(),stack);
-        return stack;
-    }
+//    @Override
+//    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+//        ItemStack stack = ItemRegister.SEAT.get().getDefaultInstance();
+//        level.getBlockEntity(pos,BlockEntityRegister.SEAT.get()).get().saveToItem(level.getBlockEntity(pos,BlockEntityRegister.SEAT.get()).get(),stack);
+//        return stack;
+//    }
 
 
     @Override

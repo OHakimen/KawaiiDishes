@@ -51,7 +51,6 @@ public class CoffeeMugBlock extends Block {
         return state.setValue( FACING, rot.rotate( state.getValue( FACING ) ) );
     }
 
-    @javax.annotation.Nullable
     @Override
     public BlockState getStateForPlacement( BlockPlaceContext placement )
     {
@@ -78,15 +77,15 @@ public class CoffeeMugBlock extends Block {
                 : super.updateShape(pState, pDirection, pOtherState, pLevel, pPrimaryPos, pSecondaryPos);
     }
 
-
-    @Override
-    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
-        if(pPlayer.isCrouching()){
-            pPlayer.addItem(getCloneItemStack(pState, pHitResult, pLevel, pPos, pPlayer));
-            pLevel.setBlockAndUpdate(pPos,Blocks.AIR.defaultBlockState());
-            pPlayer.playSound(SoundEvents.ITEM_PICKUP, 1f, 0.75f + pLevel.getRandom().nextFloat()/2f);
-            return InteractionResult.SUCCESS;
-        }
-        return super.useWithoutItem(pState, pLevel, pPos, pPlayer, pHitResult);
-    }
+//
+//    @Override
+//    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
+//        if(pPlayer.isCrouching()){
+//            pPlayer.addItem(getCloneItemStack(pState, pHitResult, pLevel, pPos, pPlayer));
+//            pLevel.setBlockAndUpdate(pPos,Blocks.AIR.defaultBlockState());
+//            pPlayer.playSound(SoundEvents.ITEM_PICKUP, 1f, 0.75f + pLevel.getRandom().nextFloat()/2f);
+//            return InteractionResult.SUCCESS;
+//        }
+//        return super.useWithoutItem(pState, pLevel, pPos, pPlayer, pHitResult);
+//    }
 }

@@ -41,6 +41,6 @@ public class PrimaryTailLayer extends GeoArmorLayer<MaidDressesWithTailArmorItem
                 partialTick,
                 packedLight,
                 OverlayTexture.NO_OVERLAY,
-                stackData.get(DataComponentRegister.DYEABLE).getSecondaryBase());
+                stackData.get(DataComponentRegister.DYEABLE.get()).getSecondaryBase());
     }
 }

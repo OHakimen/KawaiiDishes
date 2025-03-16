@@ -1,6 +1,5 @@
 package com.hakimen.kawaiidishes.block;
 
-import com.hakimen.kawaiidishes.block_entities.CoffeeMachineBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;

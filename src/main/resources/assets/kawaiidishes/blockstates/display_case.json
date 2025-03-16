@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "kawaiidishes:block/display_case",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "kawaiidishes:block/display_case"
+    },
+    "facing=south": {
+      "model": "kawaiidishes:block/display_case",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "kawaiidishes:block/display_case",
+      "y": 270
+    }
+  }
+}

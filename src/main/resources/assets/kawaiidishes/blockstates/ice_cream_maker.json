@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "kawaiidishes:block/ice_cream_maker",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "kawaiidishes:block/ice_cream_maker"
+    },
+    "facing=south": {
+      "model": "kawaiidishes:block/ice_cream_maker",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "kawaiidishes:block/ice_cream_maker",
+      "y": 270
+    }
+  }
+}

@@ -2,17 +2,17 @@ package com.hakimen.kawaiidishes.registry;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.block.*;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class BlockRegister {
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(Registries.BLOCK, KawaiiDishes.MODID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(BuiltInRegistries.BLOCK, KawaiiDishes.MODID);
     private static final BlockBehaviour.Properties coffeeProps =  BlockBehaviour.Properties.of()
             .strength(1f)
             .destroyTime(1f)
@@ -33,7 +33,7 @@ public class BlockRegister {
     ));
 
     public static final DeferredHolder<Block, Block> KITCHEN_TILES = BLOCKS.register("kitchen_tiles", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)));
-    public static final DeferredHolder<Block, DisplayCaseBlock> DISPLAY_CASE = BLOCKS.register("display_case", DisplayCaseBlock::new);
+//    public static final DeferredHolder<Block, DisplayCaseBlock> DISPLAY_CASE = BLOCKS.register("display_case", DisplayCaseBlock::new);
 
 
     public static final DeferredHolder<Block, CoffeeMachineBlock> COFFEE_MACHINE = BLOCKS.register("coffee_machine", CoffeeMachineBlock::new);
@@ -62,14 +62,12 @@ public class BlockRegister {
     public static final DeferredHolder<Block, CakeBlock> CHOCOLATE_CHEESE_CAKE = BLOCKS.register("chocolate_cheese_cake", ()-> new CakeBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE)));
     public static final DeferredHolder<Block, CakeBlock> HONEY_CHEESE_CAKE = BLOCKS.register("honey_cheese_cake", ()-> new CakeBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE)));
 
-    //Pie
+//    Pie
     public static final DeferredHolder<Block, CakeBlock> APPLE_PIE = BLOCKS.register("apple_pie", ()-> new CakeBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE)));
     public static final DeferredHolder<Block, CakeBlock> SWEET_BERRY_PIE = BLOCKS.register("sweet_berry_pie", ()-> new CakeBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE)));
     public static final DeferredHolder<Block, CakeBlock> GLOW_BERRY_PIE = BLOCKS.register("glow_berry_pie", ()-> new CakeBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE)));
     public static final DeferredHolder<Block, CakeBlock> CHERRY_PIE = BLOCKS.register("cherry_pie", ()-> new CakeBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE)));
 
-    public static final DeferredHolder<Block, IncenseBlock> INCENSE_GLASS = BLOCKS.register("incense_glass", IncenseBlock::new);
-    public static void register(IEventBus bus){
-        BLOCKS.register(bus);
-    }
+//    public static final DeferredHolder<Block, IncenseBlock> INCENSE_GLASS = BLOCKS.register("incense_glass", IncenseBlock::new);
+    public static void register() {}
 }

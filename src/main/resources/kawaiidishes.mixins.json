@@ -2,8 +2,6 @@
   "required": true,
   "package": "com.hakimen.kawaiidishes.mixins",
   "mixins": [
-    "ArmorItemAutoEquipMixin",
-    "PacifyEntityMixin"
   ],
   "injectors": {
     "maxShiftBy": 5,

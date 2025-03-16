@@ -30,7 +30,7 @@ public class HeadBandRibbonLayer extends GeoArmorLayer<HeadBandArmorItem> {
         return new ResourceLocation[]{
                 ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"textures/models/armor/none.png"),
                 ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"textures/models/armor/head_band/head_band_overlay.png")
-        }[stackData.get(DataComponentRegister.DYEABLE).isHasOverlay() ? 1 : 0];
+        }[stackData.get(DataComponentRegister.DYEABLE.get()).isHasOverlay() ? 1 : 0];
     }
 
     @Override
@@ -45,6 +45,6 @@ public class HeadBandRibbonLayer extends GeoArmorLayer<HeadBandArmorItem> {
                 partialTick,
                 packedLight,
                 OverlayTexture.NO_OVERLAY,
-                stackData.get(DataComponentRegister.DYEABLE).getOverlay());
+                stackData.get(DataComponentRegister.DYEABLE.get()).getOverlay());
     }
 }

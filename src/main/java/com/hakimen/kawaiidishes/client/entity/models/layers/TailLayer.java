@@ -34,7 +34,7 @@ public class TailLayer extends GeoArmorLayer<TailArmorItem> {
         return new ResourceLocation[]{
                 ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/none.png"),
                 TailUtils.getTailOverlayTextures().get(((TailArmorItem)stackData.getItem()).getTailType())
-        }[stackData.get(DataComponentRegister.DYEABLE).isHasOverlay() ? 1 : 0];
+        }[stackData.get(DataComponentRegister.DYEABLE.get()).isHasOverlay() ? 1 : 0];
     }
 
     @Override
@@ -50,6 +50,6 @@ public class TailLayer extends GeoArmorLayer<TailArmorItem> {
                 partialTick,
                 packedLight,
                 OverlayTexture.NO_OVERLAY,
-                stackData.get(DataComponentRegister.DYEABLE).getOverlay());
+                stackData.get(DataComponentRegister.DYEABLE.get()).getOverlay());
     }
 }

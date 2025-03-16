@@ -18,25 +18,27 @@ import java.util.List;
 
 public abstract class GeoArmorItem extends ArmorItem implements GeoItem {
     public GeoArmorItem(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
-        super(Holder.direct(pMaterial), pType, pProperties.component(DataComponentRegister.DYEABLE, KawaiiDyeableComponent.DEFAULT).stacksTo(1));
+        super(Holder.direct(pMaterial), pType, pProperties.component(DataComponentRegister.DYEABLE.get(), KawaiiDyeableComponent.DEFAULT).stacksTo(1));
     }
 
 
     @Override
     public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
-        DyeableUtils.makeTooltips(pStack.get(DataComponentRegister.DYEABLE), pTooltipComponents, pTooltipFlag);
+        DyeableUtils.makeTooltips(pStack.get(DataComponentRegister.DYEABLE.get()), pTooltipComponents, pTooltipFlag);
         super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
     }
 
-    @Override
-    public boolean isDamageable(ItemStack stack) {
-        return false;
-    }
+//    @Override
+//    public boolean isDamageable(ItemStack stack) {
+//        return false;
+//    }
+//
+//    @Override
+//    public int getMaxDamage(ItemStack stack) {
+//        return -1;
+//    }
 
-    @Override
-    public int getMaxDamage(ItemStack stack) {
-        return -1;
-    }
+
 
     @Override
     public boolean isEnchantable(ItemStack p_41456_) {

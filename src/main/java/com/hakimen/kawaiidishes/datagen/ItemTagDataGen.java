@@ -5,12 +5,13 @@ import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.minecraft.world.level.block.Block;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -30,9 +31,8 @@ public class ItemTagDataGen extends ItemTagsProvider {
     public static TagKey<Item> OVERLAYABLE = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "overlayable"));
     public static TagKey<Item> THIGH_HIGH_DECOR = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "thigh_high_decorations"));
 
-
-    public ItemTagDataGen(DataGenerator generator, CompletableFuture<HolderLookup.Provider> lookupProvider, BlockTagsProvider provider) {
-        super(generator.getPackOutput(), lookupProvider, provider.contentsGetter());
+    public ItemTagDataGen(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> completableFuture, CompletableFuture<TagLookup<Block>> completableFuture2) {
+        super(packOutput, completableFuture, completableFuture2);
     }
 
     @Override

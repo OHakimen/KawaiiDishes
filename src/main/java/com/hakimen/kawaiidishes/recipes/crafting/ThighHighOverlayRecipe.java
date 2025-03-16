@@ -95,7 +95,7 @@ public class ThighHighOverlayRecipe extends CustomRecipe {
                 data.putInt("Decoration", allDeco.indexOf(deco)+1);
             }
         }
-        stack.update(DataComponentRegister.DYEABLE, KawaiiDyeableComponent.DEFAULT, dyeable -> new KawaiiDyeableComponent.KawaiiDyeableBuilder(dyeable).setHasOverlay(true).build());
+        stack.update(DataComponentRegister.DYEABLE.get(), KawaiiDyeableComponent.DEFAULT, dyeable -> new KawaiiDyeableComponent.KawaiiDyeableBuilder(dyeable).setHasOverlay(true).build());
         stack.set(DataComponents.CUSTOM_DATA, CustomData.of(data));
         return !thighHighs.isEmpty() && decorations.size() == 1 ? stack : ItemStack.EMPTY;
     }

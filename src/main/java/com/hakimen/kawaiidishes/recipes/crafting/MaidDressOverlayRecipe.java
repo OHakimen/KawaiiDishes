@@ -60,7 +60,7 @@ public class MaidDressOverlayRecipe extends CustomRecipe {
             ItemStack containerItem = pContainer.getItem(i);
             if (!containerItem.isEmpty()) {
                 if (containerItem.getItem() instanceof MaidDressArmorItem) {
-                    KawaiiDyeableComponent.KawaiiDyeable dyeable = containerItem.get(DataComponentRegister.DYEABLE);
+                    KawaiiDyeableComponent.KawaiiDyeable dyeable = containerItem.get(DataComponentRegister.DYEABLE.get());
                     if(dyeable.isHasOverlay()){
                         return ItemStack.EMPTY;
                     }
@@ -80,7 +80,7 @@ public class MaidDressOverlayRecipe extends CustomRecipe {
         }
 
         ItemStack stack = dress.copy();
-        stack.update(DataComponentRegister.DYEABLE, KawaiiDyeableComponent.DEFAULT, dyeable -> new KawaiiDyeableComponent.KawaiiDyeableBuilder(dyeable).setHasOverlay(true).build());
+        stack.update(DataComponentRegister.DYEABLE.get(), KawaiiDyeableComponent.DEFAULT, dyeable -> new KawaiiDyeableComponent.KawaiiDyeableBuilder(dyeable).setHasOverlay(true).build());
         return !dress.isEmpty() && apron.size() == 1 ? stack : ItemStack.EMPTY;
     }
 

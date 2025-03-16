@@ -1,6 +1,5 @@
 package com.hakimen.kawaiidishes.block;
 
-import com.hakimen.kawaiidishes.block_entities.CoffeeMachineBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -23,7 +22,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class CoffeeMachineBlock extends DirectionalBlockWithEntity{
+public class CoffeeMachineBlock extends DirectionalBlockWithEntity {
     public CoffeeMachineBlock() {
         super(Properties.ofFullCopy(Blocks.DIRT)
                 .strength(1.0F, 6.0F)
@@ -36,12 +35,12 @@ public class CoffeeMachineBlock extends DirectionalBlockWithEntity{
     }
 
 
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide ? null
-                : (level, pos, state, blockEntity) -> ((CoffeeMachineBlockEntity) blockEntity).tick(level,pos,state,(CoffeeMachineBlockEntity)blockEntity);
-    }
+//    @Nullable
+//    @Override
+//    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+//        return pLevel.isClientSide ? null
+//                : (level, pos, state, blockEntity) -> ((CoffeeMachineBlockEntity) blockEntity).tick(level,pos,state,(CoffeeMachineBlockEntity)blockEntity);
+//    }
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
@@ -76,42 +75,43 @@ public class CoffeeMachineBlock extends DirectionalBlockWithEntity{
         return state.setValue( FACING, rot.rotate( state.getValue( FACING ) ) );
     }
 
-    @javax.annotation.Nullable
     @Override
     public BlockState getStateForPlacement( BlockPlaceContext placement )
     {
         return defaultBlockState().setValue( FACING, placement.getHorizontalDirection().getOpposite() );
     }
 
-    @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (!pState.is(pNewState.getBlock())) {
-            BlockEntity blockentity = pLevel.getBlockEntity(pPos);
-            if (blockentity instanceof CoffeeMachineBlockEntity coffeeMachine) {
-                for (int i = 0; i < coffeeMachine.getInventory().getSlots(); i++) {
-                    popResource(pLevel,pPos,coffeeMachine.getInventory().getStackInSlot(i));
-                }
-            }
-            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
-        }
-    }
-
-    @Override
-    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
-        if (!pLevel.isClientSide()) {
-            BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if(entity instanceof CoffeeMachineBlockEntity) {
-                pPlayer.openMenu((CoffeeMachineBlockEntity)entity, pPos);
-            } else {
-                throw new IllegalStateException("Our Container provider is missing!");
-            }
-        }
-        return InteractionResult.SUCCESS;
-    }
-
-
-    @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new CoffeeMachineBlockEntity(pPos,pState);
-    }
+//    @Override
+//    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+//        if (!pState.is(pNewState.getBlock())) {
+//            BlockEntity blockentity = pLevel.getBlockEntity(pPos);
+//            if (blockentity instanceof CoffeeMachineBlockEntity coffeeMachine) {
+//                for (int i = 0; i < coffeeMachine.getInventory().getSlots(); i++) {
+//                    popResource(pLevel,pPos,coffeeMachine.getInventory().getStackInSlot(i));
+//                }
+//            }
+//            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+//        }
+//    }
+//
+//    @Override
+//    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
+//        if (!pLevel.isClientSide()) {
+//            BlockEntity entity = pLevel.getBlockEntity(pPos);
+//            if(entity instanceof CoffeeMachineBlockEntity) {
+//                pPlayer.openMenu((CoffeeMachineBlockEntity)entity, pPos);
+//            } else {
+//                throw new IllegalStateException("Our Container provider is missing!");
+//            }
+//        }
+//        return InteractionResult.SUCCESS;
+//    }
+//
+//
+//    @Override
+//    public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+//        return new CoffeeMachineBlockEntity(pPos,pState);
+//    }
 }
+
+// TODO: coffee machine

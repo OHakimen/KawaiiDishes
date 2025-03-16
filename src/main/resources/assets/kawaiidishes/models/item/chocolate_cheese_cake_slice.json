@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kawaiidishes:item/food/chocolate_cheese_cake_slice"
+  }
+}

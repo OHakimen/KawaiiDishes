@@ -32,7 +32,7 @@ public class OverlayIDyeable extends CustomRecipe {
         for(int i = 0; i < pContainer.size(); ++i) {
             ItemStack containerItem = pContainer.getItem(i);
             if (!containerItem.isEmpty()) {
-                if (containerItem.has(DataComponentRegister.DYEABLE)) {
+                if (containerItem.has(DataComponentRegister.DYEABLE.get())) {
                     if (!idyeable.isEmpty()) {
                         return false;
                     }
@@ -47,7 +47,7 @@ public class OverlayIDyeable extends CustomRecipe {
             }
         }
 
-        return !idyeable.isEmpty() && wool.size() == 2 && !idyeable.get(DataComponentRegister.DYEABLE).isHasOverlay();
+        return !idyeable.isEmpty() && wool.size() == 2 && !idyeable.get(DataComponentRegister.DYEABLE.get()).isHasOverlay();
     }
 
     @Override
@@ -59,8 +59,8 @@ public class OverlayIDyeable extends CustomRecipe {
         for(int i = 0; i < pContainer.size(); ++i) {
             ItemStack containerItem = pContainer.getItem(i);
             if (!containerItem.isEmpty()) {
-                KawaiiDyeableComponent.KawaiiDyeable dyeable = containerItem.get(DataComponentRegister.DYEABLE);
-                if (containerItem.has(DataComponentRegister.DYEABLE)) {
+                KawaiiDyeableComponent.KawaiiDyeable dyeable = containerItem.get(DataComponentRegister.DYEABLE.get());
+                if (containerItem.has(DataComponentRegister.DYEABLE.get())) {
                     if(dyeable.isHasOverlay()){
                         return ItemStack.EMPTY;
                     }
@@ -80,7 +80,7 @@ public class OverlayIDyeable extends CustomRecipe {
         }
 
         ItemStack stack = idyeable.copy();
-        stack.update(DataComponentRegister.DYEABLE, KawaiiDyeableComponent.DEFAULT, dyeable -> new KawaiiDyeableComponent.KawaiiDyeableBuilder(dyeable).setHasOverlay(true).build());
+        stack.update(DataComponentRegister.DYEABLE.get(), KawaiiDyeableComponent.DEFAULT, dyeable -> new KawaiiDyeableComponent.KawaiiDyeableBuilder(dyeable).setHasOverlay(true).build());
         return !idyeable.isEmpty() && wool.size() == 2 ? stack : ItemStack.EMPTY;
     }
 

@@ -6,6 +6,7 @@ import com.hakimen.kawaiidishes.item.armor.*;
 import com.hakimen.kawaiidishes.item.food.CoffeeItem;
 import com.hakimen.kawaiidishes.item.food.OnConsumeDropItem;
 import com.hakimen.kawaiidishes.utils.*;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -13,7 +14,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -24,7 +24,7 @@ public class ItemRegister {
             .nutrition(4)
             .saturationModifier(1.3f)
             .build();
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, KawaiiDishes.MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, KawaiiDishes.MODID);
     public static final DeferredHolder<Item, ThighHighsArmorItem> THIGH_HIGHS = ITEMS.register("thigh_highs", () -> new ThighHighsArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final DeferredHolder<Item, MaidDressArmorItem> MAID_DRESS = ITEMS.register("maid_dress", () -> new MaidDressArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final DeferredHolder<Item, HeadBandArmorItem> HEAD_BAND = ITEMS.register("head_band", () -> new HeadBandArmorItem(ArmorMaterials.IRON.value(), ArmorItem.Type.HELMET, new Item.Properties()));
@@ -78,7 +78,7 @@ public class ItemRegister {
                     new FoodProperties.Builder()
                             .nutrition(2)
                             .saturationModifier(1f)
-                            .effect(() -> new MobEffectInstance(MobEffects.GLOWING, 30 * 20), 1f)
+                            .effect(new MobEffectInstance(MobEffects.GLOWING, 30 * 20), 1f)
                             .build()
             )
             )
@@ -88,22 +88,24 @@ public class ItemRegister {
                     new FoodProperties.Builder()
                             .nutrition(2)
                             .saturationModifier(1f)
-                            .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 10 * 20), 1f)
-                            .effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 30 * 20, 1), 1f)
+                            .effect(new MobEffectInstance(MobEffects.REGENERATION, 10 * 20), 1f)
+                            .effect(new MobEffectInstance(MobEffects.ABSORPTION, 30 * 20, 1), 1f)
                             .build()
             )
             )
     );
-    public static final DeferredHolder<Item, Item> COOKIE_OF_UNBINDING = ITEMS.register("cookie_of_unbinding", () ->
-            new Item(new Item.Properties().food(
-                    new FoodProperties.Builder()
-                            .nutrition(2)
-                            .saturationModifier(1f)
-                            .effect(() -> new MobEffectInstance(EffectRegister.BLESSING_OF_UNBINDING, (2 * 60 + 30) * 20), 1f)
-                            .build()
-            )
-            )
-    );
+
+    // TODO what the fuck is a Holder
+//    public static final DeferredHolder<Item, Item> COOKIE_OF_UNBINDING = ITEMS.register("cookie_of_unbinding", () ->
+//            new Item(new Item.Properties().food(
+//                    new FoodProperties.Builder()
+//                            .nutrition(2)
+//                            .saturationModifier(1f)
+//                            .effect(new MobEffectInstance(EffectRegister.BLESSING_OF_UNBINDING.get(), (2 * 60 + 30) * 20), 1f)
+//                            .build()
+//            )
+//            )
+//    );
 
     //Coffees
     public static final DeferredHolder<Item, BlockItem> MUG = ITEMS.register("mug", () -> new BlockItem(BlockRegister.MUG.get(), new Item.Properties()));
@@ -251,7 +253,7 @@ public class ItemRegister {
                     new FoodProperties.Builder()
                             .nutrition(6)
                             .saturationModifier(1.5f)
-                            .effect(() -> new MobEffectInstance(MobEffects.GLOWING, 30 * 20), 1f)
+                            .effect(new MobEffectInstance(MobEffects.GLOWING, 30 * 20), 1f)
                             .build()
             ), Items.BOWL.getDefaultInstance())
     );
@@ -291,8 +293,8 @@ public class ItemRegister {
     //Decor
     public static final DeferredHolder<Item, SeatItem> SEAT = ITEMS.register("seat", () -> new SeatItem(BlockRegister.SEAT.get(), new Item.Properties()));
     public static final DeferredHolder<Item, BlockItem> KITCHEN_TILES = ITEMS.register("kitchen_tiles", () -> new BlockItem(BlockRegister.KITCHEN_TILES.get(), new Item.Properties()));
-    public static final DeferredHolder<Item, BlockItem> DISPLAY_CASE = ITEMS.register("display_case", () -> new BlockItem(BlockRegister.DISPLAY_CASE.get(), new Item.Properties()));
-    public static final DeferredHolder<Item, BlockItem> INCENSE_GLASS = ITEMS.register("incense_glass", () -> new BlockItem(BlockRegister.INCENSE_GLASS.get(), new Item.Properties()));
+//    public static final DeferredHolder<Item, BlockItem> DISPLAY_CASE = ITEMS.register("display_case", () -> new BlockItem(BlockRegister.DISPLAY_CASE.get(), new Item.Properties()));
+//    public static final DeferredHolder<Item, BlockItem> INCENSE_GLASS = ITEMS.register("incense_glass", () -> new BlockItem(BlockRegister.INCENSE_GLASS.get(), new Item.Properties()));
 
 
     public static void setupItems() {
@@ -313,8 +315,7 @@ public class ItemRegister {
         HeadBandsWithEarsUtils.makeHeadbandWithEarsDefaultAnims(AnimalType.CAT, HEAD_BAND_CAT_EARS);
     }
 
-    public static void register(IEventBus bus) {
-        ITEMS.register(bus);
+    public static void register() {
         setupItems();
     }
 }

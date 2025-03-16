@@ -70,7 +70,7 @@ public class ThighHighsDecorationArmorLayer extends GeoArmorLayer<ThighHighsArmo
                 partialTick,
                 packedLight,
                 OverlayTexture.NO_OVERLAY,
-                stackData.get(DataComponentRegister.DYEABLE).getOverlay() | 0xff000000);
+                stackData.get(DataComponentRegister.DYEABLE.get()).getOverlay() | 0xff000000);
     }
 
 

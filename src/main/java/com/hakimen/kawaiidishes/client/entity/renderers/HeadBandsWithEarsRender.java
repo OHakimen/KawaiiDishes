@@ -57,6 +57,6 @@ public class HeadBandsWithEarsRender extends GeoArmorItemRenderer<HeadBandWithEa
 
     @Override
     public Color getRenderColor(HeadBandWithEarsArmorItem animatable, float partialTick, int packedLight) {
-        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE).getBase());
+        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE.get()).getBase());
     }
 }

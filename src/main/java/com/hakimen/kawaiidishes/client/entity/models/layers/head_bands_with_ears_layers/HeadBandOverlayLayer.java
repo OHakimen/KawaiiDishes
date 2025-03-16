@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import org.checkerframework.checker.units.qual.K;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 
@@ -45,5 +44,5 @@ public class HeadBandOverlayLayer extends GeoArmorLayer<HeadBandWithEarsArmorIte
                 partialTick,
                 packedLight,
                 OverlayTexture.NO_OVERLAY,
-                stackData.get(DataComponentRegister.DYEABLE).getOverlay());}
+                stackData.get(DataComponentRegister.DYEABLE.get()).getOverlay());}
 }

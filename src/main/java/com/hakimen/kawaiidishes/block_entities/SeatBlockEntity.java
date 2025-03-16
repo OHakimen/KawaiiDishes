@@ -44,11 +44,11 @@ public class SeatBlockEntity extends BlockEntity {
         if(blockEntity.getColor() == IFourColorDyeableItem.defaultColor){
             return;
         }
-        pStack.update(DataComponentRegister.DYEABLE, KawaiiDyeableComponent.DEFAULT, dyeable -> new KawaiiDyeableComponent.KawaiiDyeableBuilder(dyeable).setBase(color).build());
+        pStack.update(DataComponentRegister.DYEABLE.get(), KawaiiDyeableComponent.DEFAULT, dyeable -> new KawaiiDyeableComponent.KawaiiDyeableBuilder(dyeable).setBase(color).build());
     }
 
     public SeatBlockEntity fromItem(ItemStack pStack){
-        KawaiiDyeableComponent.KawaiiDyeable data = pStack.get(DataComponentRegister.DYEABLE);
+        KawaiiDyeableComponent.KawaiiDyeable data = pStack.get(DataComponentRegister.DYEABLE.get());
         this.color = data.getBase();
         return this;
     }

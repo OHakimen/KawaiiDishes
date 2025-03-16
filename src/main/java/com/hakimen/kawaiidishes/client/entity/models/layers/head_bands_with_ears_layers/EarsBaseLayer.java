@@ -44,6 +44,6 @@ public class EarsBaseLayer extends GeoArmorLayer<HeadBandWithEarsArmorItem> {
                 partialTick,
                 packedLight,
                 OverlayTexture.NO_OVERLAY,
-                stackData.get(DataComponentRegister.DYEABLE).getSecondaryBase());
+                stackData.get(DataComponentRegister.DYEABLE.get()).getSecondaryBase());
     }
 }

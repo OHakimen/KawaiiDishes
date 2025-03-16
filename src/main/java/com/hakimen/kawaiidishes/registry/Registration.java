@@ -1,30 +1,27 @@
 package com.hakimen.kawaiidishes.registry;
 
-import net.neoforged.bus.api.IEventBus;
-
-
 public class Registration{
 
-    public static void init(IEventBus bus){
+    public static void init() {
 
         //Do all registration here
 
-        AromaRegister.register(bus);
+//        AromaRegister.register();
 
-        BlockRegister.register(bus);
-        ItemRegister.register(bus);
-        ItemTabRegister.register(bus);
-        RecipeRegister.register(bus);
-        EffectRegister.register(bus);
-        BlockEntityRegister.register(bus);
-        ContainerRegister.register(bus);
-        EntityRegister.register(bus);
-        LootModifierRegistry.register(bus);
-        EnchantmentRegister.register(bus);
+        BlockRegister.register();
+        ItemRegister.register();
+        ItemTabRegister.register();
+        RecipeRegister.register();
+        EffectRegister.register();
+        BlockEntityRegister.register();
+//        ContainerRegister.register();
+        EntityRegister.register();
+//        LootModifierRegistry.register();
+        EnchantmentRegister.register();
 
-        DataComponentRegister.register(bus);
+        DataComponentRegister.register();
 
-        ParticleRegister.register(bus);
+//        ParticleRegister.register();
 
 
     }
