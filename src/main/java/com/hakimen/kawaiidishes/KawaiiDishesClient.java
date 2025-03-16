@@ -7,7 +7,6 @@ import com.hakimen.kawaiidishes.item.component.KawaiiDyeableComponent;
 import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.registry.EntityRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
-import com.unascribed.ears.api.EarsFeatureType;
 import com.unascribed.ears.api.registry.EarsInhibitorRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
@@ -16,6 +15,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
+@SuppressWarnings("DataFlowIssue")
 public class KawaiiDishesClient implements ClientModInitializer {
 //    @SubscribeEvent
 //    public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event){
@@ -37,14 +37,22 @@ public class KawaiiDishesClient implements ClientModInitializer {
 
         if (FabricLoader.getInstance().isModLoaded("ears")) {
             EarsInhibitorRegistry.register(KawaiiDishes.MODID, (type, peer) -> {
-                if (type == EarsFeatureType.CHEST) {
-                    Player player = (Player) peer;
 
-                    for (ItemStack slot : player.getArmorSlots()) {
-                        if (slot.getItem() instanceof TailArmorItem) {
-                            return true;
-                        }
-                    }
+                Player player = (Player) peer;
+                for (ItemStack slot : player.getArmorSlots()) {
+                    return switch (type) {
+                        case EARS -> false;
+                        case HORN -> false;
+                        case SNOUT -> false;
+                        case CLAW_LEFT_ARM -> false;
+                        case CLAW_RIGHT_ARM -> false;
+                        case CLAW_LEFT_LEG -> false;
+                        case CLAW_RIGHT_LEG -> false;
+                        case TAIL -> slot.getItem() instanceof TailArmorItem;
+                        case WINGS -> false;
+                        case CAPE -> false;
+                        case CHEST -> slot.getItem() instanceof TailArmorItem;
+                    };
                 }
 
                 return false;
