@@ -25,6 +25,13 @@ repositories {
 			includeGroup("com.eliotlash.mclib")
 		}
 	}
+
+	maven {
+		url "https://repo.unascribed.com"
+		content {
+			includeGroup "com.unascribed"
+		}
+	}
 }
 
 dependencies {
@@ -32,12 +39,14 @@ dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings loom.officialMojangMappings()
 //	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	modImplementation "software.bernie.geckolib:geckolib-fabric-${project.minecraft_version}:${project.geckolib_version}"
+	implementation "com.unascribed:ears-api:1.4.7"
 }
 
 fabricApi {

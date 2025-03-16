@@ -2,13 +2,19 @@ package com.hakimen.kawaiidishes;
 
 import com.hakimen.kawaiidishes.client.entity.SeatRenderer;
 import com.hakimen.kawaiidishes.item.IFourColorDyeableItem;
+import com.hakimen.kawaiidishes.item.armor.TailArmorItem;
 import com.hakimen.kawaiidishes.item.component.KawaiiDyeableComponent;
 import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.registry.EntityRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
+import com.unascribed.ears.api.EarsFeatureType;
+import com.unascribed.ears.api.registry.EarsInhibitorRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 public class KawaiiDishesClient implements ClientModInitializer {
 //    @SubscribeEvent
@@ -28,6 +34,22 @@ public class KawaiiDishesClient implements ClientModInitializer {
 //        event.register(ContainerRegister.DISPLAY_CASE.get(), DisplayCaseScreen::new);
 //        event.register(ContainerRegister.ICE_CREAM_MAKER.get(), IceCreamMakerScreen::new);
         // TODO: screens
+
+        if (FabricLoader.getInstance().isModLoaded("ears")) {
+            EarsInhibitorRegistry.register(KawaiiDishes.MODID, (type, peer) -> {
+                if (type == EarsFeatureType.CHEST) {
+                    Player player = (Player) peer;
+
+                    for (ItemStack slot : player.getArmorSlots()) {
+                        if (slot.getItem() instanceof TailArmorItem) {
+                            return true;
+                        }
+                    }
+                }
+
+                return false;
+            });
+        }
 
         EntityRendererRegistry.register(EntityRegister.SEAT.get(), SeatRenderer::new);
 
