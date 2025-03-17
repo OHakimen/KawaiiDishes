@@ -1,8 +1,7 @@
 {
   "required": true,
   "package": "com.hakimen.kawaiidishes.mixins",
-  "mixins": [
-    "EarsTailCompatMixin"
+  "client": [
   ],
   "injectors": {
     "maxShiftBy": 5,

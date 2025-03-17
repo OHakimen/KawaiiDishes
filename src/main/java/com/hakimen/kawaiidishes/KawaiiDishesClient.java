@@ -8,7 +8,10 @@ import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.registry.EntityRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import com.unascribed.ears.api.EarsFeatureType;
+import com.unascribed.ears.api.EarsStateType;
+import com.unascribed.ears.api.OverrideResult;
 import com.unascribed.ears.api.registry.EarsInhibitorRegistry;
+import com.unascribed.ears.api.registry.EarsStateOverriderRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -46,6 +49,17 @@ public class KawaiiDishesClient implements ClientModInitializer {
                 }
 
                 return false;
+            });
+
+            EarsStateOverriderRegistry.register(KawaiiDishes.MODID, (type, peer) -> {
+                Player player = (Player) peer;
+                for (ItemStack slot : player.getArmorSlots()) {
+                    if (slot.getItem() instanceof TailArmorItem && type == EarsStateType.WEARING_CHESTPLATE) {
+                        return OverrideResult.FALSE;
+                    }
+                }
+
+                return OverrideResult.DEFAULT;
             });
         }
 
