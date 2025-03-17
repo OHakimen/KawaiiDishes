@@ -40,7 +40,7 @@ public class KawaiiDishesClient implements ClientModInitializer {
             EarsInhibitorRegistry.register(KawaiiDishes.MODID, (type, peer) -> {
                 Player player = (Player) peer;
                 for (ItemStack slot : player.getArmorSlots()) {
-                    if (slot.getItem() instanceof TailArmorItem && (type == EarsFeatureType.TAIL || type == EarsFeatureType.CHEST)) {
+                    if (slot.getItem() instanceof TailArmorItem && type == EarsFeatureType.TAIL) {
                         return true;
                     }
                 }

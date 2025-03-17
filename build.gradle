@@ -32,6 +32,11 @@ repositories {
 			includeGroup "com.unascribed"
 		}
 	}
+
+	maven {
+		name = "Modrinth"
+		url = "https://api.modrinth.com/maven"
+	}
 }
 
 dependencies {
@@ -46,7 +51,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	modImplementation "software.bernie.geckolib:geckolib-fabric-${project.minecraft_version}:${project.geckolib_version}"
-	implementation "com.unascribed:ears-api:1.4.7"
+	modImplementation "maven.modrinth:ears:1.4.7+fabric-1.21"
 }
 
 fabricApi {
