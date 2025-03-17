@@ -7,6 +7,7 @@ import com.hakimen.kawaiidishes.item.component.KawaiiDyeableComponent;
 import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.registry.EntityRegister;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
+import com.unascribed.ears.api.EarsFeatureType;
 import com.unascribed.ears.api.registry.EarsInhibitorRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
@@ -37,26 +38,14 @@ public class KawaiiDishesClient implements ClientModInitializer {
 
         if (FabricLoader.getInstance().isModLoaded("ears")) {
             EarsInhibitorRegistry.register(KawaiiDishes.MODID, (type, peer) -> {
-                boolean inhibit = false;
-
                 Player player = (Player) peer;
                 for (ItemStack slot : player.getArmorSlots()) {
-                    inhibit = switch (type) {
-                        case EARS -> false;
-                        case HORN -> false;
-                        case SNOUT -> false;
-                        case CLAW_LEFT_ARM -> false;
-                        case CLAW_RIGHT_ARM -> false;
-                        case CLAW_LEFT_LEG -> false;
-                        case CLAW_RIGHT_LEG -> false;
-                        case TAIL -> slot.getItem() instanceof TailArmorItem;
-                        case WINGS -> false;
-                        case CAPE -> false;
-                        case CHEST -> slot.getItem() instanceof TailArmorItem;
-                    };
+                    if (slot.getItem() instanceof TailArmorItem && (type == EarsFeatureType.TAIL || type == EarsFeatureType.CHEST)) {
+                        return true;
+                    }
                 }
 
-                return inhibit;
+                return false;
             });
         }
 
