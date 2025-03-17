@@ -37,10 +37,11 @@ public class KawaiiDishesClient implements ClientModInitializer {
 
         if (FabricLoader.getInstance().isModLoaded("ears")) {
             EarsInhibitorRegistry.register(KawaiiDishes.MODID, (type, peer) -> {
+                boolean inhibit = false;
 
                 Player player = (Player) peer;
                 for (ItemStack slot : player.getArmorSlots()) {
-                    return switch (type) {
+                    inhibit = switch (type) {
                         case EARS -> false;
                         case HORN -> false;
                         case SNOUT -> false;
@@ -55,7 +56,7 @@ public class KawaiiDishesClient implements ClientModInitializer {
                     };
                 }
 
-                return false;
+                return inhibit;
             });
         }
 

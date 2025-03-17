@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "kawaiidishes",
-  "version": "1.11.2",
+  "version": "$(version)",
   "name": "Kawaii Dishes",
   "description": "A mod about coffee, food and maids",
   "authors": [
