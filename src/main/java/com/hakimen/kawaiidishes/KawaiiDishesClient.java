@@ -2,6 +2,7 @@ package com.hakimen.kawaiidishes;
 
 import com.hakimen.kawaiidishes.client.entity.SeatRenderer;
 import com.hakimen.kawaiidishes.item.IFourColorDyeableItem;
+import com.hakimen.kawaiidishes.item.armor.MaidDressesWithTailArmorItem;
 import com.hakimen.kawaiidishes.item.armor.TailArmorItem;
 import com.hakimen.kawaiidishes.item.component.KawaiiDyeableComponent;
 import com.hakimen.kawaiidishes.registry.DataComponentRegister;
@@ -43,7 +44,7 @@ public class KawaiiDishesClient implements ClientModInitializer {
             EarsInhibitorRegistry.register(KawaiiDishes.MODID, (type, peer) -> {
                 Player player = (Player) peer;
                 for (ItemStack slot : player.getArmorSlots()) {
-                    if (slot.getItem() instanceof TailArmorItem && type == EarsFeatureType.TAIL) {
+                    if ((slot.getItem() instanceof TailArmorItem || slot.getItem() instanceof MaidDressesWithTailArmorItem) && type == EarsFeatureType.TAIL) {
                         return true;
                     }
                 }
