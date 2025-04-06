@@ -2,6 +2,7 @@ package com.hakimen.kawaiidishes;
 
 import com.hakimen.kawaiidishes.client.entity.SeatRenderer;
 import com.hakimen.kawaiidishes.item.IFourColorDyeableItem;
+import com.hakimen.kawaiidishes.item.armor.MaidDressArmorItem;
 import com.hakimen.kawaiidishes.item.armor.MaidDressesWithTailArmorItem;
 import com.hakimen.kawaiidishes.item.armor.TailArmorItem;
 import com.hakimen.kawaiidishes.item.component.KawaiiDyeableComponent;
@@ -18,6 +19,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 @SuppressWarnings("DataFlowIssue")
@@ -33,6 +35,10 @@ public class KawaiiDishesClient implements ClientModInitializer {
 //                IncenseParticle.Provider::new);
 //    } // TODO: renderers
 
+    private boolean isMaidOutfit(Item item) {
+        return (item instanceof MaidDressesWithTailArmorItem || item instanceof MaidDressArmorItem);
+    }
+
     public void onInitializeClient() {
 //        event.register(ContainerRegister.COFFEE_MACHINE.get(), CoffeeMachineScreen::new);
 //        event.register(ContainerRegister.BLENDER.get(), BlenderScreen::new);
@@ -44,9 +50,11 @@ public class KawaiiDishesClient implements ClientModInitializer {
             EarsInhibitorRegistry.register(KawaiiDishes.MODID, (type, peer) -> {
                 Player player = (Player) peer;
                 for (ItemStack slot : player.getArmorSlots()) {
-                    if ((slot.getItem() instanceof TailArmorItem || slot.getItem() instanceof MaidDressesWithTailArmorItem) && type == EarsFeatureType.TAIL) {
+                    Item item = slot.getItem();
+                    if ((item instanceof TailArmorItem || item instanceof MaidDressesWithTailArmorItem) && type == EarsFeatureType.TAIL) {
                         return true;
                     }
+
                 }
 
                 return false;
@@ -55,7 +63,8 @@ public class KawaiiDishesClient implements ClientModInitializer {
             EarsStateOverriderRegistry.register(KawaiiDishes.MODID, (type, peer) -> {
                 Player player = (Player) peer;
                 for (ItemStack slot : player.getArmorSlots()) {
-                    if (slot.getItem() instanceof TailArmorItem && type == EarsStateType.WEARING_CHESTPLATE) {
+                    Item item = slot.getItem();
+                    if ((item instanceof TailArmorItem || isMaidOutfit(item)) && type == EarsStateType.WEARING_CHESTPLATE) {
                         return OverrideResult.FALSE;
                     }
                 }
