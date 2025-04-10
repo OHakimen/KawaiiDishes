@@ -17,6 +17,7 @@ import com.unascribed.ears.api.registry.EarsStateOverriderRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRenderEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -45,6 +46,17 @@ public class KawaiiDishesClient implements ClientModInitializer {
 //        event.register(ContainerRegister.DISPLAY_CASE.get(), DisplayCaseScreen::new);
 //        event.register(ContainerRegister.ICE_CREAM_MAKER.get(), IceCreamMakerScreen::new);
         // TODO: screens
+
+        LivingEntityFeatureRenderEvents.ALLOW_CAPE_RENDER.register(player -> {
+            for (ItemStack slot : player.getArmorSlots()) {
+                Item item = slot.getItem();
+                if (item instanceof TailArmorItem || isMaidOutfit(item)) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
 
         if (FabricLoader.getInstance().isModLoaded("ears")) {
             EarsInhibitorRegistry.register(KawaiiDishes.MODID, (type, peer) -> {
