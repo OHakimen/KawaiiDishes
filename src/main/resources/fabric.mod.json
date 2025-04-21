@@ -5,12 +5,18 @@
   "name": "Kawaii Dishes",
   "description": "A mod about coffee, food and maids",
   "authors": [
-    "Hakimen",
-    "LilyflowerFDL / SpectreiCyanogen (1.21.1/Fabric port)"
+    "Hakimen (Original mod)",
+    "CYANO★FLOWER (This port)"
   ],
   "contact": {
 
   },
+  "contributors": [
+    {
+        "name": "Ampflower (Ears support)",
+        "contact": "https://ampflower.gay/"
+    }
+  ],
   "license": "MIT",
   "icon": "assets/kawaiidishes/icon.png",
   "environment": "*",
