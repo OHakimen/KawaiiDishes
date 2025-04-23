@@ -13,8 +13,10 @@
   },
   "contributors": [
     {
-        "name": "Ampflower (Ears support)",
-        "contact": "https://ampflower.gay/"
+      "name": "Ampflower (Ears support)",
+      "contact": {
+          "website": "https://ampflower.gay/"
+      }
     }
   ],
   "license": "MIT",
