@@ -72,6 +72,13 @@ public class MaidDressesWithTailArmorRender extends GeoArmorItemRenderer<MaidDre
     }
 
     @Override
+    public void postRender(final PoseStack poseStack, final MaidDressesWithTailArmorItem animatable, final BakedGeoModel model, final MultiBufferSource bufferSource, @Nullable final VertexConsumer buffer, final boolean isReRender, final float partialTick, final int packedLight, final int packedOverlay, final int colour) {
+        super.postRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, colour);
+
+        updateStack(null);
+    }
+
+    @Override
     public Color getRenderColor(MaidDressesWithTailArmorItem animatable, float partialTick, int packedLight) {
         return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE.get()).getBase());
     }
