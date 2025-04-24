@@ -4,9 +4,7 @@ import com.hakimen.kawaiidishes.client.entity.models.layers.ears_layers.EarSkinL
 import com.hakimen.kawaiidishes.client.entity.models.layers.ears_layers.EarsLayer;
 import com.hakimen.kawaiidishes.item.armor.EarsArmorItem;
 import com.hakimen.kawaiidishes.registry.DataComponentRegister;
-import com.hakimen.kawaiidishes.utils.ColorUtils;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
@@ -14,11 +12,19 @@ import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.util.Color;
 
+import java.lang.ref.WeakReference;
+
 public class EarsArmorRender extends GeoArmorItemRenderer<EarsArmorItem> {
-    ItemStack stackData;
-    public void updateStack(ItemStack stack){
-        this.stackData = stack;
+    private WeakReference<ItemStack> stackData;
+
+    public void updateStack(ItemStack stack) {
+        this.stackData = new WeakReference<>(stack);
     }
+
+    public ItemStack getStack() {
+        return this.stackData.get();
+    }
+
     public EarsArmorRender(GeoModel<EarsArmorItem> model) {
         super(model);
 
@@ -38,6 +44,6 @@ public class EarsArmorRender extends GeoArmorItemRenderer<EarsArmorItem> {
 
     @Override
     public Color getRenderColor(EarsArmorItem animatable, float partialTick, int packedLight) {
-        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE.get()).getBase());
+        return Color.ofOpaque(getStack().get(DataComponentRegister.DYEABLE.get()).getBase());
     }
 }

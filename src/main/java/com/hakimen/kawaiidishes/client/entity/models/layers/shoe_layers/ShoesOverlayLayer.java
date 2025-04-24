@@ -4,7 +4,6 @@ import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.client.entity.models.layers.GeoArmorLayer;
 import com.hakimen.kawaiidishes.item.armor.ShoesArmorItem;
 import com.hakimen.kawaiidishes.registry.DataComponentRegister;
-import com.hakimen.kawaiidishes.utils.ColorUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -15,11 +14,18 @@ import net.minecraft.world.item.ItemStack;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 
+import java.lang.ref.WeakReference;
+
 public class ShoesOverlayLayer extends GeoArmorLayer<ShoesArmorItem> {
 
-    ItemStack stackData;
-    public void updateStack(ItemStack stack){
-        stackData = stack;
+    private WeakReference<ItemStack> stackData;
+
+    public void updateStack(ItemStack stack) {
+        this.stackData = new WeakReference<>(stack);
+    }
+
+    public ItemStack getStack() {
+        return this.stackData.get();
     }
 
     public ShoesOverlayLayer(GeoRenderer<ShoesArmorItem> entityRendererIn) {
@@ -31,7 +37,7 @@ public class ShoesOverlayLayer extends GeoArmorLayer<ShoesArmorItem> {
         return new ResourceLocation[]{
                 ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/none.png"),
                 ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/shoes/shoes_overlay.png")
-        }[stackData.get(DataComponentRegister.DYEABLE.get()).isHasOverlay() ? 1 : 0];
+        }[getStack().get(DataComponentRegister.DYEABLE.get()).isHasOverlay() ? 1 : 0];
     }
 
     @Override
@@ -47,6 +53,6 @@ public class ShoesOverlayLayer extends GeoArmorLayer<ShoesArmorItem> {
                 partialTick,
                 packedLight,
                 OverlayTexture.NO_OVERLAY,
-                stackData.get(DataComponentRegister.DYEABLE.get()).getOverlay());
+                getStack().get(DataComponentRegister.DYEABLE.get()).getOverlay());
     }
 }

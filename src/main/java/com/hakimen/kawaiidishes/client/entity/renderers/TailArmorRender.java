@@ -3,7 +3,6 @@ package com.hakimen.kawaiidishes.client.entity.renderers;
 import com.hakimen.kawaiidishes.client.entity.models.layers.TailLayer;
 import com.hakimen.kawaiidishes.item.armor.TailArmorItem;
 import com.hakimen.kawaiidishes.registry.DataComponentRegister;
-import com.hakimen.kawaiidishes.utils.ColorUtils;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -12,11 +11,19 @@ import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.util.Color;
 
+import java.lang.ref.WeakReference;
+
 public class TailArmorRender extends GeoArmorItemRenderer<TailArmorItem> {
-    ItemStack stackData;
-    public void updateStack(ItemStack stack){
-        this.stackData = stack;
+    private WeakReference<ItemStack> stackData;
+
+    public void updateStack(ItemStack stack) {
+        this.stackData = new WeakReference<>(stack);
     }
+
+    public ItemStack getStack() {
+        return this.stackData.get();
+    }
+
     public TailArmorRender(GeoModel<TailArmorItem> model) {
         super(model);
         addRenderLayer(new TailLayer(this));
@@ -33,6 +40,6 @@ public class TailArmorRender extends GeoArmorItemRenderer<TailArmorItem> {
 
     @Override
     public Color getRenderColor(TailArmorItem animatable, float partialTick, int packedLight) {
-        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE.get()).getBase());
+        return Color.ofOpaque(getStack().get(DataComponentRegister.DYEABLE.get()).getBase());
     }
 }

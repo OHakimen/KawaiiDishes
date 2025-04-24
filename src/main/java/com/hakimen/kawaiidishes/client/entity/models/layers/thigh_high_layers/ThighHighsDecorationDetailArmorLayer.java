@@ -3,7 +3,6 @@ package com.hakimen.kawaiidishes.client.entity.models.layers.thigh_high_layers;
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.client.entity.models.layers.GeoArmorLayer;
 import com.hakimen.kawaiidishes.item.armor.ThighHighsArmorItem;
-import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -15,19 +14,24 @@ import net.minecraft.world.item.ItemStack;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class ThighHighsDecorationDetailArmorLayer extends GeoArmorLayer<ThighHighsArmorItem> {
 
-    ItemStack stackData;
+    private WeakReference<ItemStack> stackData;
 
-    public void updateStack(ItemStack stack){
-        stackData = stack;
+    public void updateStack(ItemStack stack) {
+        this.stackData = new WeakReference<>(stack);
+    }
+
+    public ItemStack getStack() {
+        return this.stackData.get();
     }
 
     @Override
     public ResourceLocation getTexture() {
-        return getResourceLocationFromStack(stackData);
+        return getResourceLocationFromStack(getStack());
     }
 
     static List<ResourceLocation> decorations = List.of(
@@ -35,7 +39,7 @@ public class ThighHighsDecorationDetailArmorLayer extends GeoArmorLayer<ThighHig
     );
     public ThighHighsDecorationDetailArmorLayer(GeoRenderer<ThighHighsArmorItem> entityRendererIn, ItemStack stack) {
         super(entityRendererIn, getResourceLocationFromStack(stack));
-        this.stackData = stack;
+        this.updateStack(stack);
     }
 
     private static ResourceLocation getResourceLocationFromStack(ItemStack stack) {

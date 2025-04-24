@@ -4,7 +4,6 @@ import com.hakimen.kawaiidishes.client.entity.models.layers.shoe_layers.ShoesOve
 import com.hakimen.kawaiidishes.client.entity.models.layers.shoe_layers.ShoesSolesLayer;
 import com.hakimen.kawaiidishes.item.armor.ShoesArmorItem;
 import com.hakimen.kawaiidishes.registry.DataComponentRegister;
-import com.hakimen.kawaiidishes.utils.ColorUtils;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -13,11 +12,19 @@ import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.util.Color;
 
+import java.lang.ref.WeakReference;
+
 public class ShoesArmorRender extends GeoArmorItemRenderer<ShoesArmorItem> {
-    ItemStack stackData;
-    public void updateStack(ItemStack stack){
-        this.stackData = stack;
+    private WeakReference<ItemStack> stackData;
+
+    public void updateStack(ItemStack stack) {
+        this.stackData = new WeakReference<>(stack);
     }
+
+    public ItemStack getStack() {
+        return this.stackData.get();
+    }
+
     public ShoesArmorRender(GeoModel<ShoesArmorItem> model) {
         super(model);
         addRenderLayer(new ShoesSolesLayer(this));
@@ -35,6 +42,6 @@ public class ShoesArmorRender extends GeoArmorItemRenderer<ShoesArmorItem> {
 
     @Override
     public Color getRenderColor(ShoesArmorItem animatable, float partialTick, int packedLight) {
-        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE.get()).getBase());
+        return Color.ofOpaque(getStack().get(DataComponentRegister.DYEABLE.get()).getBase());
     }
 }
