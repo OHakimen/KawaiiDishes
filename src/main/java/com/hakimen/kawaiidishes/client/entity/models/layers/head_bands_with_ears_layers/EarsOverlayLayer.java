@@ -4,7 +4,6 @@ import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.client.entity.models.layers.GeoArmorLayer;
 import com.hakimen.kawaiidishes.item.armor.HeadBandWithEarsArmorItem;
 import com.hakimen.kawaiidishes.registry.DataComponentRegister;
-import com.hakimen.kawaiidishes.utils.ColorUtils;
 import com.hakimen.kawaiidishes.utils.HeadBandsWithEarsUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -16,11 +15,17 @@ import net.minecraft.world.item.ItemStack;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 
-public class EarsOverlayLayer extends GeoArmorLayer<HeadBandWithEarsArmorItem> {
-    ItemStack stackData;
+import java.lang.ref.WeakReference;
 
-    public void updateStack(ItemStack stack){
-        this.stackData = stack;
+public class EarsOverlayLayer extends GeoArmorLayer<HeadBandWithEarsArmorItem> {
+    private WeakReference<ItemStack> stackData;
+
+    public void updateStack(ItemStack stack) {
+        this.stackData = new WeakReference<>(stack);
+    }
+
+    public ItemStack getStack() {
+        return this.stackData.get();
     }
     public EarsOverlayLayer(GeoRenderer<HeadBandWithEarsArmorItem> entityRendererIn) {
         super(entityRendererIn, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/none.png"));
@@ -28,7 +33,7 @@ public class EarsOverlayLayer extends GeoArmorLayer<HeadBandWithEarsArmorItem> {
 
     @Override
     public ResourceLocation getTexture() {
-        return HeadBandsWithEarsUtils.getEaredHeadBandsEarsOverlay().get(((HeadBandWithEarsArmorItem)stackData.getItem()).getEarsType());
+        return HeadBandsWithEarsUtils.getEaredHeadBandsEarsOverlay().get(((HeadBandWithEarsArmorItem) getStack().getItem()).getEarsType());
     }
 
     @Override
@@ -44,6 +49,6 @@ public class EarsOverlayLayer extends GeoArmorLayer<HeadBandWithEarsArmorItem> {
                 partialTick,
                 packedLight,
                 OverlayTexture.NO_OVERLAY,
-                stackData.get(DataComponentRegister.DYEABLE.get()).getSecondaryOverlay());
+                getStack().get(DataComponentRegister.DYEABLE.get()).getSecondaryOverlay());
     }
 }

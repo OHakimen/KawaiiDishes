@@ -21,19 +21,25 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.util.Color;
 
+import java.lang.ref.WeakReference;
+
 public class MaidDressesWithTailArmorRender extends GeoArmorItemRenderer<MaidDressesWithTailArmorItem> {
 
-    ItemStack stackData;
+    private WeakReference<ItemStack> stackData;
 
     float chestAngle;
 
     public void updateStack(ItemStack stack) {
-        this.stackData = stack;
+        this.stackData = new WeakReference<>(stack);
+    }
+
+    public ItemStack getStack() {
+        return this.stackData.get();
     }
 
     public MaidDressesWithTailArmorRender(GeoModel<MaidDressesWithTailArmorItem> model, ItemStack stack) {
         super(model);
-        this.stackData = stack;
+        this.updateStack(stack);
 
         addRenderLayer(new MaidDressOverlayLayer(this));
         addRenderLayer(new PrimaryTailLayer(this, ((MaidDressesWithTailArmorItem) stack.getItem()).getTailType()));
@@ -48,7 +54,7 @@ public class MaidDressesWithTailArmorRender extends GeoArmorItemRenderer<MaidDre
         return new ResourceLocation[]{
                 ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"textures/models/armor/maid_dresses_with_tail/dress/%s/dress.png".formatted(animatable.getTailType().name().toLowerCase())),
                 ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"textures/models/armor/maid_dresses_with_tail/dress/%s/maid_dress.png".formatted(animatable.getTailType().name().toLowerCase()))
-        }[stackData.get(DataComponentRegister.DYEABLE.get()).isHasOverlay() ? 1 : 0];
+        }[getStack().get(DataComponentRegister.DYEABLE.get()).isHasOverlay() ? 1 : 0];
     }
 
     @Override
@@ -72,14 +78,7 @@ public class MaidDressesWithTailArmorRender extends GeoArmorItemRenderer<MaidDre
     }
 
     @Override
-    public void postRender(final PoseStack poseStack, final MaidDressesWithTailArmorItem animatable, final BakedGeoModel model, final MultiBufferSource bufferSource, @Nullable final VertexConsumer buffer, final boolean isReRender, final float partialTick, final int packedLight, final int packedOverlay, final int colour) {
-        super.postRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, colour);
-
-        updateStack(null);
-    }
-
-    @Override
     public Color getRenderColor(MaidDressesWithTailArmorItem animatable, float partialTick, int packedLight) {
-        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE.get()).getBase());
+        return Color.ofOpaque(getStack().get(DataComponentRegister.DYEABLE.get()).getBase());
     }
 }

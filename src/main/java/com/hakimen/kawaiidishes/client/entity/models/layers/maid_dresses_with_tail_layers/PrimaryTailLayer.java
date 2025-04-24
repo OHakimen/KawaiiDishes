@@ -4,7 +4,6 @@ import com.hakimen.kawaiidishes.client.entity.models.layers.GeoArmorLayer;
 import com.hakimen.kawaiidishes.item.armor.MaidDressesWithTailArmorItem;
 import com.hakimen.kawaiidishes.registry.DataComponentRegister;
 import com.hakimen.kawaiidishes.utils.AnimalType;
-import com.hakimen.kawaiidishes.utils.ColorUtils;
 import com.hakimen.kawaiidishes.utils.MaidDressesWithTailUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -15,8 +14,10 @@ import net.minecraft.world.item.ItemStack;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 
+import java.lang.ref.WeakReference;
+
 public class PrimaryTailLayer extends GeoArmorLayer<MaidDressesWithTailArmorItem> {
-    ItemStack stackData;
+    private WeakReference<ItemStack> stackData;
 
     AnimalType tail;
 
@@ -26,7 +27,11 @@ public class PrimaryTailLayer extends GeoArmorLayer<MaidDressesWithTailArmorItem
     }
 
     public void updateStack(ItemStack stack) {
-        this.stackData = stack;
+        this.stackData = new WeakReference<>(stack);
+    }
+
+    public ItemStack getStack() {
+        return this.stackData.get();
     }
 
     @Override
@@ -41,6 +46,6 @@ public class PrimaryTailLayer extends GeoArmorLayer<MaidDressesWithTailArmorItem
                 partialTick,
                 packedLight,
                 OverlayTexture.NO_OVERLAY,
-                stackData.get(DataComponentRegister.DYEABLE.get()).getSecondaryBase());
+                getStack().get(DataComponentRegister.DYEABLE.get()).getSecondaryBase());
     }
 }

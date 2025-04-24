@@ -19,19 +19,25 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.util.Color;
 
+import java.lang.ref.WeakReference;
+
 public class MaidDressArmorRender extends GeoArmorItemRenderer<MaidDressArmorItem> {
 
-    ItemStack stackData;
+    private WeakReference<ItemStack> stackData;
 
     float chestAngle;
 
     public void updateStack(ItemStack stack) {
-        this.stackData = stack;
+        this.stackData = new WeakReference<>(stack);
+    }
+
+    public ItemStack getStack() {
+        return this.stackData.get();
     }
 
     public MaidDressArmorRender(GeoModel<MaidDressArmorItem> model, ItemStack stack) {
         super(model);
-        this.stackData = stack;
+        this.updateStack(stack);
 
         addRenderLayer(new MaidDressOverlayLayer(this));
         ((MaidDressOverlayLayer) getRenderLayers().get(0)).updateStack(stack);
@@ -41,7 +47,7 @@ public class MaidDressArmorRender extends GeoArmorItemRenderer<MaidDressArmorIte
         return new ResourceLocation[]{
                 ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"textures/models/armor/maid_dress/dress.png"),
                 ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID,"textures/models/armor/maid_dress/maid_dress.png")
-        }[stackData.get(DataComponentRegister.DYEABLE.get()).isHasOverlay() ? 1 : 0];
+        }[getStack().get(DataComponentRegister.DYEABLE.get()).isHasOverlay() ? 1 : 0];
     }
 
     @Override
@@ -63,14 +69,7 @@ public class MaidDressArmorRender extends GeoArmorItemRenderer<MaidDressArmorIte
     }
 
     @Override
-    public void postRender(final PoseStack poseStack, final MaidDressArmorItem animatable, final BakedGeoModel model, final MultiBufferSource bufferSource, @Nullable final VertexConsumer buffer, final boolean isReRender, final float partialTick, final int packedLight, final int packedOverlay, final int colour) {
-        super.postRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, colour);
-
-        this.updateStack(null);
-    }
-
-    @Override
     public Color getRenderColor(MaidDressArmorItem animatable, float partialTick, int packedLight) {
-        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE.get()).getBase());
+        return Color.ofOpaque(getStack().get(DataComponentRegister.DYEABLE.get()).getBase());
     }
 }

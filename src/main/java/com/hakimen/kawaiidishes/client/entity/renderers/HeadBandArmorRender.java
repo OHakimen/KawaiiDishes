@@ -3,7 +3,6 @@ package com.hakimen.kawaiidishes.client.entity.renderers;
 import com.hakimen.kawaiidishes.client.entity.models.layers.head_band_layers.HeadBandRibbonLayer;
 import com.hakimen.kawaiidishes.item.armor.HeadBandArmorItem;
 import com.hakimen.kawaiidishes.registry.DataComponentRegister;
-import com.hakimen.kawaiidishes.utils.ColorUtils;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -12,21 +11,29 @@ import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.util.Color;
 
+import java.lang.ref.WeakReference;
+
 public class HeadBandArmorRender extends GeoArmorItemRenderer<HeadBandArmorItem> {
 
-    ItemStack stackData;
+    private WeakReference<ItemStack> stackData;
+
     public HeadBandArmorRender(GeoModel<HeadBandArmorItem> model, ItemStack stack) {
         super(model);
-        this.stackData = stack;
+        this.updateStack(stack);
         addRenderLayer(new HeadBandRibbonLayer(this));
 
         ((HeadBandRibbonLayer)getRenderLayers().get(0)).updateStack(stack);
     }
 
 
-    public void updateStack(ItemStack stack){
-        this.stackData = stack;
+    public void updateStack(ItemStack stack) {
+        this.stackData = new WeakReference<>(stack);
     }
+
+    public ItemStack getStack() {
+        return this.stackData.get();
+    }
+
     @Override
     public void prepForRender(@Nullable Entity entity, ItemStack stack, @Nullable EquipmentSlot slot, @Nullable HumanoidModel<?> baseModel) {
         updateStack(stack);
@@ -38,6 +45,6 @@ public class HeadBandArmorRender extends GeoArmorItemRenderer<HeadBandArmorItem>
 
     @Override
     public Color getRenderColor(HeadBandArmorItem animatable, float partialTick, int packedLight) {
-        return Color.ofOpaque(stackData.get(DataComponentRegister.DYEABLE.get()).getBase());
+        return Color.ofOpaque(getStack().get(DataComponentRegister.DYEABLE.get()).getBase());
     }
 }

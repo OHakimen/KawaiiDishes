@@ -14,19 +14,26 @@ import net.minecraft.world.item.ItemStack;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 
-public class EarSkinLayer extends GeoArmorLayer<EarsArmorItem> {
-    ItemStack stackData;
+import java.lang.ref.WeakReference;
 
-    public void updateStack(ItemStack stack){
-        this.stackData = stack;
+public class EarSkinLayer extends GeoArmorLayer<EarsArmorItem> {
+    private WeakReference<ItemStack> stackData;
+
+    public void updateStack(ItemStack stack) {
+        this.stackData = new WeakReference<>(stack);
     }
+
+    public ItemStack getStack() {
+        return this.stackData.get();
+    }
+
     public EarSkinLayer(GeoRenderer<EarsArmorItem> entityRendererIn) {
         super(entityRendererIn, ResourceLocation.fromNamespaceAndPath(KawaiiDishes.MODID, "textures/models/armor/none.png"));
     }
 
     @Override
     public ResourceLocation getTexture() {
-        return EarUtils.getEarSkinTexture().get(((EarsArmorItem)stackData.getItem()).getEarsType());
+        return EarUtils.getEarSkinTexture().get(((EarsArmorItem) getStack().getItem()).getEarsType());
     }
 
     @Override
