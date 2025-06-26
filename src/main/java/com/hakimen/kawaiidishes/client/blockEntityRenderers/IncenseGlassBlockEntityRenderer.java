@@ -1,77 +1,78 @@
 package com.hakimen.kawaiidishes.client.blockEntityRenderers;
 
+import ;
 import com.hakimen.kawaiidishes.aromas.DecorativeAroma;
 import com.hakimen.kawaiidishes.aromas.PotionAroma;
 import com.hakimen.kawaiidishes.block.IncenseBlock;
 import com.hakimen.kawaiidishes.block_entities.IncenseBlockEntity;
 import com.hakimen.kawaiidishes.custom.types.Aroma;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.RenderLayers;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.block.BlockRenderManager;
-import net.minecraft.client.render.block.entity.BlockEntityRenderer;
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
-import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.DyeItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionUtil;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class IncenseGlassBlockEntityRenderer implements BlockEntityRenderer<IncenseBlockEntity> {
 
-    BlockEntityRendererFactory.Context context;
+    BlockEntityRendererProvider.Context context;
 
-    public IncenseGlassBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
+    public IncenseGlassBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
         this.context = context;
     }
 
 
     @Override
-    public void render(IncenseBlockEntity incenseBlockEntity, float partialTicks, MatrixStack pPoseStack, VertexConsumerProvider pBuffers, int packedLight, int overlay) {
+    public void render(IncenseBlockEntity incenseBlockEntity, float partialTicks, PoseStack pPoseStack, MultiBufferSource pBuffers, int packedLight, int overlay) {
 
-        BlockRenderManager blockRenderer = MinecraftClient.getInstance().getBlockRenderManager();
+        BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
 
         if(incenseBlockEntity != null) {
-            BlockState selfState = incenseBlockEntity.getCachedState();
+            BlockState selfState = incenseBlockEntity.getBlockState();
             Aroma aroma = incenseBlockEntity.getAromaFromId();
 
-            boolean shouldRender = incenseBlockEntity.getAroma() == 0 ? selfState.get(IncenseBlock.LIT) : true;
+            boolean shouldRender = incenseBlockEntity.getAroma() == 0 ? selfState.getValue(IncenseBlock.LIT) : true;
 
             if (shouldRender) {
 
-                pPoseStack.push();
+                pPoseStack.pushPose();
                 pPoseStack.translate(0.372f, 0.05f, 0.372f);
                 pPoseStack.scale(0.25f, 0.25f, 0.25f);
 
-                var renderType = RenderLayer.getCutout();
+                var renderType = RenderType.cutout();
 
                 ItemStack stack = incenseBlockEntity.getInventory().getResource().toStack((int) incenseBlockEntity.getInventory().amount);
 
                 int color = 0xffffff;
 
                 if (aroma instanceof DecorativeAroma) {
-                    color = stack.getItem() instanceof DyeItem dyeItem ? dyeItem.getColor().getFireworkColor() : 0;
+                    color = stack.getItem() instanceof DyeItem dyeItem ? dyeItem.getDyeColor().getFireworkColor() : 0;
                 } else if (aroma instanceof PotionAroma) {
-                    color = PotionUtil.getColor(stack);
+                    color = PotionUtils.getColor(stack);
                 } else {
                     color = aroma.getColor();
                 }
 
                 var renderColors = ColorUtils.getColorsFromHex(color);
 
-                BlockState state = Blocks.ACACIA_LEAVES.getDefaultState();
+                BlockState state = Blocks.ACACIA_LEAVES.defaultBlockState();
 
 
                 for (int i = 0; i < 2; i++) {
-                    BakedModel bakedmodel = blockRenderer.getModel(state);
+                    BakedModel bakedmodel = blockRenderer.getBlockModel(state);
 
-                    blockRenderer.getModelRenderer().render(
-                            pPoseStack.peek(),
-                            pBuffers.getBuffer(renderType != null ? renderType : RenderLayers.getItemLayer(stack,false)),
+                    blockRenderer.getModelRenderer().renderModel(
+                            pPoseStack.last(),
+                            pBuffers.getBuffer(renderType != null ? renderType : ItemBlockRenderTypes.getRenderType(stack,false)),
                             state,
                             bakedmodel,
                             renderColors[0],
@@ -80,10 +81,10 @@ public class IncenseGlassBlockEntityRenderer implements BlockEntityRenderer<Ince
                             packedLight,
                             overlay
                     );
-                    state = Blocks.OAK_LEAVES.getDefaultState();
+                    state = Blocks.OAK_LEAVES.defaultBlockState();
                 }
 
-                pPoseStack.pop();
+                pPoseStack.popPose();
             }
         }
     }

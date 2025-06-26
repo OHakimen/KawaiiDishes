@@ -1,10 +1,10 @@
 package com.hakimen.kawaiidishes.client.entity.models;
 
 import com.hakimen.kawaiidishes.item.armor.HeadBandArmorItem;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 public class HeadBandArmorModel extends GeoArmorModel<HeadBandArmorItem> {
-    public HeadBandArmorModel(Identifier modelLocation, Identifier textureLocation, Identifier animationLocation) {
+    public HeadBandArmorModel(ResourceLocation modelLocation, ResourceLocation textureLocation, ResourceLocation animationLocation) {
         super(modelLocation, textureLocation, animationLocation);
     }
 

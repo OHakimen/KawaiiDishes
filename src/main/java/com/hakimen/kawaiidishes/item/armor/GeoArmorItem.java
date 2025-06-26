@@ -1,18 +1,18 @@
 package com.hakimen.kawaiidishes.item.armor;
 
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
 import software.bernie.geckolib.animatable.GeoItem;
 
 public abstract class GeoArmorItem extends ArmorItem implements GeoItem {
-    public GeoArmorItem(ArmorMaterial pMaterial, Type pType, Settings pProperties) {
+    public GeoArmorItem(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
         super(pMaterial, pType, pProperties
-                .maxDamage(-1));
+                .durability(-1));
     }
 
     @Override
-    public boolean isDamageable() {
+    public boolean canBeDepleted() {
         return false;
     }
 

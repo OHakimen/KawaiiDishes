@@ -5,29 +5,29 @@ import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.item.IDyeableItem;
 import com.hakimen.kawaiidishes.registry.RecipeRegister;
 import java.util.List;
-import net.minecraft.inventory.RecipeInputInventory;
-import net.minecraft.item.DyeItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.SpecialCraftingRecipe;
-import net.minecraft.recipe.book.CraftingRecipeCategory;
-import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
+import net.minecraft.world.item.crafting.CustomRecipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.Level;
 
-public class DyeIDyeableRecipe extends SpecialCraftingRecipe {
+public class DyeIDyeableRecipe extends CustomRecipe {
 
-    public DyeIDyeableRecipe(Identifier resourceLocation, CraftingRecipeCategory craftingBookCategory) {
+    public DyeIDyeableRecipe(ResourceLocation resourceLocation, CraftingBookCategory craftingBookCategory) {
         super(resourceLocation, craftingBookCategory);
     }
 
     @Override
-    public boolean matches(RecipeInputInventory pContainer, World pLevel) {
+    public boolean matches(CraftingContainer pContainer, Level pLevel) {
         ItemStack itemstack = ItemStack.EMPTY;
         List<ItemStack> list = Lists.newArrayList();
-        for(int i = 0; i < pContainer.size(); ++i) {
-            ItemStack itemstack1 = pContainer.getStack(i);
+        for(int i = 0; i < pContainer.getContainerSize(); ++i) {
+            ItemStack itemstack1 = pContainer.getItem(i);
             if (!itemstack1.isEmpty()) {
                 if (itemstack1.getItem() instanceof IDyeableItem) {
                     if (!itemstack.isEmpty()) {
@@ -49,12 +49,12 @@ public class DyeIDyeableRecipe extends SpecialCraftingRecipe {
     }
 
     @Override
-    public ItemStack craft(RecipeInputInventory pContainer, DynamicRegistryManager pRegistryAccess) {
+    public ItemStack craft(CraftingContainer pContainer, RegistryAccess pRegistryAccess) {
         List<DyeItem> list = Lists.newArrayList();
         ItemStack itemstack = ItemStack.EMPTY;
 
-        for(int i = 0; i < pContainer.size(); ++i) {
-            ItemStack itemstack1 = pContainer.getStack(i);
+        for(int i = 0; i < pContainer.getContainerSize(); ++i) {
+            ItemStack itemstack1 = pContainer.getItem(i);
             if (!itemstack1.isEmpty()) {
                 Item item = itemstack1.getItem();
                 if (item instanceof IDyeableItem) {
@@ -77,7 +77,7 @@ public class DyeIDyeableRecipe extends SpecialCraftingRecipe {
     }
 
     @Override
-    public boolean fits(int pWidth, int pHeight) {
+    public boolean canCraftInDimensions(int pWidth, int pHeight) {
         return pWidth * pHeight >= 2;
     }
 

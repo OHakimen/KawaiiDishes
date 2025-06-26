@@ -1,10 +1,10 @@
 package com.hakimen.kawaiidishes.client.entity.models;
 
 import com.hakimen.kawaiidishes.item.armor.TailArmorItem;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 public class TailArmorModel extends GeoArmorModel<TailArmorItem> {
-    public TailArmorModel(Identifier modelLocation, Identifier textureLocation, Identifier animationLocation) {
+    public TailArmorModel(ResourceLocation modelLocation, ResourceLocation textureLocation, ResourceLocation animationLocation) {
         super(modelLocation, textureLocation, animationLocation);
     }
 }

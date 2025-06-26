@@ -4,32 +4,32 @@ import com.hakimen.kawaiidishes.containers.BlenderContainer;
 import com.hakimen.kawaiidishes.recipes.BlenderRecipe;
 import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtList;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
 public class BlenderBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, BlockEntityTicker<BlenderBlockEntity> {
 
-    private final PropertyDelegate data;
-    private final SimpleInventory inventory = new SimpleInventory(5);
+    private final ContainerData data;
+    private final SimpleContainer inventory = new SimpleContainer(5);
 
     private int progress = 0;
     private int recipeTicks = 0;
@@ -38,7 +38,7 @@ public class BlenderBlockEntity extends BlockEntity implements ExtendedScreenHan
     public BlenderBlockEntity(BlockPos pPos, BlockState pState) {
         super(BlockEntityRegister.BLENDER.get(), pPos, pState);
 
-        this.data = new PropertyDelegate() {
+        this.data = new ContainerData() {
             public int get(int index) {
                 return switch (index) {
                     case 0 -> BlenderBlockEntity.this.progress;
@@ -54,29 +54,29 @@ public class BlenderBlockEntity extends BlockEntity implements ExtendedScreenHan
                 }
             }
 
-            public int size() {
+            public int getCount() {
                 return 2;
             }
         };
     }
 
     public static boolean hasRecipe(BlenderBlockEntity entity) {
-        World level = entity.world;
+        Level level = entity.level;
 
         Optional<BlenderRecipe> match = level.getRecipeManager()
-                .getFirstMatch(BlenderRecipe.Type.INSTANCE, entity.inventory, level);
+                .getRecipeFor(BlenderRecipe.Type.INSTANCE, entity.inventory, level);
         return match.isPresent();
     }
 
     @Override
-    protected void writeNbt(NbtCompound pTag) {
-        NbtList listTag = new NbtList();
+    protected void saveAdditional(CompoundTag pTag) {
+        ListTag listTag = new ListTag();
 
-        for(int i = 0; i < this.getInventory().size(); ++i) {
-            ItemStack itemStack = this.getInventory().getStack(i);
-            NbtCompound tag = new NbtCompound();
+        for(int i = 0; i < this.getInventory().getContainerSize(); ++i) {
+            ItemStack itemStack = this.getInventory().getItem(i);
+            CompoundTag tag = new CompoundTag();
             tag.putInt("Slot", i);
-            tag.put("Item", itemStack.writeNbt(new NbtCompound()));
+            tag.put("Item", itemStack.save(new CompoundTag()));
             listTag.add(tag);
         }
 
@@ -84,42 +84,42 @@ public class BlenderBlockEntity extends BlockEntity implements ExtendedScreenHan
         pTag.putInt("Progress", progress);
         pTag.putInt("RecipeTicks", recipeTicks);
         pTag.putBoolean("IsCrafting", isCrafting);
-        super.writeNbt(pTag);
+        super.saveAdditional(pTag);
     }
 
     @Override
-    public void readNbt(NbtCompound pTag) {
-        super.readNbt(pTag);
+    public void load(CompoundTag pTag) {
+        super.load(pTag);
         progress = pTag.getInt("Progress");
         recipeTicks = pTag.getInt("RecipeTicks");
         isCrafting = pTag.getBoolean("IsCrafting");
-        NbtList listTag = pTag.getList("Items", NbtElement.COMPOUND_TYPE);
-        this.getInventory().clear();
+        ListTag listTag = pTag.getList("Items", Tag.TAG_COMPOUND);
+        this.getInventory().clearContent();
 
         for(int i = 0; i < listTag.size(); ++i) {
-            NbtCompound tag = listTag.getCompound(i);
+            CompoundTag tag = listTag.getCompound(i);
             int slot = tag.getInt("Slot");
-            ItemStack stack = ItemStack.fromNbt(tag.getCompound("Item"));
-            this.getInventory().setStack(slot, stack);
+            ItemStack stack = ItemStack.of(tag.getCompound("Item"));
+            this.getInventory().setItem(slot, stack);
         }
     }
 
     @Override
-    public Text getDisplayName() {
-        return Text.translatable("gui.kawaiidishes.blender");
+    public Component getDisplayName() {
+        return Component.translatable("gui.kawaiidishes.blender");
     }
 
     @Nullable
     @Override
-    public ScreenHandler createMenu(int windowId, PlayerInventory inventory, PlayerEntity player) {
+    public AbstractContainerMenu createMenu(int windowId, Inventory inventory, Player player) {
         return new BlenderContainer(windowId, inventory, this, data);
     }
 
     @Override
-    public void tick(World pLevel, BlockPos pPos, BlockState pState, BlenderBlockEntity entity) {
+    public void tick(Level pLevel, BlockPos pPos, BlockState pState, BlenderBlockEntity entity) {
         if (hasRecipe(entity)) {
-            Optional<BlenderRecipe> match = world.getRecipeManager()
-                    .getFirstMatch(BlenderRecipe.Type.INSTANCE, inventory, world);
+            Optional<BlenderRecipe> match = level.getRecipeManager()
+                    .getRecipeFor(BlenderRecipe.Type.INSTANCE, inventory, level);
             if (match.isPresent()) {
                 BlenderRecipe recipe = match.get();
                 if (!isCrafting) {
@@ -131,21 +131,21 @@ public class BlenderBlockEntity extends BlockEntity implements ExtendedScreenHan
                         isCrafting = false;
                         progress = 0;
                         for (int i = 0; i < 4; i++) {
-                            ItemStack inventoryStack = entity.inventory.getStack(i);
-                            var stack = entity.inventory.getStack(i).getItem().getRecipeRemainder();
+                            ItemStack inventoryStack = entity.inventory.getItem(i);
+                            var stack = entity.inventory.getItem(i).getItem().getCraftingRemainingItem();
                             boolean hasRemainder = stack != null;
                             if (inventoryStack.getCount() > 0 && !hasRemainder) {
-                                entity.inventory.removeStack(i, 1);
+                                entity.inventory.removeItem(i, 1);
                             } else if (hasRemainder) {
-                                entity.inventory.setStack(i, stack == null ? ItemStack.EMPTY : stack.getDefaultStack());
+                                entity.inventory.setItem(i, stack == null ? ItemStack.EMPTY : stack.getDefaultInstance());
                             }
                         }
-                        ItemStack inventoryStack = entity.inventory.getStack(4);
+                        ItemStack inventoryStack = entity.inventory.getItem(4);
                         if (inventoryStack.isEmpty()) {
-                            entity.inventory.setStack(4, recipe.getOutput(null).copy());
-                        } else if (inventoryStack.getItem().equals(recipe.getOutput(null).getItem())
-                                && inventoryStack.getCount() < inventoryStack.getMaxCount()) {
-                            entity.inventory.getStack(4).increment(1);
+                            entity.inventory.setItem(4, recipe.getResultItem(null).copy());
+                        } else if (inventoryStack.getItem().equals(recipe.getResultItem(null).getItem())
+                                && inventoryStack.getCount() < inventoryStack.getMaxStackSize()) {
+                            entity.inventory.getItem(4).grow(1);
                         }
                     }
                 }
@@ -155,17 +155,17 @@ public class BlenderBlockEntity extends BlockEntity implements ExtendedScreenHan
                 progress--;
             }
         }
-        markDirty();
+        setChanged();
     }
 
 
-    public SimpleInventory getInventory() {
+    public SimpleContainer getInventory() {
         return inventory;
     }
 
     @Override
-    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
-        buf.writeBlockPos(getPos());
+    public void writeScreenOpeningData(ServerPlayer player, FriendlyByteBuf buf) {
+        buf.writeBlockPos(getBlockPos());
     }
 }
 

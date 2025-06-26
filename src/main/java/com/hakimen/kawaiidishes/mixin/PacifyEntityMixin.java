@@ -1,7 +1,7 @@
 package com.hakimen.kawaiidishes.mixin;
 
 import com.hakimen.kawaiidishes.registry.EffectRegister;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -13,7 +13,7 @@ public class PacifyEntityMixin {
 
     @Inject(at = @At("RETURN"), method = "canTarget(Lnet/minecraft/entity/LivingEntity;)Z", cancellable = true)
     public void canAttack(LivingEntity entity, CallbackInfoReturnable<Boolean> cir){
-        cir.setReturnValue(!((LivingEntity)(Object) this).hasStatusEffect(EffectRegister.CALMING.get()) && cir.getReturnValue());
+        cir.setReturnValue(!((LivingEntity)(Object) this).hasEffect(EffectRegister.CALMING.get()) && cir.getReturnValue());
     }
 
 }

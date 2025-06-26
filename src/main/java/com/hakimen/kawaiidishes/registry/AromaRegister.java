@@ -9,7 +9,7 @@ import com.hakimen.kawaiidishes.custom.types.Aroma;
 import com.hakimen.kawaiidishes.datagen.ItemTagDataGen;
 import net.fabricmc.fabric.api.event.lifecycle.v1.CommonLifecycleEvents;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import java.util.function.Supplier;
 
 public class AromaRegister {
@@ -60,7 +60,7 @@ public class AromaRegister {
     public static boolean isValidStack(ItemStack stack){
         for(Aroma aroma : AROMAS.getRegistry()){
             if(aroma != INVALID.get()){
-                if(stack.isIn(aroma.getItems())){
+                if(stack.is(aroma.getItems())){
                     return true;
                 }
             }
@@ -71,8 +71,8 @@ public class AromaRegister {
     public static int getAromaId(ItemStack stack){
         for(Aroma aroma : AROMAS.getRegistry()){
             if(aroma != INVALID.get()){
-                if(stack.isIn(aroma.getItems())){
-                    return Registries.AROMAS.getRawId(aroma);
+                if(stack.is(aroma.getItems())){
+                    return Registries.AROMAS.getId(aroma);
                 }
             }
         }

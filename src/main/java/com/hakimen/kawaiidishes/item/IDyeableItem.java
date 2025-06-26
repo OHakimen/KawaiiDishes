@@ -1,11 +1,11 @@
 package com.hakimen.kawaiidishes.item;
 
 import java.util.List;
-import net.minecraft.item.DyeItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 public interface IDyeableItem {
     String colors = "Colors";
@@ -15,34 +15,34 @@ public interface IDyeableItem {
 
     int defaultColor = 0xFFFFFF;
     default int getBaseColor(ItemStack stack){
-        NbtCompound colorData = stack.getSubNbt(colors);
-        return colorData != null && colorData.contains(base, NbtElement.NUMBER_TYPE) ? colorData.getInt(base) : defaultColor;
+        CompoundTag colorData = stack.getTagElement(colors);
+        return colorData != null && colorData.contains(base, Tag.TAG_ANY_NUMERIC) ? colorData.getInt(base) : defaultColor;
     }
 
     default int getOverlayColor(ItemStack stack){
-        NbtCompound colorData = stack.getSubNbt(colors);
-        return colorData != null && colorData.contains(overlay, NbtElement.NUMBER_TYPE) ? colorData.getInt(overlay) : defaultColor;
+        CompoundTag colorData = stack.getTagElement(colors);
+        return colorData != null && colorData.contains(overlay, Tag.TAG_ANY_NUMERIC) ? colorData.getInt(overlay) : defaultColor;
     }
 
     default boolean hasBaseColor(ItemStack stack){
-        NbtCompound colorData = stack.getSubNbt(colors);
-        return colorData != null && colorData.contains(base, NbtElement.NUMBER_TYPE);
+        CompoundTag colorData = stack.getTagElement(colors);
+        return colorData != null && colorData.contains(base, Tag.TAG_ANY_NUMERIC);
     }
 
     default boolean hasOverlayColor(ItemStack stack){
-        NbtCompound colorData = stack.getSubNbt(colors);
-        return colorData != null && colorData.contains(overlay, NbtElement.NUMBER_TYPE);
+        CompoundTag colorData = stack.getTagElement(colors);
+        return colorData != null && colorData.contains(overlay, Tag.TAG_ANY_NUMERIC);
     }
 
     default void clearBaseColor(ItemStack stack) {
-        NbtCompound colorData = stack.getSubNbt(colors);
+        CompoundTag colorData = stack.getTagElement(colors);
         if (colorData != null && colorData.contains(base)) {
             colorData.remove(base);
         }
     }
 
     default void clearOverlayColor(ItemStack stack) {
-        NbtCompound colorData = stack.getSubNbt(colors);
+        CompoundTag colorData = stack.getTagElement(colors);
         if (colorData != null && colorData.contains(overlay)) {
             colorData.remove(overlay);
         }
@@ -51,10 +51,10 @@ public interface IDyeableItem {
     boolean hasOverlay(ItemStack stack);
 
     default void setBaseColor(ItemStack stack, int color) {
-        stack.getOrCreateSubNbt(colors).putInt(base, color);
+        stack.getOrCreateTagElement(colors).putInt(base, color);
     }
     default void setOverlayColor(ItemStack stack, int color) {
-        stack.getOrCreateSubNbt(colors).putInt(overlay, color);
+        stack.getOrCreateTagElement(colors).putInt(overlay, color);
     }
 
     static ItemStack dyeBase(ItemStack stack, List<DyeItem> dyes){
@@ -83,7 +83,7 @@ public interface IDyeableItem {
         }
 
         for(DyeItem dyeitem : dyes) {
-            float[] dyeColors = dyeitem.getColor().getColorComponents();
+            float[] dyeColors = dyeitem.getDyeColor().getTextureDiffuseColors();
             int r = (int)(dyeColors[0] * 255.0F);
             int g = (int)(dyeColors[1] * 255.0F);
             int b = (int)(dyeColors[2] * 255.0F);
@@ -132,7 +132,7 @@ public interface IDyeableItem {
         }
 
         for(DyeItem dyeitem : dyes) {
-            float[] dyeColors = dyeitem.getColor().getColorComponents();
+            float[] dyeColors = dyeitem.getDyeColor().getTextureDiffuseColors();
             int r = (int)(dyeColors[0] * 255.0F);
             int g = (int)(dyeColors[1] * 255.0F);
             int b = (int)(dyeColors[2] * 255.0F);

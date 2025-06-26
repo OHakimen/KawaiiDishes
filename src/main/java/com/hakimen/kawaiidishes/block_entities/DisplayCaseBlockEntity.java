@@ -6,41 +6,41 @@ import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.SlottedStorage;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.PotionItem;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtList;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.listener.ClientPlayPacketListener;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PotionItem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 
 public class DisplayCaseBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, BlockEntityTicker<DisplayCaseBlockEntity> {
 
 
-    private final SimpleInventory inventory = new SimpleInventory(8){
+    private final SimpleContainer inventory = new SimpleContainer(8){
         @Override
-        public boolean isValid(int i, ItemStack itemStack) {
-            return itemStack.isFood() || itemStack.getItem() instanceof PotionItem;
+        public boolean canPlaceItem(int i, ItemStack itemStack) {
+            return itemStack.isEdible() || itemStack.getItem() instanceof PotionItem;
         }
 
         @Override
-        public boolean canInsert(ItemStack itemStack) {
-            return itemStack.isFood() || itemStack.getItem() instanceof PotionItem;
+        public boolean canAddItem(ItemStack itemStack) {
+            return itemStack.isEdible() || itemStack.getItem() instanceof PotionItem;
         }
     };
     public SlottedStorage<ItemVariant> getStorage() {
@@ -48,7 +48,7 @@ public class DisplayCaseBlockEntity extends BlockEntity implements ExtendedScree
     }
 
 
-    public SimpleInventory getInventory() {
+    public SimpleContainer getInventory() {
         return inventory;
     }
 
@@ -57,63 +57,63 @@ public class DisplayCaseBlockEntity extends BlockEntity implements ExtendedScree
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return this.createNbtWithIdentifyingData();
+    public CompoundTag getUpdateTag() {
+        return this.saveWithFullMetadata();
     }
     @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
         // Will get tag from #getUpdateTag
-        return BlockEntityUpdateS2CPacket.create(this,BlockEntity::createNbtWithIdentifyingData);
+        return ClientboundBlockEntityDataPacket.create(this,BlockEntity::saveWithFullMetadata);
     }
 
 
     @Override
-    public Text getDisplayName() {
-        return Text.translatable("gui.kawaiidishes.display_case");
+    public Component getDisplayName() {
+        return Component.translatable("gui.kawaiidishes.display_case");
     }
 
     @Nullable
     @Override
-    public ScreenHandler createMenu(int windowId, PlayerInventory inventory, PlayerEntity player) {
+    public AbstractContainerMenu createMenu(int windowId, Inventory inventory, Player player) {
         return new DisplayCaseContainer(windowId,inventory,this);
     }
 
     @Override
-    public void tick(World pLevel, BlockPos pPos, BlockState pState, DisplayCaseBlockEntity entity) {
+    public void tick(Level pLevel, BlockPos pPos, BlockState pState, DisplayCaseBlockEntity entity) {
     }
 
     @Override
-    protected void writeNbt(NbtCompound pTag) {
-        NbtList listTag = new NbtList();
+    protected void saveAdditional(CompoundTag pTag) {
+        ListTag listTag = new ListTag();
 
-        for(int i = 0; i < this.getInventory().size(); ++i) {
-            ItemStack itemStack = this.getInventory().getStack(i);
-            NbtCompound tag = new NbtCompound();
+        for(int i = 0; i < this.getInventory().getContainerSize(); ++i) {
+            ItemStack itemStack = this.getInventory().getItem(i);
+            CompoundTag tag = new CompoundTag();
             tag.putInt("Slot", i);
-            tag.put("Item", itemStack.writeNbt(new NbtCompound()));
+            tag.put("Item", itemStack.save(new CompoundTag()));
             listTag.add(tag);
         }
 
         pTag.put("Items", listTag);
-        super.writeNbt(pTag);
+        super.saveAdditional(pTag);
     }
 
     @Override
-    public void readNbt(NbtCompound pTag) {
-        super.readNbt(pTag);
-        NbtList listTag = pTag.getList("Items", NbtElement.COMPOUND_TYPE);
-        this.getInventory().clear();
+    public void load(CompoundTag pTag) {
+        super.load(pTag);
+        ListTag listTag = pTag.getList("Items", Tag.TAG_COMPOUND);
+        this.getInventory().clearContent();
 
         for(int i = 0; i < listTag.size(); ++i) {
-            NbtCompound tag = listTag.getCompound(i);
+            CompoundTag tag = listTag.getCompound(i);
             int slot = tag.getInt("Slot");
-            ItemStack stack = ItemStack.fromNbt(tag.getCompound("Item"));
-            this.getInventory().setStack(slot, stack);
+            ItemStack stack = ItemStack.of(tag.getCompound("Item"));
+            this.getInventory().setItem(slot, stack);
         }
     }
 
     @Override
-    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
-        buf.writeBlockPos(getPos());
+    public void writeScreenOpeningData(ServerPlayer player, FriendlyByteBuf buf) {
+        buf.writeBlockPos(getBlockPos());
     }
 }

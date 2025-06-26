@@ -1,6 +1,6 @@
 package com.hakimen.kawaiidishes.client.entity.renderers;
 
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;

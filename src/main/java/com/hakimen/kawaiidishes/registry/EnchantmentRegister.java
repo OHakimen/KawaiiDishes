@@ -7,11 +7,11 @@ import com.hakimen.kawaiidishes.enchantments.BunnyHasteEnchantment;
 import com.hakimen.kawaiidishes.enchantments.CatAuraEnchant;
 import com.hakimen.kawaiidishes.enchantments.FoxAptitudeEnchant;
 import java.util.function.Supplier;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.registry.Registries;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.enchantment.Enchantment;
 
 public class EnchantmentRegister {
-    public static final Recorder<Enchantment> ENCHANTMENTS = new Recorder<>(Registries.ENCHANTMENT, KawaiiDishes.MODID);
+    public static final Recorder<Enchantment> ENCHANTMENTS = new Recorder<>(BuiltInRegistries.ENCHANTMENT, KawaiiDishes.MODID);
 
     public static final Supplier<CatAuraEnchant> CAT_AURA = ENCHANTMENTS.register("cat_aura", CatAuraEnchant::new);
     public static final Supplier<FoxAptitudeEnchant> FOX_APTITUDE = ENCHANTMENTS.register("fox_aptitude", FoxAptitudeEnchant::new);

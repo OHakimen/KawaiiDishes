@@ -4,8 +4,8 @@ import com.hakimen.kawaiidishes.world.Features;
 import com.hakimen.kawaiidishes.world.PlacedFeatures;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.minecraft.registry.RegistryBuilder;
-import net.minecraft.registry.RegistryKeys;
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.registries.Registries;
 
 public class DataGeneration implements DataGeneratorEntrypoint {
     @Override
@@ -23,8 +23,8 @@ public class DataGeneration implements DataGeneratorEntrypoint {
 
 
     @Override
-    public void buildRegistry(RegistryBuilder registryBuilder) {
-        registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, Features::bootstrap);
-        registryBuilder.addRegistry(RegistryKeys.PLACED_FEATURE, PlacedFeatures::bootstrap);
+    public void buildRegistry(RegistrySetBuilder registryBuilder) {
+        registryBuilder.add(Registries.CONFIGURED_FEATURE, Features::bootstrap);
+        registryBuilder.add(Registries.PLACED_FEATURE, PlacedFeatures::bootstrap);
     }
 }

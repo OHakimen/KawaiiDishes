@@ -1,11 +1,11 @@
 package com.hakimen.kawaiidishes.item;
 
 import java.util.List;
-import net.minecraft.item.DyeItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 public interface IFourColorDyeableItem {
 
@@ -17,34 +17,34 @@ public interface IFourColorDyeableItem {
 
     int defaultColor = 0xFFFFFF;
     default int getPrimaryBaseColor(ItemStack stack){
-        NbtCompound colorData = stack.getSubNbt(colors);
-        return colorData != null && colorData.contains(base, NbtElement.NUMBER_TYPE) ? colorData.getInt(base) : defaultColor;
+        CompoundTag colorData = stack.getTagElement(colors);
+        return colorData != null && colorData.contains(base, Tag.TAG_ANY_NUMERIC) ? colorData.getInt(base) : defaultColor;
     }
 
     default int getPrimaryOverlayColor(ItemStack stack){
-        NbtCompound colorData = stack.getSubNbt(colors);
-        return colorData != null && colorData.contains(overlay, NbtElement.NUMBER_TYPE) ? colorData.getInt(overlay) : defaultColor;
+        CompoundTag colorData = stack.getTagElement(colors);
+        return colorData != null && colorData.contains(overlay, Tag.TAG_ANY_NUMERIC) ? colorData.getInt(overlay) : defaultColor;
     }
 
     default boolean hasPrimaryBaseColor(ItemStack stack){
-        NbtCompound colorData = stack.getSubNbt(colors);
-        return colorData != null && colorData.contains(base, NbtElement.NUMBER_TYPE);
+        CompoundTag colorData = stack.getTagElement(colors);
+        return colorData != null && colorData.contains(base, Tag.TAG_ANY_NUMERIC);
     }
 
     default boolean hasPrimaryOverlayColor(ItemStack stack){
-        NbtCompound colorData = stack.getSubNbt(colors);
-        return colorData != null && colorData.contains(overlay, NbtElement.NUMBER_TYPE);
+        CompoundTag colorData = stack.getTagElement(colors);
+        return colorData != null && colorData.contains(overlay, Tag.TAG_ANY_NUMERIC);
     }
 
     default void clearPrimaryBaseColor(ItemStack stack) {
-        NbtCompound colorData = stack.getSubNbt(colors);
+        CompoundTag colorData = stack.getTagElement(colors);
         if (colorData != null && colorData.contains(base)) {
             colorData.remove(base);
         }
     }
 
     default void clearPrimaryOverlayColor(ItemStack stack) {
-        NbtCompound colorData = stack.getSubNbt(colors);
+        CompoundTag colorData = stack.getTagElement(colors);
         if (colorData != null && colorData.contains(overlay)) {
             colorData.remove(overlay);
         }
@@ -53,10 +53,10 @@ public interface IFourColorDyeableItem {
     boolean hasPrimaryOverlay(ItemStack stack);
 
     default void setPrimaryBaseColor(ItemStack stack, int color) {
-        stack.getOrCreateSubNbt(colors).putInt(base, color);
+        stack.getOrCreateTagElement(colors).putInt(base, color);
     }
     default void setPrimaryOverlayColor(ItemStack stack, int color) {
-        stack.getOrCreateSubNbt(colors).putInt(overlay, color);
+        stack.getOrCreateTagElement(colors).putInt(overlay, color);
     }
 
     static ItemStack dyePrimaryBase(ItemStack stack, List<DyeItem> dyes){
@@ -85,7 +85,7 @@ public interface IFourColorDyeableItem {
         }
 
         for(DyeItem dyeitem : dyes) {
-            float[] dyeColors = dyeitem.getColor().getColorComponents();
+            float[] dyeColors = dyeitem.getDyeColor().getTextureDiffuseColors();
             int r = (int)(dyeColors[0] * 255.0F);
             int g = (int)(dyeColors[1] * 255.0F);
             int b = (int)(dyeColors[2] * 255.0F);
@@ -134,7 +134,7 @@ public interface IFourColorDyeableItem {
         }
 
         for(DyeItem dyeitem : dyes) {
-            float[] dyeColors = dyeitem.getColor().getColorComponents();
+            float[] dyeColors = dyeitem.getDyeColor().getTextureDiffuseColors();
             int r = (int)(dyeColors[0] * 255.0F);
             int g = (int)(dyeColors[1] * 255.0F);
             int b = (int)(dyeColors[2] * 255.0F);
@@ -158,34 +158,34 @@ public interface IFourColorDyeableItem {
     }
 
     default int getSecondaryBaseColor(ItemStack stack){
-        NbtCompound colorData = stack.getSubNbt(secondaryColors);
-        return colorData != null && colorData.contains(base, NbtElement.NUMBER_TYPE) ? colorData.getInt(base) : defaultColor;
+        CompoundTag colorData = stack.getTagElement(secondaryColors);
+        return colorData != null && colorData.contains(base, Tag.TAG_ANY_NUMERIC) ? colorData.getInt(base) : defaultColor;
     }
 
     default int getSecondaryOverlayColor(ItemStack stack){
-        NbtCompound colorData = stack.getSubNbt(secondaryColors);
-        return colorData != null && colorData.contains(overlay, NbtElement.NUMBER_TYPE) ? colorData.getInt(overlay) : defaultColor;
+        CompoundTag colorData = stack.getTagElement(secondaryColors);
+        return colorData != null && colorData.contains(overlay, Tag.TAG_ANY_NUMERIC) ? colorData.getInt(overlay) : defaultColor;
     }
 
     default boolean hasSecondaryBaseColor(ItemStack stack){
-        NbtCompound colorData = stack.getSubNbt(secondaryColors);
-        return colorData != null && colorData.contains(base, NbtElement.NUMBER_TYPE);
+        CompoundTag colorData = stack.getTagElement(secondaryColors);
+        return colorData != null && colorData.contains(base, Tag.TAG_ANY_NUMERIC);
     }
 
     default boolean hasSecondaryOverlayColor(ItemStack stack){
-        NbtCompound colorData = stack.getSubNbt(secondaryColors);
-        return colorData != null && colorData.contains(overlay, NbtElement.NUMBER_TYPE);
+        CompoundTag colorData = stack.getTagElement(secondaryColors);
+        return colorData != null && colorData.contains(overlay, Tag.TAG_ANY_NUMERIC);
     }
 
     default void clearSecondaryBaseColor(ItemStack stack) {
-        NbtCompound colorData = stack.getSubNbt(secondaryColors);
+        CompoundTag colorData = stack.getTagElement(secondaryColors);
         if (colorData != null && colorData.contains(base)) {
             colorData.remove(base);
         }
     }
 
     default void clearSecondaryOverlayColor(ItemStack stack) {
-        NbtCompound colorData = stack.getSubNbt(secondaryColors);
+        CompoundTag colorData = stack.getTagElement(secondaryColors);
         if (colorData != null && colorData.contains(overlay)) {
             colorData.remove(overlay);
         }
@@ -194,10 +194,10 @@ public interface IFourColorDyeableItem {
     boolean hasSecondaryOverlay(ItemStack stack);
 
     default void setSecondaryBaseColor(ItemStack stack, int color) {
-        stack.getOrCreateSubNbt(secondaryColors).putInt(base, color);
+        stack.getOrCreateTagElement(secondaryColors).putInt(base, color);
     }
     default void setSecondaryOverlayColor(ItemStack stack, int color) {
-        stack.getOrCreateSubNbt(secondaryColors).putInt(overlay, color);
+        stack.getOrCreateTagElement(secondaryColors).putInt(overlay, color);
     }
 
     static ItemStack dyeSecondaryBase(ItemStack stack, List<DyeItem> dyes){
@@ -226,7 +226,7 @@ public interface IFourColorDyeableItem {
         }
 
         for(DyeItem dyeitem : dyes) {
-            float[] dyeColors = dyeitem.getColor().getColorComponents();
+            float[] dyeColors = dyeitem.getDyeColor().getTextureDiffuseColors();
             int r = (int)(dyeColors[0] * 255.0F);
             int g = (int)(dyeColors[1] * 255.0F);
             int b = (int)(dyeColors[2] * 255.0F);
@@ -275,7 +275,7 @@ public interface IFourColorDyeableItem {
         }
 
         for(DyeItem dyeitem : dyes) {
-            float[] dyeColors = dyeitem.getColor().getColorComponents();
+            float[] dyeColors = dyeitem.getDyeColor().getTextureDiffuseColors();
             int r = (int)(dyeColors[0] * 255.0F);
             int g = (int)(dyeColors[1] * 255.0F);
             int b = (int)(dyeColors[2] * 255.0F);

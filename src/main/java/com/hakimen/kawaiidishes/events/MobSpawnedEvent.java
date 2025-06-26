@@ -7,52 +7,52 @@ import com.hakimen.kawaiidishes.item.IDyeableItem;
 import com.hakimen.kawaiidishes.item.IFourColorDyeableItem;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.PiglinBruteEntity;
-import net.minecraft.entity.mob.PiglinEntity;
-import net.minecraft.entity.mob.SkeletonEntity;
-import net.minecraft.entity.mob.StrayEntity;
-import net.minecraft.entity.mob.WitherSkeletonEntity;
-import net.minecraft.entity.mob.ZombieEntity;
-import net.minecraft.item.DyeItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DyeColor;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.entity.monster.Stray;
+import net.minecraft.world.entity.monster.WitherSkeleton;
+import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.piglin.Piglin;
+import net.minecraft.world.entity.monster.piglin.PiglinBrute;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 public class MobSpawnedEvent {
 
     public static void handle(){
         ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
-            Random source = world.getRandom();
-            if (entity instanceof HostileEntity monster &&
-                    (monster instanceof SkeletonEntity
-                            || monster instanceof WitherSkeletonEntity
-                            || monster instanceof StrayEntity
-                            || monster instanceof ZombieEntity
-                            || monster instanceof PiglinEntity
-                            || monster instanceof PiglinBruteEntity) && source.nextFloat() < ServerConfig.dressedMobsSpawnRate.get()) {
+            RandomSource source = world.getRandom();
+            if (entity instanceof Monster monster &&
+                    (monster instanceof Skeleton
+                            || monster instanceof WitherSkeleton
+                            || monster instanceof Stray
+                            || monster instanceof Zombie
+                            || monster instanceof Piglin
+                            || monster instanceof PiglinBrute) && source.nextFloat() < ServerConfig.dressedMobsSpawnRate.get()) {
 
-                int set = source.nextBetweenExclusive(0, ArmorSets.values().length);
+                int set = source.nextInt(0, ArmorSets.values().length);
 
                 List<ItemStack> armor = makeSet(source, ArmorSets.values()[set]);
 
-                monster.equipStack(EquipmentSlot.HEAD, armor.get(0));
-                monster.equipStack(EquipmentSlot.CHEST, armor.get(1));
-                monster.equipStack(EquipmentSlot.LEGS, armor.get(2));
-                monster.equipStack(EquipmentSlot.FEET, armor.get(3));
+                monster.setItemSlot(EquipmentSlot.HEAD, armor.get(0));
+                monster.setItemSlot(EquipmentSlot.CHEST, armor.get(1));
+                monster.setItemSlot(EquipmentSlot.LEGS, armor.get(2));
+                monster.setItemSlot(EquipmentSlot.FEET, armor.get(3));
 
-                monster.setEquipmentDropChance(EquipmentSlot.HEAD, ServerConfig.dressedDropRate.get().floatValue());
-                monster.setEquipmentDropChance(EquipmentSlot.CHEST, ServerConfig.dressedDropRate.get().floatValue());
-                monster.setEquipmentDropChance(EquipmentSlot.LEGS, ServerConfig.dressedDropRate.get().floatValue());
-                monster.setEquipmentDropChance(EquipmentSlot.FEET, ServerConfig.dressedDropRate.get().floatValue());
+                monster.setDropChance(EquipmentSlot.HEAD, ServerConfig.dressedDropRate.get().floatValue());
+                monster.setDropChance(EquipmentSlot.CHEST, ServerConfig.dressedDropRate.get().floatValue());
+                monster.setDropChance(EquipmentSlot.LEGS, ServerConfig.dressedDropRate.get().floatValue());
+                monster.setDropChance(EquipmentSlot.FEET, ServerConfig.dressedDropRate.get().floatValue());
             }
         });
     }
 
-    public static List<ItemStack> makeSet(Random source, ArmorSets set) {
+    public static List<ItemStack> makeSet(RandomSource source, ArmorSets set) {
 
         ItemStack headSlot = new ItemStack(set.head);
         ItemStack chestSlot = new ItemStack(set.chest);
@@ -61,41 +61,41 @@ public class MobSpawnedEvent {
 
 
         //Pick a base color
-        int base = source.nextBetweenExclusive(1, 15);
+        int base = source.nextInt(1, 15);
 
         //Pick an overlay color
         int overlay = 0;
 
 
         if (ArmorSets.isQuadColor(set)) {
-            int base2 = source.nextBetweenExclusive(0, 15);
-            int overlay2 = source.nextFloat() < 0.25f ? source.nextBetweenExclusive(0, 15) : -1;
+            int base2 = source.nextInt(0, 15);
+            int overlay2 = source.nextFloat() < 0.25f ? source.nextInt(0, 15) : -1;
 
             headSlot = dyePiece(headSlot, base, overlay, base2, overlay2);
-            headSlot.getOrCreateNbt().putBoolean("HasPrimaryOverlay", true);
-            headSlot.getOrCreateNbt().putBoolean("HasSecondaryOverlay", overlay2 != -1);
+            headSlot.getOrCreateTag().putBoolean("HasPrimaryOverlay", true);
+            headSlot.getOrCreateTag().putBoolean("HasSecondaryOverlay", overlay2 != -1);
 
             chestSlot = dyePiece(chestSlot, base, overlay, base2, overlay2);
-            chestSlot.getOrCreateNbt().putBoolean("HasPrimaryOverlay", true);
-            chestSlot.getOrCreateNbt().putBoolean("HasSecondaryOverlay", true);
+            chestSlot.getOrCreateTag().putBoolean("HasPrimaryOverlay", true);
+            chestSlot.getOrCreateTag().putBoolean("HasSecondaryOverlay", true);
 
             feetSlot = new ItemStack(ItemRegister.SHOES.get());
             feetSlot = dyePiece(feetSlot, base, overlay);
-            feetSlot.getOrCreateNbt().putBoolean("HasOverlay", true);
+            feetSlot.getOrCreateTag().putBoolean("HasOverlay", true);
         } else {
             headSlot = dyePiece(headSlot, base, overlay);
-            headSlot.getOrCreateNbt().putBoolean("HasOverlay", true);
+            headSlot.getOrCreateTag().putBoolean("HasOverlay", true);
 
             chestSlot = dyePiece(chestSlot, base, overlay);
-            chestSlot.getOrCreateNbt().putBoolean("HasOverlay", true);
+            chestSlot.getOrCreateTag().putBoolean("HasOverlay", true);
             if (set.equals(ArmorSets.Maid)) {
                 feetSlot = new ItemStack(ItemRegister.SHOES.get());
                 feetSlot = dyePiece(feetSlot, base, overlay);
-                feetSlot.getOrCreateNbt().putBoolean("HasOverlay", true);
+                feetSlot.getOrCreateTag().putBoolean("HasOverlay", true);
             }
         }
         legSlot = dyePiece(legSlot, base, overlay);
-        legSlot.getOrCreateNbt().putInt("Decoration", source.nextBetweenExclusive(0, 5));
+        legSlot.getOrCreateTag().putInt("Decoration", source.nextInt(0, 5));
 
         return List.of(headSlot, chestSlot, legSlot, feetSlot);
     }

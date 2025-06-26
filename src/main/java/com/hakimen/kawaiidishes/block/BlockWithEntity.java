@@ -1,20 +1,20 @@
 package com.hakimen.kawaiidishes.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockWithEntity extends Block implements BlockEntityProvider {
-    public BlockWithEntity(Settings pProperties) {
+public class BlockWithEntity extends Block implements EntityBlock {
+    public BlockWithEntity(Properties pProperties) {
         super(pProperties);
     }
 
     @Nullable
     @Override
-    public BlockEntity createBlockEntity(BlockPos pPos, BlockState pState) {
+    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return null;
     }
 

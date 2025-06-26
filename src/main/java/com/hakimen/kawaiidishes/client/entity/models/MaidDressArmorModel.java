@@ -1,11 +1,11 @@
 package com.hakimen.kawaiidishes.client.entity.models;
 
 import com.hakimen.kawaiidishes.item.armor.MaidDressArmorItem;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 public class MaidDressArmorModel extends GeoArmorModel<MaidDressArmorItem>{
 
-    public MaidDressArmorModel(Identifier modelLocation, Identifier textureLocation, Identifier animationLocation) {
+    public MaidDressArmorModel(ResourceLocation modelLocation, ResourceLocation textureLocation, ResourceLocation animationLocation) {
         super(modelLocation, textureLocation, animationLocation);
     }
 

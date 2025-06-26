@@ -3,29 +3,28 @@ package com.hakimen.kawaiidishes.containers;
 import com.hakimen.kawaiidishes.block_entities.IceCreamMakerBlockEntity;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
 import com.hakimen.kawaiidishes.registry.ContainerRegister;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.ArrayPropertyDelegate;
-import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.screen.slot.Slot;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
-public class IceCreamMakerContainer extends ScreenHandler {
+public class IceCreamMakerContainer extends AbstractContainerMenu {
     public final IceCreamMakerBlockEntity blockEntity;
-    private final PlayerInventory playerInventory;
-    private final PropertyDelegate data;
+    private final Inventory playerInventory;
+    private final ContainerData data;
 
-    public IceCreamMakerContainer(int pContainerId, PlayerInventory inv, PacketByteBuf extraData) {
-        this(pContainerId, inv, inv.player.getWorld().getBlockEntity(extraData.readBlockPos()), new ArrayPropertyDelegate(2));
+    public IceCreamMakerContainer(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
+        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
-    public IceCreamMakerContainer(int windowId, PlayerInventory inv, BlockEntity entity, PropertyDelegate data) {
+    public IceCreamMakerContainer(int windowId, Inventory inv, BlockEntity entity, ContainerData data) {
 
         super(ContainerRegister.ICE_CREAM_MAKER.get(),windowId);
         this.data = data;
@@ -40,12 +39,12 @@ public class IceCreamMakerContainer extends ScreenHandler {
         addSlot(new IceCreamMakerSlot(blockEntity.getInventory(), 5, 114, 54));
         layoutPlayerInventorySlots(8,86);
 
-        addProperties(data);
+        addDataSlots(data);
     }
 
 
 
-    private int addSlotRange(Inventory handler, int index, int x, int y, int amount, int dx) {
+    private int addSlotRange(Container handler, int index, int x, int y, int amount, int dx) {
         for (int i = 0 ; i < amount ; i++) {
             addSlot(new Slot(handler, index, x, y));
             x += dx;
@@ -54,7 +53,7 @@ public class IceCreamMakerContainer extends ScreenHandler {
         return index;
     }
 
-    private int addSlotBox(Inventory handler, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
+    private int addSlotBox(Container handler, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
         for (int j = 0 ; j < verAmount ; j++) {
             index = addSlotRange(handler, index, x, y, horAmount, dx);
             y += dy;
@@ -72,33 +71,33 @@ public class IceCreamMakerContainer extends ScreenHandler {
     }
 
     @Override
-    public ItemStack quickMove( PlayerEntity player, int index )
+    public ItemStack quickMoveStack( Player player, int index )
     {
         ItemStack stack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasStack()) {
-            ItemStack stack1 = slot.getStack();
+        if (slot != null && slot.hasItem()) {
+            ItemStack stack1 = slot.getItem();
             stack = stack1.copy();
-            if (index < 6 && !this.insertItem(stack1,  6, this.slots.size(), true)) {
+            if (index < 6 && !this.moveItemStackTo(stack1,  6, this.slots.size(), true)) {
                 return ItemStack.EMPTY;
             }
-            if (!this.insertItem(stack1, 0,  6, false)) {
+            if (!this.moveItemStackTo(stack1, 0,  6, false)) {
                 return ItemStack.EMPTY;
             }
             if (stack1.isEmpty()) {
-                slot.canInsert(ItemStack.EMPTY);
+                slot.mayPlace(ItemStack.EMPTY);
             }
             if (stack1.getCount() == stack.getCount()) {
                 return ItemStack.EMPTY;
             } else {
-                slot.markDirty();
+                slot.setChanged();
             }
         }
         return stack;
     }
 
     @Override
-    public boolean canUse(PlayerEntity player) {
+    public boolean stillValid(Player player) {
         return true;
     }
 
@@ -114,24 +113,24 @@ public class IceCreamMakerContainer extends ScreenHandler {
         return blockEntity;
     }
 
-    public PlayerInventory getPlayerInventory() {
+    public Inventory getPlayerInventory() {
         return playerInventory;
     }
 
-    public PropertyDelegate getData() {
+    public ContainerData getData() {
         return data;
     }
 
 
     class IceCreamMakerSlot extends Slot {
 
-        public IceCreamMakerSlot(Inventory container, int i, int j, int k) {
+        public IceCreamMakerSlot(Container container, int i, int j, int k) {
             super(container, i, j, k);
         }
 
         @Override
-        public boolean canInsert(ItemStack itemStack) {
-            return id != 0 || itemStack.getItem() == Items.SNOWBALL;
+        public boolean mayPlace(ItemStack itemStack) {
+            return index != 0 || itemStack.getItem() == Items.SNOWBALL;
         }
     }
 }

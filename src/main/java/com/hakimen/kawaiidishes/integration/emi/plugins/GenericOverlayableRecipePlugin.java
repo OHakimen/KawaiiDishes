@@ -5,21 +5,20 @@ import com.hakimen.kawaiidishes.registry.ItemRegister;
 import dev.emi.emi.api.recipe.EmiCraftingRecipe;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
-import net.minecraft.item.DyeItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.*;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.util.DyeColor;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GenericOverlayableRecipePlugin extends EmiCraftingRecipe {
 
-    public GenericOverlayableRecipePlugin(ItemStack item, ItemStack output, Identifier id) {
+    public GenericOverlayableRecipePlugin(ItemStack item, ItemStack output, ResourceLocation id) {
         super(new ArrayList<>(), EmiStack.of(output), id);
 
         List<Item> usesWoolAsOverlay = List.of(
@@ -37,39 +36,39 @@ public class GenericOverlayableRecipePlugin extends EmiCraftingRecipe {
             var stacc = item.copy();
             stacc = IDyeableItem.dyeBase(stacc, List.of(DyeItem.byColor(DyeColor.BLACK)));
 
-            NbtList list = new NbtList();
+            ListTag list = new ListTag();
 
-            list.add(NbtString.of("\"This is an example!\""));
+            list.add(StringTag.valueOf("\"This is an example!\""));
 
-            NbtCompound compound = new NbtCompound();
+            CompoundTag compound = new CompoundTag();
             compound.put("Lore",list);
 
-            stacc.getOrCreateNbt().put("display", compound);
+            stacc.getOrCreateTag().put("display", compound);
 
             this.input.addAll(List.of(
-                    EmiIngredient.of(Ingredient.ofStacks(stacc)),
+                    EmiIngredient.of(Ingredient.of(stacc)),
                     EmiIngredient.of(ItemTags.WOOL),
                     EmiIngredient.of(ItemTags.WOOL)
             ));
         }
     }
 
-    public GenericOverlayableRecipePlugin(ItemStack item, Ingredient overlayItem, ItemStack output, Identifier id) {
+    public GenericOverlayableRecipePlugin(ItemStack item, Ingredient overlayItem, ItemStack output, ResourceLocation id) {
         super(new ArrayList<>(), EmiStack.of(output), id);
         var stacc = item.copy();
         stacc = IDyeableItem.dyeBase(stacc, List.of(DyeItem.byColor(DyeColor.BLACK)));
 
-        NbtList list = new NbtList();
+        ListTag list = new ListTag();
 
-        list.add(NbtString.of("\"This is an example!\""));
+        list.add(StringTag.valueOf("\"This is an example!\""));
 
-        NbtCompound compound = new NbtCompound();
+        CompoundTag compound = new CompoundTag();
         compound.put("Lore",list);
 
-        stacc.getOrCreateNbt().put("display", compound);
+        stacc.getOrCreateTag().put("display", compound);
 
         this.input.addAll(List.of(
-                EmiIngredient.of(Ingredient.ofStacks(stacc)),
+                EmiIngredient.of(Ingredient.of(stacc)),
                 EmiIngredient.of(overlayItem)
         ));
     }

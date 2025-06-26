@@ -11,13 +11,13 @@ import software.bernie.geckolib.model.GeoModel;
 
 import java.util.HashMap;
 import java.util.function.Supplier;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 public class HeadBandsWithEarsUtils {
     static HashMap<AnimalType, GeoModel> earedHeadBandsModels = new HashMap<>();
-    static HashMap<AnimalType, Identifier> earedHeadBandsEarsOverlay = new HashMap<>();
-    static HashMap<AnimalType, Identifier> earedHeadBandsEarsBase = new HashMap<>();
-    static HashMap<AnimalType, Identifier> earedHeadBandsEarsSkin = new HashMap<>();
+    static HashMap<AnimalType, ResourceLocation> earedHeadBandsEarsOverlay = new HashMap<>();
+    static HashMap<AnimalType, ResourceLocation> earedHeadBandsEarsBase = new HashMap<>();
+    static HashMap<AnimalType, ResourceLocation> earedHeadBandsEarsSkin = new HashMap<>();
     static HashMap<AnimalType, IAnimationPredicate<HeadBandWithEarsArmorItem>> earedHeadBandsAnimations = new HashMap<>();
 
     static HashMap<AnimalType, Supplier<HeadBandWithEarsArmorItem>> earedHeadBandsItems = new HashMap<>();
@@ -27,11 +27,11 @@ public class HeadBandsWithEarsUtils {
         return earedHeadBandsModels;
     }
 
-    public static HashMap<AnimalType, Identifier> getEaredHeadBandsEarsOverlay() {
+    public static HashMap<AnimalType, ResourceLocation> getEaredHeadBandsEarsOverlay() {
         return earedHeadBandsEarsOverlay;
     }
 
-    public static HashMap<AnimalType, Identifier> getEaredHeadBandsEarsBase() {
+    public static HashMap<AnimalType, ResourceLocation> getEaredHeadBandsEarsBase() {
         return earedHeadBandsEarsBase;
     }
 
@@ -39,7 +39,7 @@ public class HeadBandsWithEarsUtils {
         return earedHeadBandsAnimations;
     }
 
-    public static HashMap<AnimalType, Identifier> getEaredHeadBandsEarsSkin() {
+    public static HashMap<AnimalType, ResourceLocation> getEaredHeadBandsEarsSkin() {
         return earedHeadBandsEarsSkin;
     }
 
@@ -54,14 +54,14 @@ public class HeadBandsWithEarsUtils {
         String typeName = type.name().toLowerCase();
 
         earedHeadBandsModels.put(type, new HeadBandsWithEarsModel(
-                new Identifier(KawaiiDishes.MODID, "geo/head_bands_with_ears/head_band_%s_ears.geo.json".formatted(typeName)),
-                new Identifier(KawaiiDishes.MODID, "textures/models/armor/head_bands_with_ears/head_bands/%s/head_band.png".formatted(typeName)),
-                new Identifier(KawaiiDishes.MODID, "animations/ears/%s_ears.animation.json".formatted(typeName))
+                new ResourceLocation(KawaiiDishes.MODID, "geo/head_bands_with_ears/head_band_%s_ears.geo.json".formatted(typeName)),
+                new ResourceLocation(KawaiiDishes.MODID, "textures/models/armor/head_bands_with_ears/head_bands/%s/head_band.png".formatted(typeName)),
+                new ResourceLocation(KawaiiDishes.MODID, "animations/ears/%s_ears.animation.json".formatted(typeName))
         ));
 
-        earedHeadBandsEarsBase.put(type, new Identifier(KawaiiDishes.MODID, "textures/models/armor/head_bands_with_ears/ears_base/%s_ears.png".formatted(typeName)));
-        earedHeadBandsEarsOverlay.put(type, new Identifier(KawaiiDishes.MODID, "textures/models/armor/head_bands_with_ears/ears_overlays/%s_ears.png".formatted(typeName)));
-        earedHeadBandsEarsSkin.put(type, new Identifier(KawaiiDishes.MODID, "textures/models/armor/head_bands_with_ears/ears_skin/%s_ears.png".formatted(typeName)));
+        earedHeadBandsEarsBase.put(type, new ResourceLocation(KawaiiDishes.MODID, "textures/models/armor/head_bands_with_ears/ears_base/%s_ears.png".formatted(typeName)));
+        earedHeadBandsEarsOverlay.put(type, new ResourceLocation(KawaiiDishes.MODID, "textures/models/armor/head_bands_with_ears/ears_overlays/%s_ears.png".formatted(typeName)));
+        earedHeadBandsEarsSkin.put(type, new ResourceLocation(KawaiiDishes.MODID, "textures/models/armor/head_bands_with_ears/ears_skin/%s_ears.png".formatted(typeName)));
 
         earedHeadBandsAnimations.put(type, state);
     }

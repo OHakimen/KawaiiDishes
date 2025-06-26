@@ -4,12 +4,12 @@ import com.hakimen.kawaiidishes.enchantments.BunnyHasteEnchantment;
 import com.hakimen.kawaiidishes.enchantments.CatAuraEnchant;
 import com.hakimen.kawaiidishes.enchantments.FoxAptitudeEnchant;
 import com.hakimen.kawaiidishes.registry.EnchantmentRegister;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class ArmorUtils {
-    public static void applyEnchantmentEffects(ItemStack stack, World level, PlayerEntity player){
+    public static void applyEnchantmentEffects(ItemStack stack, Level level, Player player){
         if(EnchantUtils.hasEnchant(stack, EnchantmentRegister.CAT_AURA.get())){
             CatAuraEnchant.applySelf(stack,level,player);
         }

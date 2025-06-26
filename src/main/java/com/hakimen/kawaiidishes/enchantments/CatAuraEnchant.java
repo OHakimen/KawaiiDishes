@@ -11,31 +11,31 @@ import com.hakimen.kawaiidishes.utils.AnimalType;
 import com.hakimen.kawaiidishes.utils.item.EnchantUtils;
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.PhantomEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.Box;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Phantom;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 
 public class CatAuraEnchant extends Enchantment {
     public CatAuraEnchant() {
-        super(Rarity.RARE, EnchantmentTarget.ARMOR, new EquipmentSlot[]{
+        super(Rarity.RARE, EnchantmentCategory.ARMOR, new EquipmentSlot[]{
                 EquipmentSlot.CHEST,
                 EquipmentSlot.HEAD
         });
 
     }
 
-    public static void applySelf(ItemStack stack, World level, PlayerEntity player) {
+    public static void applySelf(ItemStack stack, Level level, Player player) {
 
-        ItemStack headItem = player.getEquippedStack(EquipmentSlot.HEAD);
-        ItemStack chestItem = player.getEquippedStack(EquipmentSlot.CHEST);
+        ItemStack headItem = player.getItemBySlot(EquipmentSlot.HEAD);
+        ItemStack chestItem = player.getItemBySlot(EquipmentSlot.CHEST);
 
         boolean isHeadItemValid =
                 (headItem.getItem() instanceof HeadBandWithEarsArmorItem headBandWithEarsArmorItem && headBandWithEarsArmorItem.getEarsType().equals(AnimalType.CAT)) ||
@@ -50,14 +50,14 @@ public class CatAuraEnchant extends Enchantment {
             List<LivingEntity> toKnockback = new ArrayList<>();
 
             //Get creepers TODO: config again
-            toKnockback.addAll(level.getEntitiesByType(EntityType.CREEPER, new Box(player.getSteppingPos()).expand(ServerConfig.catsAuraAmplifier.get() * amp), (creeper -> true)));
+            toKnockback.addAll(level.getEntities(EntityType.CREEPER, new AABB(player.getOnPos()).inflate(ServerConfig.catsAuraAmplifier.get() * amp), (creeper -> true)));
 
             //Get Phantoms TODO: config again
-            toKnockback.addAll(level.getEntitiesByType(EntityType.PHANTOM, new Box(player.getSteppingPos()).expand(ServerConfig.catsAuraAmplifier.get() * amp), (phantom -> true)));
+            toKnockback.addAll(level.getEntities(EntityType.PHANTOM, new AABB(player.getOnPos()).inflate(ServerConfig.catsAuraAmplifier.get() * amp), (phantom -> true)));
 
             toKnockback.forEach(mob -> {
-                mob.takeKnockback(
-                        mob instanceof PhantomEntity ? 0.4f : 0.25f,
+                mob.knockback(
+                        mob instanceof Phantom ? 0.4f : 0.25f,
                         (player.getX() - mob.getX()),
                         (player.getZ() - mob.getZ())
                 );
@@ -66,7 +66,7 @@ public class CatAuraEnchant extends Enchantment {
     }
 
     @Override
-    public boolean isAcceptableItem(ItemStack stack) {
+    public boolean canEnchant(ItemStack stack) {
         Item item = stack.getItem();
 
         // Check for cat tails
@@ -83,12 +83,12 @@ public class CatAuraEnchant extends Enchantment {
             return earsArmorItem.getEarsType().equals(AnimalType.CAT);
         }
 
-        return super.isAcceptableItem(stack);
+        return super.canEnchant(stack);
     }
 
     @Override
-    protected boolean canAccept(Enchantment enchantment) {
-        return super.canAccept(enchantment);
+    protected boolean checkCompatibility(Enchantment enchantment) {
+        return super.checkCompatibility(enchantment);
     }
 
     @Override

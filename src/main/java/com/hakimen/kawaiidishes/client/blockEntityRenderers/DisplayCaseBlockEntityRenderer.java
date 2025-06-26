@@ -3,33 +3,33 @@ package com.hakimen.kawaiidishes.client.blockEntityRenderers;
 import com.hakimen.kawaiidishes.block.DirectionalBlockWithEntity;
 import com.hakimen.kawaiidishes.block_entities.DisplayCaseBlockEntity;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.block.entity.BlockEntityRenderer;
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
-import net.minecraft.client.render.item.ItemRenderer;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.Direction;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import org.joml.Quaternionf;
 
 public class DisplayCaseBlockEntityRenderer implements BlockEntityRenderer<DisplayCaseBlockEntity> {
-    BlockEntityRendererFactory.Context context;
-    public DisplayCaseBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
+    BlockEntityRendererProvider.Context context;
+    public DisplayCaseBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
         this.context = context;
     }
 
     @Override
-    public void render(DisplayCaseBlockEntity pBlockEntity, float pPartialTick, MatrixStack pPoseStack, VertexConsumerProvider pBufferSource, int pPackedLight, int pPackedOverlay) {
-        ItemRenderer renderer = MinecraftClient.getInstance().getItemRenderer();
-        int slots = pBlockEntity.getInventory().size();
+    public void render(DisplayCaseBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
+        ItemRenderer renderer = Minecraft.getInstance().getItemRenderer();
+        int slots = pBlockEntity.getInventory().getContainerSize();
         for (int i = 0; i < slots; i++) {
-            pPoseStack.push();
-            ItemStack stack = pBlockEntity.getInventory().getStack(i);
+            pPoseStack.pushPose();
+            ItemStack stack = pBlockEntity.getInventory().getItem(i);
             if(!stack.equals(ItemStack.EMPTY)){
-                int renderCount = stack.getMaxCount() == 1 ? 1 : stack.getCount() / (stack.getMaxCount() / 4) + 1;
+                int renderCount = stack.getMaxStackSize() == 1 ? 1 : stack.getCount() / (stack.getMaxStackSize() / 4) + 1;
                 int x,y;
 
 
@@ -37,36 +37,36 @@ public class DisplayCaseBlockEntityRenderer implements BlockEntityRenderer<Displ
                 y = (i % 4) / 2;
 
                 pPoseStack.scale(0.35f,0.35f,0.35f);
-                BlockState state = pBlockEntity.getWorld().getBlockState(pBlockEntity.getPos());
+                BlockState state = pBlockEntity.getLevel().getBlockState(pBlockEntity.getBlockPos());
 
-                switch ((state.getBlock().equals(BlockRegister.DISPLAY_CASE.get()) ? state.get(DirectionalBlockWithEntity.FACING) : Direction.UP)){
+                switch ((state.getBlock().equals(BlockRegister.DISPLAY_CASE.get()) ? state.getValue(DirectionalBlockWithEntity.FACING) : Direction.UP)){
                     case NORTH ->  {
                         pPoseStack.translate(1 + x,  (i >= 4 ? 0.5 : 1.85f), 1 + y);
                     }
                     case SOUTH -> {
-                        pPoseStack.multiply(new Quaternionf().rotateXYZ(0,(float)(Math.toRadians(180)), 0),0,0,0);
+                        pPoseStack.rotateAround(new Quaternionf().rotateXYZ(0,(float)(Math.toRadians(180)), 0),0,0,0);
                         pPoseStack.translate(x - 2,  (i >= 4 ? 0.5 : 1.85f),  y - 2);
                     }
                     case EAST -> {
-                        pPoseStack.multiply(new Quaternionf().rotateXYZ(0,(float)(Math.toRadians(270)), 0),0,0,0);
+                        pPoseStack.rotateAround(new Quaternionf().rotateXYZ(0,(float)(Math.toRadians(270)), 0),0,0,0);
                         pPoseStack.translate(x + 1,  (i >= 4 ? 0.5 : 1.85f),  y - 2);
                     }
 
                     case WEST -> {
-                        pPoseStack.multiply(new Quaternionf().rotateXYZ(0,(float)(Math.toRadians(90)), 0),0,0,0);
+                        pPoseStack.rotateAround(new Quaternionf().rotateXYZ(0,(float)(Math.toRadians(90)), 0),0,0,0);
                         pPoseStack.translate(x - 2,  (i >= 4 ? 0.5 : 1.85f),  y + 1);
                     }
                 }
-                pPoseStack.multiply(new Quaternionf().rotateXYZ((float)Math.PI/2.5f,0,0),0,0,0);
+                pPoseStack.rotateAround(new Quaternionf().rotateXYZ((float)Math.PI/2.5f,0,0),0,0,0);
                 for (int j = 0; j < renderCount; j++) {
-                    pPoseStack.multiply(new Quaternionf().rotateXYZ(0,0, (float)(Math.sin(j + (x + y))/4f)),0,0,0);
-                    renderer.renderItem(null,
+                    pPoseStack.rotateAround(new Quaternionf().rotateXYZ(0,0, (float)(Math.sin(j + (x + y))/4f)),0,0,0);
+                    renderer.renderStatic(null,
                             stack,
-                            ModelTransformationMode.FIXED,
+                            ItemDisplayContext.FIXED,
                             false,
                             pPoseStack,
                             pBufferSource,
-                            MinecraftClient.getInstance().world,
+                            Minecraft.getInstance().level,
                             pPackedLight,
                             pPackedOverlay,
                             0);
@@ -74,7 +74,7 @@ public class DisplayCaseBlockEntityRenderer implements BlockEntityRenderer<Displ
                 }
             }
 
-            pPoseStack.pop();
+            pPoseStack.popPose();
         }
     }
 }

@@ -6,116 +6,116 @@ import com.hakimen.kawaiidishes.registry.ContainerRegister;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.fabricmc.fabric.mixin.screenhandler.NamedScreenHandlerFactoryMixin;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.state.StateManager;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class CoffeeMachineBlock extends DirectionalBlockWithEntity{
     public CoffeeMachineBlock() {
-        super(Settings.copy(Blocks.DIRT)
+        super(Properties.copy(Blocks.DIRT)
                 .strength(1.0F, 6.0F)
-                .sounds(BlockSoundGroup.METAL)
-                .requiresTool());
+                .sound(SoundType.METAL)
+                .requiresCorrectToolForDrops());
 
-        setDefaultState( getStateManager().getDefaultState()
-                .with(FACING, Direction.NORTH));
+        registerDefaultState( getStateDefinition().any()
+                .setValue(FACING, Direction.NORTH));
 
     }
 
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClient ? null
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+        return pLevel.isClientSide ? null
                 : (level, pos, state, blockEntity) -> ((CoffeeMachineBlockEntity) blockEntity).tick(level,pos,state,(CoffeeMachineBlockEntity)blockEntity);
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState pState, BlockView pLevel, BlockPos pPos, ShapeContext pContext) {
+    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
 
-        VoxelShape box = Block.createCuboidShape(0,0,0,16,16,16);
+        VoxelShape box = Block.box(0,0,0,16,16,16);
 
-        switch (pState.get(FACING)){
-            case SOUTH -> box = Block.createCuboidShape(2,0,0,14,16,15);
-            case NORTH -> box = Block.createCuboidShape(2,0,1,14,16,16);
-            case EAST -> box = Block.createCuboidShape(0,0,2,15,16,14);
-            case WEST -> box = Block.createCuboidShape(1,0,2,16,16,14);
+        switch (pState.getValue(FACING)){
+            case SOUTH -> box = Block.box(2,0,0,14,16,15);
+            case NORTH -> box = Block.box(2,0,1,14,16,16);
+            case EAST -> box = Block.box(0,0,2,15,16,14);
+            case WEST -> box = Block.box(1,0,2,16,16,14);
         }
         return box;
     }
 
-    protected void appendProperties(StateManager.Builder<Block, BlockState> properties )
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> properties )
     {
         properties.add( FACING );
     }
 
     @Override
     @Deprecated
-    public BlockState mirror( BlockState state, BlockMirror mirrorIn )
+    public BlockState mirror( BlockState state, Mirror mirrorIn )
     {
-        return state.rotate( mirrorIn.getRotation( state.get( FACING ) ) );
+        return state.rotate( mirrorIn.getRotation( state.getValue( FACING ) ) );
     }
 
     @Override
     @Deprecated
-    public BlockState rotate( BlockState state, BlockRotation rot )
+    public BlockState rotate( BlockState state, Rotation rot )
     {
-        return state.with( FACING, rot.rotate( state.get( FACING ) ) );
+        return state.setValue( FACING, rot.rotate( state.getValue( FACING ) ) );
     }
 
     @Override
-    public BlockState getPlacementState( ItemPlacementContext placement )
+    public BlockState getStateForPlacement( BlockPlaceContext placement )
     {
-        return getDefaultState().with( FACING, placement.getHorizontalPlayerFacing().getOpposite() );
+        return defaultBlockState().setValue( FACING, placement.getHorizontalDirection().getOpposite() );
     }
 
     @Override
-    public void onStateReplaced(BlockState pState, World pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (!pState.isOf(pNewState.getBlock())) {
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (!pState.is(pNewState.getBlock())) {
             BlockEntity blockentity = pLevel.getBlockEntity(pPos);
             if (blockentity instanceof CoffeeMachineBlockEntity coffeeMachine) {
-                for (int i = 0; i < coffeeMachine.getInventory().size(); i++) {
-                    dropStack(pLevel,pPos,coffeeMachine.getInventory().getStack(i));
+                for (int i = 0; i < coffeeMachine.getInventory().getContainerSize(); i++) {
+                    popResource(pLevel,pPos,coffeeMachine.getInventory().getItem(i));
                 }
             }
-            super.onStateReplaced(pState, pLevel, pPos, pNewState, pIsMoving);
+            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
         }
     }
 
     @Override
-    public ActionResult onUse(BlockState pState, World pLevel, BlockPos pPos, PlayerEntity pPlayer, Hand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClient()) {
+    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+        if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if(entity instanceof CoffeeMachineBlockEntity coffeeMachineBlockEntity) {
 
-                pPlayer.openHandledScreen(coffeeMachineBlockEntity);
+                pPlayer.openMenu(coffeeMachineBlockEntity);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }
         }
-        return ActionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
     @Override
-    public @Nullable BlockEntity createBlockEntity(BlockPos pPos, BlockState pState) {
+    public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new CoffeeMachineBlockEntity(pPos,pState);
     }
 }

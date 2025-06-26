@@ -6,40 +6,40 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffectUtil;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.FoodComponent;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffectUtil;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class CoffeeItem extends BlockItem {
 
-    StatusEffectInstance[] mobEffects;
-    public CoffeeItem(Block pBlock, int nutrition, float saturationMod, StatusEffectInstance... effects) {
-        super(pBlock, new Item.Settings().food(
-                ((Supplier<FoodComponent>) () -> {
-                    FoodComponent.Builder builder = new FoodComponent.Builder()
-                            .hunger(nutrition)
-                            .saturationModifier(saturationMod)
-                            .alwaysEdible();
+    MobEffectInstance[] mobEffects;
+    public CoffeeItem(Block pBlock, int nutrition, float saturationMod, MobEffectInstance... effects) {
+        super(pBlock, new Item.Properties().food(
+                ((Supplier<FoodProperties>) () -> {
+                    FoodProperties.Builder builder = new FoodProperties.Builder()
+                            .nutrition(nutrition)
+                            .saturationMod(saturationMod)
+                            .alwaysEat();
 
-                    for (StatusEffectInstance effect : effects) {
-                        builder.statusEffect(effect, 1f);
+                    for (MobEffectInstance effect : effects) {
+                        builder.effect(effect, 1f);
                     }
 
                     return builder.build();
@@ -48,55 +48,55 @@ public class CoffeeItem extends BlockItem {
         mobEffects = effects;
     }
     @Override
-    public void appendTooltip(ItemStack pStack, @Nullable World pLevel, List<Text> pComponents, TooltipContext pTooltipFlag) {
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pComponents, TooltipFlag pTooltipFlag) {
 
         if (!Arrays.asList(mobEffects).isEmpty()) {
             {
-                for (StatusEffectInstance mobeffectinstance : mobEffects) {
-                    MutableText mutablecomponent = Text.translatable(mobeffectinstance.getTranslationKey());
-                    StatusEffect mobeffect = mobeffectinstance.getEffectType();
+                for (MobEffectInstance mobeffectinstance : mobEffects) {
+                    MutableComponent mutablecomponent = Component.translatable(mobeffectinstance.getDescriptionId());
+                    MobEffect mobeffect = mobeffectinstance.getEffect();
 
                     if (mobeffectinstance.getAmplifier() > 0) {
-                        mutablecomponent = Text.translatable(
-                                "potion.withAmplifier", mutablecomponent, Text.translatable("potion.potency." + mobeffectinstance.getAmplifier())
+                        mutablecomponent = Component.translatable(
+                                "potion.withAmplifier", mutablecomponent, Component.translatable("potion.potency." + mobeffectinstance.getAmplifier())
                         );
                     }
 
-                    if (!mobeffectinstance.isDurationBelow(20)) {
-                        mutablecomponent = Text.translatable("potion.withDuration", mutablecomponent, StatusEffectUtil.getDurationText(mobeffectinstance, 1f));
+                    if (!mobeffectinstance.endsWithin(20)) {
+                        mutablecomponent = Component.translatable("potion.withDuration", mutablecomponent, MobEffectUtil.formatDuration(mobeffectinstance, 1f));
                     }
 
-                    pComponents.add(mutablecomponent.formatted(mobeffect.getCategory().getFormatting()));
+                    pComponents.add(mutablecomponent.withStyle(mobeffect.getCategory().getTooltipFormatting()));
                 }
             }
         }
-        super.appendTooltip(pStack, pLevel, pComponents, pTooltipFlag);
+        super.appendHoverText(pStack, pLevel, pComponents, pTooltipFlag);
     }
 
     @Override
-    public ItemStack finishUsing(ItemStack itemStack, World level, LivingEntity livingEntity) {
-        if (livingEntity instanceof PlayerEntity player) {
-            if(player.getInventory().containsAny(item -> item.isOf(ItemRegister.MUG.get()) && item.getCount() < item.getMaxCount()) || player.getInventory().getEmptySlot() != -1){
-                player.giveItemStack(ItemRegister.MUG.get().getDefaultStack());
-            }else if (player.getInventory().getEmptySlot() == -1) {
-                level.spawnEntity(new ItemEntity(level,
-                        player.getX() + 0.5 + MathHelper.nextDouble(level.random, -0.25, 0.25),
-                        player.getY() + 0.5 + MathHelper.nextDouble(level.random, -0.25, 0.25),
-                        player.getZ() + 0.5 + MathHelper.nextDouble(level.random, -0.25, 0.25),
-                        ItemRegister.MUG.get().getDefaultStack()));
+    public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity) {
+        if (livingEntity instanceof Player player) {
+            if(player.getInventory().hasAnyMatching(item -> item.is(ItemRegister.MUG.get()) && item.getCount() < item.getMaxStackSize()) || player.getInventory().getFreeSlot() != -1){
+                player.addItem(ItemRegister.MUG.get().getDefaultInstance());
+            }else if (player.getInventory().getFreeSlot() == -1) {
+                level.addFreshEntity(new ItemEntity(level,
+                        player.getX() + 0.5 + Mth.nextDouble(level.random, -0.25, 0.25),
+                        player.getY() + 0.5 + Mth.nextDouble(level.random, -0.25, 0.25),
+                        player.getZ() + 0.5 + Mth.nextDouble(level.random, -0.25, 0.25),
+                        ItemRegister.MUG.get().getDefaultInstance()));
             }
         }
 
-        return super.finishUsing(itemStack, level, livingEntity);
+        return super.finishUsingItem(itemStack, level, livingEntity);
     }
 
     @Override
-    public SoundEvent getEatSound() {
-        return SoundEvents.ENTITY_GENERIC_DRINK;
+    public SoundEvent getEatingSound() {
+        return SoundEvents.GENERIC_DRINK;
     }
 
     @Override
-    protected boolean canPlace(ItemPlacementContext blockPlaceContext, BlockState p_40612_) {
-        return blockPlaceContext.getPlayer().isInSneakingPose() && super.canPlace(blockPlaceContext, p_40612_);
+    protected boolean canPlace(BlockPlaceContext blockPlaceContext, BlockState p_40612_) {
+        return blockPlaceContext.getPlayer().isCrouching() && super.canPlace(blockPlaceContext, p_40612_);
     }
 }

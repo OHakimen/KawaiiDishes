@@ -14,16 +14,16 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import static com.hakimen.kawaiidishes.integration.emi.EMIPlugin.BLENDER_TEXTURE;
 import static com.hakimen.kawaiidishes.integration.emi.EMIPlugin.COFFEE_MACHINE_TEXTURE;
 
 public class BlenderRecipePlugin implements EmiRecipe {
 
-    private final Identifier id;
+    private final ResourceLocation id;
     private final List<EmiIngredient> input;
 
     private final EmiStack output;
@@ -33,8 +33,8 @@ public class BlenderRecipePlugin implements EmiRecipe {
 
         this.id = recipe.getId();
         List<EmiIngredient> ingredients = new ArrayList<>();
-        for (ItemStack recipeItem : recipe.getRecipeItems().get(0).getMatchingStacks()) {
-            ingredients.add(EmiIngredient.of(Ingredient.ofStacks(recipeItem)));
+        for (ItemStack recipeItem : recipe.getRecipeItems().get(0).getItems()) {
+            ingredients.add(EmiIngredient.of(Ingredient.of(recipeItem)));
         }
         this.input = ingredients;
 
@@ -48,7 +48,7 @@ public class BlenderRecipePlugin implements EmiRecipe {
     }
 
     @Override
-    public @Nullable Identifier getId() {
+    public @Nullable ResourceLocation getId() {
         return id;
     }
 

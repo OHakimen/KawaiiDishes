@@ -7,29 +7,29 @@ import com.hakimen.kawaiidishes.item.armor.TailArmorItem;
 import com.hakimen.kawaiidishes.registry.EnchantmentRegister;
 import com.hakimen.kawaiidishes.utils.AnimalType;
 import com.hakimen.kawaiidishes.utils.item.EnchantUtils;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.level.Level;
 
 public class FoxAptitudeEnchant extends Enchantment {
     public FoxAptitudeEnchant() {
-        super(Rarity.RARE, EnchantmentTarget.ARMOR, new EquipmentSlot[]{
+        super(Rarity.RARE, EnchantmentCategory.ARMOR, new EquipmentSlot[]{
                 EquipmentSlot.CHEST,
                 EquipmentSlot.HEAD
         });
 
     }
 
-    public static void applySelf(ItemStack stack, World level, PlayerEntity player) {
+    public static void applySelf(ItemStack stack, Level level, Player player) {
 
-        ItemStack headItem = player.getEquippedStack(EquipmentSlot.HEAD);
-        ItemStack chestItem = player.getEquippedStack(EquipmentSlot.CHEST);
+        ItemStack headItem = player.getItemBySlot(EquipmentSlot.HEAD);
+        ItemStack chestItem = player.getItemBySlot(EquipmentSlot.CHEST);
 
         boolean isHeadItemValid =
                 (headItem.getItem() instanceof HeadBandWithEarsArmorItem headBandWithEarsArmorItem && headBandWithEarsArmorItem.getEarsType().equals(AnimalType.FOX)) ||
@@ -42,17 +42,17 @@ public class FoxAptitudeEnchant extends Enchantment {
 
         if (isHeadItemValid && isChestItemValid) {
             if(level.isNight()){
-                player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 15*20));
+                player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 15*20));
             }
 
             if(player.isSprinting()) {
-                player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 15*20, amp-1, false, false,false));
+                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 15*20, amp-1, false, false,false));
             }
         }
     }
 
     @Override
-    public boolean isAcceptableItem(ItemStack stack) {
+    public boolean canEnchant(ItemStack stack) {
         Item item = stack.getItem();
 
         // Check for fox tails
@@ -69,16 +69,16 @@ public class FoxAptitudeEnchant extends Enchantment {
             return earsArmorItem.getEarsType().equals(AnimalType.FOX);
         }
 
-        return super.isAcceptableItem(stack);
+        return super.canEnchant(stack);
     }
 
     @Override
-    public int getMinPower(int lvl) {
+    public int getMinCost(int lvl) {
         return lvl * 10;
     }
 
     @Override
-    public int getMaxPower(int lvl) {
+    public int getMaxCost(int lvl) {
         return lvl * 15;
     }
 

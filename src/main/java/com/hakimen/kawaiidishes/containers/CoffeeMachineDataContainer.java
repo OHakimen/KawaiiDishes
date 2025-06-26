@@ -1,21 +1,21 @@
 package com.hakimen.kawaiidishes.containers;
 
 import com.hakimen.kawaiidishes.block_entities.CoffeeMachineBlockEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
-public record CoffeeMachineDataContainer(CoffeeMachineBlockEntity blockEntity) implements Inventory {
+public record CoffeeMachineDataContainer(CoffeeMachineBlockEntity blockEntity) implements Container {
 
     @Override
-    public int size() {
-        return blockEntity.getInventory().size();
+    public int getContainerSize() {
+        return blockEntity.getInventory().getContainerSize();
     }
 
     @Override
     public boolean isEmpty() {
-        for (int i = 0; i < blockEntity.getInventory().size(); i++) {
-            if (blockEntity.getInventory().getStack(i) != ItemStack.EMPTY) {
+        for (int i = 0; i < blockEntity.getInventory().getContainerSize(); i++) {
+            if (blockEntity.getInventory().getItem(i) != ItemStack.EMPTY) {
                 return false;
             }
         }
@@ -23,38 +23,38 @@ public record CoffeeMachineDataContainer(CoffeeMachineBlockEntity blockEntity) i
     }
 
     @Override
-    public ItemStack getStack(int idx) {
-        return blockEntity.getInventory().getStack(idx);
+    public ItemStack getItem(int idx) {
+        return blockEntity.getInventory().getItem(idx);
     }
 
     @Override
-    public ItemStack removeStack(int idx, int count) {
-        return blockEntity.getInventory().removeStack(idx, count);
+    public ItemStack removeItem(int idx, int count) {
+        return blockEntity.getInventory().removeItem(idx, count);
     }
 
     @Override
-    public ItemStack removeStack(int idx) {
-        return blockEntity.getInventory().removeStack(idx);
+    public ItemStack removeItemNoUpdate(int idx) {
+        return blockEntity.getInventory().removeItemNoUpdate(idx);
     }
 
     @Override
-    public void setStack(int idx, ItemStack stack) {
-        blockEntity.getInventory().setStack(idx, stack);
+    public void setItem(int idx, ItemStack stack) {
+        blockEntity.getInventory().setItem(idx, stack);
     }
 
     @Override
-    public void markDirty() {
-        blockEntity.markDirty();
+    public void setChanged() {
+        blockEntity.setChanged();
     }
 
     @Override
-    public boolean canPlayerUse(PlayerEntity pPlayer) {
+    public boolean stillValid(Player pPlayer) {
         return true;
     }
 
 
     @Override
-    public void clear() {
+    public void clearContent() {
 
     }
 }

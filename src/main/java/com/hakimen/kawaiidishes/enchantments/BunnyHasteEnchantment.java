@@ -7,29 +7,29 @@ import com.hakimen.kawaiidishes.item.armor.TailArmorItem;
 import com.hakimen.kawaiidishes.registry.EnchantmentRegister;
 import com.hakimen.kawaiidishes.utils.AnimalType;
 import com.hakimen.kawaiidishes.utils.item.EnchantUtils;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.level.Level;
 
 public class BunnyHasteEnchantment extends Enchantment {
     public BunnyHasteEnchantment() {
-        super(Rarity.RARE, EnchantmentTarget.ARMOR, new EquipmentSlot[]{
+        super(Rarity.RARE, EnchantmentCategory.ARMOR, new EquipmentSlot[]{
                 EquipmentSlot.CHEST,
                 EquipmentSlot.HEAD
         });
 
     }
 
-    public static void applySelf(ItemStack stack, World level, PlayerEntity player) {
+    public static void applySelf(ItemStack stack, Level level, Player player) {
 
-        ItemStack headItem = player.getEquippedStack(EquipmentSlot.HEAD);
-        ItemStack chestItem = player.getEquippedStack(EquipmentSlot.CHEST);
+        ItemStack headItem = player.getItemBySlot(EquipmentSlot.HEAD);
+        ItemStack chestItem = player.getItemBySlot(EquipmentSlot.CHEST);
 
         int amp = Math.round((EnchantUtils.getEnchantLevel(headItem, EnchantmentRegister.BUNNY_HASTE.get()) + EnchantUtils.getEnchantLevel(chestItem, EnchantmentRegister.BUNNY_HASTE.get()))/2f);
 
@@ -42,12 +42,12 @@ public class BunnyHasteEnchantment extends Enchantment {
                 (chestItem.getItem() instanceof TailArmorItem tailArmorItem && tailArmorItem.getTailType().equals(AnimalType.BUNNY));
 
         if (isHeadItemValid && isChestItemValid) {
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, 15*20, amp - 1));
+            player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 15*20, amp - 1));
         }
     }
 
     @Override
-    public boolean isAcceptableItem(ItemStack stack) {
+    public boolean canEnchant(ItemStack stack) {
         Item item = stack.getItem();
 
         // Check for fox tails
@@ -64,7 +64,7 @@ public class BunnyHasteEnchantment extends Enchantment {
             return earsArmorItem.getEarsType().equals(AnimalType.BUNNY);
         }
 
-        return super.isAcceptableItem(stack);
+        return super.canEnchant(stack);
     }
 
 

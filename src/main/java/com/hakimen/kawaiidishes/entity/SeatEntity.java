@@ -2,55 +2,55 @@ package com.hakimen.kawaiidishes.entity;
 
 import com.hakimen.kawaiidishes.registry.EntityRegister;
 import java.util.List;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MovementType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 public class SeatEntity extends Entity {
 
-    public SeatEntity(EntityType<?> entityTypeIn, World worldIn) {
+    public SeatEntity(EntityType<?> entityTypeIn, Level worldIn) {
         super(entityTypeIn, worldIn);
     }
-    public SeatEntity(World worldIn, BlockPos position) {
+    public SeatEntity(Level worldIn, BlockPos position) {
         super(EntityRegister.SEAT.get(), worldIn);
-        this.setPosition(position.getX() + 0.5D, position.getY() + 0D, position.getZ() + 0.5D);
+        this.setPos(position.getX() + 0.5D, position.getY() + 0D, position.getZ() + 0.5D);
     }
 
-    public static ActionResult sitDown(PlayerEntity player, World level, BlockPos position) {
+    public static InteractionResult sitDown(Player player, Level level, BlockPos position) {
 
-        List<SeatEntity> seats = level.getNonSpectatingEntities(SeatEntity.class,
-                new Box(position.getX(), position.getY(), position.getZ(),
+        List<SeatEntity> seats = level.getEntitiesOfClass(SeatEntity.class,
+                new AABB(position.getX(), position.getY(), position.getZ(),
                         position.getX() + 1.0, position.getY() + 1.0, position.getZ() + 1.0)
         );
         if(seats.isEmpty())
         {
             SeatEntity seat = new SeatEntity(level, position);
-            level.spawnEntity(seat);
+            level.addFreshEntity(seat);
             player.startRiding(seat, false);
         }
-        return ActionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
-    public boolean collidesWith(Entity entity) {
+    public boolean canCollideWith(Entity entity) {
         return false;
     }
 
     @Override
-    public double getMountedHeightOffset() {
+    public double getPassengersRidingOffset() {
         return 0.5f;
     }
 
 
     @Override
-    public float getTargetingMargin() {
+    public float getPickRadius() {
         return 0.0f;
     }
 
@@ -60,66 +60,66 @@ public class SeatEntity extends Entity {
     }
 
     @Override
-    public boolean canHit() {
+    public boolean isPickable() {
         return false;
     }
 
     @Override
-    public void move(MovementType typeIn, Vec3d pos) {
+    public void move(MoverType typeIn, Vec3 pos) {
 
     }
 
     @Override
-    public void onPlayerCollision(PlayerEntity entityIn) {
+    public void playerTouch(Player entityIn) {
 
     }
 
 
     @Override
-    protected void updatePassengerPosition(Entity pPassenger, PositionUpdater pCallback) {
-        super.updatePassengerPosition(pPassenger, pCallback);
+    protected void positionRider(Entity pPassenger, MoveFunction pCallback) {
+        super.positionRider(pPassenger, pCallback);
     }
 
     @Override
-    public void pushAwayFrom(Entity entityIn) {
+    public void push(Entity entityIn) {
 
     }
 
     @Override
     public void tick() {
         super.tick();
-        if(!this.getWorld().isClient)
+        if(!this.level().isClientSide)
         {
-            if(this.getPassengerList().isEmpty() || this.getWorld().isAir(this.getBlockPos()))
+            if(this.getPassengers().isEmpty() || this.level().isEmptyBlock(this.blockPosition()))
             {
                 this.remove(RemovalReason.DISCARDED);
-                this.getWorld().updateComparators(getBlockPos(), this.getWorld().getBlockState(getBlockPos()).getBlock());
+                this.level().updateNeighbourForOutputSignal(blockPosition(), this.level().getBlockState(blockPosition()).getBlock());
             }
         }
     }
 
     @Override
-    protected void writeCustomDataToNbt(NbtCompound compound) {
+    protected void addAdditionalSaveData(CompoundTag compound) {
 
     }
 
     @Override
-    protected boolean canStartRiding(Entity entityIn) {
-        return entityIn instanceof PlayerEntity;
+    protected boolean canRide(Entity entityIn) {
+        return entityIn instanceof Player;
     }
 
     @Override
-    protected void checkBlockCollision() {
-
-    }
-
-    @Override
-    protected void initDataTracker() {
+    protected void checkInsideBlocks() {
 
     }
 
     @Override
-    protected void readCustomDataFromNbt(NbtCompound compound) {
+    protected void defineSynchedData() {
+
+    }
+
+    @Override
+    protected void readAdditionalSaveData(CompoundTag compound) {
 
     }
 }

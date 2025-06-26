@@ -4,10 +4,10 @@ import com.hakimen.kawaiidishes.client.entity.models.layers.shoe_layers.ShoesOve
 import com.hakimen.kawaiidishes.client.entity.models.layers.shoe_layers.ShoesSolesLayer;
 import com.hakimen.kawaiidishes.item.armor.ShoesArmorItem;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.core.object.Color;
 import software.bernie.geckolib.model.GeoModel;
@@ -24,7 +24,7 @@ public class ShoesArmorRender extends GeoArmorItemRenderer<ShoesArmorItem> {
     }
 
     @Override
-    public void prepForRender(@Nullable Entity entity, ItemStack stack, @Nullable EquipmentSlot slot, @Nullable BipedEntityModel<?> baseModel) {
+    public void prepForRender(@Nullable Entity entity, ItemStack stack, @Nullable EquipmentSlot slot, @Nullable HumanoidModel<?> baseModel) {
         updateStack(stack);
 
         ((ShoesOverlayLayer)getRenderLayers().get(1)).updateStack(stack);

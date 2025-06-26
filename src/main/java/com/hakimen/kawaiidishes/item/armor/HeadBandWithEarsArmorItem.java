@@ -19,18 +19,18 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import net.minecraft.client.item.TooltipContext;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.ItemStack;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.world.World;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 
 import static com.hakimen.kawaiidishes.utils.item.ArmorUtils.applyEnchantmentEffects;
 
@@ -44,42 +44,42 @@ public class HeadBandWithEarsArmorItem extends GeoArmorItem implements IFourColo
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
 
-    public HeadBandWithEarsArmorItem(ArmorMaterial pMaterial, Type pType, Settings pProperties, AnimalType tailType) {
+    public HeadBandWithEarsArmorItem(ArmorMaterial pMaterial, Type pType, Properties pProperties, AnimalType tailType) {
         super(pMaterial, pType, pProperties);
         this.earsType = tailType;
     }
 
     @Override
-    public void appendTooltip(ItemStack pStack, @Nullable World pLevel, List<Text> pTooltipComponents, TooltipContext pIsAdvanced) {
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         if((hasPrimaryBaseColor(pStack) || hasPrimaryOverlayColor(pStack) || hasSecondaryBaseColor(pStack) || hasSecondaryOverlay(pStack)) && !pIsAdvanced.isAdvanced()){
-            pTooltipComponents.add(Text.translatable("item.dyed").fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
+            pTooltipComponents.add(Component.translatable("item.dyed").withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
         }else if((hasPrimaryBaseColor(pStack) || hasPrimaryOverlayColor(pStack) || hasSecondaryBaseColor(pStack) || hasSecondaryOverlay(pStack)) && !pIsAdvanced.isCreative()){
             if(hasPrimaryBaseColor(pStack)){
-                pTooltipComponents.add(Text.translatable("item.kawaiidishes.head_band_color", "0x"+Integer.toString(getPrimaryBaseColor(pStack),16).toUpperCase()).fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
+                pTooltipComponents.add(Component.translatable("item.kawaiidishes.head_band_color", "0x"+Integer.toString(getPrimaryBaseColor(pStack),16).toUpperCase()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
             }
             if(hasPrimaryOverlayColor(pStack)){
-                pTooltipComponents.add(Text.translatable("item.kawaiidishes.head_band_decoration_color", "0x"+Integer.toString(getPrimaryOverlayColor(pStack),16).toUpperCase()).fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
+                pTooltipComponents.add(Component.translatable("item.kawaiidishes.head_band_decoration_color", "0x"+Integer.toString(getPrimaryOverlayColor(pStack),16).toUpperCase()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
             }
             if(hasSecondaryBaseColor(pStack)){
-                pTooltipComponents.add(Text.translatable("item.kawaiidishes.ears_color", "0x"+Integer.toString(getSecondaryBaseColor(pStack),16).toUpperCase()).fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
+                pTooltipComponents.add(Component.translatable("item.kawaiidishes.ears_color", "0x"+Integer.toString(getSecondaryBaseColor(pStack),16).toUpperCase()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
             }
             if(hasSecondaryOverlay(pStack)){
-                pTooltipComponents.add(Text.translatable("item.kawaiidishes.ears_decoration_color", "0x"+Integer.toString(getSecondaryOverlayColor(pStack),16).toUpperCase()).fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
+                pTooltipComponents.add(Component.translatable("item.kawaiidishes.ears_decoration_color", "0x"+Integer.toString(getSecondaryOverlayColor(pStack),16).toUpperCase()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
             }
         }else{
 
-            pTooltipComponents.add(Text.translatable("item.kawaiidishes.dyeable").fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
+            pTooltipComponents.add(Component.translatable("item.kawaiidishes.dyeable").withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
         }
     }
 
     @Override
-    public boolean hasGlint(ItemStack p_41453_) {
+    public boolean isFoil(ItemStack p_41453_) {
         return false;
     }
 
     @Override
-    public void inventoryTick(ItemStack itemStack, World level, Entity entity, int slot, boolean bl) {
-        if(ItemUtils.isItemOnArmorSlot(slot) && entity instanceof PlayerEntity player){
+    public void inventoryTick(ItemStack itemStack, Level level, Entity entity, int slot, boolean bl) {
+        if(ItemUtils.isItemOnArmorSlot(slot) && entity instanceof Player player){
             applyEnchantmentEffects(itemStack, level, player);
         }
         super.inventoryTick(itemStack, level, entity, slot, bl);
@@ -91,9 +91,9 @@ public class HeadBandWithEarsArmorItem extends GeoArmorItem implements IFourColo
             private GeoArmorRenderer<?> renderer;
 
             @Override
-            public BipedEntityModel<LivingEntity> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, BipedEntityModel<LivingEntity> original) {
+            public HumanoidModel<LivingEntity> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<LivingEntity> original) {
                 if (this.renderer == null)
-                    this.renderer = new HeadBandsWithEarsRender(HeadBandsWithEarsUtils.getEaredHeadBandsModels().get(earsType), livingEntity.getEquippedStack(EquipmentSlot.HEAD));
+                    this.renderer = new HeadBandsWithEarsRender(HeadBandsWithEarsUtils.getEaredHeadBandsModels().get(earsType), livingEntity.getItemBySlot(EquipmentSlot.HEAD));
 
 
                 this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
@@ -113,12 +113,12 @@ public class HeadBandWithEarsArmorItem extends GeoArmorItem implements IFourColo
 
     @Override
     public boolean hasPrimaryOverlay(ItemStack stack) {
-        return stack.getOrCreateNbt().contains(hasPrimaryOverlay) && stack.getOrCreateNbt().getBoolean(hasPrimaryOverlay);
+        return stack.getOrCreateTag().contains(hasPrimaryOverlay) && stack.getOrCreateTag().getBoolean(hasPrimaryOverlay);
     }
 
     @Override
     public boolean hasSecondaryOverlay(ItemStack stack) {
-        return stack.getOrCreateNbt().contains(hasSecondaryOverlay) && stack.getOrCreateNbt().getBoolean(hasSecondaryOverlay);
+        return stack.getOrCreateTag().contains(hasSecondaryOverlay) && stack.getOrCreateTag().getBoolean(hasSecondaryOverlay);
     }
 
     @Override

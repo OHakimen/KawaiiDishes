@@ -2,39 +2,39 @@ package com.hakimen.kawaiidishes.client.screens;
 
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.containers.DisplayCaseContainer;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.ingame.HandledScreen;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 
-public class DisplayCaseScreen extends HandledScreen<DisplayCaseContainer> {
-    private final Identifier GUI = new Identifier(KawaiiDishes.MODID, "textures/gui/display_case_gui.png");
+public class DisplayCaseScreen extends AbstractContainerScreen<DisplayCaseContainer> {
+    private final ResourceLocation GUI = new ResourceLocation(KawaiiDishes.MODID, "textures/gui/display_case_gui.png");
 
 
-    public DisplayCaseScreen(DisplayCaseContainer container, PlayerInventory inv, Text name) {
+    public DisplayCaseScreen(DisplayCaseContainer container, Inventory inv, Component name) {
         super(container, inv, name);
     }
 
 
     @Override
-    protected void drawForeground(DrawContext guiGraphics, int pMouseX, int pMouseY) {
+    protected void renderLabels(GuiGraphics guiGraphics, int pMouseX, int pMouseY) {
 
-        guiGraphics.drawText(this.textRenderer, this.title, this.titleX, this.titleY - 1, 4210752, false);
-        guiGraphics.drawText(this.textRenderer, this.playerInventoryTitle, this.playerInventoryTitleX, this.playerInventoryTitleY + 2, 4210752, false);
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY - 1, 4210752, false);
+        guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY + 2, 4210752, false);
     }
 
-    public void render(DrawContext guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        this.drawBackground(guiGraphics,partialTicks,mouseX,mouseY);
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+        this.renderBg(guiGraphics,partialTicks,mouseX,mouseY);
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
-        this.drawMouseoverTooltip(guiGraphics, mouseX, mouseY);
+        this.renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
 
     @Override
-    protected void drawBackground(DrawContext guiGraphics, float partialTicks, int mouseX, int mouseY) {
-        int relX = (this.width - this.backgroundWidth) / 2;
-        int relY = (this.height - this.backgroundHeight) / 2;
-        guiGraphics.drawTexture(GUI, relX, relY, 0, 0, this.backgroundWidth, this.backgroundHeight + 2);
+    protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int mouseX, int mouseY) {
+        int relX = (this.width - this.imageWidth) / 2;
+        int relY = (this.height - this.imageHeight) / 2;
+        guiGraphics.blit(GUI, relX, relY, 0, 0, this.imageWidth, this.imageHeight + 2);
     }
 }

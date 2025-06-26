@@ -4,11 +4,11 @@ import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.client.entity.models.layers.maid_dress_layers.MaidDressOverlayLayer;
 import com.hakimen.kawaiidishes.item.armor.MaidDressArmorItem;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.core.object.Color;
 import software.bernie.geckolib.model.GeoModel;
@@ -28,15 +28,15 @@ public class MaidDressArmorRender extends GeoArmorItemRenderer<MaidDressArmorIte
         ((MaidDressOverlayLayer)getRenderLayers().get(0)).updateStack(stack);
     }
     @Override
-    public Identifier getTextureLocation(MaidDressArmorItem animatable) {
-        return new Identifier[]{
-                new Identifier(KawaiiDishes.MODID,"textures/models/armor/maid_dress/dress.png"),
-                new Identifier(KawaiiDishes.MODID,"textures/models/armor/maid_dress/maid_dress.png")
+    public ResourceLocation getTextureLocation(MaidDressArmorItem animatable) {
+        return new ResourceLocation[]{
+                new ResourceLocation(KawaiiDishes.MODID,"textures/models/armor/maid_dress/dress.png"),
+                new ResourceLocation(KawaiiDishes.MODID,"textures/models/armor/maid_dress/maid_dress.png")
         }[animatable.hasOverlay(stackData) ? 1 : 0];
     }
 
     @Override
-    public void prepForRender(@Nullable Entity entity, ItemStack stack, @Nullable EquipmentSlot slot, @Nullable BipedEntityModel<?> baseModel) {
+    public void prepForRender(@Nullable Entity entity, ItemStack stack, @Nullable EquipmentSlot slot, @Nullable HumanoidModel<?> baseModel) {
         updateStack(stack);
 
         ((MaidDressOverlayLayer)getRenderLayers().get(0)).updateStack(stack);

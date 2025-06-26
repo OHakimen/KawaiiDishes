@@ -1,8 +1,8 @@
 package com.hakimen.kawaiidishes.custom;
 
 import java.util.function.Supplier;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 
 public class Recorder<T>{
     private final String modId;
@@ -13,7 +13,7 @@ public class Recorder<T>{
     }
 
     public <X extends T> Supplier<X> register(String name, Supplier<X> object){
-        X temp = Registry.register(registry,new Identifier(modId, name), object.get());
+        X temp = Registry.register(registry,new ResourceLocation(modId, name), object.get());
         return () -> temp;
     }
 

@@ -1,33 +1,33 @@
 package com.hakimen.kawaiidishes.client.entity.models;
 
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.model.GeoModel;
 
 public class GeoArmorModel<T extends GeoAnimatable> extends GeoModel<T> {
 
-    Identifier modelLocation;
-    Identifier textureLocation;
-    Identifier animationLocation;
+    ResourceLocation modelLocation;
+    ResourceLocation textureLocation;
+    ResourceLocation animationLocation;
 
-    public GeoArmorModel(Identifier modelLocation, Identifier textureLocation, Identifier animationLocation) {
+    public GeoArmorModel(ResourceLocation modelLocation, ResourceLocation textureLocation, ResourceLocation animationLocation) {
         this.modelLocation = modelLocation;
         this.textureLocation = textureLocation;
         this.animationLocation = animationLocation;
     }
 
     @Override
-    public Identifier getModelResource(T animatable) {
+    public ResourceLocation getModelResource(T animatable) {
         return modelLocation;
     }
 
     @Override
-    public Identifier getTextureResource(T animatable) {
+    public ResourceLocation getTextureResource(T animatable) {
         return textureLocation;
     }
 
     @Override
-    public Identifier getAnimationResource(T animatable) {
+    public ResourceLocation getAnimationResource(T animatable) {
         return animationLocation;
     }
 }

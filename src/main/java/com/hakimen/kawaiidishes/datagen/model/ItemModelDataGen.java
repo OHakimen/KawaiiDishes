@@ -6,15 +6,15 @@ import com.hakimen.kawaiidishes.custom.Registries;
 import com.hakimen.kawaiidishes.custom.types.ThighHighDecoration;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import java.util.Map;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Models;
-import net.minecraft.data.client.TextureKey;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
+import net.minecraft.data.models.ItemModelGenerators;
+import net.minecraft.data.models.model.ModelTemplates;
+import net.minecraft.data.models.model.TextureSlot;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 
 public class ItemModelDataGen {
-    public static void gen(ItemModelGenerator itemGen){
+    public static void gen(ItemModelGenerators itemGen){
         generateThighHighs(itemGen);
 
         decorationItem(ItemRegister.BOW.get(), itemGen);
@@ -93,11 +93,11 @@ public class ItemModelDataGen {
 
     }
 
-    public static void decorationItem(Item item, ItemModelGenerator itemGen){
+    public static void decorationItem(Item item, ItemModelGenerators itemGen){
         itemWithPath(item, "thigh_highs/decorations/", itemGen);
     }
 
-    public static void generateThighHighs(ItemModelGenerator itemGen){
+    public static void generateThighHighs(ItemModelGenerators itemGen){
         JsonObject item = new JsonObject();
         item.addProperty("parent", "minecraft:item/generated");
 
@@ -112,7 +112,7 @@ public class ItemModelDataGen {
             JsonObject override = new JsonObject();
 
             JsonObject predicate = new JsonObject();
-            predicate.addProperty("kawaiidishes:decoration", (Registries.THIGH_HIGH_DECORATIONS.getRawId(decor) / (float) Registries.THIGH_HIGH_DECORATIONS.size()));
+            predicate.addProperty("kawaiidishes:decoration", (Registries.THIGH_HIGH_DECORATIONS.getId(decor) / (float) Registries.THIGH_HIGH_DECORATIONS.size()));
 
             override.add("predicate", predicate);
             override.addProperty("model", decor.getOverlayModel().toString());
@@ -122,69 +122,69 @@ public class ItemModelDataGen {
 
         item.add("overrides", overrides);
 
-        Identifier itemKey = net.minecraft.registry.Registries.ITEM.getId(ItemRegister.THIGH_HIGHS.get());
+        ResourceLocation itemKey = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(ItemRegister.THIGH_HIGHS.get());
         //This makes the thigh high model itself
-        itemGen.writer.accept(new Identifier(itemKey.getNamespace(), "item/" + itemKey.getPath()),() -> item);
+        itemGen.output.accept(new ResourceLocation(itemKey.getNamespace(), "item/" + itemKey.getPath()),() -> item);
     }
 
 
-    public static void drinkBlockItem(BlockItem blockItem, ItemModelGenerator itemGen){
+    public static void drinkBlockItem(BlockItem blockItem, ItemModelGenerators itemGen){
         blockItemWithPath(blockItem, "drinks/", itemGen);
     }
-    public static void basicItem(Item item, ItemModelGenerator itemGen){
+    public static void basicItem(Item item, ItemModelGenerators itemGen){
         itemWithPath(item, "", itemGen);
     }
 
-    public static void blockItem(BlockItem blockItem, ItemModelGenerator itemGen){
+    public static void blockItem(BlockItem blockItem, ItemModelGenerators itemGen){
         blockItemWithPath(blockItem, "", itemGen);
     }
 
-    public static void pieBlockItem(BlockItem blockItem, ItemModelGenerator itemGen){
-        Identifier itemKey = net.minecraft.registry.Registries.BLOCK.getId(blockItem.getBlock());
+    public static void pieBlockItem(BlockItem blockItem, ItemModelGenerators itemGen){
+        ResourceLocation itemKey = net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(blockItem.getBlock());
         String toRegister = "pie/" + itemKey.getPath() + "_slice_4";
-        itemGen.writer.accept(new Identifier(itemKey.getNamespace(), "item/" + itemKey.getPath()),
+        itemGen.output.accept(new ResourceLocation(itemKey.getNamespace(), "item/" + itemKey.getPath()),
                 () -> {
                     JsonObject object = new JsonObject();
-                    object.addProperty("parent", new Identifier(itemKey.getNamespace(), "block/%s".formatted(toRegister)).toString());
+                    object.addProperty("parent", new ResourceLocation(itemKey.getNamespace(), "block/%s".formatted(toRegister)).toString());
                     return object;
                 }
         );
     }
 
 
-    public static void cakeBlockItem(BlockItem blockItem, ItemModelGenerator itemGen){
-        Identifier itemKey = net.minecraft.registry.Registries.BLOCK.getId(blockItem.getBlock());
+    public static void cakeBlockItem(BlockItem blockItem, ItemModelGenerators itemGen){
+        ResourceLocation itemKey = net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(blockItem.getBlock());
         String toRegister = "cake/" + itemKey.getPath() + "_slice_4";
-        itemGen.writer.accept(new Identifier(itemKey.getNamespace(), "item/" + itemKey.getPath()),
+        itemGen.output.accept(new ResourceLocation(itemKey.getNamespace(), "item/" + itemKey.getPath()),
                 () -> {
                     JsonObject object = new JsonObject();
-                    object.addProperty("parent", new Identifier(itemKey.getNamespace(), "block/%s".formatted(toRegister)).toString());
+                    object.addProperty("parent", new ResourceLocation(itemKey.getNamespace(), "block/%s".formatted(toRegister)).toString());
                     return object;
                 }
         );
     }
-    public static void foodItem(Item item, ItemModelGenerator itemGen) {
+    public static void foodItem(Item item, ItemModelGenerators itemGen) {
         itemWithPath(item, "food/", itemGen);
     }
 
-    public static void blockItemWithPath(BlockItem item, String where, ItemModelGenerator itemGen) {
-        Identifier itemKey = net.minecraft.registry.Registries.ITEM.getId(item);
+    public static void blockItemWithPath(BlockItem item, String where, ItemModelGenerators itemGen) {
+        ResourceLocation itemKey = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(item);
         String toRegister = where + itemKey.getPath();
-        itemGen.writer.accept(new Identifier(itemKey.getNamespace(), "item/" + itemKey.getPath()),
+        itemGen.output.accept(new ResourceLocation(itemKey.getNamespace(), "item/" + itemKey.getPath()),
                 () -> {
                     JsonObject object = new JsonObject();
-                    object.addProperty("parent", new Identifier(itemKey.getNamespace(), "block/%s".formatted(toRegister)).toString());
+                    object.addProperty("parent", new ResourceLocation(itemKey.getNamespace(), "block/%s".formatted(toRegister)).toString());
                     return object;
                 }
         );
     }
 
-    public static void itemWithPath(Item item, String where, ItemModelGenerator itemGen) {
-        Identifier itemKey = net.minecraft.registry.Registries.ITEM.getId(item);
+    public static void itemWithPath(Item item, String where, ItemModelGenerators itemGen) {
+        ResourceLocation itemKey = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(item);
         String toRegister = where + itemKey.getPath();
-        itemGen.writer.accept(new Identifier(itemKey.getNamespace(), "item/" + itemKey.getPath()),
-                () -> Models.GENERATED.createJson(itemKey,
-                        Map.of(TextureKey.of("layer0"), new Identifier(itemKey.getNamespace(), "item/%s".formatted(toRegister)))
+        itemGen.output.accept(new ResourceLocation(itemKey.getNamespace(), "item/" + itemKey.getPath()),
+                () -> ModelTemplates.FLAT_ITEM.createBaseTemplate(itemKey,
+                        Map.of(TextureSlot.create("layer0"), new ResourceLocation(itemKey.getNamespace(), "item/%s".formatted(toRegister)))
                 )
         );
     }

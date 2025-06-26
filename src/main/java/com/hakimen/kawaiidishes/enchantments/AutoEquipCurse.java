@@ -1,12 +1,12 @@
 package com.hakimen.kawaiidishes.enchantments;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
-import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class AutoEquipCurse extends Enchantment {
     public AutoEquipCurse() {
-        super(Rarity.UNCOMMON, EnchantmentTarget.ARMOR, new EquipmentSlot[]{
+        super(Rarity.UNCOMMON, EnchantmentCategory.ARMOR, new EquipmentSlot[]{
                 EquipmentSlot.HEAD,
                 EquipmentSlot.CHEST,
                 EquipmentSlot.LEGS,
@@ -15,7 +15,7 @@ public class AutoEquipCurse extends Enchantment {
     }
 
     @Override
-    public boolean isCursed() {
+    public boolean isCurse() {
         return true;
     }
 
@@ -25,7 +25,7 @@ public class AutoEquipCurse extends Enchantment {
     }
 
     @Override
-    public boolean isAvailableForRandomSelection() {
+    public boolean isDiscoverable() {
         return false;
     }
 

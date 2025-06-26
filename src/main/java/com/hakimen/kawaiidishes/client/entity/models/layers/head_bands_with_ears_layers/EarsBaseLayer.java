@@ -5,13 +5,13 @@ import com.hakimen.kawaiidishes.client.entity.models.layers.GeoArmorLayer;
 import com.hakimen.kawaiidishes.item.armor.HeadBandWithEarsArmorItem;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
 import com.hakimen.kawaiidishes.utils.HeadBandsWithEarsUtils;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 
@@ -22,20 +22,20 @@ public class EarsBaseLayer extends GeoArmorLayer<HeadBandWithEarsArmorItem> {
         this.stackData = stack;
     }
     public EarsBaseLayer(GeoRenderer<HeadBandWithEarsArmorItem> entityRendererIn) {
-        super(entityRendererIn, new Identifier(KawaiiDishes.MODID, "textures/models/armor/none.png"));
+        super(entityRendererIn, new ResourceLocation(KawaiiDishes.MODID, "textures/models/armor/none.png"));
     }
 
     @Override
-    public Identifier getTexture() {
+    public ResourceLocation getTexture() {
         return HeadBandsWithEarsUtils.getEaredHeadBandsEarsBase().get(((HeadBandWithEarsArmorItem)stackData.getItem()).getEarsType());
     }
 
     @Override
-    public void render(MatrixStack poseStack, HeadBandWithEarsArmorItem animatable, BakedGeoModel bakedModel, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        RenderLayer armorRenderType = RenderLayer.getArmorCutoutNoCull(getTexture());
+    public void render(PoseStack poseStack, HeadBandWithEarsArmorItem animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+        RenderType armorRenderType = RenderType.armorCutoutNoCull(getTexture());
 
         float[] rgb = ColorUtils.getColorsFromHex(animatable.getSecondaryBaseColor(stackData));
 
-        getRenderer().reRender(getDefaultBakedModel(animatable),poseStack,bufferSource,animatable,armorRenderType,bufferSource.getBuffer(armorRenderType),partialTick,packedLight, OverlayTexture.DEFAULT_UV,rgb[0],rgb[1],rgb[2],1);
+        getRenderer().reRender(getDefaultBakedModel(animatable),poseStack,bufferSource,animatable,armorRenderType,bufferSource.getBuffer(armorRenderType),partialTick,packedLight, OverlayTexture.NO_OVERLAY,rgb[0],rgb[1],rgb[2],1);
     }
 }

@@ -1,18 +1,18 @@
 package com.hakimen.kawaiidishes.item;
 
-import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 
 public class DecorationItem extends Item {
 
-    Identifier thighHighDecorationLocation;
+    ResourceLocation thighHighDecorationLocation;
 
-    public DecorationItem(Settings properties, Identifier resourceLocation) {
+    public DecorationItem(Properties properties, ResourceLocation resourceLocation) {
         super(properties);
         thighHighDecorationLocation = resourceLocation;
     }
 
-    public Identifier getThighHighDecorationLocation() {
+    public ResourceLocation getThighHighDecorationLocation() {
         return thighHighDecorationLocation;
     }
 }
