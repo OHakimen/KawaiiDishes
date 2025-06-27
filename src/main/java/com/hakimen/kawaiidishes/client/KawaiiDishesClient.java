@@ -1,6 +1,5 @@
 package com.hakimen.kawaiidishes.client;
 
-import F;
 import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.aromas.DecorativeAroma;
 import com.hakimen.kawaiidishes.aromas.PotionAroma;

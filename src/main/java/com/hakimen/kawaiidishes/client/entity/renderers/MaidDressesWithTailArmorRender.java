@@ -4,30 +4,39 @@ import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.client.entity.models.layers.maid_dresses_with_tail_layers.MaidDressOverlayLayer;
 import com.hakimen.kawaiidishes.client.entity.models.layers.maid_dresses_with_tail_layers.PrimaryTailLayer;
 import com.hakimen.kawaiidishes.client.entity.models.layers.maid_dresses_with_tail_layers.SecondaryTailLayer;
+import com.hakimen.kawaiidishes.client.util.EarsSupport;
 import com.hakimen.kawaiidishes.item.armor.MaidDressesWithTailArmorItem;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.core.object.Color;
 import software.bernie.geckolib.model.GeoModel;
 
-public class MaidDressesWithTailArmorRender extends GeoArmorItemRenderer<MaidDressesWithTailArmorItem>{
+public class MaidDressesWithTailArmorRender extends GeoArmorItemRenderer<MaidDressesWithTailArmorItem> {
 
     ItemStack stackData;
 
-    public void updateStack(ItemStack stack){
+    float chestAngle;
+
+    public void updateStack(ItemStack stack) {
         this.stackData = stack;
     }
+
     public MaidDressesWithTailArmorRender(GeoModel<MaidDressesWithTailArmorItem> model, ItemStack stack) {
         super(model);
         this.stackData = stack;
 
         addRenderLayer(new MaidDressOverlayLayer(this));
-        addRenderLayer(new PrimaryTailLayer(this, ((MaidDressesWithTailArmorItem)stack.getItem()).getTailType()));
+        addRenderLayer(new PrimaryTailLayer(this, ((MaidDressesWithTailArmorItem) stack.getItem()).getTailType()));
         addRenderLayer(new SecondaryTailLayer(this,((MaidDressesWithTailArmorItem)stack.getItem()).getTailType()));
 
         ((MaidDressOverlayLayer)getRenderLayers().get(0)).updateStack(stack);
@@ -46,11 +55,19 @@ public class MaidDressesWithTailArmorRender extends GeoArmorItemRenderer<MaidDre
     public void prepForRender(@Nullable Entity entity, ItemStack stack, @Nullable EquipmentSlot slot, @Nullable HumanoidModel<?> baseModel) {
         updateStack(stack);
 
-        ((MaidDressOverlayLayer)getRenderLayers().get(0)).updateStack(stack);
-        ((PrimaryTailLayer)getRenderLayers().get(1)).updateStack(stack);
-        ((SecondaryTailLayer)getRenderLayers().get(2)).updateStack(stack);
+        ((MaidDressOverlayLayer) getRenderLayers().get(0)).updateStack(stack);
+        ((PrimaryTailLayer) getRenderLayers().get(1)).updateStack(stack);
+        ((SecondaryTailLayer) getRenderLayers().get(2)).updateStack(stack);
+
+        this.chestAngle = EarsSupport.getChestSize(entity);
 
         super.prepForRender(entity, stack, slot, baseModel);
+    }
+
+    @Override
+    public void preRender(PoseStack poseStack, MaidDressesWithTailArmorItem animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+        model.getBone("armorChest").orElseThrow().updateRotation(Mth.DEG_TO_RAD * -90f + chestAngle, 0, 0);
     }
 
     @Override

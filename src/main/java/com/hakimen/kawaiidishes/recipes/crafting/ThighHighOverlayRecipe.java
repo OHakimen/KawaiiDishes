@@ -1,6 +1,5 @@
 package com.hakimen.kawaiidishes.recipes.crafting;
 
-import I;
 import com.hakimen.kawaiidishes.custom.Registries;
 import com.hakimen.kawaiidishes.item.DecorationItem;
 import com.hakimen.kawaiidishes.item.armor.ThighHighsArmorItem;

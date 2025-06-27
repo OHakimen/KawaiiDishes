@@ -1,6 +1,5 @@
 package com.hakimen.kawaiidishes.client.blockEntityRenderers;
 
-import ;
 import com.hakimen.kawaiidishes.aromas.DecorativeAroma;
 import com.hakimen.kawaiidishes.aromas.PotionAroma;
 import com.hakimen.kawaiidishes.block.IncenseBlock;
