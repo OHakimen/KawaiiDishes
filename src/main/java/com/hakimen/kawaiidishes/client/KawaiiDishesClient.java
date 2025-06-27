@@ -11,8 +11,6 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import mod.azure.azurelib.AzureLib;
 
 public class KawaiiDishesClient implements ClientModInitializer {
-
-
     @Override
     public void onInitializeClient() {
         AzureLib.initialize();

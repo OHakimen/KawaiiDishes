@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "kawaiidishes",
-  "version": "${version}",
+  "version": "1.12.0",
   "name": "Kawaii Dishes",
   "description": "A mod about coffee, food and maids",
   "authors": [
@@ -40,9 +40,9 @@
     "kawaiidishes.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=${loader_version}",
+    "fabricloader": ">=0.15.7",
     "fabric": "*",
-    "minecraft": "${minecraft_version}",
+    "minecraft": "1.20.1",
     "forgeconfigapiport": ">=8.0.0"
   }
 }

@@ -56,11 +56,11 @@ public class TailArmorItem extends GeoArmorItem implements IDyeableItem {
 
     @Override
     public Supplier<Object> getRenderProvider() {
-        return renderProvider;
+        return this.renderProvider;
     }
 
     public AnimalType getTailType() {
-        return tailType;
+        return this.tailType;
     }
 
     @Override
@@ -97,8 +97,9 @@ public class TailArmorItem extends GeoArmorItem implements IDyeableItem {
             public BipedEntityModel<LivingEntity> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, BipedEntityModel<LivingEntity> original) {
 
 
-                if (this.renderer == null)
+                if (this.renderer == null) {
                     this.renderer = new TailArmorRender(TailUtils.getTailModels().get(tailType));
+                }
 
                 this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
                 return this.renderer;
