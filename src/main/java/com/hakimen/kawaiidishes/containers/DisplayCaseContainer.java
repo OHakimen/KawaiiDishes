@@ -3,25 +3,25 @@ package com.hakimen.kawaiidishes.containers;
 import com.hakimen.kawaiidishes.block_entities.DisplayCaseBlockEntity;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
 import com.hakimen.kawaiidishes.registry.ContainerRegister;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PotionItem;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.PotionItem;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.slot.Slot;
 
-public class DisplayCaseContainer extends AbstractContainerMenu{
+public class DisplayCaseContainer extends ScreenHandler{
     public final DisplayCaseBlockEntity blockEntity;
-    private final Inventory playerInventory;
+    private final PlayerInventory playerInventory;
 
-    public DisplayCaseContainer(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
+    public DisplayCaseContainer(int pContainerId, PlayerInventory inv, PacketByteBuf extraData) {
+        this(pContainerId, inv, inv.player.getWorld().getBlockEntity(extraData.readBlockPos()));
     }
 
-    public DisplayCaseContainer(int windowId, Inventory inv, BlockEntity entity) {
+    public DisplayCaseContainer(int windowId, PlayerInventory inv, BlockEntity entity) {
 
         super(ContainerRegister.DISPLAY_CASE.get(),windowId);
         blockEntity = (DisplayCaseBlockEntity)entity;
@@ -39,7 +39,7 @@ public class DisplayCaseContainer extends AbstractContainerMenu{
 
 
 
-    private int addSlotRange(Container handler, int index, int x, int y, int amount, int dx) {
+    private int addSlotRange(Inventory handler, int index, int x, int y, int amount, int dx) {
         for (int i = 0 ; i < amount ; i++) {
             addSlot(new Slot(handler, index, x, y));
             x += dx;
@@ -48,7 +48,7 @@ public class DisplayCaseContainer extends AbstractContainerMenu{
         return index;
     }
 
-    private int addSlotBox(Container handler, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
+    private int addSlotBox(Inventory handler, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
         for (int j = 0 ; j < verAmount ; j++) {
             index = addSlotRange(handler, index, x, y, horAmount, dx);
             y += dy;
@@ -66,47 +66,47 @@ public class DisplayCaseContainer extends AbstractContainerMenu{
     }
 
     @Override
-    public ItemStack quickMoveStack(Player player, int index )
+    public ItemStack quickMove(PlayerEntity player, int index )
     {
         int size = 8;
         ItemStack stack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasItem()) {
-            ItemStack stack1 = slot.getItem();
+        if (slot != null && slot.hasStack()) {
+            ItemStack stack1 = slot.getStack();
             stack = stack1.copy();
-            if (index < size && !this.moveItemStackTo(stack1, size, this.slots.size(), true)) {
+            if (index < size && !this.insertItem(stack1, size, this.slots.size(), true)) {
                 return ItemStack.EMPTY;
             }
-            if (!this.moveItemStackTo(stack1, 0, size, false)) {
+            if (!this.insertItem(stack1, 0, size, false)) {
                 return ItemStack.EMPTY;
             }
             if (stack1.isEmpty()) {
-                slot.mayPlace(ItemStack.EMPTY);
+                slot.canInsert(ItemStack.EMPTY);
             }
             if (stack1.getCount() == stack.getCount()) {
                 return ItemStack.EMPTY;
             } else {
-                slot.setChanged();
+                slot.markDirty();
             }
         }
         return stack;
     }
 
     @Override
-    public boolean stillValid(Player player) {
+    public boolean canUse(PlayerEntity player) {
         return true;
     }
 
 
     class FoodSlot extends Slot{
 
-        public FoodSlot(Container container, int i, int j, int k) {
+        public FoodSlot(Inventory container, int i, int j, int k) {
             super(container, i, j, k);
         }
 
         @Override
-        public boolean mayPlace(ItemStack itemStack) {
-            return itemStack.isEdible() || itemStack.getItem() instanceof PotionItem;
+        public boolean canInsert(ItemStack itemStack) {
+            return itemStack.isFood() || itemStack.getItem() instanceof PotionItem;
         }
     }
 }

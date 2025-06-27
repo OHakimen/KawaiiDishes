@@ -4,10 +4,10 @@ import com.hakimen.kawaiidishes.client.entity.models.layers.thigh_high_layers.Th
 import com.hakimen.kawaiidishes.client.entity.models.layers.thigh_high_layers.ThighHighsDecorationDetailArmorLayer;
 import com.hakimen.kawaiidishes.item.armor.ThighHighsArmorItem;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.core.object.Color;
 import software.bernie.geckolib.model.GeoModel;
@@ -23,7 +23,7 @@ public class ThighHighsArmorRender extends GeoArmorItemRenderer<ThighHighsArmorI
     }
 
     @Override
-    public void prepForRender(@Nullable Entity entity, ItemStack stack, @Nullable EquipmentSlot slot, @Nullable HumanoidModel<?> baseModel) {
+    public void prepForRender(@Nullable Entity entity, ItemStack stack, @Nullable EquipmentSlot slot, @Nullable BipedEntityModel<?> baseModel) {
         this.stackData = stack;
         ((ThighHighsDecorationArmorLayer)getRenderLayers().get(0)).updateStack(stack);
         ((ThighHighsDecorationDetailArmorLayer)getRenderLayers().get(1)).updateStack(stack);

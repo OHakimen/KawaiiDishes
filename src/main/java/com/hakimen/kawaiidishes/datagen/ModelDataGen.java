@@ -13,8 +13,8 @@ import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.client.model.Model;
-import net.minecraft.data.models.BlockModelGenerators;
-import net.minecraft.data.models.ItemModelGenerators;
+import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.client.ItemModelGenerator;
 import java.util.Map;
 
 public class ModelDataGen extends FabricModelProvider {
@@ -23,13 +23,13 @@ public class ModelDataGen extends FabricModelProvider {
     }
 
     @Override
-    public void generateBlockStateModels(BlockModelGenerators stateGen) {
+    public void generateBlockStateModels(BlockStateModelGenerator stateGen) {
         BlockStateModelDataGen.gen(stateGen);
     }
 
 
     @Override
-    public void generateItemModels(ItemModelGenerators itemGen) {
+    public void generateItemModels(ItemModelGenerator itemGen) {
         ItemModelDataGen.gen(itemGen);
     }
 

@@ -3,14 +3,14 @@ package com.hakimen.kawaiidishes.block_entities;
 import com.hakimen.kawaiidishes.item.IDyeableItem;
 import com.hakimen.kawaiidishes.item.SeatItem;
 import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
 public class SeatBlockEntity extends BlockEntity {
@@ -25,14 +25,14 @@ public class SeatBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag pTag) {
+    protected void writeNbt(NbtCompound pTag) {
         pTag.putInt("Color", color);
-        super.saveAdditional(pTag);
+        super.writeNbt(pTag);
     }
 
     @Override
-    public void load(CompoundTag pTag) {
-        super.load(pTag);
+    public void readNbt(NbtCompound pTag) {
+        super.readNbt(pTag);
         color = pTag.getInt("Color");
     }
 
@@ -53,12 +53,12 @@ public class SeatBlockEntity extends BlockEntity {
 
     @Nullable
     @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this,BlockEntity::saveWithFullMetadata);
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this,BlockEntity::createNbtWithIdentifyingData);
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
-        return this.saveWithFullMetadata();
+    public NbtCompound toInitialChunkDataNbt() {
+        return this.createNbtWithIdentifyingData();
     }
 }

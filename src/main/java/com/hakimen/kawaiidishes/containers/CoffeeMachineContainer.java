@@ -4,29 +4,29 @@ import com.hakimen.kawaiidishes.block_entities.CoffeeMachineBlockEntity;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
 import com.hakimen.kawaiidishes.registry.ContainerRegister;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.SimpleContainerData;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.screen.ArrayPropertyDelegate;
+import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.slot.Slot;
 
-public class CoffeeMachineContainer extends AbstractContainerMenu{
+public class CoffeeMachineContainer extends ScreenHandler{
     public final CoffeeMachineBlockEntity blockEntity;
-    private final Inventory playerInventory;
-    private final ContainerData data;
+    private final PlayerInventory playerInventory;
+    private final PropertyDelegate data;
     private FluidVariant fluidVariant;
     private long amount;
 
-    public CoffeeMachineContainer(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+    public CoffeeMachineContainer(int pContainerId, PlayerInventory inv, PacketByteBuf extraData) {
+        this(pContainerId, inv, inv.player.getWorld().getBlockEntity(extraData.readBlockPos()), new ArrayPropertyDelegate(2));
     }
 
-    public CoffeeMachineContainer(int windowId, Inventory inv, BlockEntity entity, ContainerData data) {
+    public CoffeeMachineContainer(int windowId, PlayerInventory inv, BlockEntity entity, PropertyDelegate data) {
 
         super(ContainerRegister.COFFEE_MACHINE.get(),windowId);
         this.data = data;
@@ -44,12 +44,12 @@ public class CoffeeMachineContainer extends AbstractContainerMenu{
 
         layoutPlayerInventorySlots(8,86);
 
-        addDataSlots(data);
+        addProperties(data);
     }
 
 
 
-    private int addSlotRange(Container handler, int index, int x, int y, int amount, int dx) {
+    private int addSlotRange(Inventory handler, int index, int x, int y, int amount, int dx) {
         for (int i = 0 ; i < amount ; i++) {
             addSlot(new Slot(handler, index, x, y));
             x += dx;
@@ -58,7 +58,7 @@ public class CoffeeMachineContainer extends AbstractContainerMenu{
         return index;
     }
 
-    private int addSlotBox(Container handler, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
+    private int addSlotBox(Inventory handler, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
         for (int j = 0 ; j < verAmount ; j++) {
             index = addSlotRange(handler, index, x, y, horAmount, dx);
             y += dy;
@@ -76,33 +76,33 @@ public class CoffeeMachineContainer extends AbstractContainerMenu{
     }
 
     @Override
-    public ItemStack quickMoveStack(Player player, int index )
+    public ItemStack quickMove(PlayerEntity player, int index )
     {
         ItemStack stack;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasItem()) {
-            ItemStack stack1 = slot.getItem();
+        if (slot != null && slot.hasStack()) {
+            ItemStack stack1 = slot.getStack();
             stack = stack1.copy();
-            if (index < 7 && !this.moveItemStackTo(stack1, 7, this.slots.size(), true)) {
+            if (index < 7 && !this.insertItem(stack1, 7, this.slots.size(), true)) {
                 return ItemStack.EMPTY;
             }
-            if (!this.moveItemStackTo(stack1, 2, 7, false)) {
+            if (!this.insertItem(stack1, 2, 7, false)) {
                 return ItemStack.EMPTY;
             }
             if (stack1.isEmpty()) {
-                slot.mayPlace(ItemStack.EMPTY);
+                slot.canInsert(ItemStack.EMPTY);
             }
             if (stack1.getCount() == stack.getCount()) {
                 return ItemStack.EMPTY;
             } else {
-                slot.setChanged();
+                slot.markDirty();
             }
         }
         return ItemStack.EMPTY;
     }
 
     @Override
-    public boolean stillValid(Player player) {
+    public boolean canUse(PlayerEntity player) {
         return true;
     }
 
@@ -120,11 +120,11 @@ public class CoffeeMachineContainer extends AbstractContainerMenu{
         return blockEntity;
     }
 
-    public Inventory getPlayerInventory() {
+    public PlayerInventory getPlayerInventory() {
         return playerInventory;
     }
 
-    public ContainerData getData() {
+    public PropertyDelegate getData() {
         return data;
     }
 

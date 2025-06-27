@@ -4,10 +4,10 @@ import com.hakimen.kawaiidishes.client.entity.models.layers.ears_layers.EarSkinL
 import com.hakimen.kawaiidishes.client.entity.models.layers.ears_layers.EarsLayer;
 import com.hakimen.kawaiidishes.item.armor.EarsArmorItem;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.core.object.Color;
 import software.bernie.geckolib.model.GeoModel;
@@ -25,7 +25,7 @@ public class EarsArmorRender extends GeoArmorItemRenderer<EarsArmorItem> {
     }
 
     @Override
-    public void prepForRender(@Nullable Entity entity, ItemStack stack, @Nullable EquipmentSlot slot, @Nullable HumanoidModel<?> baseModel) {
+    public void prepForRender(@Nullable Entity entity, ItemStack stack, @Nullable EquipmentSlot slot, @Nullable BipedEntityModel<?> baseModel) {
         updateStack(stack);
 
         ((EarsLayer)getRenderLayers().get(0)).updateStack(stack);
@@ -42,7 +42,7 @@ public class EarsArmorRender extends GeoArmorItemRenderer<EarsArmorItem> {
 
 
     @Override
-    public void setupAnim(Entity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+    public void setAngles(Entity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 
     }
 }

@@ -5,17 +5,17 @@ import com.hakimen.kawaiidishes.client.entity.models.layers.GeoArmorLayer;
 import com.hakimen.kawaiidishes.custom.Registries;
 import com.hakimen.kawaiidishes.item.armor.ThighHighsArmorItem;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 
 import java.util.List;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.client.render.OverlayTexture;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Identifier;
 
 public class ThighHighsDecorationArmorLayer extends GeoArmorLayer<ThighHighsArmorItem> {
 
@@ -26,7 +26,7 @@ public class ThighHighsDecorationArmorLayer extends GeoArmorLayer<ThighHighsArmo
     }
 
     @Override
-    public ResourceLocation getTexture() {
+    public Identifier getTexture() {
         return getResourceLocationFromStack(stackData);
     }
 
@@ -35,26 +35,26 @@ public class ThighHighsDecorationArmorLayer extends GeoArmorLayer<ThighHighsArmo
         this.stackData = stack;
     }
 
-    private static ResourceLocation getResourceLocationFromStack(ItemStack stack) {
+    private static Identifier getResourceLocationFromStack(ItemStack stack) {
 
-        if(stack.getOrCreateTag().contains("Decoration")){
-            return Registries.THIGH_HIGH_DECORATIONS.getHolder(stack.getOrCreateTag().getInt("Decoration")).get().value().getTexture();
+        if(stack.getOrCreateNbt().contains("Decoration")){
+            return Registries.THIGH_HIGH_DECORATIONS.getEntry(stack.getOrCreateNbt().getInt("Decoration")).get().value().getTexture();
         }
-        return new ResourceLocation(KawaiiDishes.MODID, "textures/models/armor/none.png");
+        return new Identifier(KawaiiDishes.MODID, "textures/models/armor/none.png");
     }
 
     @Override
-    public void preRender(PoseStack poseStack, ThighHighsArmorItem animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+    public void preRender(MatrixStack poseStack, ThighHighsArmorItem animatable, BakedGeoModel bakedModel, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         super.preRender(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
     }
 
     @Override
-    public void render(PoseStack poseStack, ThighHighsArmorItem animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        RenderType armorRenderType = RenderType.armorCutoutNoCull(getTexture());
+    public void render(MatrixStack poseStack, ThighHighsArmorItem animatable, BakedGeoModel bakedModel, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+        RenderLayer armorRenderType = RenderLayer.getArmorCutoutNoCull(getTexture());
 
         float[] rgb = ColorUtils.getColorsFromHex(animatable.getOverlayColor(stackData));
 
-        getRenderer().reRender(getDefaultBakedModel(animatable),poseStack,bufferSource,animatable,armorRenderType,bufferSource.getBuffer(armorRenderType),partialTick,packedLight, OverlayTexture.NO_OVERLAY,rgb[0],rgb[1],rgb[2],1);
+        getRenderer().reRender(getDefaultBakedModel(animatable),poseStack,bufferSource,animatable,armorRenderType,bufferSource.getBuffer(armorRenderType),partialTick,packedLight, OverlayTexture.DEFAULT_UV,rgb[0],rgb[1],rgb[2],1);
     }
 
 

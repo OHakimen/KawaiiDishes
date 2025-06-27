@@ -4,10 +4,10 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 
 import java.util.List;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.text.Text;
 
 // CREDIT: https://github.com/mezz/JustEnoughItems by mezz
 // Under MIT-License: https://github.com/mezz/JustEnoughItems/blob/1.18/LICENSE.txt
@@ -32,7 +32,7 @@ public interface IIngredientRenderer<T> {
      * @param tooltipFlag Whether to show advanced information on item tooltips, toggled by F3+H
      * @return The tooltip text for the ingredient.
      */
-    List<Component> getTooltip(T ingredient, TooltipFlag tooltipFlag);
+    List<Text> getTooltip(T ingredient, TooltipContext tooltipFlag);
 
     /**
      * Get the tooltip font renderer for this ingredient. JEI renders the tooltip based on this.
@@ -41,8 +41,8 @@ public interface IIngredientRenderer<T> {
      * @param ingredient The ingredient to get the tooltip for.
      * @return The font renderer for the ingredient.
      */
-    default Font getFontRenderer(Minecraft minecraft, T ingredient) {
-        return minecraft.font;
+    default TextRenderer getFontRenderer(MinecraftClient minecraft, T ingredient) {
+        return minecraft.textRenderer;
     }
 
     /**

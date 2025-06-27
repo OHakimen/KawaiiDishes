@@ -3,10 +3,10 @@ package com.hakimen.kawaiidishes.client.entity.renderers;
 import com.hakimen.kawaiidishes.client.entity.models.layers.TailLayer;
 import com.hakimen.kawaiidishes.item.armor.TailArmorItem;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.core.object.Color;
 import software.bernie.geckolib.model.GeoModel;
@@ -22,7 +22,7 @@ public class TailArmorRender extends GeoArmorItemRenderer<TailArmorItem> {
     }
 
     @Override
-    public void prepForRender(@Nullable Entity entity, ItemStack stack, @Nullable EquipmentSlot slot, @Nullable HumanoidModel<?> baseModel) {
+    public void prepForRender(@Nullable Entity entity, ItemStack stack, @Nullable EquipmentSlot slot, @Nullable BipedEntityModel<?> baseModel) {
         updateStack(stack);
 
         ((TailLayer)getRenderLayers().get(0)).updateStack(stack);

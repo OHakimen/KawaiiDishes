@@ -1,11 +1,11 @@
 package com.hakimen.kawaiidishes.effects;
 
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectCategory;
 
-public class CalmingEffect extends MobEffect {
+public class CalmingEffect extends StatusEffect {
     public CalmingEffect() {
-        super(MobEffectCategory.NEUTRAL, 0xFF52B2);
+        super(StatusEffectCategory.NEUTRAL, 0xFF52B2);
     }
 
 }

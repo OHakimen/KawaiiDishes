@@ -26,14 +26,14 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.DyeItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.client.item.ModelPredicateProviderRegistry;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.item.DyeItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionUtil;
+import net.minecraft.util.Identifier;
 import software.bernie.geckolib.GeckoLib;
 
 import java.util.List;
@@ -55,14 +55,14 @@ public class KawaiiDishesClient implements ClientModInitializer {
         ScreenRegistry.register(ContainerRegister.ICE_CREAM_MAKER.get(), IceCreamMakerScreen::new);
         ScreenRegistry.register(ContainerRegister.BLENDER.get(), BlenderScreen::new);
 
-        BlockRenderLayerMap.INSTANCE.putBlock(BlockRegister.COFFEE_BUSH.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(BlockRegister.INCENSE_GLASS.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(BlockRegister.ICE_CREAM_MAKER.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(BlockRegister.DISPLAY_CASE.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(BlockRegister.BLENDER.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(BlockRegister.COFFEE_BUSH.get(), RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(BlockRegister.INCENSE_GLASS.get(), RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(BlockRegister.ICE_CREAM_MAKER.get(), RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(BlockRegister.DISPLAY_CASE.get(), RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(BlockRegister.BLENDER.get(), RenderLayer.getCutout());
 
-        BlockEntityRenderers.register(BlockEntityRegister.INCENSE.get(), IncenseGlassBlockEntityRenderer::new);
-        BlockEntityRenderers.register(BlockEntityRegister.DISPLAY_CASE.get(), DisplayCaseBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(BlockEntityRegister.INCENSE.get(), IncenseGlassBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(BlockEntityRegister.DISPLAY_CASE.get(), DisplayCaseBlockEntityRenderer::new);
 
         ParticleFactoryRegistry.getInstance().register(ParticleRegister.INCENSE_PARTICLE.get(), IncenseParticle.Provider::new);
 
@@ -85,9 +85,9 @@ public class KawaiiDishesClient implements ClientModInitializer {
                 Aroma aroma = incenseBlockEntity.getAromaFromId();
 
                 if (aroma instanceof DecorativeAroma) {
-                    color = stack.getItem() instanceof DyeItem dyeItem ? dyeItem.getDyeColor().getFireworkColor() : 0;
+                    color = stack.getItem() instanceof DyeItem dyeItem ? dyeItem.getColor().getFireworkColor() : 0;
                 } else if (aroma instanceof PotionAroma) {
-                    color = PotionUtils.getColor(stack);
+                    color = PotionUtil.getColor(stack);
                 } else {
                     color = aroma.getColor();
                 }
@@ -361,12 +361,12 @@ public class KawaiiDishesClient implements ClientModInitializer {
                 ItemRegister.CAT_EARS.get());
 
 
-        ItemProperties.register(ItemRegister.THIGH_HIGHS.get(), new ResourceLocation(KawaiiDishes.MODID, "decoration"), ((pStack, pLevel, pEntity, pSeed) -> {
-            return (pStack.getOrCreateTag().getInt("Decoration") / (float) ThighHighsDecorationRegister.DECORATIONS.getRegistry().size());
+        ModelPredicateProviderRegistry.register(ItemRegister.THIGH_HIGHS.get(), new Identifier(KawaiiDishes.MODID, "decoration"), ((pStack, pLevel, pEntity, pSeed) -> {
+            return (pStack.getOrCreateNbt().getInt("Decoration") / (float) ThighHighsDecorationRegister.DECORATIONS.getRegistry().size());
         }));
 
         itemsWithState.forEach(item -> {
-            ItemProperties.register(item, new ResourceLocation(KawaiiDishes.MODID, "state"), (pStack, pLevel, pEntity, pSeed) -> {
+            ModelPredicateProviderRegistry.register(item, new Identifier(KawaiiDishes.MODID, "state"), (pStack, pLevel, pEntity, pSeed) -> {
                 float compoundValue = 0;
 
                 IFourColorDyeableItem fourColoredItem = (IFourColorDyeableItem) pStack.getItem();
@@ -384,7 +384,7 @@ public class KawaiiDishesClient implements ClientModInitializer {
         });
 
         itemsWithOverlay.forEach(item -> {
-            ItemProperties.register(item, new ResourceLocation(KawaiiDishes.MODID, "has_overlay"), ((pStack, pLevel, pEntity, pSeed) -> ((IDyeableItem) pStack.getItem()).hasOverlay(pStack) ? 1 : 0));
+            ModelPredicateProviderRegistry.register(item, new Identifier(KawaiiDishes.MODID, "has_overlay"), ((pStack, pLevel, pEntity, pSeed) -> ((IDyeableItem) pStack.getItem()).hasOverlay(pStack) ? 1 : 0));
         });
     }
 }

@@ -12,17 +12,17 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.util.Identifier;
 
 import static com.hakimen.kawaiidishes.integration.emi.EMIPlugin.BLENDER_TEXTURE;
 import static com.hakimen.kawaiidishes.integration.emi.EMIPlugin.ICE_CREAM_MAKER_TEXTURE;
 
 public class IceCreamMakerRecipePlugin implements EmiRecipe {
 
-    private final ResourceLocation id;
+    private final Identifier id;
     private final List<EmiIngredient> input;
     private final EmiStack output;
     private final EmiStack onOutput;
@@ -32,8 +32,8 @@ public class IceCreamMakerRecipePlugin implements EmiRecipe {
 
         this.id = recipe.getId();
         List<EmiIngredient> ingredients = new ArrayList<>();
-        for (ItemStack recipeItem : recipe.getRecipeItems().get(0).getItems()) {
-            ingredients.add(EmiIngredient.of(Ingredient.of(recipeItem)));
+        for (ItemStack recipeItem : recipe.getRecipeItems().get(0).getMatchingStacks()) {
+            ingredients.add(EmiIngredient.of(Ingredient.ofStacks(recipeItem)));
         }
         this.input = ingredients;
 
@@ -49,7 +49,7 @@ public class IceCreamMakerRecipePlugin implements EmiRecipe {
     }
 
     @Override
-    public @Nullable ResourceLocation getId() {
+    public @Nullable Identifier getId() {
         return id;
     }
 
@@ -78,7 +78,7 @@ public class IceCreamMakerRecipePlugin implements EmiRecipe {
         widgets.addTexture(ICE_CREAM_MAKER_TEXTURE,0,0,168,80,0,0,168,80, 168,80);
 
         if(snowballs > 0){
-            widgets.addSlot(EmiStack.of(Items.SNOWBALL.getDefaultInstance(), snowballs), 21, 13);
+            widgets.addSlot(EmiStack.of(Items.SNOWBALL.getDefaultStack(), snowballs), 21, 13);
         }
         for (int i = 0; i < input.size(); i++) {
             widgets.addSlot(input.get(i), 57,13 + (18 * i));

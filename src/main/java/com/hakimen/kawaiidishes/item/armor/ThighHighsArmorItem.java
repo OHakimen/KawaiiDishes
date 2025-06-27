@@ -20,21 +20,21 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 
 import static com.hakimen.kawaiidishes.utils.item.ArmorUtils.applyEnchantmentEffects;
 
@@ -45,7 +45,7 @@ public class ThighHighsArmorItem extends GeoArmorItem implements IAnimationPredi
 
     private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
     @Override
-    public boolean isFoil(ItemStack p_41453_) {
+    public boolean hasGlint(ItemStack p_41453_) {
         return false;
     }
 
@@ -55,44 +55,44 @@ public class ThighHighsArmorItem extends GeoArmorItem implements IAnimationPredi
     }
 
     @Override
-    public void inventoryTick(ItemStack itemStack, Level level, Entity entity, int slot, boolean bl) {
-        if(ItemUtils.isItemOnArmorSlot(slot) && entity instanceof Player player){
+    public void inventoryTick(ItemStack itemStack, World level, Entity entity, int slot, boolean bl) {
+        if(ItemUtils.isItemOnArmorSlot(slot) && entity instanceof PlayerEntity player){
             applyEnchantmentEffects(itemStack, level, player);
         }
         super.inventoryTick(itemStack, level, entity, slot, bl);
     }
 
-    public ThighHighsArmorItem(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
+    public ThighHighsArmorItem(ArmorMaterial pMaterial, Type pType, Settings pProperties) {
         super(pMaterial, pType, pProperties);
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+    public void appendTooltip(ItemStack pStack, @Nullable World pLevel, List<Text> pTooltipComponents, TooltipContext pIsAdvanced) {
         if((hasBaseColor(pStack) || hasOverlayColor(pStack)) && !pIsAdvanced.isAdvanced() ){
-            pTooltipComponents.add(Component.translatable("item.dyed").withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
+            pTooltipComponents.add(Text.translatable("item.dyed").fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
         }else if((hasBaseColor(pStack) || hasOverlayColor(pStack)) && !pIsAdvanced.isCreative()){
             if(hasBaseColor(pStack)){
-                pTooltipComponents.add(Component.translatable("item.kawaiidishes.base_dye", "0x"+Integer.toString(getBaseColor(pStack),16).toUpperCase()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
+                pTooltipComponents.add(Text.translatable("item.kawaiidishes.base_dye", "0x"+Integer.toString(getBaseColor(pStack),16).toUpperCase()).fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
             }
             if(hasOverlayColor(pStack)){
-                pTooltipComponents.add(Component.translatable("item.kawaiidishes.overlay_dye", "0x"+Integer.toString(getOverlayColor(pStack),16).toUpperCase()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
+                pTooltipComponents.add(Text.translatable("item.kawaiidishes.overlay_dye", "0x"+Integer.toString(getOverlayColor(pStack),16).toUpperCase()).fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
             }
         }else{
-            pTooltipComponents.add(Component.translatable("item.kawaiidishes.dyeable").withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
+            pTooltipComponents.add(Text.translatable("item.kawaiidishes.dyeable").fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
         }
-        if (hasOverlay(pStack) && pStack.getOrCreateTag().getInt(decoration) > 0 && pStack.getOrCreateTag().getInt(decoration)-1 < Registries.THIGH_HIGH_DECORATIONS.size()) {
-            pTooltipComponents.add(Registries.THIGH_HIGH_DECORATIONS.getHolder(pStack.getOrCreateTag().getInt(decoration)).get().value().getName());
+        if (hasOverlay(pStack) && pStack.getOrCreateNbt().getInt(decoration) > 0 && pStack.getOrCreateNbt().getInt(decoration)-1 < Registries.THIGH_HIGH_DECORATIONS.size()) {
+            pTooltipComponents.add(Registries.THIGH_HIGH_DECORATIONS.getEntry(pStack.getOrCreateNbt().getInt(decoration)).get().value().getName());
         }
 
         if(hasOverlay(pStack)){
-            pTooltipComponents.add(Component.translatable("item.kawaiidishes.overlayed").withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
+            pTooltipComponents.add(Text.translatable("item.kawaiidishes.overlayed").fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
         }
 
     }
 
     public boolean hasOverlay(ItemStack stack){
-        CompoundTag decorData = stack.getOrCreateTag();
-        return decorData.contains(decoration, Tag.TAG_INT) && decorData.getInt(decoration) > 0;
+        NbtCompound decorData = stack.getOrCreateNbt();
+        return decorData.contains(decoration, NbtElement.INT_TYPE) && decorData.getInt(decoration) > 0;
     }
 
     @Override
@@ -101,13 +101,13 @@ public class ThighHighsArmorItem extends GeoArmorItem implements IAnimationPredi
             private GeoArmorRenderer<?> renderer;
 
             @Override
-            public HumanoidModel<LivingEntity> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<LivingEntity> original) {
+            public BipedEntityModel<LivingEntity> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, BipedEntityModel<LivingEntity> original) {
                 if (this.renderer == null)
                     this.renderer = new ThighHighsArmorRender(new ThighHighsArmorModel(
-                            new ResourceLocation(KawaiiDishes.MODID,"geo/thigh_highs.geo.json"),   //
-                            new ResourceLocation(KawaiiDishes.MODID,"textures/models/armor/thigh_highs/thigh_highs.png"),   //  Set resource locations
-                            new ResourceLocation(KawaiiDishes.MODID,"")    //
-                    ), livingEntity.getItemBySlot(EquipmentSlot.LEGS));
+                            new Identifier(KawaiiDishes.MODID,"geo/thigh_highs.geo.json"),   //
+                            new Identifier(KawaiiDishes.MODID,"textures/models/armor/thigh_highs/thigh_highs.png"),   //  Set resource locations
+                            new Identifier(KawaiiDishes.MODID,"")    //
+                    ), livingEntity.getEquippedStack(EquipmentSlot.LEGS));
 
 
                 this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);

@@ -7,25 +7,25 @@ import com.hakimen.kawaiidishes.containers.DisplayCaseContainer;
 import com.hakimen.kawaiidishes.containers.IceCreamMakerContainer;
 import com.hakimen.kawaiidishes.custom.Recorder;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.inventory.MenuType;
+import net.minecraft.registry.Registries;
+import net.minecraft.screen.ScreenHandlerType;
 import java.util.function.Supplier;
 
 public class ContainerRegister {
-    public static final Recorder<MenuType<?>> CONTAINERS = new Recorder<>(BuiltInRegistries.MENU, KawaiiDishes.MODID);
+    public static final Recorder<ScreenHandlerType<?>> CONTAINERS = new Recorder<>(Registries.SCREEN_HANDLER, KawaiiDishes.MODID);
 
-    public static final Supplier<MenuType<CoffeeMachineContainer>> COFFEE_MACHINE = CONTAINERS.register("coffee_machine", () ->
+    public static final Supplier<ScreenHandlerType<CoffeeMachineContainer>> COFFEE_MACHINE = CONTAINERS.register("coffee_machine", () ->
             new ExtendedScreenHandlerType<>(CoffeeMachineContainer::new)
     );
-    public static final Supplier<MenuType<DisplayCaseContainer>> DISPLAY_CASE = CONTAINERS.register("display_case", () ->
+    public static final Supplier<ScreenHandlerType<DisplayCaseContainer>> DISPLAY_CASE = CONTAINERS.register("display_case", () ->
             new ExtendedScreenHandlerType<>(DisplayCaseContainer::new)
     );
 
-    public static final Supplier<MenuType<IceCreamMakerContainer>> ICE_CREAM_MAKER = CONTAINERS.register("ice_cream_maker", () ->
+    public static final Supplier<ScreenHandlerType<IceCreamMakerContainer>> ICE_CREAM_MAKER = CONTAINERS.register("ice_cream_maker", () ->
             new ExtendedScreenHandlerType<>(IceCreamMakerContainer::new)
     );
 
-    public static final Supplier<MenuType<BlenderContainer>> BLENDER = CONTAINERS.register("blender", () ->
+    public static final Supplier<ScreenHandlerType<BlenderContainer>> BLENDER = CONTAINERS.register("blender", () ->
             new ExtendedScreenHandlerType<>(BlenderContainer::new)
     );
 

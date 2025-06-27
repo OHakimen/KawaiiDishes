@@ -6,11 +6,11 @@ import com.hakimen.kawaiidishes.client.entity.models.layers.head_bands_with_ears
 import com.hakimen.kawaiidishes.client.entity.models.layers.head_bands_with_ears_layers.HeadBandOverlayLayer;
 import com.hakimen.kawaiidishes.item.armor.HeadBandWithEarsArmorItem;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.core.object.Color;
 import software.bernie.geckolib.model.GeoModel;
@@ -38,12 +38,12 @@ public class HeadBandsWithEarsRender extends GeoArmorItemRenderer<HeadBandWithEa
     }
 
     @Override
-    public ResourceLocation getTextureLocation(HeadBandWithEarsArmorItem animatable) {
+    public Identifier getTextureLocation(HeadBandWithEarsArmorItem animatable) {
         return super.getTextureLocation(animatable);
     }
 
     @Override
-    public void prepForRender(@Nullable Entity entity, ItemStack stack, @Nullable EquipmentSlot slot, @Nullable HumanoidModel<?> baseModel) {
+    public void prepForRender(@Nullable Entity entity, ItemStack stack, @Nullable EquipmentSlot slot, @Nullable BipedEntityModel<?> baseModel) {
         updateStack(stack);
 
         ((HeadBandOverlayLayer)getRenderLayers().get(0)).updateStack(stack);

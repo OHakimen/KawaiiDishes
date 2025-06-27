@@ -4,31 +4,31 @@ import com.hakimen.kawaiidishes.block_entities.IncenseBlockEntity;
 import com.hakimen.kawaiidishes.registry.AromaRegister;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.service.ITransformer;
 
@@ -37,120 +37,120 @@ import static com.hakimen.kawaiidishes.datagen.ItemTagDataGen.CAN_IGNITE_INCENSE
 
 public class IncenseBlock extends DirectionalBlockWithEntity{
 
-    public static final BooleanProperty LIT = BooleanProperty.create("lit");
+    public static final BooleanProperty LIT = BooleanProperty.of("lit");
 
     public IncenseBlock() {
-        super(Properties.copy(Blocks.GLASS)
-                .isViewBlocking((blockState, blockGetter, blockPos) -> false)
-                .isSuffocating((blockState, blockGetter, blockPos) -> false)
-                .requiresCorrectToolForDrops()
-                .lightLevel(value -> value.getValue(LIT) ? 7 : 0)
+        super(Settings.copy(Blocks.GLASS)
+                .blockVision((blockState, blockGetter, blockPos) -> false)
+                .suffocates((blockState, blockGetter, blockPos) -> false)
+                .requiresTool()
+                .luminance(value -> value.get(LIT) ? 7 : 0)
         );
 
 
-        registerDefaultState( getStateDefinition().any()
-                .setValue(FACING, Direction.NORTH)
-                .setValue(LIT, false));
+        setDefaultState( getStateManager().getDefaultState()
+                .with(FACING, Direction.NORTH)
+                .with(LIT, false));
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> properties )
+    protected void appendProperties(StateManager.Builder<Block, BlockState> properties )
     {
         properties.add( FACING ).add(LIT);
     }
 
     @Override
     @Deprecated
-    public BlockState mirror( BlockState state, Mirror mirrorIn )
+    public BlockState mirror( BlockState state, BlockMirror mirrorIn )
     {
-        return state.rotate( mirrorIn.getRotation( state.getValue( FACING ) ) );
+        return state.rotate( mirrorIn.getRotation( state.get( FACING ) ) );
     }
 
     @Override
     @Deprecated
-    public BlockState rotate( BlockState state, Rotation rot )
+    public BlockState rotate( BlockState state, BlockRotation rot )
     {
-        return state.setValue( FACING, rot.rotate( state.getValue( FACING ) ) );
+        return state.with( FACING, rot.rotate( state.get( FACING ) ) );
     }
 
     @Override
-    public BlockState getStateForPlacement( BlockPlaceContext placement )
+    public BlockState getPlacementState( ItemPlacementContext placement )
     {
-        return defaultBlockState().setValue( FACING, placement.getHorizontalDirection().getOpposite() );
+        return getDefaultState().with( FACING, placement.getHorizontalPlayerFacing().getOpposite() );
     }
     @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+    public @Nullable BlockEntity createBlockEntity(BlockPos pPos, BlockState pState) {
         return new IncenseBlockEntity(pPos, pState);
     }
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
         return (level, pos, state, blockEntity) -> ((IncenseBlockEntity) blockEntity).tick(level,pos,state,(IncenseBlockEntity)blockEntity);
     }
 
 
     @Override
-    public VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
-        return Block.box(5,0,5,11,6,11);
+    public VoxelShape getOutlineShape(BlockState p_60555_, BlockView p_60556_, BlockPos p_60557_, ShapeContext p_60558_) {
+        return Block.createCuboidShape(5,0,5,11,6,11);
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pBlockHitResult) {
+    public ActionResult onUse(BlockState pState, World pLevel, BlockPos pPos, PlayerEntity pPlayer, Hand pHand, BlockHitResult pBlockHitResult) {
 
-        ItemStack holdStack = pPlayer.getItemInHand(pHand);
+        ItemStack holdStack = pPlayer.getStackInHand(pHand);
 
         IncenseBlockEntity entity = (IncenseBlockEntity) pLevel.getBlockEntity(pPos);
 
-        if(holdStack.is(CAN_EXTINGUISH_INCENSE) || holdStack.is(CAN_IGNITE_INCENSE)){
+        if(holdStack.isIn(CAN_EXTINGUISH_INCENSE) || holdStack.isIn(CAN_IGNITE_INCENSE)){
             BlockState state = pState;
-            if(holdStack.is(CAN_EXTINGUISH_INCENSE) && pState.getValue(LIT)){
-                state = pState.setValue(LIT, false);
-                pLevel.playSound(pPlayer, pPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1f,1f);
-            }else if(holdStack.is(CAN_IGNITE_INCENSE) && !pState.getValue(LIT)){
-                state = pState.setValue(LIT, true);
-                pLevel.playSound(pPlayer, pPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1f,1f);
+            if(holdStack.isIn(CAN_EXTINGUISH_INCENSE) && pState.get(LIT)){
+                state = pState.with(LIT, false);
+                pLevel.playSound(pPlayer, pPos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1f,1f);
+            }else if(holdStack.isIn(CAN_IGNITE_INCENSE) && !pState.get(LIT)){
+                state = pState.with(LIT, true);
+                pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1f,1f);
             }
 
-            if(holdStack.isDamageableItem()){
-               if(holdStack.is(CAN_IGNITE_INCENSE) && !pState.getValue(LIT)){
-                   holdStack.setDamageValue(holdStack.getDamageValue() + 1);
-                   if(holdStack.getDamageValue() == holdStack.getMaxDamage()){
-                       pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1f,1f);
-                       holdStack.shrink(1);
+            if(holdStack.isDamageable()){
+               if(holdStack.isIn(CAN_IGNITE_INCENSE) && !pState.get(LIT)){
+                   holdStack.setDamage(holdStack.getDamage() + 1);
+                   if(holdStack.getDamage() == holdStack.getMaxDamage()){
+                       pLevel.playSound(pPlayer, pPos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1f,1f);
+                       holdStack.decrement(1);
                    }
-               }else if(holdStack.is(CAN_EXTINGUISH_INCENSE) && pState.getValue(LIT)){
-                   holdStack.setDamageValue(holdStack.getDamageValue() + 1);
-                   if(holdStack.getDamageValue() == holdStack.getMaxDamage()){
-                       pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1f,1f);
-                       holdStack.shrink(1);
+               }else if(holdStack.isIn(CAN_EXTINGUISH_INCENSE) && pState.get(LIT)){
+                   holdStack.setDamage(holdStack.getDamage() + 1);
+                   if(holdStack.getDamage() == holdStack.getMaxDamage()){
+                       pLevel.playSound(pPlayer, pPos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1f,1f);
+                       holdStack.decrement(1);
                    }
                }
             }else if(!holdStack.getRecipeRemainder().equals(ItemStack.EMPTY)){
-                if(holdStack.is(CAN_IGNITE_INCENSE) && !pState.getValue(LIT)) {
+                if(holdStack.isIn(CAN_IGNITE_INCENSE) && !pState.get(LIT)) {
                     var stack = holdStack.getRecipeRemainder();
                     if(stack.getItem() != Items.BUCKET){
-                        holdStack.shrink(1);
-                        pPlayer.addItem(stack);
+                        holdStack.decrement(1);
+                        pPlayer.giveItemStack(stack);
                     }
                 }
-                else if(holdStack.is(CAN_EXTINGUISH_INCENSE) && pState.getValue(LIT)){
+                else if(holdStack.isIn(CAN_EXTINGUISH_INCENSE) && pState.get(LIT)){
                     var stack = holdStack.getRecipeRemainder();
                     if(stack.getItem() != Items.BUCKET){
-                        holdStack.shrink(1);
-                        pPlayer.addItem(stack);
+                        holdStack.decrement(1);
+                        pPlayer.giveItemStack(stack);
                     }
                 }
             }else{
-                if(holdStack.is(CAN_IGNITE_INCENSE) && !pState.getValue(LIT)){
-                    holdStack.shrink(1);
-                }else if(holdStack.is(CAN_EXTINGUISH_INCENSE) && pState.getValue(LIT)){
-                    holdStack.shrink(1);
+                if(holdStack.isIn(CAN_IGNITE_INCENSE) && !pState.get(LIT)){
+                    holdStack.decrement(1);
+                }else if(holdStack.isIn(CAN_EXTINGUISH_INCENSE) && pState.get(LIT)){
+                    holdStack.decrement(1);
                 }
             }
-            pLevel.setBlock(pPos,state, Block.UPDATE_ALL);
-            return InteractionResult.SUCCESS;
+            pLevel.setBlockState(pPos,state, Block.NOTIFY_ALL);
+            return ActionResult.SUCCESS;
 
-        } else if(!pState.getValue(LIT) && AromaRegister.isValidStack(holdStack)){
+        } else if(!pState.get(LIT) && AromaRegister.isValidStack(holdStack)){
 
             try(Transaction tx = Transaction.openOuter()){
                 if(entity.getInventory().amount == 0){
@@ -159,14 +159,14 @@ public class IncenseBlock extends DirectionalBlockWithEntity{
                 entity.getInventory().insert(ItemVariant.of(stack), stack.getCount(), tx);
 
                 entity.setAroma(AromaRegister.getAromaId(holdStack));
-                entity.setChanged();
-                    holdStack.shrink(1);
-                    pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f ,0.75f + (pLevel.getRandom().nextFloat() / 2f) * pLevel.getRandom().nextInt(-1,2));
+                entity.markDirty();
+                    holdStack.decrement(1);
+                    pLevel.playSound(pPlayer, pPos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 1f ,0.75f + (pLevel.getRandom().nextFloat() / 2f) * pLevel.getRandom().nextBetweenExclusive(-1,2));
                 }
                 tx.commit();
             }
-            return InteractionResult.SUCCESS;
-        } else if(!pState.getValue(LIT) && !entity.getInventory().getResource().toStack((int)entity.getInventory().amount).isEmpty() && holdStack.isEmpty()){
+            return ActionResult.SUCCESS;
+        } else if(!pState.get(LIT) && !entity.getInventory().getResource().toStack((int)entity.getInventory().amount).isEmpty() && holdStack.isEmpty()){
             try(Transaction tx = Transaction.openOuter()){
                 ItemStack stack = entity.getInventory().variant.toStack((int)entity.getInventory().amount);
                 if(stack.getCount() == 1){
@@ -174,30 +174,30 @@ public class IncenseBlock extends DirectionalBlockWithEntity{
 
                     entity.setAroma(0);
 
-                    if(pPlayer.getInventory().hasAnyMatching(item -> item.is(stack.getItem()) && item.getCount() < item.getMaxStackSize()) || pPlayer.getInventory().getFreeSlot() != -1){
-                        pPlayer.addItem(stack);
-                    }else if (pPlayer.getInventory().getFreeSlot() == -1) {
-                        popResource(pLevel, pPos, stack);
+                    if(pPlayer.getInventory().containsAny(item -> item.isOf(stack.getItem()) && item.getCount() < item.getMaxCount()) || pPlayer.getInventory().getEmptySlot() != -1){
+                        pPlayer.giveItemStack(stack);
+                    }else if (pPlayer.getInventory().getEmptySlot() == -1) {
+                        dropStack(pLevel, pPos, stack);
                     }
-                    pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f ,0.75f + (pLevel.getRandom().nextFloat() / 2f) * pLevel.getRandom().nextInt(-1,2));
+                    pLevel.playSound(pPlayer, pPos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 1f ,0.75f + (pLevel.getRandom().nextFloat() / 2f) * pLevel.getRandom().nextBetweenExclusive(-1,2));
 
                 }
-                entity.setChanged();
+                entity.markDirty();
                 tx.commit();
             }
-            return InteractionResult.SUCCESS;
+            return ActionResult.SUCCESS;
         }
 
 
-        return InteractionResult.FAIL;
+        return ActionResult.FAIL;
     }
 
     @Override
-    public void playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
+    public void onBreak(World level, BlockPos blockPos, BlockState blockState, PlayerEntity player) {
         IncenseBlockEntity entity = (IncenseBlockEntity) level.getBlockEntity(blockPos);
 
         ItemStack stack = entity.getInventory().getResource().toStack((int)entity.getInventory().amount);
-        popResource(level,blockPos,stack);
-        super.playerWillDestroy(level, blockPos, blockState, player);
+        dropStack(level,blockPos,stack);
+        super.onBreak(level, blockPos, blockState, player);
     }
 }

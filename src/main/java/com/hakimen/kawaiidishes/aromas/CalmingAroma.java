@@ -5,14 +5,14 @@ import com.hakimen.kawaiidishes.custom.types.Aroma;
 import com.hakimen.kawaiidishes.effects.CalmingEffect;
 import com.hakimen.kawaiidishes.registry.EffectRegister;
 import java.util.List;
-import net.minecraft.core.BlockPos;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.item.Item;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.world.World;
 
 public class CalmingAroma extends Aroma {
     public CalmingAroma(TagKey<Item> items, int color) {
@@ -20,11 +20,11 @@ public class CalmingAroma extends Aroma {
     }
 
     @Override
-    public void aromaTick(Level pLevel, BlockPos pPos, BlockState pState, IncenseBlockEntity entity) {
-        List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, AABB.ofSize(pPos.getCenter(),1,1,1).inflate(8),livingEntity -> true);
+    public void aromaTick(World pLevel, BlockPos pPos, BlockState pState, IncenseBlockEntity entity) {
+        List<LivingEntity> entities = pLevel.getEntitiesByClass(LivingEntity.class, Box.of(pPos.toCenterPos(),1,1,1).expand(8),livingEntity -> true);
 
         for (LivingEntity livingEntity : entities) {
-            livingEntity.addEffect(new MobEffectInstance(EffectRegister.CALMING.get(), 20 * 5, 0, false, false));
+            livingEntity.addStatusEffect(new StatusEffectInstance(EffectRegister.CALMING.get(), 20 * 5, 0, false, false));
         }
     }
 }

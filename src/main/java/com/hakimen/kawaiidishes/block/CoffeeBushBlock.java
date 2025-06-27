@@ -2,115 +2,115 @@ package com.hakimen.kawaiidishes.block;
 
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Fertilizable;
+import net.minecraft.block.PlantBlock;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
+import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
-public class CoffeeBushBlock extends BushBlock implements BonemealableBlock {
+public class CoffeeBushBlock extends PlantBlock implements Fertilizable {
 
-    public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
-    private static final VoxelShape TINY_BUSH_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D);
-    private static final VoxelShape BUSH_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
+    public static final IntProperty AGE = Properties.AGE_3;
+    private static final VoxelShape TINY_BUSH_SHAPE = Block.createCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D);
+    private static final VoxelShape BUSH_SHAPE = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
 
-    public CoffeeBushBlock(Properties pProperties) {
+    public CoffeeBushBlock(Settings pProperties) {
         super(pProperties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(AGE, Integer.valueOf(0)));
+        this.setDefaultState(this.stateManager.getDefaultState().with(AGE, Integer.valueOf(0)));
     }
 
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+    protected void appendProperties(StateManager.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(AGE);
     }
 
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader pLevelReader, BlockPos pPos, BlockState pState, boolean bl) {
-        return pState.getValue(AGE) < 3;
+    public boolean isFertilizable(WorldView pLevelReader, BlockPos pPos, BlockState pState, boolean bl) {
+        return pState.get(AGE) < 3;
     }
 
     @Override
-    public boolean isBonemealSuccess(Level pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState) {
+    public boolean canGrow(World pLevel, Random pRandom, BlockPos pPos, BlockState pState) {
         return true;
     }
 
     @Override
-    public void performBonemeal(ServerLevel pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState) {
-        int i = Math.min(3, pState.getValue(AGE) + 1);
-        pLevel.setBlock(pPos, pState.setValue(AGE, Integer.valueOf(i)), 2);
+    public void grow(ServerWorld pLevel, Random pRandom, BlockPos pPos, BlockState pState) {
+        int i = Math.min(3, pState.get(AGE) + 1);
+        pLevel.setBlockState(pPos, pState.with(AGE, Integer.valueOf(i)), 2);
     }
 
     @Override
-    public boolean isRandomlyTicking(BlockState pState) {
-        return pState.getValue(AGE) < 3;
+    public boolean hasRandomTicks(BlockState pState) {
+        return pState.get(AGE) < 3;
     }
 
     @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        if (pState.getValue(AGE) == 0) {
+    public VoxelShape getOutlineShape(BlockState pState, BlockView pLevel, BlockPos pPos, ShapeContext pContext) {
+        if (pState.get(AGE) == 0) {
             return TINY_BUSH_SHAPE;
         } else {
-            return pState.getValue(AGE) < 3 ? BUSH_SHAPE : super.getShape(pState, pLevel, pPos, pContext);
+            return pState.get(AGE) < 3 ? BUSH_SHAPE : super.getOutlineShape(pState, pLevel, pPos, pContext);
         }
     }
 
     @Override
-    public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-        int i = pState.getValue(AGE);
-        if (i < 3 && pLevel.getRawBrightness(pPos.above(), 0) >= 9) {
-            BlockState blockstate = pState.setValue(AGE, Integer.valueOf(i + 1));
-            pLevel.setBlock(pPos, blockstate, 2);
-            pLevel.gameEvent(GameEvent.BLOCK_CHANGE, pPos, GameEvent.Context.of(blockstate));
+    public void randomTick(BlockState pState, ServerWorld pLevel, BlockPos pPos, Random pRandom) {
+        int i = pState.get(AGE);
+        if (i < 3 && pLevel.getBaseLightLevel(pPos.up(), 0) >= 9) {
+            BlockState blockstate = pState.with(AGE, Integer.valueOf(i + 1));
+            pLevel.setBlockState(pPos, blockstate, 2);
+            pLevel.emitGameEvent(GameEvent.BLOCK_CHANGE, pPos, GameEvent.Emitter.of(blockstate));
         }
     }
 
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        int currentAge = pState.getValue(AGE);
-        if ((currentAge != 3) && pPlayer.getItemInHand(pHand).is(Items.BONE_MEAL)) {
-            return InteractionResult.PASS;
+    public ActionResult onUse(BlockState pState, World pLevel, BlockPos pPos, PlayerEntity pPlayer, Hand pHand, BlockHitResult pHit) {
+        int currentAge = pState.get(AGE);
+        if ((currentAge != 3) && pPlayer.getStackInHand(pHand).isOf(Items.BONE_MEAL)) {
+            return ActionResult.PASS;
         } else if (currentAge == 3) {
             int itemCount = 1 + pLevel.random.nextInt(4);
-            popResource(pLevel, pPos, new ItemStack(ItemRegister.COFFEE_BERRIES.get(), itemCount));
-            pLevel.playSound(null, pPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + pLevel.random.nextFloat() * 0.4F);
-            BlockState blockstate = pState.setValue(AGE, 1);
-            pLevel.setBlock(pPos, blockstate, 2);
-            pLevel.gameEvent(GameEvent.BLOCK_CHANGE, pPos, GameEvent.Context.of(pPlayer, blockstate));
-            return InteractionResult.sidedSuccess(pLevel.isClientSide);
+            dropStack(pLevel, pPos, new ItemStack(ItemRegister.COFFEE_BERRIES.get(), itemCount));
+            pLevel.playSound(null, pPos, SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + pLevel.random.nextFloat() * 0.4F);
+            BlockState blockstate = pState.with(AGE, 1);
+            pLevel.setBlockState(pPos, blockstate, 2);
+            pLevel.emitGameEvent(GameEvent.BLOCK_CHANGE, pPos, GameEvent.Emitter.of(pPlayer, blockstate));
+            return ActionResult.success(pLevel.isClient);
         } else {
-            return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+            return super.onUse(pState, pLevel, pPos, pPlayer, pHand, pHit);
         }
     }
 
     @Override
-    public void playerDestroy(Level level, Player player, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, ItemStack itemStack) {
-        int age = blockState.getValue(AGE);
+    public void afterBreak(World level, PlayerEntity player, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, ItemStack itemStack) {
+        int age = blockState.get(AGE);
         if(age == 3){
             int itemCount = 1 + level.random.nextInt(4);
-            popResource(level, blockPos, new ItemStack(ItemRegister.COFFEE_BERRIES.get(), itemCount));
+            dropStack(level, blockPos, new ItemStack(ItemRegister.COFFEE_BERRIES.get(), itemCount));
         }
 
-        super.playerDestroy(level, player, blockPos, blockState, blockEntity, itemStack);
+        super.afterBreak(level, player, blockPos, blockState, blockEntity, itemStack);
     }
 }

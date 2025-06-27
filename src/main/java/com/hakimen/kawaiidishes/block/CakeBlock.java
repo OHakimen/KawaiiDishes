@@ -1,97 +1,97 @@
 package com.hakimen.kawaiidishes.block;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.BooleanOp;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.IntProperty;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.function.BooleanBiFunction;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
+import net.minecraft.world.event.GameEvent;
 
 public class CakeBlock extends Block {
 
-    public static final IntegerProperty SLICES = IntegerProperty.create("slices", 1,4);
+    public static final IntProperty SLICES = IntProperty.of("slices", 1,4);
 
-    public CakeBlock(Properties props) {
+    public CakeBlock(Settings props) {
         super(props
-                .isSuffocating((pState, pBlockGetter,pPos) -> false)
+                .suffocates((pState, pBlockGetter,pPos) -> false)
         );
-        this.registerDefaultState(this.stateDefinition.any().setValue(SLICES, 4));
+        this.setDefaultState(this.stateManager.getDefaultState().with(SLICES, 4));
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> properties) {
+    protected void appendProperties(StateManager.Builder<Block, BlockState> properties) {
         properties.add( SLICES );
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDir, BlockState pState1, LevelAccessor pLevelAccessor, BlockPos pPos, BlockPos pPos1) {
+    public BlockState getStateForNeighborUpdate(BlockState pState, Direction pDir, BlockState pState1, WorldAccess pLevelAccessor, BlockPos pPos, BlockPos pPos1) {
 
-        if(pDir == Direction.DOWN && !pState.canSurvive(pLevelAccessor, pPos) && pState.getValue(SLICES) == 4){
-            popResource((Level) pLevelAccessor,pPos,new ItemStack(this));
+        if(pDir == Direction.DOWN && !pState.canPlaceAt(pLevelAccessor, pPos) && pState.get(SLICES) == 4){
+            dropStack((World) pLevelAccessor,pPos,new ItemStack(this));
         }
 
-        return pDir == Direction.DOWN && !pState.canSurvive(pLevelAccessor, pPos)
-                ? Blocks.AIR.defaultBlockState()
-                : super.updateShape(pState, pDir, pState1, pLevelAccessor, pPos, pPos1);
+        return pDir == Direction.DOWN && !pState.canPlaceAt(pLevelAccessor, pPos)
+                ? Blocks.AIR.getDefaultState()
+                : super.getStateForNeighborUpdate(pState, pDir, pState1, pLevelAccessor, pPos, pPos1);
     }
 
     @Override
-    public boolean canSurvive(BlockState pState, LevelReader pLevelReader, BlockPos pPos) {
-        return pLevelReader.getBlockState(pPos.below()).isSolid() && !(pLevelReader.getBlockState(pPos.below()).getBlock() instanceof CakeBlock);
+    public boolean canPlaceAt(BlockState pState, WorldView pLevelReader, BlockPos pPos) {
+        return pLevelReader.getBlockState(pPos.down()).isSolid() && !(pLevelReader.getBlockState(pPos.down()).getBlock() instanceof CakeBlock);
     }
 
     @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pBlockGetter, BlockPos pPos, CollisionContext pCollisionContext) {
-        switch (pState.getValue(SLICES)){
+    public VoxelShape getOutlineShape(BlockState pState, BlockView pBlockGetter, BlockPos pPos, ShapeContext pCollisionContext) {
+        switch (pState.get(SLICES)){
             case 1 -> {
-                return Block.box(8,0,8,15,4,15);
+                return Block.createCuboidShape(8,0,8,15,4,15);
             }
             case 2 -> {
-                return Block.box(8,0,1,15,4,15);
+                return Block.createCuboidShape(8,0,1,15,4,15);
             }
             case 3 -> {
-                return Shapes.join(
-                        Block.box(1,0,8,15,4,15),
-                        Block.box(8,0,1,15,4,8),
-                        BooleanOp.OR);
+                return VoxelShapes.combineAndSimplify(
+                        Block.createCuboidShape(1,0,8,15,4,15),
+                        Block.createCuboidShape(8,0,1,15,4,8),
+                        BooleanBiFunction.OR);
             }
             case 4 -> {
-                return Block.box(1,0,1,15,4,15);
+                return Block.createCuboidShape(1,0,1,15,4,15);
             }
         }
 
-        return super.getShape(pState,pBlockGetter,pPos,pCollisionContext);
+        return super.getOutlineShape(pState,pBlockGetter,pPos,pCollisionContext);
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pBlockHitResult) {
-        ItemStack itemstack = pPlayer.getItemInHand(pHand);
+    public ActionResult onUse(BlockState pState, World pLevel, BlockPos pPos, PlayerEntity pPlayer, Hand pHand, BlockHitResult pBlockHitResult) {
+        ItemStack itemstack = pPlayer.getStackInHand(pHand);
 
-        if (pLevel.isClientSide) {
-            if (eat(pLevel, pPos, pState, pPlayer).consumesAction()) {
-                return InteractionResult.SUCCESS;
+        if (pLevel.isClient) {
+            if (eat(pLevel, pPos, pState, pPlayer).isAccepted()) {
+                return ActionResult.SUCCESS;
             }
 
             if (itemstack.isEmpty()) {
-                return InteractionResult.CONSUME;
+                return ActionResult.CONSUME;
             }
         }
 
@@ -99,31 +99,31 @@ public class CakeBlock extends Block {
     }
 
     @Override
-    public void destroy(LevelAccessor pLevel, BlockPos pPos, BlockState pState) {
-        if(pState.getValue(SLICES) == 4){
-            popResource((Level) pLevel,pPos,new ItemStack(this));
+    public void onBroken(WorldAccess pLevel, BlockPos pPos, BlockState pState) {
+        if(pState.get(SLICES) == 4){
+            dropStack((World) pLevel,pPos,new ItemStack(this));
         }
-        super.destroy(pLevel, pPos, pState);
+        super.onBroken(pLevel, pPos, pState);
     }
 
 
-    protected static InteractionResult eat(LevelAccessor pLevelAccessor, BlockPos pPos, BlockState pState, Player pPlayer) {
-        if (!pPlayer.canEat(false)) {
-            return InteractionResult.PASS;
+    protected static ActionResult eat(WorldAccess pLevelAccessor, BlockPos pPos, BlockState pState, PlayerEntity pPlayer) {
+        if (!pPlayer.canConsume(false)) {
+            return ActionResult.PASS;
         } else {
-            pPlayer.awardStat(Stats.EAT_CAKE_SLICE);
-            pPlayer.getFoodData().eat(3, 1f);
-            int i = pState.getValue(SLICES);
-            pLevelAccessor.gameEvent(pPlayer, GameEvent.EAT, pPos);
-            pLevelAccessor.playSound(pPlayer, pPos, SoundEvents.GENERIC_EAT, SoundSource.BLOCKS, 1f,1f);
+            pPlayer.incrementStat(Stats.EAT_CAKE_SLICE);
+            pPlayer.getHungerManager().add(3, 1f);
+            int i = pState.get(SLICES);
+            pLevelAccessor.emitGameEvent(pPlayer, GameEvent.EAT, pPos);
+            pLevelAccessor.playSound(pPlayer, pPos, SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.BLOCKS, 1f,1f);
             if (i > 1) {
-                pLevelAccessor.setBlock(pPos, pState.setValue(SLICES, i - 1), UPDATE_ALL);
+                pLevelAccessor.setBlockState(pPos, pState.with(SLICES, i - 1), NOTIFY_ALL);
             } else {
                 pLevelAccessor.removeBlock(pPos, false);
-                pLevelAccessor.gameEvent(pPlayer, GameEvent.BLOCK_DESTROY, pPos);
+                pLevelAccessor.emitGameEvent(pPlayer, GameEvent.BLOCK_DESTROY, pPos);
             }
 
-            return InteractionResult.SUCCESS;
+            return ActionResult.SUCCESS;
         }
     }
 }

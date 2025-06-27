@@ -11,14 +11,14 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.impl.client.itemgroup.FabricCreativeGuiComponents;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.material.Fluids;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.texture.Sprite;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.registry.Registries;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Style;
+import net.minecraft.util.Formatting;
 import org.joml.Matrix3dStack;
 import org.joml.Matrix4f;
 import org.w3c.dom.Text;
@@ -27,7 +27,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.minecraft.world.inventory.InventoryMenu.BLOCK_ATLAS;
+import static net.minecraft.screen.PlayerScreenHandler.BLOCK_ATLAS_TEXTURE;
 
 public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
     private static final NumberFormat nf = NumberFormat.getIntegerInstance();
@@ -70,13 +70,13 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
      * METHOD FROM https://github.com/TechReborn/TechReborn
      * UNDER MIT LICENSE: https://github.com/TechReborn/TechReborn/blob/1.19/LICENSE.md
      */
-    public void drawFluid(GuiGraphics context, FluidStack fluidStorage, int x, int y) {
+    public void drawFluid(DrawContext context, FluidStack fluidStorage, int x, int y) {
         if (fluidStorage.getFluidVariant().getFluid() == Fluids.EMPTY) {
             return;
         }
-        RenderSystem.setShaderTexture(0, BLOCK_ATLAS);
+        RenderSystem.setShaderTexture(0, BLOCK_ATLAS_TEXTURE);
         y += height;
-        final TextureAtlasSprite sprite = FluidVariantRendering.getSprite(fluidStorage.fluidVariant);
+        final Sprite sprite = FluidVariantRendering.getSprite(fluidStorage.fluidVariant);
         int color = FluidVariantRendering.getColor(fluidStorage.fluidVariant);
 
 
@@ -91,7 +91,7 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
         while (offsetHeight != 0) {
             final int curHeight = Math.min(offsetHeight, iconHeight);
 
-            context.blit(x, y - offsetHeight, 0, width, curHeight, sprite);
+            context.drawSprite(x, y - offsetHeight, 0, width, curHeight, sprite);
             offsetHeight -= curHeight;
             iteration++;
 
@@ -102,26 +102,26 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 
         RenderSystem.setShaderTexture(0, FluidRenderHandlerRegistry.INSTANCE.get(fluidStorage.fluidVariant.getFluid())
-                .getFluidSprites(net.minecraft.client.Minecraft.getInstance().level, null, fluidStorage.fluidVariant.getFluid().defaultFluidState())[0].atlasLocation());
+                .getFluidSprites(net.minecraft.client.MinecraftClient.getInstance().world, null, fluidStorage.fluidVariant.getFluid().getDefaultState())[0].getAtlasId());
     }
 
-    public List<net.minecraft.network.chat.Component> getTooltip(FluidStack fluidStack, TooltipFlag tooltipFlag) {
-        List<net.minecraft.network.chat.Component> tooltip = new ArrayList<>();
+    public List<net.minecraft.text.Text> getTooltip(FluidStack fluidStack, TooltipContext tooltipFlag) {
+        List<net.minecraft.text.Text> tooltip = new ArrayList<>();
         FluidVariant fluidType = fluidStack.getFluidVariant();
         if (fluidType == null) {
             return tooltip;
         }
 
-        MutableComponent displayName = net.minecraft.network.chat.Component.translatable("block." + BuiltInRegistries.FLUID.getKey(fluidStack.fluidVariant.getObject()).toLanguageKey());
+        MutableText displayName = net.minecraft.text.Text.translatable("block." + Registries.FLUID.getId(fluidStack.fluidVariant.getObject()).toTranslationKey());
         tooltip.add(displayName);
 
         long amount = fluidStack.getAmount();
         if (tooltipMode == TooltipMode.SHOW_AMOUNT_AND_CAPACITY) {
-            MutableComponent amountString = net.minecraft.network.chat.Component.translatable("kawaiidishes.tooltip.liquid.amount_with_capacity", nf.format(FluidStack.convertDropletsToMb(amount)), nf.format(capacityMb));
-            tooltip.add(amountString.withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
+            MutableText amountString = net.minecraft.text.Text.translatable("kawaiidishes.tooltip.liquid.amount_with_capacity", nf.format(FluidStack.convertDropletsToMb(amount)), nf.format(capacityMb));
+            tooltip.add(amountString.fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
         } else if (tooltipMode == TooltipMode.SHOW_AMOUNT) {
-            MutableComponent amountString = net.minecraft.network.chat.Component.translatable("kawaiidishes.tooltip.liquid.amount", nf.format(FluidStack.convertDropletsToMb(amount)));
-            tooltip.add(amountString.withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
+            MutableText amountString = net.minecraft.text.Text.translatable("kawaiidishes.tooltip.liquid.amount", nf.format(FluidStack.convertDropletsToMb(amount)));
+            tooltip.add(amountString.fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
         }
 
         return tooltip;

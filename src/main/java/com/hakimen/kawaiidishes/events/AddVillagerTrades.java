@@ -3,11 +3,11 @@ package com.hakimen.kawaiidishes.events;
 import com.hakimen.kawaiidishes.configs.ServerConfig;
 import com.hakimen.kawaiidishes.registry.ItemRegister;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
-import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.trading.MerchantOffer;
-import net.minecraft.world.level.ItemLike;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.village.TradeOffer;
+import net.minecraft.village.VillagerProfession;
 import org.jetbrains.annotations.Nullable;
 
 public class AddVillagerTrades {
@@ -80,15 +80,15 @@ public class AddVillagerTrades {
         });
     }
 
-    public static MerchantOffer buyTrade(ItemLike item, int count, int maxTrades, int xp) {
-        return new MerchantOffer(new ItemStack(item, count), new ItemStack(Items.EMERALD), maxTrades, xp, 0.05F);
+    public static TradeOffer buyTrade(ItemConvertible item, int count, int maxTrades, int xp) {
+        return new TradeOffer(new ItemStack(item, count), new ItemStack(Items.EMERALD), maxTrades, xp, 0.05F);
     }
 
-    public static MerchantOffer sellTrade(ItemLike item, int count, int maxTrades, int xp) {
-        return new MerchantOffer(new ItemStack(Items.EMERALD, 1), new ItemStack(item, count), maxTrades, xp, 0.05F);
+    public static TradeOffer sellTrade(ItemConvertible item, int count, int maxTrades, int xp) {
+        return new TradeOffer(new ItemStack(Items.EMERALD, 1), new ItemStack(item, count), maxTrades, xp, 0.05F);
     }
 
-    public static MerchantOffer sellTrade(int value, ItemLike item, int count, int maxTrades, int xp) {
-        return new MerchantOffer(new ItemStack(Items.EMERALD, value), new ItemStack(item, count), maxTrades, xp, 0.05F);
+    public static TradeOffer sellTrade(int value, ItemConvertible item, int count, int maxTrades, int xp) {
+        return new TradeOffer(new ItemStack(Items.EMERALD, value), new ItemStack(item, count), maxTrades, xp, 0.05F);
     }
 }

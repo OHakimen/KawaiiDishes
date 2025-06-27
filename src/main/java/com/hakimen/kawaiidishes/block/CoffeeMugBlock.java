@@ -1,92 +1,92 @@
 package com.hakimen.kawaiidishes.block;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 
 public class CoffeeMugBlock extends Block {
 
-    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public CoffeeMugBlock(Properties props) {
+    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+    public CoffeeMugBlock(Settings props) {
         super(props);
 
-        registerDefaultState( getStateDefinition().any()
-                .setValue(FACING, Direction.NORTH));
+        setDefaultState( getStateManager().getDefaultState()
+                .with(FACING, Direction.NORTH));
     }
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> properties )
+    protected void appendProperties(StateManager.Builder<Block, BlockState> properties )
     {
         properties.add( FACING );
     }
 
     @Override
     @Deprecated
-    public BlockState mirror( BlockState state, Mirror mirrorIn )
+    public BlockState mirror( BlockState state, BlockMirror mirrorIn )
     {
-        return state.rotate( mirrorIn.getRotation( state.getValue( FACING ) ) );
+        return state.rotate( mirrorIn.getRotation( state.get( FACING ) ) );
     }
 
     @Override
     @Deprecated
-    public BlockState rotate( BlockState state, Rotation rot )
+    public BlockState rotate( BlockState state, BlockRotation rot )
     {
-        return state.setValue( FACING, rot.rotate( state.getValue( FACING ) ) );
+        return state.with( FACING, rot.rotate( state.get( FACING ) ) );
     }
 
     @Override
-    public BlockState getStateForPlacement( BlockPlaceContext placement )
+    public BlockState getPlacementState( ItemPlacementContext placement )
     {
-        return defaultBlockState().setValue( FACING, placement.getHorizontalDirection() );
+        return getDefaultState().with( FACING, placement.getHorizontalPlayerFacing() );
     }
 
 
     @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        VoxelShape shape = Block.box(5,0,5,11,9,11);
+    public VoxelShape getOutlineShape(BlockState pState, BlockView pLevel, BlockPos pPos, ShapeContext pContext) {
+        VoxelShape shape = Block.createCuboidShape(5,0,5,11,9,11);
         return shape;
     }
 
     @Override
-    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
-        return pLevel.getBlockState(pPos.below()).isSolid();
+    public boolean canPlaceAt(BlockState pState, WorldView pLevel, BlockPos pPos) {
+        return pLevel.getBlockState(pPos.down()).isSolid();
 
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pOtherState, LevelAccessor pLevel, BlockPos pPrimaryPos, BlockPos pSecondaryPos) {
-        return pDirection == Direction.DOWN && !pState.canSurvive(pLevel, pPrimaryPos)
-                ? Blocks.AIR.defaultBlockState()
-                : super.updateShape(pState, pDirection, pOtherState, pLevel, pPrimaryPos, pSecondaryPos);
+    public BlockState getStateForNeighborUpdate(BlockState pState, Direction pDirection, BlockState pOtherState, WorldAccess pLevel, BlockPos pPrimaryPos, BlockPos pSecondaryPos) {
+        return pDirection == Direction.DOWN && !pState.canPlaceAt(pLevel, pPrimaryPos)
+                ? Blocks.AIR.getDefaultState()
+                : super.getStateForNeighborUpdate(pState, pDirection, pOtherState, pLevel, pPrimaryPos, pSecondaryPos);
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pInteractionHand, BlockHitResult pBlockHitResult) {
+    public ActionResult onUse(BlockState pState, World pLevel, BlockPos pPos, PlayerEntity pPlayer, Hand pInteractionHand, BlockHitResult pBlockHitResult) {
 
-        if(pPlayer.isCrouching()){
-            pPlayer.addItem(getCloneItemStack(pLevel, pPos, pState));
-            pLevel.setBlockAndUpdate(pPos,Blocks.AIR.defaultBlockState());
-            pPlayer.playSound(SoundEvents.ITEM_PICKUP, 1f, 0.75f + pLevel.getRandom().nextFloat()/2f);
-            return InteractionResult.SUCCESS;
+        if(pPlayer.isInSneakingPose()){
+            pPlayer.giveItemStack(getPickStack(pLevel, pPos, pState));
+            pLevel.setBlockState(pPos,Blocks.AIR.getDefaultState());
+            pPlayer.playSound(SoundEvents.ENTITY_ITEM_PICKUP, 1f, 0.75f + pLevel.getRandom().nextFloat()/2f);
+            return ActionResult.SUCCESS;
         }
 
-        return super.use(pState, pLevel, pPos, pPlayer, pInteractionHand, pBlockHitResult);
+        return super.onUse(pState, pLevel, pPos, pPlayer, pInteractionHand, pBlockHitResult);
     }
 }

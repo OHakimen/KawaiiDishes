@@ -7,14 +7,14 @@ import com.hakimen.kawaiidishes.registry.BlockEntityRegister;
 import com.hakimen.kawaiidishes.registry.ParticleRegister;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class IncenseBlockEntity extends BlockEntity {
 
@@ -36,7 +36,7 @@ public class IncenseBlockEntity extends BlockEntity {
     }
 
     public Aroma getAromaFromId(){
-        return Registries.AROMAS.getHolder(getAroma()).get().value();
+        return Registries.AROMAS.getEntry(getAroma()).get().value();
     }
 
     public void setAroma(int aroma) {
@@ -52,24 +52,24 @@ public class IncenseBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag pTag) {
+    protected void writeNbt(NbtCompound pTag) {
         inventory.writeNbt(pTag);
         pTag.putInt("aroma", aroma);
-        super.saveAdditional(pTag);
+        super.writeNbt(pTag);
     }
 
     @Override
-    public void load(CompoundTag pTag) {
+    public void readNbt(NbtCompound pTag) {
         inventory.variant = ItemVariant.fromNbt(pTag.getCompound("variant"));
         inventory.amount = pTag.getLong("amount");
         aroma = pTag.getInt("aroma");
-        super.load(pTag);
+        super.readNbt(pTag);
     }
 
-    public void tick(Level pLevel, BlockPos pPos, BlockState pState, IncenseBlockEntity entity) {
-        if (pLevel.isClientSide) {
+    public void tick(World pLevel, BlockPos pPos, BlockState pState, IncenseBlockEntity entity) {
+        if (pLevel.isClient) {
             // On client
-            if (pState.getValue(IncenseBlock.LIT) && pLevel.random.nextFloat() < 0.025f) {
+            if (pState.get(IncenseBlock.LIT) && pLevel.random.nextFloat() < 0.025f) {
 
                 pLevel.addParticle(ParticleRegister.INCENSE_PARTICLE.get(),
                         pPos.getX() + 0.5f,
@@ -81,7 +81,7 @@ public class IncenseBlockEntity extends BlockEntity {
                 );
             }
         }else {
-            if(!this.getBlockState().getValue(IncenseBlock.LIT)){
+            if(!this.getCachedState().get(IncenseBlock.LIT)){
                 return;
             }
 
@@ -93,14 +93,14 @@ public class IncenseBlockEntity extends BlockEntity {
 
 
     @Override
-    public CompoundTag getUpdateTag() {
-        return this.saveWithFullMetadata();
+    public NbtCompound toInitialChunkDataNbt() {
+        return this.createNbtWithIdentifyingData();
     }
 
     @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
         // Will get tag from #getUpdateTag
-        return ClientboundBlockEntityDataPacket.create(this, BlockEntity::saveWithFullMetadata);
+        return BlockEntityUpdateS2CPacket.create(this, BlockEntity::createNbtWithIdentifyingData);
     }
 
 }

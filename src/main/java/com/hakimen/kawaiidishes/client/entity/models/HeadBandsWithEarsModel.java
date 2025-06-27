@@ -1,11 +1,11 @@
 package com.hakimen.kawaiidishes.client.entity.models;
 
 import com.hakimen.kawaiidishes.item.armor.MaidDressesWithTailArmorItem;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Identifier;
 
 public class HeadBandsWithEarsModel extends GeoArmorModel<MaidDressesWithTailArmorItem>{
 
-    public HeadBandsWithEarsModel(ResourceLocation modelLocation, ResourceLocation textureLocation, ResourceLocation animationLocation) {
+    public HeadBandsWithEarsModel(Identifier modelLocation, Identifier textureLocation, Identifier animationLocation) {
         super(modelLocation, textureLocation, animationLocation);
     }
 

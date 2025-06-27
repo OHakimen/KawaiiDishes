@@ -2,13 +2,13 @@ package com.hakimen.kawaiidishes.mixin;
 
 import com.hakimen.kawaiidishes.registry.EnchantmentRegister;
 import com.hakimen.kawaiidishes.utils.item.EnchantUtils;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Equipable;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Equipment;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,12 +18,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ArmorItemAutoEquipMixin {
 
     @Inject(at = @At("HEAD"), method = "inventoryTick")
-    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pPartialTicks, boolean someBoolean, CallbackInfo ci){
-        if(pStack.getItem() instanceof Equipable equipable && pEntity instanceof Player player) {
+    public void inventoryTick(ItemStack pStack, World pLevel, Entity pEntity, int pPartialTicks, boolean someBoolean, CallbackInfo ci){
+        if(pStack.getItem() instanceof Equipment equipable && pEntity instanceof PlayerEntity player) {
             boolean hasAutoEquip = EnchantUtils.hasEnchant(pStack, EnchantmentRegister.AUTO_EQUIP_CURSE.get());
-            EquipmentSlot targetSlot = equipable.getEquipmentSlot();
-            if(player.getItemBySlot(targetSlot).equals(ItemStack.EMPTY) && hasAutoEquip && !player.getCooldowns().isOnCooldown(pStack.getItem())){
-                player.setItemSlot(targetSlot, pStack.copy());
+            EquipmentSlot targetSlot = equipable.getSlotType();
+            if(player.getEquippedStack(targetSlot).equals(ItemStack.EMPTY) && hasAutoEquip && !player.getItemCooldownManager().isCoolingDown(pStack.getItem())){
+                player.equipStack(targetSlot, pStack.copy());
                 pStack.setCount(0);
             }
         }

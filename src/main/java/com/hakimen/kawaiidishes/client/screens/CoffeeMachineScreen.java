@@ -6,19 +6,19 @@ import com.hakimen.kawaiidishes.containers.CoffeeMachineContainer;
 import com.hakimen.kawaiidishes.utils.FluidStack;
 import com.hakimen.kawaiidishes.utils.MouseUtil;
 import java.util.Optional;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 
-public class CoffeeMachineScreen extends AbstractContainerScreen<CoffeeMachineContainer> {
-    private final ResourceLocation GUI = new ResourceLocation(KawaiiDishes.MODID, "textures/gui/coffee_machine_gui.png");
+public class CoffeeMachineScreen extends HandledScreen<CoffeeMachineContainer> {
+    private final Identifier GUI = new Identifier(KawaiiDishes.MODID, "textures/gui/coffee_machine_gui.png");
 
     private FluidStackRenderer renderer;
 
-    public CoffeeMachineScreen(CoffeeMachineContainer container, Inventory inv, Component name) {
+    public CoffeeMachineScreen(CoffeeMachineContainer container, PlayerInventory inv, Text name) {
         super(container, inv, name);
         assignFluidRenderer();
     }
@@ -28,40 +28,40 @@ public class CoffeeMachineScreen extends AbstractContainerScreen<CoffeeMachineCo
     }
 
     @Override
-    protected void renderLabels(GuiGraphics guiGraphics, int pMouseX, int pMouseY) {
+    protected void drawForeground(DrawContext guiGraphics, int pMouseX, int pMouseY) {
 
-        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY - 1, 4210752, false);
-        guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY + 2, 4210752, false);
+        guiGraphics.drawText(this.textRenderer, this.title, this.titleX, this.titleY - 1, 4210752, false);
+        guiGraphics.drawText(this.textRenderer, this.playerInventoryTitle, this.playerInventoryTitleX, this.playerInventoryTitleY + 2, 4210752, false);
 
-        int x = (width - imageWidth) / 2;
-        int y = (height - imageHeight) / 2;
+        int x = (width - backgroundWidth) / 2;
+        int y = (height - backgroundHeight) / 2;
 
         renderFluidAreaTooltips(guiGraphics, pMouseX, pMouseY, x, y);
     }
 
-    private void renderFluidAreaTooltips(GuiGraphics guiGraphics, int pMouseX, int pMouseY, int x, int y) {
+    private void renderFluidAreaTooltips(DrawContext guiGraphics, int pMouseX, int pMouseY, int x, int y) {
         if(isMouseAboveArea(pMouseX, pMouseY, x, y, 49, 18)) {
-            guiGraphics.renderTooltip(this.font,renderer.getTooltip(new FluidStack(menu.getFluidVariant(), menu.getBlockEntity().getWaterTank().getAmount()), TooltipFlag.NORMAL), Optional.empty(), pMouseX - x, pMouseY - y);
+            guiGraphics.drawTooltip(this.textRenderer,renderer.getTooltip(new FluidStack(handler.getFluidVariant(), handler.getBlockEntity().getWaterTank().getAmount()), TooltipContext.BASIC), Optional.empty(), pMouseX - x, pMouseY - y);
         }
     }
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        this.renderBg(guiGraphics,partialTicks,mouseX,mouseY);
+    public void render(DrawContext guiGraphics, int mouseX, int mouseY, float partialTicks) {
+        this.drawBackground(guiGraphics,partialTicks,mouseX,mouseY);
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
-        this.renderTooltip(guiGraphics, mouseX, mouseY);
+        this.drawMouseoverTooltip(guiGraphics, mouseX, mouseY);
     }
 
 
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int mouseX, int mouseY) {
-        int relX = (this.width - this.imageWidth) / 2;
-        int relY = (this.height - this.imageHeight) / 2;
-        guiGraphics.blit(GUI, relX, relY, 0, 0, this.imageWidth, this.imageHeight + 2);
+    protected void drawBackground(DrawContext guiGraphics, float partialTicks, int mouseX, int mouseY) {
+        int relX = (this.width - this.backgroundWidth) / 2;
+        int relY = (this.height - this.backgroundHeight) / 2;
+        guiGraphics.drawTexture(GUI, relX, relY, 0, 0, this.backgroundWidth, this.backgroundHeight + 2);
 
-        FluidStack stack =  new FluidStack(menu.getFluidVariant(), menu.getBlockEntity().getWaterTank().getAmount());
+        FluidStack stack =  new FluidStack(handler.getFluidVariant(), handler.getBlockEntity().getWaterTank().getAmount());
 
         renderer.drawFluid(guiGraphics, stack,relX + 49, relY + 18);
 
-        guiGraphics.blit(GUI, relX+64, relY+22, 0, 168, menu.getScaledProgress(),44);
+        guiGraphics.drawTexture(GUI, relX+64, relY+22, 0, 168, handler.getScaledProgress(),44);
     }
 
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY) {

@@ -19,20 +19,20 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 
 import static com.hakimen.kawaiidishes.utils.item.ArmorUtils.applyEnchantmentEffects;
 
@@ -43,43 +43,43 @@ public class ShoesArmorItem extends GeoArmorItem implements IDyeableItem, IAnima
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
     public boolean hasOverlay(ItemStack stack){
-        CompoundTag decorData = stack.getOrCreateTag();
+        NbtCompound decorData = stack.getOrCreateNbt();
         return decorData.contains(has_overlay) && decorData.getBoolean(has_overlay);
     }
 
-    public ShoesArmorItem(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
+    public ShoesArmorItem(ArmorMaterial pMaterial, Type pType, Settings pProperties) {
         super(pMaterial, pType, pProperties);
     }
 
     @Override
-    public boolean isFoil(ItemStack p_41453_) {
+    public boolean hasGlint(ItemStack p_41453_) {
         return false;
     }
 
     @Override
-    public void inventoryTick(ItemStack itemStack, Level level, Entity entity, int slot, boolean bl) {
-        if(ItemUtils.isItemOnArmorSlot(slot) && entity instanceof Player player){
+    public void inventoryTick(ItemStack itemStack, World level, Entity entity, int slot, boolean bl) {
+        if(ItemUtils.isItemOnArmorSlot(slot) && entity instanceof PlayerEntity player){
             applyEnchantmentEffects(itemStack, level, player);
         }
         super.inventoryTick(itemStack, level, entity, slot, bl);
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+    public void appendTooltip(ItemStack pStack, @Nullable World pLevel, List<Text> pTooltipComponents, TooltipContext pIsAdvanced) {
         if((hasBaseColor(pStack) || hasOverlayColor(pStack)) && !pIsAdvanced.isAdvanced() ){
-            pTooltipComponents.add(Component.translatable("item.dyed").withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
+            pTooltipComponents.add(Text.translatable("item.dyed").fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
         }else if((hasBaseColor(pStack) || hasOverlayColor(pStack)) && !pIsAdvanced.isCreative()){
             if(hasBaseColor(pStack)){
-                pTooltipComponents.add(Component.translatable("item.kawaiidishes.base_dye", "0x"+Integer.toString(getBaseColor(pStack),16).toUpperCase()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
+                pTooltipComponents.add(Text.translatable("item.kawaiidishes.base_dye", "0x"+Integer.toString(getBaseColor(pStack),16).toUpperCase()).fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
             }
             if(hasOverlayColor(pStack)){
-                pTooltipComponents.add(Component.translatable("item.kawaiidishes.overlay_dye", "0x"+Integer.toString(getOverlayColor(pStack),16).toUpperCase()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
+                pTooltipComponents.add(Text.translatable("item.kawaiidishes.overlay_dye", "0x"+Integer.toString(getOverlayColor(pStack),16).toUpperCase()).fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
             }
         }else{
-            pTooltipComponents.add(Component.translatable("item.kawaiidishes.dyeable").withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
+            pTooltipComponents.add(Text.translatable("item.kawaiidishes.dyeable").fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
         }
         if(hasOverlay(pStack)){
-            pTooltipComponents.add(Component.translatable("item.kawaiidishes.overlayed").withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
+            pTooltipComponents.add(Text.translatable("item.kawaiidishes.overlayed").fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
         }
     }
 
@@ -89,12 +89,12 @@ public class ShoesArmorItem extends GeoArmorItem implements IDyeableItem, IAnima
             private GeoArmorRenderer<?> renderer;
 
             @Override
-            public HumanoidModel<LivingEntity> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<LivingEntity> original) {
+            public BipedEntityModel<LivingEntity> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, BipedEntityModel<LivingEntity> original) {
                 if (this.renderer == null)
                     this.renderer = new ShoesArmorRender(new ShoesArmorModel(
-                            new ResourceLocation(KawaiiDishes.MODID, "geo/shoes.geo.json"),
-                            new ResourceLocation(KawaiiDishes.MODID, "textures/models/armor/shoes/shoes.png"),
-                            new ResourceLocation(KawaiiDishes.MODID, "")));
+                            new Identifier(KawaiiDishes.MODID, "geo/shoes.geo.json"),
+                            new Identifier(KawaiiDishes.MODID, "textures/models/armor/shoes/shoes.png"),
+                            new Identifier(KawaiiDishes.MODID, "")));
 
                 this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
                 return this.renderer;

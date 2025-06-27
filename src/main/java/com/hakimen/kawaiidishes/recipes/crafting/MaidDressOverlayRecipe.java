@@ -6,28 +6,28 @@ import com.hakimen.kawaiidishes.registry.ItemRegister;
 import com.hakimen.kawaiidishes.registry.RecipeRegister;
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.CraftingContainer;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
-import net.minecraft.world.item.crafting.CustomRecipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.Level;
+import net.minecraft.inventory.RecipeInputInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.SpecialCraftingRecipe;
+import net.minecraft.recipe.book.CraftingRecipeCategory;
+import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 
-public class MaidDressOverlayRecipe extends CustomRecipe {
-    public MaidDressOverlayRecipe(ResourceLocation resourceLocation, CraftingBookCategory craftingBookCategory) {
+public class MaidDressOverlayRecipe extends SpecialCraftingRecipe {
+    public MaidDressOverlayRecipe(Identifier resourceLocation, CraftingRecipeCategory craftingBookCategory) {
         super(resourceLocation, craftingBookCategory);
     }
 
     @Override
-    public boolean matches(CraftingContainer pContainer, Level pLevel) {
+    public boolean matches(RecipeInputInventory pContainer, World pLevel) {
         ItemStack dress = ItemStack.EMPTY;
         List<ItemStack> apron = new ArrayList<>();
 
 
-        for(int i = 0; i < pContainer.getContainerSize(); ++i) {
-            ItemStack containerItem = pContainer.getItem(i);
+        for(int i = 0; i < pContainer.size(); ++i) {
+            ItemStack containerItem = pContainer.getStack(i);
             if (!containerItem.isEmpty()) {
                 if (containerItem.getItem() instanceof MaidDressArmorItem) {
                     if (!dress.isEmpty()) {
@@ -48,16 +48,16 @@ public class MaidDressOverlayRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack craft(CraftingContainer pContainer, RegistryAccess pRegistryAccess) {
+    public ItemStack craft(RecipeInputInventory pContainer, DynamicRegistryManager pRegistryAccess) {
         ItemStack dress = ItemStack.EMPTY;
         List<ItemStack> apron = new ArrayList<>();
 
 
-        for(int i = 0; i < pContainer.getContainerSize(); ++i) {
-            ItemStack containerItem = pContainer.getItem(i);
+        for(int i = 0; i < pContainer.size(); ++i) {
+            ItemStack containerItem = pContainer.getStack(i);
             if (!containerItem.isEmpty()) {
                 if (containerItem.getItem() instanceof MaidDressArmorItem) {
-                    if(containerItem.getOrCreateTag().contains("HasOverlay") && containerItem.getOrCreateTag().getBoolean("HasOverlay")){
+                    if(containerItem.getOrCreateNbt().contains("HasOverlay") && containerItem.getOrCreateNbt().getBoolean("HasOverlay")){
                         return ItemStack.EMPTY;
                     }
                     if (!dress.isEmpty()) {
@@ -76,12 +76,12 @@ public class MaidDressOverlayRecipe extends CustomRecipe {
         }
 
         ItemStack stack = dress.copy();
-        stack.getOrCreateTag().putBoolean("HasOverlay",true);
+        stack.getOrCreateNbt().putBoolean("HasOverlay",true);
         return !dress.isEmpty() && apron.size() == 1 ? stack : ItemStack.EMPTY;
     }
 
     @Override
-    public boolean canCraftInDimensions(int pWidth, int pHeight) {
+    public boolean fits(int pWidth, int pHeight) {
         return pWidth * pHeight >= 2;
     }
 

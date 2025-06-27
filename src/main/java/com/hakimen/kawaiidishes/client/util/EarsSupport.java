@@ -2,9 +2,9 @@ package com.hakimen.kawaiidishes.client.util;
 
 import com.unascribed.ears.api.features.EarsFeatures;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.MathHelper;
 
 /**
  * @author Ampflower
@@ -12,11 +12,11 @@ import net.minecraft.world.entity.player.Player;
 public final class EarsSupport {
 	public static final boolean enabled = FabricLoader.getInstance().isModLoaded("ears");
 
-	private static final float stockChestSize = 15f * Mth.DEG_TO_RAD;
+	private static final float stockChestSize = 15f * MathHelper.RADIANS_PER_DEGREE;
 
 	public static float getChestSize(Entity entity) {
-		if (EarsSupport.enabled && entity instanceof Player player) {
-			final var features = EarsFeatures.getById(player.getUUID());
+		if (EarsSupport.enabled && entity instanceof PlayerEntity player) {
+			final var features = EarsFeatures.getById(player.getUuid());
 
 			if (features == null) {
 				return stockChestSize;

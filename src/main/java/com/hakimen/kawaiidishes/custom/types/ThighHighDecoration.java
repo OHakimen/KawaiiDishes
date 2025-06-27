@@ -1,22 +1,22 @@
 package com.hakimen.kawaiidishes.custom.types;
 
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 
 public class ThighHighDecoration {
-    Component name;
-    ResourceLocation overlayModel;
-    ResourceLocation texture;
-    ResourceLocation extraTexture;
+    Text name;
+    Identifier overlayModel;
+    Identifier texture;
+    Identifier extraTexture;
 
-    public ThighHighDecoration(Component name, ResourceLocation overlayModel, ResourceLocation texture) {
+    public ThighHighDecoration(Text name, Identifier overlayModel, Identifier texture) {
         this.overlayModel = overlayModel;
         this.name = name;
         this.texture = texture;
         this.extraTexture = null;
     }
 
-    public ThighHighDecoration(Component name, ResourceLocation overlayModel, ResourceLocation texture, ResourceLocation extraTexture) {
+    public ThighHighDecoration(Text name, Identifier overlayModel, Identifier texture, Identifier extraTexture) {
         this.overlayModel = overlayModel;
         this.name = name;
         this.texture = texture;
@@ -24,19 +24,19 @@ public class ThighHighDecoration {
     }
 
 
-    public Component getName() {
+    public Text getName() {
         return name;
     }
 
-    public ResourceLocation getTexture() {
+    public Identifier getTexture() {
         return texture;
     }
 
-    public ResourceLocation getExtraTexture() {
+    public Identifier getExtraTexture() {
         return extraTexture;
     }
 
-    public ResourceLocation getOverlayModel() {
+    public Identifier getOverlayModel() {
         return overlayModel;
     }
 }

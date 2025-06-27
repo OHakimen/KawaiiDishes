@@ -5,15 +5,15 @@ import com.hakimen.kawaiidishes.client.entity.models.layers.maid_dress_layers.Ma
 import com.hakimen.kawaiidishes.client.util.EarsSupport;
 import com.hakimen.kawaiidishes.item.armor.MaidDressArmorItem;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.core.object.Color;
@@ -37,15 +37,15 @@ public class MaidDressArmorRender extends GeoArmorItemRenderer<MaidDressArmorIte
         ((MaidDressOverlayLayer) getRenderLayers().get(0)).updateStack(stack);
     }
     @Override
-    public ResourceLocation getTextureLocation(MaidDressArmorItem animatable) {
-        return new ResourceLocation[]{
-                new ResourceLocation(KawaiiDishes.MODID,"textures/models/armor/maid_dress/dress.png"),
-                new ResourceLocation(KawaiiDishes.MODID,"textures/models/armor/maid_dress/maid_dress.png")
+    public Identifier getTextureLocation(MaidDressArmorItem animatable) {
+        return new Identifier[]{
+                new Identifier(KawaiiDishes.MODID,"textures/models/armor/maid_dress/dress.png"),
+                new Identifier(KawaiiDishes.MODID,"textures/models/armor/maid_dress/maid_dress.png")
         }[animatable.hasOverlay(stackData) ? 1 : 0];
     }
 
     @Override
-    public void prepForRender(@Nullable Entity entity, ItemStack stack, @Nullable EquipmentSlot slot, @Nullable HumanoidModel<?> baseModel) {
+    public void prepForRender(@Nullable Entity entity, ItemStack stack, @Nullable EquipmentSlot slot, @Nullable BipedEntityModel<?> baseModel) {
         updateStack(stack);
 
         ((MaidDressOverlayLayer) getRenderLayers().get(0)).updateStack(stack);
@@ -56,9 +56,9 @@ public class MaidDressArmorRender extends GeoArmorItemRenderer<MaidDressArmorIte
     }
 
     @Override
-    public void preRender(PoseStack poseStack, MaidDressArmorItem animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void preRender(MatrixStack poseStack, MaidDressArmorItem animatable, BakedGeoModel model, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
-        model.getBone("armorChest").orElseThrow().updateRotation(Mth.DEG_TO_RAD * -90f + chestAngle, 0, 0);
+        model.getBone("armorChest").orElseThrow().updateRotation(MathHelper.RADIANS_PER_DEGREE * -90f + chestAngle, 0, 0);
     }
 
     @Override

@@ -1,11 +1,11 @@
 package com.hakimen.kawaiidishes.custom.types;
 
 import com.hakimen.kawaiidishes.block_entities.IncenseBlockEntity;
-import net.minecraft.core.BlockPos;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.item.Item;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class Aroma {
 
@@ -33,5 +33,5 @@ public class Aroma {
         this.color = color;
     }
 
-    public void aromaTick(Level pLevel, BlockPos pPos, BlockState pState, IncenseBlockEntity entity) {};
+    public void aromaTick(World pLevel, BlockPos pPos, BlockState pState, IncenseBlockEntity entity) {};
 }

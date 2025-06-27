@@ -8,40 +8,40 @@ import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.SlottedStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtList;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
 public class IceCreamMakerBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, BlockEntityTicker<IceCreamMakerBlockEntity> {
 
-    private final ContainerData data;
-    private final SimpleContainer inventory = new SimpleContainer(6){
+    private final PropertyDelegate data;
+    private final SimpleInventory inventory = new SimpleInventory(6){
         @Override
-        public boolean canPlaceItem(int slot, ItemStack stack) {
+        public boolean isValid(int slot, ItemStack stack) {
             return slot != 0 || stack.getItem() == Items.SNOWBALL;
         }
     };
 
-    public SimpleContainer getInventory() {
+    public SimpleInventory getInventory() {
         return inventory;
     }
 
@@ -55,7 +55,7 @@ public class IceCreamMakerBlockEntity extends BlockEntity implements ExtendedScr
 
     public IceCreamMakerBlockEntity(BlockPos pPos, BlockState pState) {
         super(BlockEntityRegister.ICE_CREAM_MAKER.get(), pPos, pState);
-        this.data = new ContainerData() {
+        this.data = new PropertyDelegate() {
             public int get(int index) {
                 return switch (index) {
                     case 0 -> IceCreamMakerBlockEntity.this.progress;
@@ -71,29 +71,29 @@ public class IceCreamMakerBlockEntity extends BlockEntity implements ExtendedScr
                 }
             }
 
-            public int getCount() {
+            public int size() {
                 return 2;
             }
         };
     }
 
     public static boolean hasRecipe(IceCreamMakerBlockEntity entity) {
-        Level level = entity.level;
+        World level = entity.world;
 
         Optional<IceCreamMakerRecipe> match = level.getRecipeManager()
-                .getRecipeFor(IceCreamMakerRecipe.Type.INSTANCE, entity.inventory, level);
+                .getFirstMatch(IceCreamMakerRecipe.Type.INSTANCE, entity.inventory, level);
         return match.isPresent();
     }
 
     @Override
-    protected void saveAdditional(CompoundTag pTag) {
-        ListTag listTag = new ListTag();
+    protected void writeNbt(NbtCompound pTag) {
+        NbtList listTag = new NbtList();
 
-        for(int i = 0; i < this.getInventory().getContainerSize(); ++i) {
-            ItemStack itemStack = this.getInventory().getItem(i);
-            CompoundTag tag = new CompoundTag();
+        for(int i = 0; i < this.getInventory().size(); ++i) {
+            ItemStack itemStack = this.getInventory().getStack(i);
+            NbtCompound tag = new NbtCompound();
             tag.putInt("Slot", i);
-            tag.put("Item", itemStack.save(new CompoundTag()));
+            tag.put("Item", itemStack.writeNbt(new NbtCompound()));
             listTag.add(tag);
         }
 
@@ -101,43 +101,43 @@ public class IceCreamMakerBlockEntity extends BlockEntity implements ExtendedScr
         pTag.putInt("Progress", progress);
         pTag.putInt("RecipeTicks", recipeTicks);
         pTag.putBoolean("IsCrafting", isCrafting);
-        super.saveAdditional(pTag);
+        super.writeNbt(pTag);
     }
 
     @Override
-    public void load(CompoundTag pTag) {
-        super.load(pTag);
+    public void readNbt(NbtCompound pTag) {
+        super.readNbt(pTag);
         progress = pTag.getInt("Progress");
         recipeTicks = pTag.getInt("RecipeTicks");
         isCrafting = pTag.getBoolean("IsCrafting");
 
-        ListTag listTag = pTag.getList("Items", Tag.TAG_COMPOUND);
-        this.getInventory().clearContent();
+        NbtList listTag = pTag.getList("Items", NbtElement.COMPOUND_TYPE);
+        this.getInventory().clear();
 
         for(int i = 0; i < listTag.size(); ++i) {
-            CompoundTag tag = listTag.getCompound(i);
+            NbtCompound tag = listTag.getCompound(i);
             int slot = tag.getInt("Slot");
-            ItemStack stack = ItemStack.of(tag.getCompound("Item"));
-            this.getInventory().setItem(slot, stack);
+            ItemStack stack = ItemStack.fromNbt(tag.getCompound("Item"));
+            this.getInventory().setStack(slot, stack);
         }
     }
 
     @Override
-    public Component getDisplayName() {
-        return Component.translatable("gui.kawaiidishes.ice_cream_maker");
+    public Text getDisplayName() {
+        return Text.translatable("gui.kawaiidishes.ice_cream_maker");
     }
 
     @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int windowId, Inventory inventory, Player player) {
+    public ScreenHandler createMenu(int windowId, PlayerInventory inventory, PlayerEntity player) {
         return new IceCreamMakerContainer(windowId, inventory, this, data);
     }
 
     @Override
-    public void tick(Level pLevel, BlockPos pPos, BlockState pState, IceCreamMakerBlockEntity entity) {
+    public void tick(World pLevel, BlockPos pPos, BlockState pState, IceCreamMakerBlockEntity entity) {
         if (hasRecipe(entity)) {
-            Optional<IceCreamMakerRecipe> match = level.getRecipeManager()
-                    .getRecipeFor(IceCreamMakerRecipe.Type.INSTANCE, entity.inventory, level);
+            Optional<IceCreamMakerRecipe> match = world.getRecipeManager()
+                    .getFirstMatch(IceCreamMakerRecipe.Type.INSTANCE, entity.inventory, world);
             if (match.isPresent()) {
                 IceCreamMakerRecipe recipe = match.get();
                 if (!isCrafting) {
@@ -149,24 +149,24 @@ public class IceCreamMakerBlockEntity extends BlockEntity implements ExtendedScr
                         isCrafting = false;
                         progress = 0;
                         for (int i = 1; i < 5; i++) {
-                            ItemStack inventoryStack = entity.inventory.getItem(i);
-                            var stack = entity.inventory.getItem(i).getItem().getCraftingRemainingItem();
+                            ItemStack inventoryStack = entity.inventory.getStack(i);
+                            var stack = entity.inventory.getStack(i).getItem().getRecipeRemainder();
                             boolean hasRemainder = stack != null;
                             if (inventoryStack.getCount() > 0 && !hasRemainder) {
-                                entity.inventory.removeItem(i, 1);
+                                entity.inventory.removeStack(i, 1);
                             } else if (hasRemainder) {
-                                entity.inventory.setItem(i, stack == null ? ItemStack.EMPTY : stack.getDefaultInstance());
+                                entity.inventory.setStack(i, stack == null ? ItemStack.EMPTY : stack.getDefaultStack());
                             }
                         }
-                        if(entity.inventory.getItem(0).getCount() >= recipe.getSnowballs()) {
-                            entity.inventory.removeItem(0,recipe.getSnowballs());
+                        if(entity.inventory.getStack(0).getCount() >= recipe.getSnowballs()) {
+                            entity.inventory.removeStack(0,recipe.getSnowballs());
                         }
-                        ItemStack inventoryStack = entity.inventory.getItem(5);
+                        ItemStack inventoryStack = entity.inventory.getStack(5);
                         if (inventoryStack.isEmpty()) {
-                            entity.inventory.setItem(5, recipe.getResultItem(null).copy());
-                        } else if (inventoryStack.getItem().equals(recipe.getResultItem(null).getItem())
-                                && inventoryStack.getCount() < inventoryStack.getMaxStackSize()) {
-                            entity.inventory.getItem(5).grow(1);
+                            entity.inventory.setStack(5, recipe.getOutput(null).copy());
+                        } else if (inventoryStack.getItem().equals(recipe.getOutput(null).getItem())
+                                && inventoryStack.getCount() < inventoryStack.getMaxCount()) {
+                            entity.inventory.getStack(5).increment(1);
                         }
                     }
                 }
@@ -176,12 +176,12 @@ public class IceCreamMakerBlockEntity extends BlockEntity implements ExtendedScr
                 progress--;
             }
         }
-        setChanged();
+        markDirty();
     }
 
 
     @Override
-    public void writeScreenOpeningData(ServerPlayer player, FriendlyByteBuf buf) {
-        buf.writeBlockPos(getBlockPos());
+    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
+        buf.writeBlockPos(getPos());
     }
 }

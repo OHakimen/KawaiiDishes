@@ -17,41 +17,41 @@ import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.SlottedStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluids;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtList;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import java.util.Optional;
 
 public class CoffeeMachineBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, BlockEntityTicker<CoffeeMachineBlockEntity> {
 
-    SimpleContainer inventory = new SimpleContainer(7){
+    SimpleInventory inventory = new SimpleInventory(7){
         @Override
-        public boolean canPlaceItem(int i, ItemStack itemStack) {
-            return super.canPlaceItem(i, itemStack);
+        public boolean isValid(int i, ItemStack itemStack) {
+            return super.isValid(i, itemStack);
         }
     };
-    private ContainerData data;
+    private PropertyDelegate data;
 
     private int progress = 0;    SingleVariantStorage<FluidVariant> waterTank = new SingleVariantStorage<FluidVariant>() {
         @Override
@@ -81,14 +81,14 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements ExtendedScr
 
         @Override
         protected void onFinalCommit() {
-            setChanged();
-            if (!level.isClientSide()) {
-                FriendlyByteBuf data = PacketByteBufs.create();
+            markDirty();
+            if (!world.isClient()) {
+                PacketByteBuf data = PacketByteBufs.create();
                 waterTank.variant.toPacket(data);
                 data.writeLong(waterTank.amount);
-                data.writeBlockPos(getBlockPos());
+                data.writeBlockPos(getPos());
 
-                for (ServerPlayer player : PlayerLookup.tracking((ServerLevel) level, getBlockPos())) {
+                for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
                     ServerPlayNetworking.send(player, PacketRegister.FLUID_SYNC, data);
                 }
             }
@@ -99,7 +99,7 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements ExtendedScr
 
     public CoffeeMachineBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(BlockEntityRegister.COFFEE_MACHINE.get(), pPos, pBlockState);
-        this.data = new ContainerData() {
+        this.data = new PropertyDelegate() {
             public int get(int index) {
                 switch (index) {
                     case 0:
@@ -122,7 +122,7 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements ExtendedScr
                 }
             }
 
-            public int getCount() {
+            public int size() {
                 return 2;
             }
         };
@@ -130,39 +130,39 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements ExtendedScr
 
 
     public static boolean hasRecipe(CoffeeMachineBlockEntity entity) {
-        Level level = entity.level;
+        World level = entity.world;
         CoffeeMachineDataContainer coffeeMachineContainer = new CoffeeMachineDataContainer(entity);
         Optional<CoffeeMachineRecipe> match = level.getRecipeManager()
-                .getRecipeFor(CoffeeMachineRecipe.Type.INSTANCE, coffeeMachineContainer, level);
+                .getFirstMatch(CoffeeMachineRecipe.Type.INSTANCE, coffeeMachineContainer, level);
         return match.isPresent();
     }
 
 
     private static void transferItemFluidToFluidTank(CoffeeMachineBlockEntity pEntity) {
         try (Transaction tx = Transaction.openOuter()) {
-            if (ItemStack.isSameItem(pEntity.inventory.getItem(0), Items.WATER_BUCKET.getDefaultInstance())) {
+            if (ItemStack.areItemsEqual(pEntity.inventory.getStack(0), Items.WATER_BUCKET.getDefaultStack())) {
                 int drainAmount = (int) FluidConstants.BUCKET;
 
                 if (pEntity.getWaterTank().amount + drainAmount <= pEntity.getWaterTank().getCapacity()) {
                     pEntity.waterTank.insert(FluidVariant.of(Fluids.WATER), drainAmount, tx);
 
-                    pEntity.inventory.removeItem(0, 1);
-                    pEntity.inventory.setItem(0, Items.BUCKET.getDefaultInstance());
-                    pEntity.setChanged();
+                    pEntity.inventory.removeStack(0, 1);
+                    pEntity.inventory.setStack(0, Items.BUCKET.getDefaultStack());
+                    pEntity.markDirty();
                 }
                 tx.commit();
             }
         }
     }
 
-    public SimpleContainer getInventory() {
+    public SimpleInventory getInventory() {
         return inventory;
     }
 
     private static void transferFluidToItemFluid(CoffeeMachineBlockEntity pEntity) {
 
         try (Transaction tx = Transaction.openOuter()) {
-            if (ItemStack.isSameItem(pEntity.inventory.getItem(1), Items.BUCKET.getDefaultInstance())) {
+            if (ItemStack.areItemsEqual(pEntity.inventory.getStack(1), Items.BUCKET.getDefaultStack())) {
                 int drainAmount = (int) (FluidConstants.BUCKET);
 
                 if (pEntity.waterTank.getAmount() >= drainAmount) {
@@ -170,11 +170,11 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements ExtendedScr
                     pEntity.waterTank.extract(fluidVariant, drainAmount, tx);
 
 
-                    pEntity.inventory.removeItem(1, 1);
-                    pEntity.inventory.setItem(1, Items.WATER_BUCKET.getDefaultInstance());
+                    pEntity.inventory.removeStack(1, 1);
+                    pEntity.inventory.setStack(1, Items.WATER_BUCKET.getDefaultStack());
 
 
-                    pEntity.setChanged();
+                    pEntity.markDirty();
                 }
                 tx.commit();
             }
@@ -186,8 +186,8 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements ExtendedScr
     }
 
     @Override
-    public void setChanged() {
-        super.setChanged();
+    public void markDirty() {
+        super.markDirty();
     }
 
     public SingleVariantStorage<FluidVariant> getWaterTank() {
@@ -207,7 +207,7 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements ExtendedScr
         return recipeTicks;
     }
 
-    public ContainerData getData() {
+    public PropertyDelegate getData() {
         return data;
     }
 
@@ -216,15 +216,15 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements ExtendedScr
     }
 
     @Override
-    protected void saveAdditional(CompoundTag pTag) {
+    protected void writeNbt(NbtCompound pTag) {
 
-        ListTag listTag = new ListTag();
+        NbtList listTag = new NbtList();
 
-        for(int i = 0; i < this.getInventory().getContainerSize(); ++i) {
-            ItemStack itemStack = this.getInventory().getItem(i);
-            CompoundTag tag = new CompoundTag();
+        for(int i = 0; i < this.getInventory().size(); ++i) {
+            ItemStack itemStack = this.getInventory().getStack(i);
+            NbtCompound tag = new NbtCompound();
             tag.putInt("Slot", i);
-            tag.put("Item", itemStack.save(new CompoundTag()));
+            tag.put("Item", itemStack.writeNbt(new NbtCompound()));
             listTag.add(tag);
         }
 
@@ -233,45 +233,45 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements ExtendedScr
         pTag.putInt("Progress", progress);
         pTag.putInt("RecipeTicks", recipeTicks);
         pTag.putBoolean("IsCrafting", isCrafting);
-        super.saveAdditional(pTag);
+        super.writeNbt(pTag);
     }
 
     @Override
-    public void load(CompoundTag pTag) {
-        super.load(pTag);
+    public void readNbt(NbtCompound pTag) {
+        super.readNbt(pTag);
         progress = pTag.getInt("Progress");
         recipeTicks = pTag.getInt("RecipeTicks");
         isCrafting = pTag.getBoolean("IsCrafting");
 
-        ListTag listTag = pTag.getList("Items", Tag.TAG_COMPOUND);
-        this.getInventory().clearContent();
+        NbtList listTag = pTag.getList("Items", NbtElement.COMPOUND_TYPE);
+        this.getInventory().clear();
 
         for(int i = 0; i < listTag.size(); ++i) {
-            CompoundTag tag = listTag.getCompound(i);
+            NbtCompound tag = listTag.getCompound(i);
             int slot = tag.getInt("Slot");
-            ItemStack stack = ItemStack.of(tag.getCompound("Item"));
-            this.getInventory().setItem(slot, stack);
+            ItemStack stack = ItemStack.fromNbt(tag.getCompound("Item"));
+            this.getInventory().setStack(slot, stack);
         }
         waterTank.variant = FluidVariant.fromNbt(pTag.getCompound("variant"));
         waterTank.amount = pTag.getLong("amount");
     }
 
     @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this, BlockEntity::saveWithFullMetadata);
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this, BlockEntity::createNbtWithIdentifyingData);
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
-        return this.saveWithFullMetadata();
+    public NbtCompound toInitialChunkDataNbt() {
+        return this.createNbtWithIdentifyingData();
     }
 
     @Override
-    public void tick(Level pLevel, BlockPos pPos, BlockState pState, CoffeeMachineBlockEntity pBlockEntity) {
+    public void tick(World pLevel, BlockPos pPos, BlockState pState, CoffeeMachineBlockEntity pBlockEntity) {
         if (hasRecipe(pBlockEntity)) {
             CoffeeMachineDataContainer coffeeMachineContainer = new CoffeeMachineDataContainer(pBlockEntity);
-            Optional<CoffeeMachineRecipe> match = level.getRecipeManager()
-                    .getRecipeFor(CoffeeMachineRecipe.Type.INSTANCE, coffeeMachineContainer, level);
+            Optional<CoffeeMachineRecipe> match = world.getRecipeManager()
+                    .getFirstMatch(CoffeeMachineRecipe.Type.INSTANCE, coffeeMachineContainer, world);
             if (match.isPresent()) {
                 CoffeeMachineRecipe recipe = match.get();
                 if (!isCrafting) {
@@ -287,21 +287,21 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements ExtendedScr
                             tx.commit();
                         }
                         for (int i = 2; i < 6; i++) {
-                            ItemStack inventoryStack = pBlockEntity.inventory.getItem(i);
-                            var stack = pBlockEntity.inventory.getItem(i).getItem().getCraftingRemainingItem();
+                            ItemStack inventoryStack = pBlockEntity.inventory.getStack(i);
+                            var stack = pBlockEntity.inventory.getStack(i).getItem().getRecipeRemainder();
                             boolean hasRemainder = stack != null;
                             if (inventoryStack.getCount() > 0 && !hasRemainder) {
-                                pBlockEntity.inventory.removeItem(i, 1);
+                                pBlockEntity.inventory.removeStack(i, 1);
                             } else if (hasRemainder) {
-                                pBlockEntity.inventory.setItem(i, stack == null ? ItemStack.EMPTY : stack.getDefaultInstance());
+                                pBlockEntity.inventory.setStack(i, stack == null ? ItemStack.EMPTY : stack.getDefaultStack());
                             }
                         }
-                        ItemStack inventoryStack = pBlockEntity.inventory.getItem(6);
+                        ItemStack inventoryStack = pBlockEntity.inventory.getStack(6);
                         if (inventoryStack.isEmpty()) {
-                            pBlockEntity.inventory.setItem(6, recipe.getResultItem(null));
-                        } else if (inventoryStack.getItem().equals(recipe.getResultItem(null).getItem())
-                                && inventoryStack.getCount() <= inventoryStack.getMaxStackSize()) {
-                            pBlockEntity.inventory.getItem(6).grow(1);
+                            pBlockEntity.inventory.setStack(6, recipe.getOutput(null));
+                        } else if (inventoryStack.getItem().equals(recipe.getOutput(null).getItem())
+                                && inventoryStack.getCount() <= inventoryStack.getMaxCount()) {
+                            pBlockEntity.inventory.getStack(6).increment(1);
                         }
                     }
                 }
@@ -311,7 +311,7 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements ExtendedScr
                 progress--;
             }
         }
-        setChanged();
+        markDirty();
 
 
         if (hasFluidInSlot(pBlockEntity)) {
@@ -324,25 +324,25 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements ExtendedScr
     }
 
     public boolean hasFluidInSlot(CoffeeMachineBlockEntity entity) {
-        return entity.inventory.getItem(0).getCount() > 0;
+        return entity.inventory.getStack(0).getCount() > 0;
     }
 
     public boolean hasTankInExtractSlot(CoffeeMachineBlockEntity entity) {
-        return entity.inventory.getItem(1).getCount() > 0;
+        return entity.inventory.getStack(1).getCount() > 0;
     }
 
     @Override
-    public Component getDisplayName() {
-        return Component.translatable("gui.kawaiidishes.coffee_machine");
+    public Text getDisplayName() {
+        return Text.translatable("gui.kawaiidishes.coffee_machine");
     }
 
     @Override
-    public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
+    public ScreenHandler createMenu(int pContainerId, PlayerInventory pInventory, PlayerEntity pPlayer) {
         return new CoffeeMachineContainer(pContainerId, pInventory, this, this.getData());
     }
 
     @Override
-    public void writeScreenOpeningData(ServerPlayer player, FriendlyByteBuf buf) {
-        buf.writeBlockPos(getBlockPos());
+    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
+        buf.writeBlockPos(getPos());
     }
 }

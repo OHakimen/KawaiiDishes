@@ -6,30 +6,30 @@ import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.containers.CoffeeMachineDataContainer;
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.ShapedRecipe;
-import net.minecraft.world.level.Level;
+import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.ShapedRecipe;
+import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.JsonHelper;
+import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.world.World;
 
 public class CoffeeMachineRecipe implements Recipe<CoffeeMachineDataContainer> {
 
-    private final ResourceLocation id;
+    private final Identifier id;
     private final ItemStack output;
-    private final NonNullList<Ingredient> recipeItems;
+    private final DefaultedList<Ingredient> recipeItems;
     private final int ticks;
     private final int waterNeeded;
     private final ItemStack itemOnOutput;
 
-    public CoffeeMachineRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems, int ticks, int waterNeeded, ItemStack itemOnOutput) {
+    public CoffeeMachineRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> recipeItems, int ticks, int waterNeeded, ItemStack itemOnOutput) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
@@ -42,7 +42,7 @@ public class CoffeeMachineRecipe implements Recipe<CoffeeMachineDataContainer> {
         return output;
     }
 
-    public NonNullList<Ingredient> getRecipeItems() {
+    public DefaultedList<Ingredient> getRecipeItems() {
         return recipeItems;
     }
 
@@ -50,7 +50,7 @@ public class CoffeeMachineRecipe implements Recipe<CoffeeMachineDataContainer> {
         return ticks;
     }
 
-    public ResourceLocation getId() {
+    public Identifier getId() {
         return id;
     }
 
@@ -63,34 +63,34 @@ public class CoffeeMachineRecipe implements Recipe<CoffeeMachineDataContainer> {
     }
 
     @Override
-    public boolean matches(CoffeeMachineDataContainer coffeeMachineContainer, Level pLevel) {
+    public boolean matches(CoffeeMachineDataContainer coffeeMachineContainer, World pLevel) {
         List<Integer> slots = new ArrayList<Integer>();
 
         if (coffeeMachineContainer.blockEntity().getWaterTank().amount < getWaterNeeded()) {
             return false;
         }
-        SimpleContainer inventory = coffeeMachineContainer.blockEntity().getInventory();
+        SimpleInventory inventory = coffeeMachineContainer.blockEntity().getInventory();
 
-        if (!inventory.getItem(5).is(itemOnOutput.getItem())) {
+        if (!inventory.getStack(5).isOf(itemOnOutput.getItem())) {
             return false;
         }
 
         for (int i = 2; i < 5; i++) {
-            if(!inventory.getItem(i).is(ItemStack.EMPTY.getItem())){
+            if(!inventory.getStack(i).isOf(ItemStack.EMPTY.getItem())){
                 slots.add(i);
             }
         }
 
-        ItemStack last = inventory.getItem(6);
-        if(!last.isEmpty() && !last.getItem().equals(getOutput().getItem()) || last.getCount() == last.getMaxStackSize()){
+        ItemStack last = inventory.getStack(6);
+        if(!last.isEmpty() && !last.getItem().equals(getOutput().getItem()) || last.getCount() == last.getMaxCount()){
             return false;
         }
 
-        if(slots.size() != recipeItems.get(0).getItems().length){
+        if(slots.size() != recipeItems.get(0).getMatchingStacks().length){
             return false;
         }else{
             for (int i = 0; i < slots.size(); i++) {
-                if(!inventory.getItem(slots.get(i)).is(recipeItems.get(0).getItems()[i].getItem())){
+                if(!inventory.getStack(slots.get(i)).isOf(recipeItems.get(0).getMatchingStacks()[i].getItem())){
                     return false;
                 }
                 if(slots.get(i)-2 > slots.size()-1){
@@ -103,17 +103,17 @@ public class CoffeeMachineRecipe implements Recipe<CoffeeMachineDataContainer> {
     }
 
     @Override
-    public ItemStack craft(CoffeeMachineDataContainer coffeeMachineContainer, RegistryAccess pRegistryAccess) {
+    public ItemStack craft(CoffeeMachineDataContainer coffeeMachineContainer, DynamicRegistryManager pRegistryAccess) {
         return output;
     }
 
     @Override
-    public boolean canCraftInDimensions(int pWidth, int pHeight) {
+    public boolean fits(int pWidth, int pHeight) {
         return true;
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
+    public ItemStack getOutput(DynamicRegistryManager pRegistryAccess) {
         return output.copy();
     }
 
@@ -136,15 +136,15 @@ public class CoffeeMachineRecipe implements Recipe<CoffeeMachineDataContainer> {
 
     public static class Serializer implements RecipeSerializer<CoffeeMachineRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID =
-                new ResourceLocation(KawaiiDishes.MODID, "coffee_machining");
+        public static final Identifier ID =
+                new Identifier(KawaiiDishes.MODID, "coffee_machining");
 
 
         @Override
-        public CoffeeMachineRecipe fromJson(ResourceLocation resourceLocation, JsonObject jsonObject) {
+        public CoffeeMachineRecipe read(Identifier resourceLocation, JsonObject jsonObject) {
             JsonArray array = jsonObject.getAsJsonArray("ingredients");
 
-            NonNullList<Ingredient> inputs = NonNullList.withSize(array.size(), Ingredient.EMPTY);
+            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(array.size(), Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(array.get(i),false));
@@ -153,47 +153,47 @@ public class CoffeeMachineRecipe implements Recipe<CoffeeMachineDataContainer> {
             int ticks = jsonObject.get("ticks").getAsInt();
             int waterNeeded = jsonObject.get("waterNeeded").getAsInt();
             ItemStack onOutput = ItemStack.EMPTY;
-            if(!GsonHelper.getAsJsonObject(jsonObject, "itemOnOutput").get("item").getAsString().equals("minecraft:air")){
-                onOutput = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject, "itemOnOutput"));
+            if(!JsonHelper.getObject(jsonObject, "itemOnOutput").get("item").getAsString().equals("minecraft:air")){
+                onOutput = ShapedRecipe.outputFromJson(JsonHelper.getObject(jsonObject, "itemOnOutput"));
             }
             ItemStack result = ItemStack.EMPTY;
-            if(!GsonHelper.getAsJsonObject(jsonObject, "output").get("item").getAsString().equals("minecraft:air")) {
-                result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject, "output"));
+            if(!JsonHelper.getObject(jsonObject, "output").get("item").getAsString().equals("minecraft:air")) {
+                result = ShapedRecipe.outputFromJson(JsonHelper.getObject(jsonObject, "output"));
             }
             return new CoffeeMachineRecipe(resourceLocation, result, inputs, ticks, waterNeeded,onOutput);
         }
 
         @Override
-        public CoffeeMachineRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf buf) {
-            ResourceLocation id = resourceLocation;
+        public CoffeeMachineRecipe read(Identifier resourceLocation, PacketByteBuf buf) {
+            Identifier id = resourceLocation;
 
-            NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
+            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
 
 
             for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromNetwork(buf));
+                inputs.set(i, Ingredient.fromPacket(buf));
             }
 
             int waterAmount = buf.readInt();
             int ticks = buf.readInt();
-            ItemStack onOutput = buf.readItem();
-            ItemStack output = buf.readItem();
+            ItemStack onOutput = buf.readItemStack();
+            ItemStack output = buf.readItemStack();
 
             return new CoffeeMachineRecipe(id,output, inputs, ticks, waterAmount, onOutput);
         }
 
         @Override
-        public void write(FriendlyByteBuf buf, CoffeeMachineRecipe recipe) {
+        public void write(PacketByteBuf buf, CoffeeMachineRecipe recipe) {
             buf.writeInt(recipe.getRecipeItems().size());
 
             for (Ingredient ing : recipe.getRecipeItems()) {
-                ing.toNetwork(buf);
+                ing.write(buf);
             }
 
             buf.writeInt(recipe.waterNeeded);
             buf.writeInt(recipe.ticks);
-            buf.writeItem(recipe.itemOnOutput);
-            buf.writeItem(recipe.getResultItem(null));
+            buf.writeItemStack(recipe.itemOnOutput);
+            buf.writeItemStack(recipe.getOutput(null));
         }
     }
 }

@@ -9,18 +9,18 @@ import com.hakimen.kawaiidishes.block.IncenseBlock;
 import com.hakimen.kawaiidishes.block_entities.IncenseBlockEntity;
 import com.hakimen.kawaiidishes.registry.BlockRegister;
 import com.ibm.icu.impl.ValidIdentifiers;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.models.BlockModelGenerators;
-import net.minecraft.data.models.blockstates.MultiVariantGenerator;
-import net.minecraft.data.models.blockstates.PropertyDispatch;
-import net.minecraft.data.models.blockstates.Variant;
-import net.minecraft.data.models.blockstates.VariantProperties;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.client.BlockStateVariant;
+import net.minecraft.data.client.BlockStateVariantMap;
+import net.minecraft.data.client.VariantSettings;
+import net.minecraft.data.client.VariantsBlockStateSupplier;
+import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
 
 public class BlockStateModelDataGen {
-    public static void gen(BlockModelGenerators blockGen) {
+    public static void gen(BlockStateModelGenerator blockGen) {
 
         cubeAllBlock(BlockRegister.KITCHEN_TILES.get(), blockGen);
 
@@ -41,111 +41,111 @@ public class BlockStateModelDataGen {
 
     }
 
-    private static void cubeAllBlock(Block block, BlockModelGenerators blockGen){
+    private static void cubeAllBlock(Block block, BlockStateModelGenerator blockGen){
         var model = new JsonObject();
-        model.addProperty("parent", new ResourceLocation( "block/cube_all").toString());
+        model.addProperty("parent", new Identifier( "block/cube_all").toString());
 
         var textureData = new JsonObject();
 
-        textureData.addProperty("all", new ResourceLocation(KawaiiDishes.MODID, "block/%s".formatted(BuiltInRegistries.BLOCK.getKey(block).getPath())).toString());
+        textureData.addProperty("all", new Identifier(KawaiiDishes.MODID, "block/%s".formatted(Registries.BLOCK.getId(block).getPath())).toString());
         model.add("textures",textureData);
 
-        blockGen.modelOutput.accept(new ResourceLocation(KawaiiDishes.MODID, "block/"+BuiltInRegistries.BLOCK.getKey(block).getPath()),() -> model);
+        blockGen.modelCollector.accept(new Identifier(KawaiiDishes.MODID, "block/"+Registries.BLOCK.getId(block).getPath()),() -> model);
 
-        var variant= MultiVariantGenerator.multiVariant(block,Variant.variant().with(VariantProperties.MODEL, new ResourceLocation(KawaiiDishes.MODID, "block/"+BuiltInRegistries.BLOCK.getKey(block).getPath())));
-        blockGen.blockStateOutput.accept(variant);
+        var variant= VariantsBlockStateSupplier.create(block,BlockStateVariant.create().put(VariantSettings.MODEL, new Identifier(KawaiiDishes.MODID, "block/"+Registries.BLOCK.getId(block).getPath())));
+        blockGen.blockStateCollector.accept(variant);
     }
 
-    private static void cakeBlock(CakeBlock block, BlockModelGenerators blockGen) {
+    private static void cakeBlock(CakeBlock block, BlockStateModelGenerator blockGen) {
         for (int i = 1; i < 5; i++) {
             var model = new JsonObject();
-            model.addProperty("parent", new ResourceLocation(KawaiiDishes.MODID, "block/cake/cake_slice_%d".formatted(i)).toString());
+            model.addProperty("parent", new Identifier(KawaiiDishes.MODID, "block/cake/cake_slice_%d".formatted(i)).toString());
 
             var textureData = new JsonObject();
 
-            textureData.addProperty("0", new ResourceLocation(KawaiiDishes.MODID, "block/cake/%s".formatted(BuiltInRegistries.BLOCK.getKey(block).getPath())).toString());
-            textureData.addProperty("particle", new ResourceLocation(KawaiiDishes.MODID, "block/cake/%s".formatted(BuiltInRegistries.BLOCK.getKey(block).getPath())).toString());
+            textureData.addProperty("0", new Identifier(KawaiiDishes.MODID, "block/cake/%s".formatted(Registries.BLOCK.getId(block).getPath())).toString());
+            textureData.addProperty("particle", new Identifier(KawaiiDishes.MODID, "block/cake/%s".formatted(Registries.BLOCK.getId(block).getPath())).toString());
 
 
             model.add("textures", textureData);
 
-            blockGen.modelOutput.accept(new ResourceLocation(KawaiiDishes.MODID, "block/cake/%s_slice_%s".formatted(BuiltInRegistries.BLOCK.getKey(block).getPath(), i)), () -> model);
+            blockGen.modelCollector.accept(new Identifier(KawaiiDishes.MODID, "block/cake/%s_slice_%s".formatted(Registries.BLOCK.getId(block).getPath(), i)), () -> model);
         }
 
-        MultiVariantGenerator variants = MultiVariantGenerator.multiVariant(block)
-                .with(PropertyDispatch.property(CakeBlock.SLICES)
-                        .generate((i) -> Variant.variant().with(VariantProperties.MODEL, new ResourceLocation(KawaiiDishes.MODID, "block/cake/%s_slice_%s".formatted(BuiltInRegistries.BLOCK.getKey(block).getPath(), i))))
+        VariantsBlockStateSupplier variants = VariantsBlockStateSupplier.create(block)
+                .coordinate(BlockStateVariantMap.create(CakeBlock.SLICES)
+                        .register((i) -> BlockStateVariant.create().put(VariantSettings.MODEL, new Identifier(KawaiiDishes.MODID, "block/cake/%s_slice_%s".formatted(Registries.BLOCK.getId(block).getPath(), i))))
                 );
 
-        blockGen.blockStateOutput.accept(variants);
+        blockGen.blockStateCollector.accept(variants);
     }
 
 
-    private static void pieBlock(CakeBlock block, BlockModelGenerators blockGen) {
+    private static void pieBlock(CakeBlock block, BlockStateModelGenerator blockGen) {
         for (int i = 1; i < 5; i++) {
             var model = new JsonObject();
-            model.addProperty("parent", new ResourceLocation(KawaiiDishes.MODID, "block/cake/cake_slice_%d".formatted(i)).toString());
+            model.addProperty("parent", new Identifier(KawaiiDishes.MODID, "block/cake/cake_slice_%d".formatted(i)).toString());
 
             var textureData = new JsonObject();
 
-            textureData.addProperty("0", new ResourceLocation(KawaiiDishes.MODID, "block/pie/%s".formatted(BuiltInRegistries.BLOCK.getKey(block).getPath())).toString());
-            textureData.addProperty("particle", new ResourceLocation(KawaiiDishes.MODID, "block/pie/%s".formatted(BuiltInRegistries.BLOCK.getKey(block).getPath())).toString());
+            textureData.addProperty("0", new Identifier(KawaiiDishes.MODID, "block/pie/%s".formatted(Registries.BLOCK.getId(block).getPath())).toString());
+            textureData.addProperty("particle", new Identifier(KawaiiDishes.MODID, "block/pie/%s".formatted(Registries.BLOCK.getId(block).getPath())).toString());
 
 
             model.add("textures", textureData);
 
-            blockGen.modelOutput.accept(new ResourceLocation(KawaiiDishes.MODID, "block/pie/%s_slice_%s".formatted(BuiltInRegistries.BLOCK.getKey(block).getPath(), i)), () -> model);
+            blockGen.modelCollector.accept(new Identifier(KawaiiDishes.MODID, "block/pie/%s_slice_%s".formatted(Registries.BLOCK.getId(block).getPath(), i)), () -> model);
         }
 
-        MultiVariantGenerator variants = MultiVariantGenerator.multiVariant(block)
-                .with(PropertyDispatch.property(CakeBlock.SLICES)
-                        .generate((i) -> Variant.variant().with(VariantProperties.MODEL, new ResourceLocation(KawaiiDishes.MODID, "block/pie/%s_slice_%s".formatted(BuiltInRegistries.BLOCK.getKey(block).getPath(), i))))
+        VariantsBlockStateSupplier variants = VariantsBlockStateSupplier.create(block)
+                .coordinate(BlockStateVariantMap.create(CakeBlock.SLICES)
+                        .register((i) -> BlockStateVariant.create().put(VariantSettings.MODEL, new Identifier(KawaiiDishes.MODID, "block/pie/%s_slice_%s".formatted(Registries.BLOCK.getId(block).getPath(), i))))
                 );
 
-        blockGen.blockStateOutput.accept(variants);
+        blockGen.blockStateCollector.accept(variants);
     }
 
-    public static void incenseBlock(IncenseBlock block, BlockModelGenerators blockGen) {
-        MultiVariantGenerator variants = MultiVariantGenerator.multiVariant(block)
-                .with(PropertyDispatch.properties(IncenseBlock.LIT, IncenseBlock.FACING)
-                        .generate((lit, dir) -> {
+    public static void incenseBlock(IncenseBlock block, BlockStateModelGenerator blockGen) {
+        VariantsBlockStateSupplier variants = VariantsBlockStateSupplier.create(block)
+                .coordinate(BlockStateVariantMap.create(IncenseBlock.LIT, IncenseBlock.FACING)
+                        .register((lit, dir) -> {
                                     if (!lit) {
-                                        return Variant.variant()
-                                                .with(VariantProperties.MODEL, new ResourceLocation(KawaiiDishes.MODID, "block/incense_glass"))
-                                                .with(VariantProperties.Y_ROT, switch (dir) {
-                                                    case SOUTH -> VariantProperties.Rotation.R180;
-                                                    case WEST -> VariantProperties.Rotation.R270;
-                                                    case EAST -> VariantProperties.Rotation.R90;
-                                                    default -> VariantProperties.Rotation.R0;
+                                        return BlockStateVariant.create()
+                                                .put(VariantSettings.MODEL, new Identifier(KawaiiDishes.MODID, "block/incense_glass"))
+                                                .put(VariantSettings.Y, switch (dir) {
+                                                    case SOUTH -> VariantSettings.Rotation.R180;
+                                                    case WEST -> VariantSettings.Rotation.R270;
+                                                    case EAST -> VariantSettings.Rotation.R90;
+                                                    default -> VariantSettings.Rotation.R0;
                                                 });
                                     } else {
-                                        return Variant.variant()
-                                                .with(VariantProperties.MODEL, new ResourceLocation(KawaiiDishes.MODID, "block/incense_glass_lit"))
-                                                .with(VariantProperties.Y_ROT, switch (dir) {
-                                                    case SOUTH -> VariantProperties.Rotation.R180;
-                                                    case WEST -> VariantProperties.Rotation.R270;
-                                                    case EAST -> VariantProperties.Rotation.R90;
-                                                    default -> VariantProperties.Rotation.R0;
+                                        return BlockStateVariant.create()
+                                                .put(VariantSettings.MODEL, new Identifier(KawaiiDishes.MODID, "block/incense_glass_lit"))
+                                                .put(VariantSettings.Y, switch (dir) {
+                                                    case SOUTH -> VariantSettings.Rotation.R180;
+                                                    case WEST -> VariantSettings.Rotation.R270;
+                                                    case EAST -> VariantSettings.Rotation.R90;
+                                                    default -> VariantSettings.Rotation.R0;
                                                 });
                                     }
                                 }
                         )
                 );
-        blockGen.blockStateOutput.accept(variants);
+        blockGen.blockStateCollector.accept(variants);
     }
 
-    public static void directionalBlock(HorizontalDirectionalBlock block, BlockModelGenerators blockGen){
-        MultiVariantGenerator variantGenerators = MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.property(HorizontalDirectionalBlock.FACING)
-                .generate(dir -> {
-                    return Variant.variant()
-                            .with(VariantProperties.MODEL, new ResourceLocation(KawaiiDishes.MODID, "block/" + BuiltInRegistries.BLOCK.getKey(block).getPath()))
-                            .with(VariantProperties.Y_ROT, switch (dir) {
-                                case SOUTH -> VariantProperties.Rotation.R180;
-                                case WEST -> VariantProperties.Rotation.R270;
-                                case EAST -> VariantProperties.Rotation.R90;
-                                default -> VariantProperties.Rotation.R0;
+    public static void directionalBlock(HorizontalFacingBlock block, BlockStateModelGenerator blockGen){
+        VariantsBlockStateSupplier variantGenerators = VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(HorizontalFacingBlock.FACING)
+                .register(dir -> {
+                    return BlockStateVariant.create()
+                            .put(VariantSettings.MODEL, new Identifier(KawaiiDishes.MODID, "block/" + Registries.BLOCK.getId(block).getPath()))
+                            .put(VariantSettings.Y, switch (dir) {
+                                case SOUTH -> VariantSettings.Rotation.R180;
+                                case WEST -> VariantSettings.Rotation.R270;
+                                case EAST -> VariantSettings.Rotation.R90;
+                                default -> VariantSettings.Rotation.R0;
                             });
                 }));
-        blockGen.blockStateOutput.accept(variantGenerators);
+        blockGen.blockStateCollector.accept(variantGenerators);
     }
 }
