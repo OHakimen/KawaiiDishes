@@ -6,14 +6,14 @@ import com.hakimen.kawaiidishes.client.entity.renderers.MaidDressArmorRender;
 import com.hakimen.kawaiidishes.item.IDyeableItem;
 import com.hakimen.kawaiidishes.utils.ItemUtils;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.animatable.client.RenderProvider;
-import software.bernie.geckolib.constant.DataTickets;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.*;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
-import software.bernie.geckolib.util.GeckoLibUtil;
+import mod.azure.azurelib.animatable.GeoItem;
+import mod.azure.azurelib.animatable.client.RenderProvider;
+import mod.azure.azurelib.constant.DataTickets;
+import mod.azure.azurelib.core.animatable.instance.AnimatableInstanceCache;
+import mod.azure.azurelib.core.animation.*;
+import mod.azure.azurelib.core.object.PlayState;
+import mod.azure.azurelib.renderer.GeoArmorRenderer;
+import mod.azure.azurelib.util.AzureLibUtil;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -39,7 +39,7 @@ public class MaidDressArmorItem extends GeoArmorItem implements IAnimationPredic
 
     private static final String has_overlay = "HasOverlay";
 
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private final AnimatableInstanceCache cache = AzureLibUtil.createInstanceCache(this);
     private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
 
     public MaidDressArmorItem(ArmorMaterial pMaterial, Type pType, Settings pProperties) {

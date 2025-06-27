@@ -1,9 +1,9 @@
 package com.hakimen.kawaiidishes.client.entity.models.layers;
 
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.renderer.GeoRenderer;
-import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
+import mod.azure.azurelib.core.animatable.GeoAnimatable;
+import mod.azure.azurelib.renderer.GeoRenderer;
+import mod.azure.azurelib.renderer.layer.GeoRenderLayer;
 
 public class GeoArmorLayer<T extends GeoAnimatable> extends GeoRenderLayer<T> {
 

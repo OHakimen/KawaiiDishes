@@ -9,8 +9,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.core.object.Color;
-import software.bernie.geckolib.model.GeoModel;
+import mod.azure.azurelib.core.object.Color;
+import mod.azure.azurelib.model.GeoModel;
 
 public class ShoesArmorRender extends GeoArmorItemRenderer<ShoesArmorItem> {
     ItemStack stackData;

@@ -17,10 +17,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
-import software.bernie.geckolib.core.object.Color;
-import software.bernie.geckolib.model.GeoModel;
+import mod.azure.azurelib.cache.object.BakedGeoModel;
+import mod.azure.azurelib.core.object.Color;
+import mod.azure.azurelib.model.GeoModel;
 
+@SuppressWarnings({"removal"})
 public class MaidDressesWithTailArmorRender extends GeoArmorItemRenderer<MaidDressesWithTailArmorItem> {
 
     ItemStack stackData;

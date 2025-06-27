@@ -4,10 +4,10 @@ import com.hakimen.kawaiidishes.KawaiiDishes;
 import com.hakimen.kawaiidishes.client.entity.models.EarsArmorModel;
 import com.hakimen.kawaiidishes.item.armor.EarsArmorItem;
 import com.hakimen.kawaiidishes.item.armor.IAnimationPredicate;
-import software.bernie.geckolib.core.animation.Animation;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.model.GeoModel;
+import mod.azure.azurelib.core.animation.Animation;
+import mod.azure.azurelib.core.animation.RawAnimation;
+import mod.azure.azurelib.core.object.PlayState;
+import mod.azure.azurelib.model.GeoModel;
 
 import java.util.HashMap;
 import net.minecraft.util.Identifier;

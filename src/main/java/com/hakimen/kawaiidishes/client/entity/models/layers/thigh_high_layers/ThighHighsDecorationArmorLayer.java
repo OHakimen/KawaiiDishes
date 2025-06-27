@@ -5,8 +5,8 @@ import com.hakimen.kawaiidishes.client.entity.models.layers.GeoArmorLayer;
 import com.hakimen.kawaiidishes.custom.Registries;
 import com.hakimen.kawaiidishes.item.armor.ThighHighsArmorItem;
 import com.hakimen.kawaiidishes.utils.ColorUtils;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
-import software.bernie.geckolib.renderer.GeoRenderer;
+import mod.azure.azurelib.cache.object.BakedGeoModel;
+import mod.azure.azurelib.renderer.GeoRenderer;
 
 import java.util.List;
 import net.minecraft.client.render.OverlayTexture;

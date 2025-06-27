@@ -3,7 +3,7 @@ package com.hakimen.kawaiidishes.item.armor;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
-import software.bernie.geckolib.animatable.GeoItem;
+import mod.azure.azurelib.animatable.GeoItem;
 
 public abstract class GeoArmorItem extends ArmorItem implements GeoItem {
     public GeoArmorItem(ArmorMaterial pMaterial, Type pType, Settings pProperties) {
